@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfilesController;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\PostsController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,9 +17,10 @@ use \App\Http\Controllers\PostsController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::get('/',[HomeController::class, 'index'])->name('home');
 
 Auth::routes();
 Route::get('/p/create', [PostsController::class, 'create']);
