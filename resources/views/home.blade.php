@@ -34,7 +34,7 @@
 						</button>
 					</form>
 				</section>
-				<!-- корзина и аккаунт -->
+				<!--аккаунт и регистрация -->
 				<section class="login">
 					<a href="checkout.html" class="but-login but-account">
 						Войти 
@@ -49,39 +49,34 @@
 		<!-- навигация -->
 		<div class="wrap">
 			<nav class="nav-header">
-				<a href="#" aria-label="Пока не понятно" class="nav-header-a"><mark>Что то можно написать</mark></a>
+				<a href="#" aria-label="Пока не понятно" class="nav-header-a"><mark>Категории</mark></a>
 				<!-- скрытое мега меню -->
 				<div class="nav-hide-megamenu">
 					<div class="nav-megamenu-col">
-						<h3>фотографии</h3>
+						<h3>Категории</h3>
 						<ul>
-							<li><a  href="#">Люди </a></li>
-							<li><a href="#">Природа</a></li>
+							<li><a  href="#">Портрет</a></li>
+							<li><a href="#">Пейзаж</a></li>
+							<li><a  href="#">Предметная фотография</a></li>
+							<li><a  href="#">Архитектурная фотография</a></li>
 						</ul>
 					</div>
 					<div class="nav-megamenu-col">
-						<h3>Рисунки</h3>
+						<h3>Категории</h3>
 						<ul>
-							<li><a  href="#">Детские</a></li>
-							<li><a href="#">Профи</a></li>
+							<li><a  href="#">Дикие животные</a></li>
+							<li><a href="#">Подводная фотосъемка</a></li>
 						</ul>
 					</div>
 				</div>
-				<a href="#" aria-label="Пока не понятно"  class="nav-header-a"><mark>Контакты</mark></a>
+				<a href="#" aria-label="Пока не понятно"  class="nav-header-a"><mark>Правила</mark></a>
 				<!-- скрытое мега меню -->
 				<div class="nav-hide-megamenu">
 					<div class="nav-megamenu-col">
 						<h3>Информация</h3>
 						<ul>
-							<li><a  href="#">О нас</a></li>
+							<li><a  href="#">Правила опубликования</a></li>
 							<li><a href="#">Обратная связь</a></li>
-						</ul>
-					</div>
-					<div class="nav-megamenu-col">
-						<h3>Правила</h3>
-						<ul>
-							<li><a  href="#">Правила в чате</a></li>
-							<li><a href="#">Правила опуьликования</a></li>
 						</ul>
 					</div>
 				</div>
@@ -89,10 +84,9 @@
 				<!-- скрытое мега меню -->
 				<div class="nav-hide-megamenu">
 					<div class="nav-megamenu-col">
-						<h3>Оплата</h3>
+						<h3>Оплата за дополнительную память</h3>
 						<ul>
-							<li><a  href="#">Карта</a></li>
-							<li><a href="#">Крипта</a></li>
+							<li><a  href="#">Правила оплаты</a></li>
 						</ul>
 					</div>
 				</div>
@@ -101,7 +95,7 @@
 	</header>
 
 	<main>
-	<!-- Первый слайдер -->
+	<!-- Слоган -->
 	<div class="slider">
 		<section class="slider-brend-1  wrap">
 			<h2>
@@ -111,193 +105,236 @@
 			</h2> 
 		</section>
 	</div>
-<!-- Категории -->
-	<section class="category">
-		<div class="categors-1">
-			<a href="product.html" aria-label="FOR MEN">
-				<article article class="categor-Men">
-					<h3>
-						<mark>Природа</mark> 
-					</h3>
-				</article>
-			</a>
-			<a href="#" aria-label="ACCESORIES">
-				<article class="categor-Acctsories">
-					<h3>
-						<mark>Девчонки</mark> 
-					</h3>
-				</article>
-			</a>
-		</div>
-		<div class="categors-2">
-			<a href="singlePage.html" aria-label="offer women">
-				<article class="categor-Women">
-					<h3>
-						<mark>Закат</mark>
-					</h3> 
-				</article>
-			</a>
-			<a href="#" aria-label="FOR kids">
-				<article class="categor-Kids">
-					<h3>
-						<mark>Домашние</mark> 
-						<br>
-						<span>животные</span>
-					</h3> 
-				</article>
-			</a>
-		</div>
-</section>
-<!-- Продукт -->
-<section class="product">
-<h2 class="product-Header">Различные фото</h2>
-<p>Здесь представлены лучшие фото</p>
-<ul>
-	<li>
-		<article>
-			<img src="{{ asset("svg/IMG/ImgIndex/main/product/prod_1.png")}}" alt="Product">
-			<h3><mark>Человеки</mark></h3>
-			<div class="product-star">
-			</div>
-		</article>
-	</li>
-	<li>
-		<article>
-			<img src="{{ asset("svg/IMG/ImgIndex/main/product/prod_2.png")}}" alt="Product">
-			<h3><mark>Еще человеки</mark></h3>
-			<div class="product-star">
-			</div>
-		</article>
-	</li>
-	<li>
-		<article>
-			<img src="{{ asset("svg/IMG/ImgIndex/main/product/prod_3.png")}}" alt="Product">
-			<p></p>
-			<h3><mark>Один человек</mark></h3>
-			<div class="product-star">
-			</div>
-		</article>
-	</li>
-	<li>
-		<article>
-			<img src="{{ asset("svg/IMG/ImgIndex/main/product/prod_4.png")}}" alt="Product">
-			<p></p>
-			<h3><mark>Просто чел</mark></h3>
-			<div class="product-star">
-			</div>
-		</article>
-	</li>
-	<li>
-		<article> 
-			<img src="{{ asset("svg/IMG/ImgIndex/main/product/prod_5.png")}}" alt="Product">
-			<p></p>
-			<h3><mark>Фото</mark></h3>
-			<div class="product-star">
-			</div>
-		</article>
-	</li>
-	<li>
-		<article> 
-			<img src="{{ asset("svg/IMG/ImgIndex/main/product/prod_6.png")}}" alt="Product">
-			<p></p>
-			<h3><mark>кто то</mark></h3>
-			<div class="product-star">
-			</div>
-		</article>
-	</li>
-	<li>
-		<article> 
-			<img src="{{ asset("svg/IMG/ImgIndex/main/product/prod_7.png")}}" alt="Product">
-			<p></p>
-			<h3><mark>Фотка</mark></h3>
-			<div class="product-star">
-			</div>
-		</article>
-	</li>
-	<li>
-		<article> 
-			<img src="{{ asset("svg/IMG/ImgIndex/main/product/prod_8.png")}}" alt="Product">
-			<p></p>
-			<h3><mark>People</mark></h3>
-			<div class="product-star">
-			</div>
-		</article>
-	</li>
-</ul>
+	{{-- Слайдер --}}
+<section id="slider_bl" class="wrap">
+	<div class="wrapper">
+	  <input checked type=radio name="slider" id="slide1" />
+	  <input type=radio name="slider" id="slide2" />
+	  <input type=radio name="slider" id="slide3" />
+	  <input type=radio name="slider" id="slide4" />
+	  <div class="slider-wrapper">
+	    <div class=inner>
+	      <article>
+			<section class="categori">
+				<div class="categori-1">
+					<article article class="categori-Men">
+						<a href="product.html" aria-label="FOR MEN">
+							<h3>
+								<mark>Природа</mark> 
+							</h3>
+						</a>
+					</article>
+					<article class="categori-Acctsories">
+						<a href="#" aria-label="ACCESORIES">
+							<h3>
+								<mark>Девчонки</mark> 
+							</h3>
+						</a>
+					</article>
+				</div>
+				<div class="categori-2">
+					<article class="categori-Women">
+						<a href="singlePage.html" aria-label="offer women">
+							<h3>
+								<mark>Закат</mark>
+							</h3>
+						</a> 
+					</article>
+					<article class="categori-Kids">
+						<a href="#" aria-label="FOR kids">
+							<h3>
+								<mark>Домашние</mark> 
+								<br>
+								<span>животные</span>
+							</h3> 
+						</a>						
+					</article>
+				</div>
+			</section>
+	      </article>
+	      <article>
+			<section class="categori">
+				<div class="categori-1">
+					<article article class="categori-Men">
+						<a href="product.html" aria-label="FOR MEN">
+							<h3>
+								<mark>Природа</mark> 
+							</h3>
+						</a>
+					</article>
+					<article class="categori-Acctsories">
+						<a href="#" aria-label="ACCESORIES">
+							<h3>
+								<mark>Девчонки</mark> 
+							</h3>
+						</a>
+					</article>
+				</div>
+				<div class="categori-2">
+					<article class="categori-Women">
+						<a href="singlePage.html" aria-label="offer women">
+							<h3>
+								<mark>Закат</mark>
+							</h3>
+						</a> 
+					</article>
+					<article class="categori-Kids">
+						<a href="#" aria-label="FOR kids">
+							<h3>
+								<mark>Домашние</mark> 
+								<br>
+								<span>животные</span>
+							</h3> 
+						</a>						
+					</article>
+				</div>
+			</section>
+	      </article>
+	      <article>
+			<section class="categori">
+				<div class="categori-1">
+					<article article class="categori-Men">
+						<a href="product.html" aria-label="FOR MEN">
+							<h3>
+								<mark>Природа</mark> 
+							</h3>
+						</a>
+					</article>
+					<article class="categori-Acctsories">
+						<a href="#" aria-label="ACCESORIES">
+							<h3>
+								<mark>Девчонки</mark> 
+							</h3>
+						</a>
+					</article>
+				</div>
+				<div class="categori-2">
+					<article class="categori-Women">
+						<a href="singlePage.html" aria-label="offer women">
+							<h3>
+								<mark>Закат</mark>
+							</h3>
+						</a> 
+					</article>
+					<article class="categori-Kids">
+						<a href="#" aria-label="FOR kids">
+							<h3>
+								<mark>Домашние</mark> 
+								<br>
+								<span>животные</span>
+							</h3> 
+						</a>						
+					</article>
+				</div>
+			</section>
+	      </article>
+	      <article>
+			<section class="categori">
+				<div class="categori-1">
+					<article article class="categori-Men">
+						<a href="product.html" aria-label="FOR MEN">
+							<h3>
+								<mark>Природа</mark> 
+							</h3>
+						</a>
+					</article>
+					<article class="categori-Acctsories">
+						<a href="#" aria-label="ACCESORIES">
+							<h3>
+								<mark>Девчонки</mark> 
+							</h3>
+						</a>
+					</article>
+				</div>
+				<div class="categori-2">
+					<article class="categori-Women">
+						<a href="singlePage.html" aria-label="offer women">
+							<h3>
+								<mark>Закат</mark>
+							</h3>
+						</a> 
+					</article>
+					<article class="categori-Kids">
+						<a href="#" aria-label="FOR kids">
+							<h3>
+								<mark>Домашние</mark> 
+								<br>
+								<span>животные</span>
+							</h3> 
+						</a>						
+					</article>
+				</div>
+			</section>
+	      </article>
+	    </div>
+	  </div>
+	  <div class="slider-prev-next-control">
+	    <label for=slide1></label>
+	    <label for=slide2></label>
+	    <label for=slide3></label>
+	    <label for=slide4></label>
+	  </div>
+	  <div class="slider-dot-control">
+	    <label for=slide1></label>
+	    <label for=slide2></label>
+	    <label for=slide3></label>
+	    <label for=slide4></label>
+	  </div>
+	</div>
 </section>
 </main>
 <!-- Подвал -->
+
 <footer>
-	<div class="head-footer">
-		<div class="business">
-		<!-- логотип -->
-			<div class="logotip">
-				<a href="#"> 
-					<img src="{{ asset("svg/IMG/ImgIndex/logo.png")}}" alt="Logotip"> 
-				</a>
-			</div> 
-			<section class="business-text">
-				<h3>О компании</h3>	
-				<p> Наша компания лучшая и тд.</p> <br>
-				<p>Мы стремимся и тд. </p>
-			</section>
+	<hr>
+	<div class ="wrap">
+		<div class="head-footer">
+			<div class="footer-bisness">
+				<!-- логотип -->
+				<div class="logotip">
+					<a href="#"> 
+						<img src="{{ asset("svg/IMG/ImgIndex/logo.png")}}" alt="Logotip"> 
+					</a>
+				</div> 
+				<section class="business-text">
+					<h3>О компании</h3>	
+					<p> Наша компания лучшая и тд. !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</p> <br>
+					<p>Мы стремимся и тд. </p>
+				</section>
+			</div>
+			<div class ="footer-inform">
+				<section>
+					<h3>О компании</h3>
+					<a href=""><p>Правила</p></a>
+					<a href=""><p>Цель</p></a>
+				</section>
+				<section>
+					<h3>Контактная информация</h3>
+					<a href=""><p>Телефон</p></a>
+					<a href=""><p>Емайл</p></a>
+					<a href=""><p>Адрес</p></a>
+				</section>
+				<section>
+					<h3>Отзывы</h3>
+					<a href=""><p>Отзывы</p></a>
+					<a href=""><p>Спонсоры</p></a>
+				</section>
+			</div>
+		</div>
 	</div>
-		<article>
-			<table>
-				<tr>
-					<th> О компании</th>
-					<th>Контактная информация</th>
-					<th>Отзывы</th>
-				</tr>
-				<tr>
-					<td><a href="#">Цель</a></td>
-					<td><a href="#">Адрес</a></td>
-					<td><a href="#">Отзывы</a> </td>
-				</tr>
-				<tr>
-					<td><a href="#">Автор</a></td>
-					<td><a href="#">Телефон</a></td>
-					<td><a href="#">Наши спонсоры</a></td>
-				</tr>
-				<tr>
-					<td><a href="#">Лидер</a></td>
-					<td><a href="#">Работа</a></td>
-					<td><a href="#">Что то </a></td>
-				</tr>
-				<tr>
-					<td><a href="#">Правила</a></td>
-					<td><a href="#">Емайл</a></td>
-					<td><a href="#">Наши компаньены</a></td>
-				</tr>
-			</table>
-		</article>
+	<div  class ="wrap">
+		<div class="footer-copyright">
+			<h2 class="hide">Соцсети</h2>
+			<p>&copy;&nbsp;2017 Все Права Защищены.</p>
+			<div class="footer-label">
+					<a href="#" aria-label="faisbuk"><i class="fab fa-facebook-f"></i></a>
+					<a href="#" aria-label="twitter"> <i class="fab fa-twitter"></i> </a>
+					<a href="#" aria-label="linkedin"><i class="fab fa-linkedin-in"></i></a>
+					<a href="#" aria-label="pinteres"><i class="fab fa-pinterest-p"></i> </a>
+					<a href="#" aria-label="gugl"><i class="fab fa-google-plus-g"></i></a>
+			</div>
+		</div>				
 	</div>
-	<article class="copyright">
-		<h2 class="hide">Соцсети</h2>
-		<p>&copy;&nbsp;2017 Все Права Защищены.</p>
-		<ul>
-			<li> 
-				<a href="#" aria-label="faisbuk"><i class="fab fa-facebook-f"></i></a>
-				{{-- <img src="{{ asset("svg/IMG/ImgIndex/main/footer/faisbuk.png")}}" alt="faisbuk"> --}}
-			</li>
-			<li>
-				<a href="#" aria-label="twitter"> <i class="fab fa-twitter"></i> </a>
-				<!-- <img src="../IMG/ImgIndex/main/footer/twitter.png" alt="twitter"> -->
-			</li>
-			<li>
-				<a href="#" aria-label="linkedin"><i class="fab fa-linkedin-in"></i></a>
-				<!-- <img src="../IMG/ImgIndex/main/footer/linkedin.png" alt="linkedin"> -->
-			</li>
-			<li>
-				<a href="#" aria-label="pinteres"><i class="fab fa-pinterest-p"></i> </a>
-				<!-- <img src="../IMG/ImgIndex/main/footer/pinteres.png" alt="pinteres"> -->
-			</li>
-			<li>
-				<a href="#" aria-label="gugl"><i class="fab fa-google-plus-g"></i></a>
-				<!-- <img src="../IMG/ImgIndex/main/footer/gugl.png" alt="gugl"> -->
-			</li>
-		</ul>
-	</article>
 </footer>
 </body>
 
