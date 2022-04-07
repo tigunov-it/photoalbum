@@ -5,6 +5,7 @@
 
         <div class="row">
             <div class="col-8 p-5">
+
                 <img src="{{ $user->profile->profileImage()}}" alt="" class="rounded-circle">
                 <div class="d-flex align-items-center justify-content-between">
                     <h1>{{ $user->username }}</h1>
