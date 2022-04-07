@@ -5,16 +5,16 @@
 
         <div class="row">
             <div class="col-8 p-5">
-                <img src="/storage/{{$user->profile->image}}" alt="" class="rounded-circle">
+                <img src="{{ $user->profile->profileImage()}}" alt="" class="rounded-circle">
                 <div class="d-flex align-items-center justify-content-between">
                     <h1>{{ $user->username }}</h1>
-
+                    @can('update', $user->profile)
                         <a href="/p/create">Add new post</a>
-
+                    @endcan
                 </div>
-
-                <a href="/profile/{{$user->id}}/edit">Edit profile</a>
-
+                    @can('update', $user->profile)
+                        <a href="/profile/{{$user->id}}/edit">Edit profile</a>
+                    @endcan
 
                 <h2>{{ $user->profile->title }}</h2>
                 <h3>{{ $user->profile->description }}</h3>
