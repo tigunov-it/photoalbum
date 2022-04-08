@@ -20,7 +20,14 @@
                     <p>{{$post->title}}</p>
                     <p>{{$post->description}}</p>
 
-                    <a href="#"><button class="btn btn-danger">Delete</button></a>
+                    <form action="{{ route('post.destroy', ['post' => $post->id]) }}" method="POST">
+                        @csrf
+
+                        @method('DELETE')
+
+                        <button type="submit" class="btn btn-danger btn-block">Delete</button>
+                    </form>
+
                 </div>
             </div>
         </div>
