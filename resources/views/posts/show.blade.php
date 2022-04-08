@@ -19,6 +19,8 @@
 
                     <p>{{$post->title}}</p>
                     <p>{{$post->description}}</p>
+
+                    <a href="#"><button class="btn btn-danger">Delete</button></a>
                 </div>
             </div>
         </div>
