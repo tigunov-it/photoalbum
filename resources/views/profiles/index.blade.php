@@ -4,11 +4,12 @@
     <div class="container">
 
         <div class="row border-bottom pb-3 d-flex align-items-center">
-            <div class="col-2">
+
+            <div class="col-lg-2">
                 <img src="{{ $user->profile->profileImage()}}" alt="" class="rounded-circle">
             </div>
 
-            <div class="col-5">
+            <div class="col-lg-5">
                 <h1>{{ $user->username }}</h1>
                 <h2>{{ $user->profile->title }}</h2>
                 <h3>{{ $user->profile->description }}</h3>
@@ -23,8 +24,7 @@
 
             </div>
 
-
-            <div class="col-2 d-flex justify-content-center align-items-baseline">
+            <div class="col-lg-2 d-flex justify-content-center align-items-baseline">
 
                 @can('update', $user->profile)
                     <a href="/p/create">
@@ -36,9 +36,11 @@
 
         </div>
 
-        <div class="row mt-4">
+
+
+        <div class="row">
             @foreach($user->posts as $post)
-                <div class="col-4">
+                <div class="col-sm-4">
                     <a href="/p/{{ $post->id }}">
                         <div class="mb-4"
                              style="height: 300px; background-image: url('/storage/{{ $post->image }}');  background-size: cover;">
@@ -47,6 +49,22 @@
                 </div>
             @endforeach
         </div>
+
+
+        {{--        <div class="row">--}}
+        {{--            @foreach($user->posts as $post)--}}
+        {{--                <div class="col-4">--}}
+        {{--                    <a href="/p/{{ $post->id }}">--}}
+        {{--                        <img--}}
+        {{--                            src="/storage/{{ $post->image }}"--}}
+        {{--                            class="w-100 shadow-1-strong rounded mb-4"--}}
+        {{--                            alt="{{ $post->title }}"--}}
+        {{--                        />--}}
+        {{--                    </a>--}}
+        {{--                </div>--}}
+        {{--            @endforeach--}}
+        {{--        </div>--}}
+
 
     </div>
 @endsection
