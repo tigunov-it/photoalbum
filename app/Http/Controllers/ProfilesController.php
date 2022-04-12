@@ -40,7 +40,7 @@ class ProfilesController extends Controller
             'image' => '',
         ]);
 
-//        auth()->user()->profile->update($data);
+    //    auth()->user()->profile->update($data);
 
         if (request('image')) {
             $imagePath = request('image')->store('profile', 'public');

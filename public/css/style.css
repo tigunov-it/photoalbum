@@ -171,19 +171,12 @@ header {
   margin: 0 0 0 -3px;
 }
 
-/*  аккаунт */
+/*  блок вход*/
 .login {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  flex-direction: column;
-  margin:10px  20px 0 0;
+  margin: 20px;
 }
-
 /* кнопка  войти */
+
 .login .but-login {
   width: 100px;
   height: 38px;
@@ -201,29 +194,12 @@ header {
       -ms-flex-align: center;
           align-items: center;
 }
-/* кнопка зарегать */
-.login .but-registration {
-  width:155px;
+.login .but-login:hover {
+  width: 100px;
   height: 38px;
   background: #dddddd;
   border: none;
   border-radius: 15px;
-  color: black;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  padding: 0 15px;
-}
-
-.login .but-account:hover {
-  background: black;
-  border: none;
   color: white;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -235,6 +211,574 @@ header {
       -ms-flex-align: center;
           align-items: center;
 }
+.login .but-login:active {
+  background: black;
+  border: none;
+  color: #dddddd;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+/* блок авторизации-регистрации*/
+
+
+.authorization-fon{
+  display: none;
+ } 
+.login #authorization-on,#authorization-off{
+  display: none;
+}
+
+input[id="authorization-on"]:checked +label~.authorization-fon
+ {
+  width: 100%;
+  height:80%; 
+  background-color: rgb(0, 0, 0, 0.7);
+  display:flex ;
+  justify-content:center; 
+  position: fixed;
+  z-index: 10;
+  top:0;
+  left:0;
+  }
+
+.but-login-off{
+  display: none;
+}
+/* выход из блока авторизации-регистрации */
+input[id="authorization-on"]:checked +label+.but-login-off
+ {
+  display: block;
+  top: 0;
+  right: 0;  
+  position: fixed;
+  z-index: 9;
+  background:rgb(0, 0, 0, 0);
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  }  
+
+/* кнопка перехода
+ {
+  color: black;
+  border: 1px solid #22272d;
+  padding: 7px 15px;
+  border-radius: 25px;
+  font-size: 15px;
+  margin-right: 10px;
+  margin-top: 15px;
+  height: 35px;
+} */
+.authorization{
+  margin-top: 50px;
+  width: 350px;
+  background-color:#dddddd;
+  position: fixed;
+  padding-bottom: 10px;
+  border-radius: 5px;
+  padding-top: 10px;
+
+}
+.but-authorization{
+  color:black;
+  font-size:30px;
+  margin-left: 25px;
+}
+.but-registration{
+  color:black;
+  font-size:30px;
+  margin-left: -310px;
+}
+input[id="tab-1" ]:checked ~.but-registration{
+  color:black;
+  border:1px solid #22272d;
+  padding:2px 5px;
+  border-radius:5px;
+  font-size:15px;
+  margin: 0;
+  margin-left: 21px;
+
+}
+input[id="tab-2" ]:checked ~.but-authorization{
+  color:black;
+  border:1px solid #22272d;
+  padding:2px 5px;
+  border-radius:5px;
+  font-size:15px;
+  margin-left: 228px;
+}
+input[id="tab-2" ]:checked ~.but-authorization:hover {
+  color:#22272d;
+  background:  white;
+  padding:2px 5px;
+  border-radius:5px;
+  font-size:15px;
+}
+input[id="tab-1" ]:checked ~.but-registration:hover {
+  color:#22272d;
+  background:  white;
+  padding:2px 5px;
+  border-radius:5px;
+  font-size:15px;
+}
+input[id="tab-1" ]:checked ~.forma2{
+display: none;
+}
+input[id="tab-2" ]:checked ~.forma1{
+display: none;
+}
+
+.forma1{
+  display: flex;
+  justify-content: center;
+}
+
+.forma1 .registr-name{
+ display: flex;
+ margin-top: 25px;
+}
+.forma1 .registr-name .registr-user-input{
+  width: 100%;
+    height: 40px;
+    border-radius: 3px;
+    outline: none;
+    background: transparent;
+    border: 2px solid #22272d;
+    padding-left: 80px;
+    color: black;
+    margin: 0;
+}
+
+
+.forma1 .registr-name .registr-icon-smail{
+  position:absolute;
+  width:36px;
+  height:36px;
+  border-right: 1px solid black;
+  top: 25px;
+  padding:5px;
+}
+
+.forma1 .registr-zamok{
+  display: flex;
+  margin-top: 15px;
+}
+.forma1 .registr-zamok .registr-zamok-input{
+  width:100%;
+  height:40px;
+  border-radius:3px;
+  outline: none;
+  background:transparent; 
+  border:2px solid #22272d;
+  padding-left:80px;
+  color:black;
+  margin: 0;
+  
+}
+.registr-zamok .registr-icon-zamok{
+  position:absolute;
+  width:36px;
+  height:36px;
+  border-right: 1px solid black;
+  top: 85px;
+  padding:5px;
+}
+.forma1 .registr-user-input:focus, .forma1 .registr-zamok-input:focus {
+  width:100%;
+  height:40px;
+  border-radius:3px;
+  outline: none;
+  background:transparent; 
+  border:2px solid #22272d;
+  padding-left:80px;
+  color:black;
+  margin: 0;
+  background:white;
+}
+/* кнопка войти */
+.regstr-entrance{
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+}
+.regstr-entrance .registr-entrance-input{
+  width:80%;
+  height:40px;
+  border-radius:5px;
+  outline: none;
+  background:black; 
+  border:none;
+  color:white;
+  text-align:center;
+  font-size:20px;
+  cursor:pointer;
+}
+
+.regstr-entrance .registr-entrance-input:hover{
+  width:80%;
+  height:40px;
+  border-radius:5px;
+  border: none;
+  outline: none;
+  background:white; 
+  border:none;
+  color:black;
+  text-align:center;
+  font-size:20px;
+  cursor:pointer;
+}
+.regstr-entrance .registr-entrance-input:focus{
+  width:80%;
+  height:40px;
+  border-radius:5px;
+  outline: none;
+  background:black; 
+  border:none;
+  color:white;
+  text-align:center;
+  font-size:20px;
+  cursor:pointer;
+}
+
+.registr-remember{
+  display: flex;
+  justify-content: space-around;
+  align-items:center;
+  margin-top: 20px;
+}
+.registr-remember .regstr-radio-check{
+  width:50px;
+  height:15px;
+  border:1px solid black;
+  border-radius:30px;
+  text-align:center;
+  padding:3px 0;
+  color:black;
+  font-size:13px;
+}
+.registr-remember .radio-no,.registr-remember .radio-yes{
+  display:none; 
+}
+.registr-remember .regstr-radio-check   label{
+    margin:0 6px;
+    cursor:pointer;
+  }
+.regstr-radio-check  .switch-selection{
+  display: block;
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: rgb(0, 0, 0, 0.5);
+  margin-top: -15px;
+  margin-left: 4px;
+  transition: 0.2s cubic-bezier(0.4, 0, 1, 0.3);
+  } 
+ .radio-yes:checked ~ .switch-selection{
+    margin-left:30px;
+    background:rgb(0, 0, 0, 0.5);
+    
+  } 
+/* запомнить меня */
+.registr-remember .check-label {
+  font-size:13px;
+  color:#7f8084;
+  margin: 0;
+  margin-left: 10px;
+}
+/* збыли пароль */
+.registr-remember .forgot-label{
+    font-size:13px;
+  color:#7f8084;
+  margin-left: 45px;
+  cursor:pointer;
+}
+.registr-remember .forgot-label:hover{
+    font-size:13px;
+  color:black;
+  margin-left: 45px;
+}
+
+
+form {position:relative;}
+
+
+/* форма регистрации */
+
+/* ggggggggggggggggggggggggggggggggggggggggggggggggggg */
+.forma2{
+  display: flex;
+    justify-content: center;
+}
+
+.registr-gender{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+.registr-gender .registr-gender-p{
+  flex-grow: 1;
+  margin: 0;
+}
+.registr-gender label{
+  margin-right: 5px;
+}
+
+.forma2 .registr-name{
+ display: flex;
+ margin-top: 8px;
+}
+/* jkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk */
+.forma2 .registr-user-input-name {
+  width:100%;
+  padding:5px;
+  height:20px;
+  border-radius:3px;
+  margin:5px 0;
+  outline: none;
+  background:transparent; 
+  border:2px solid #22272d;
+  padding-left:80px;
+  color:black;
+}
+
+
+.forma2 .registr-icon-identificati-name{
+  position:absolute;
+  width:39px;
+  height:33px;
+  border-right: 1px solid black;
+  top: 43px;
+  padding:0px;
+}
+.forma2 .registr-surname{
+  display: flex;
+  margin-top: 0px;
+}
+.forma2 .registr-user-input-surname{
+  width:100%;
+  padding:5px;
+  height:20px;
+  border-radius:3px;
+  outline: none;
+  background:transparent; 
+  border:2px solid #22272d;
+  padding-left:80px;
+  color:black;
+}
+.forma2 .registr-icon-surname{
+  position:absolute;
+  width:39px;
+  height:33px;
+  border-right: 1px solid black;
+  top: 84px;
+  padding:0px;
+}
+.forma2 .registr-login{
+  display: flex;
+  margin-top: 6px;
+}
+.forma2 .registr-user-input-login{
+  width:100%;
+  padding:5px;
+  height:20px;
+  border-radius:3px;
+  outline: none;
+  background:transparent; 
+  border:2px solid #22272d;
+  padding-left:80px;
+  color:black;
+}
+
+.forma2 .registr-icon-smail-login{
+  position:absolute;
+  width:36px;
+  height:27px;
+  border-right: 1px solid black;
+  top: 123px;
+  padding:2px;
+  
+}
+
+.forma2 .registr-zamok2{
+  display: flex;
+  margin: 0;
+  padding: 0;
+  margin-top: 6px;
+}
+.forma2 .registr-zamok-input{
+  width:100%;
+  padding:5px;
+  height:20px;
+  border-radius:3px;
+  outline: none;
+  background:transparent; 
+  border:2px solid #22272d;
+  padding-left:80px;
+  color:black;
+}
+
+.forma2 .registr-icon-zamok2{
+  position: absolute;
+  width: 31px;
+  height: 23px;
+  border-right: 1px solid black;
+  top: 162px;
+  padding: 5px;
+}
+.forma2 .registr-icon-zamok22{
+  position: absolute;
+  width: 31px;
+  height: 23px;
+  border-right: 1px solid black;
+  top: 203px;
+  padding: 5px;;
+}
+
+.forma2 .registr-remember2{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 20px;
+}
+.forma2 .registr-remember2 .regstr-radio-check2{
+   width: 50px;
+    height: 15px;
+    border: 1px solid black;
+    border-radius: 30px;
+    text-align: center;
+    padding: 3px 0;
+    color: black;
+    font-size: 13px;
+}
+.forma2 .registr-remember2 .radio-no2,.forma2 .registr-remember2 .radio-yes2{
+  display:none; 
+}
+.forma2 .registr-remember2 .regstr-radio-check2   label{
+    margin:0 6px;
+    cursor:pointer;
+  }
+.forma2 .registr-remember2 .regstr-radio-check2     .switch-selection2{
+  display: block;
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: rgb(0, 0, 0, 0.5);
+  margin-top: -15px;
+  margin-left: 4px;
+  transition: 0.2s cubic-bezier(0.4, 0, 1, 0.3);
+  } 
+  
+
+ .forma2 .registr-remember2 .radio-yes2:checked ~ .switch-selection2{
+    margin-left:30px;
+    background: rgb(0, 0, 0, 0.5);
+    
+  } 
+ .registr-remember2 .check-yes{
+  font-size: 13px;
+    color: black;
+  margin-left: 5px;
+}
+/* условия */
+ .forma2 .registr-terms{
+  font-size:13px;
+color:#7f8084;
+margin-left: 8px;
+}
+ .forma2 .registr-terms:hover{
+  font-size:13px;
+color:black;
+margin-left: 8px;
+}
+
+/* кнопка зарегать */
+ .forma2 .regstr-reg{
+  display: flex;
+  margin-top: 6px;
+  justify-content: center;
+ }
+
+
+.forma2 .registr-reg-input{
+  width:80%;
+  padding:5px;
+  height:40px;
+  border-radius:5px;
+  margin:5px 0;
+  outline: none;
+  background:black; 
+  border:none;
+  color:white;
+  text-align:center;
+  font-size:20px;
+  cursor:pointer;
+}
+
+.forma2 .registr-reg-input:hover{
+  width:80%;
+  padding:5px;
+  height:40px;
+  border-radius:5px;
+  margin:5px 0;
+  outline: none;
+  background:white; 
+  border:none;
+  color:black;
+  text-align:center;
+  font-size:20px;
+  cursor:pointer;
+}
+.forma2 .registr-reg-input:focus{
+  width:80%;
+  padding:5px;
+  height:40px;
+  border-radius:5px;
+  margin:5px 0;
+  outline: none;
+  background:black; 
+  border:none;
+  color:white;
+  text-align:center;
+  font-size:20px;
+  cursor:pointer;
+}
+.forma2 .registr-user-input:focus, .registr-zamok-input:focus {
+  border:3px solid black;
+  box-shadow:none;background:white;
+  
+}
+
+
+/* запомнить меня */
+.check-label {
+  font-size:13px;
+  color:#7f8084;
+  margin: 0 20px 0 0;
+}
+
+
+
+
+.regstr-reg{
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+
+
+
+
 
 /* разделительная линия */
  hr {
@@ -657,7 +1201,9 @@ width: 100%;
   color: #898989;
 }
 
-
+.head-footer .footer-inform section a p {
+  color: #898989;
+}
 .head-footer .footer-inform section a:hover p {
   color: black;
 }
