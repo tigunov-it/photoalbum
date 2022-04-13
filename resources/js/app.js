@@ -31,4 +31,8 @@ const app = new Vue({
     el: '#app',
 });
 
+// require('bootstrap.bundle.min');
+
 require('./mdb.min');
+
+
