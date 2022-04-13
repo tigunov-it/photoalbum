@@ -5421,7 +5421,7 @@ Vue.component('example-component', (__webpack_require__(/*! ./components/Example
 
 var app = new Vue({
   el: '#app'
-});
+}); // require('bootstrap.bundle.min');
 
 __webpack_require__(/*! ./mdb.min */ "./resources/js/mdb.min.js");
 
