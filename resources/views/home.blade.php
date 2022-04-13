@@ -20,7 +20,6 @@
 				<div class="logotip">
 					<a href="#" aria-label="Logotip"> 
 						<img src="{{ asset("svg/IMG/ImgIndex/logo.png")}}" alt="Logotip"> 
-						{{-- <p class="logo">Сделай мир ярче <span class="logo-D">D</span></p> --}}
 					</a>
 				</div>
 				<!-- Поиск по сайту -->
@@ -47,9 +46,7 @@
 							<input type="radio" name="tabs" id="tab-1" checked style="display: none">
 							<input type="radio" name="tabs" id="tab-2" style="display: none">
 
-
 							<label for="tab-1" class="but-authorization" title="Авторизация">Авторизация</label>
-							
 							<label for="tab-2" class="but-registration" title="Регистрация">Регистрация</label>	
 
 								<div  class="forma1">
@@ -80,7 +77,6 @@
 									</form>
 								</div>
 							<div class="forma2" >
-								{{-- <div class="registr-body"> --}}
 									<form action="#">
 										<div class="registr-gender">
 											<p class="registr-gender-p">Обращение</p>
@@ -128,7 +124,6 @@
 											<input class="registr-reg-input" type="submit" value="Зарегистрироваться" />
 										</div>
 									</form>
-								{{-- </div> --}}
 							</div>
 						</div>
 					</div>
@@ -374,7 +369,6 @@
 </section>
 </main>
 <!-- Подвал -->
-
 <footer>
 	<hr>
 	<div class ="wrap">
@@ -386,18 +380,6 @@
 						<img src="{{ asset("svg/IMG/ImgIndex/logo.png")}}" alt="Logotip"> 
 					</a>
 				</div> 
-
-
-
-
-					<a class="nav-link" href="{{ route('login') }}">{{ __('Логин') }}</a>
-
-					<a class="nav-link" href="{{ route('register') }}">{{ __('Регистрация') }}</a>
-
-
-
-
-
 				<section class="business-text">
 					<h3>О компании</h3>	
 					<p> Наша компания лучшая и тд. !!!!!!!</p> <br>
@@ -438,10 +420,7 @@
 		</div>				
 	</div>
 </footer>
-
-
 </body>
-
 </html>
 
 
