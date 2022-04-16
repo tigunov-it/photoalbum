@@ -19,6 +19,12 @@
 
                     <p>{{$post->title}}</p>
                     <p>{{$post->description}}</p>
+                    <div>
+                        <h3>Альбом</h3>
+                        <p>{{$post->album->title}}</p>
+                    </div>
+
+
 
                     <form action="{{ route('post.destroy', ['post' => $post->id]) }}" method="POST">
                         @csrf

@@ -60,35 +60,21 @@
 
         </div>
 
-
-
         <div class="row mt-5">
-            @foreach($user->posts as $post)
+            @foreach($user->album as $album)
                 <div class="col-sm-4">
-                    <a href="/p/{{ $post->id }}">
+                    <a href="/a/{{ $album->id }}">
                         <div class="mb-4"
-                             style="height: 300px; background-image: url('/storage/{{ $post->image }}');  background-size: cover;">
+                             style="height: 300px; background-image: url('/storage/{{ $album->image }}');  background-size: cover;">
+                            <div>
+                                <h3 class="text-white fs-1">{{ $album->title }}</h3>
+                            </div>
                         </div>
                     </a>
                 </div>
             @endforeach
         </div>
 
-
-        {{--        <div class="row">--}}
-        {{--            @foreach($user->posts as $post)--}}
-        {{--                <div class="col-4">--}}
-        {{--                    <a href="/p/{{ $post->id }}">--}}
-        {{--                        <img--}}
-        {{--                            src="/storage/{{ $post->image }}"--}}
-        {{--                            class="w-100 shadow-1-strong rounded mb-4"--}}
-        {{--                            alt="{{ $post->title }}"--}}
-        {{--                        />--}}
-        {{--                    </a>--}}
-        {{--                </div>--}}
-        {{--            @endforeach--}}
-        {{--        </div>--}}
-
-
     </div>
 @endsection
+
