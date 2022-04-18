@@ -60,10 +60,11 @@
 
         </div>
 
-
+        <h1 class="card-title">Album: {{ $album->title }}</h1>
 
         <div class="row mt-5">
-            @foreach($user->posts as $post)
+
+            @foreach($posts as $post)
                 <div class="col-sm-4">
                     <a href="/p/{{ $post->id }}">
                         <div class="mb-4"
@@ -72,22 +73,9 @@
                     </a>
                 </div>
             @endforeach
+
+
         </div>
-
-
-        {{--        <div class="row">--}}
-        {{--            @foreach($user->posts as $post)--}}
-        {{--                <div class="col-4">--}}
-        {{--                    <a href="/p/{{ $post->id }}">--}}
-        {{--                        <img--}}
-        {{--                            src="/storage/{{ $post->image }}"--}}
-        {{--                            class="w-100 shadow-1-strong rounded mb-4"--}}
-        {{--                            alt="{{ $post->title }}"--}}
-        {{--                        />--}}
-        {{--                    </a>--}}
-        {{--                </div>--}}
-        {{--            @endforeach--}}
-        {{--        </div>--}}
 
 
     </div>
