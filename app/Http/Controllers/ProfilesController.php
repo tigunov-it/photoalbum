@@ -10,6 +10,9 @@ class ProfilesController extends Controller
 {
     public function index(User $user)
     {
+
+        $this->authorize('update', $user->profile);
+
         return view('profiles.index', [
             'user' => $user
         ]);

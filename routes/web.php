@@ -33,7 +33,9 @@ Route::delete('/p/{post}', [PostsController::class, 'destroy'])->name('post.dest
 
 Route::get('/a/create', [AlbumsController::class, 'create']);
 Route::post('/a', [AlbumsController::class, 'store']);
-Route::get('/a/{user}', [AlbumsController::class, 'index'])->name('albums.show');
+Route::get('/a/{user}', [AlbumsController::class, 'index'])->name('albums.index');
+Route::get('/a/{user}/{album}', [AlbumsController::class, 'show'])->name('albums.show');
+
 
 Route::get('/profile/{user}', [ProfilesController::class, 'index'])->name('profile.show');
 Route::get('/profile/{user}/edit', [ProfilesController::class, 'edit'])->name('profile.edit');
