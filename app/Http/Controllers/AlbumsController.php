@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Album;
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,8 +18,28 @@ class AlbumsController extends Controller
 
     public function index(User $user)
     {
+
+        $this->authorize('update', $user->profile);
+
         return view('albums.index', [
             'user' => $user
+        ]);
+    }
+
+    public function show(User $user, Album $album)
+    {
+
+        //TODO: Сделать оптимальное решение для приватности фотоальбомов
+        $this->authorize('update', $user->profile);
+
+
+        $posts = \DB::table('posts')->where('album_id', '=', $album->id)
+            ->where('user_id', '=', $user->id)->get();
+
+        return view('albums.show', [
+            'posts' => $posts,
+            'user' => $user,
+            'album' => $album
         ]);
     }
 

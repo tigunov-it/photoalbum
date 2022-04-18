@@ -60,21 +60,23 @@
 
         </div>
 
+        <h1 class="card-title">Album: {{ $album->title }}</h1>
+
         <div class="row mt-5">
-            @foreach($user->album as $album)
+
+            @foreach($posts as $post)
                 <div class="col-sm-4">
-                    <a href="/a/{{ $user->id }}/{{ $album->id }}">
+                    <a href="/p/{{ $post->id }}">
                         <div class="mb-4"
-                             style="height: 300px; background-image: url('/storage/{{ $album->image }}');  background-size: cover;">
-                            <div>
-                                <h3 class="text-white fs-1">{{ $album->title }}</h3>
-                            </div>
+                             style="height: 300px; background-image: url('/storage/{{ $post->image }}');  background-size: cover;">
                         </div>
                     </a>
                 </div>
             @endforeach
+
+
         </div>
+
 
     </div>
 @endsection
-
