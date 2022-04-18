@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfilesController;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\PostsController;
 use Illuminate\Support\Facades\Auth;
+use SebastianBergmann\CodeCoverage\Node\CrapIndex;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,3 +33,8 @@ Route::get('/p/{post}', [PostsController::class, 'show']);
 Route::get('/profile/{user}', [ProfilesController::class, 'index'])->name('profile.show');
 Route::get('/profile/{user}/edit', [ProfilesController::class, 'edit'])->name('profile.edit');
 Route::patch('/profile/{user}', [ProfilesController::class, 'update'])->name('profile.update');
+
+
+
+// для админа
+Route::get('/admin',[AdminController::class,'index'])->name('admin.index');

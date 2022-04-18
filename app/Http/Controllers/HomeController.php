@@ -25,6 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        // $params=['heading'=>'Главная'];
+        return view('index');
     }
 }
