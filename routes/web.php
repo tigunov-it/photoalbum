@@ -19,10 +19,10 @@ use SebastianBergmann\CodeCoverage\Node\CrapIndex;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-Route::get('/',[HomeController::class, 'index'])->name('home');
+Route::get('/', function () {
+    return view('welcome');
+});
+// Route::get('/',[HomeController::class, 'index'])->name('home');
 
 Auth::routes();
 Route::get('/p/create', [PostsController::class, 'create']);
@@ -38,3 +38,5 @@ Route::patch('/profile/{user}', [ProfilesController::class, 'update'])->name('pr
 
 // для админа
 Route::get('/admin',[AdminController::class,'index'])->name('admin.index');
+
+// Route::get('/',[HomeController::class, 'index'])->name('home');
