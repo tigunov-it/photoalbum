@@ -10,7 +10,10 @@ use App\Http\Controllers\ProfilesController;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\PostsController;
 use Illuminate\Support\Facades\Auth;
+<<<<<<< HEAD
 use SebastianBergmann\CodeCoverage\Node\CrapIndex;
+=======
+>>>>>>> попытка объединить ветки
 
 /*
 |--------------------------------------------------------------------------
