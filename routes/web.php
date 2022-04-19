@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AlbumsController;
 use App\Http\Controllers\ProfilesController;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\PostsController;
@@ -16,16 +17,28 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+
 Route::get('/', function () {
     return view('welcome');
 });
 
 Auth::routes();
-Route::get('/p/create', [PostsController::class, 'create']);
+Route::get('/p/create', [PostsController::class, 'create'])->name('post.create');
+
 Route::post('/p', [PostsController::class, 'store']);
 Route::get('/p/{post}', [PostsController::class, 'show']);
+Route::delete('/p/{post}', [PostsController::class, 'destroy'])->name('post.destroy');
+
+Route::get('/a/create', [AlbumsController::class, 'create']);
+Route::post('/a', [AlbumsController::class, 'store']);
+Route::get('/a/{user}', [AlbumsController::class, 'index'])->name('albums.index');
+Route::get('/a/{user}/{album}', [AlbumsController::class, 'show'])->name('albums.show');
 
 
 Route::get('/profile/{user}', [ProfilesController::class, 'index'])->name('profile.show');
 Route::get('/profile/{user}/edit', [ProfilesController::class, 'edit'])->name('profile.edit');
 Route::patch('/profile/{user}', [ProfilesController::class, 'update'])->name('profile.update');
+
