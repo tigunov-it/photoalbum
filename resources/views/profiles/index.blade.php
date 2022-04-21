@@ -1,6 +1,6 @@
-@extends('layouts.app')
-
-@section('content')
+{{-- @extends('layouts.app') --}}
+профилеь
+{{-- @section('content')
     <div class="container">
 
         <div class="row border-bottom pb-3 d-flex align-items-center">
@@ -72,7 +72,7 @@
                     </a>
                 </div>
             @endforeach
-        </div>
+        </div> --}}
 
 
         {{--        <div class="row">--}}
@@ -90,5 +90,5 @@
         {{--        </div>--}}
 
 
-    </div>
-@endsection
+    {{-- </div>
+@endsection --}}

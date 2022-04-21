@@ -191,7 +191,8 @@
                 </div>
                 <div>
                     <div>Здесь что нибудь из фото</div>
-                    <a class="nav-link" href="/profile/{{ Auth::user()->id }}">Мой профиль</a>
+                    <a class="nav-link" href="profile/{{ Auth::user()->id }}">Мой профиль</a>
+                    {{-- /profile-? --}}
                 </div>
                 <div style="background-color: blue">
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" >
