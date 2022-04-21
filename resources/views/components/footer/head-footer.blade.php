@@ -22,9 +22,9 @@
             </section>
             <section>
                 <h3>Контактная информация</h3>
-                <a href=""><p>Телефон</p></a>
-                <a href=""><p>Емайл</p></a>
-                <a href=""><p>Адрес</p></a>
+                <a href="#"><p><i class="fas fa-phone me-3"></i>Телефон: + 71 234 567 88 </p></a>
+                <a href="#"><p><i class="fas fa-envelope me-3"></i>Емайл: info@example.com</p></a>
+                <a href="#"><p><i class="fas fa-home me-3"></i>Адрес: Russia, Irkutsk, Baikal lake</p></a>
             </section>
             <section>
                 <h3>Отзывы</h3>

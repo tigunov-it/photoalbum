@@ -188,19 +188,15 @@
             <section class="login" style="background-color: aqua">
                 <div>
                     Рады Вас видеть го-д(жа) {{ Auth::user()->username }}
-
                 </div>
                 <div>
-                    <div></div>
+                    <div>Здесь что нибудь из фото</div>
                     <a class="nav-link" href="/profile/{{ Auth::user()->id }}">Мой профиль</a>
                 </div>
-                <div>
-                    <a class="dropdown-item"onclick="event.preventDefault();
-                                        document.getElementById('logout-form').submit();">
-                        {{ __('Logout') }}
-                    </a>
+                <div style="background-color: blue">
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" >
                         @csrf
+                        <input class="registr-entrance-input" type="submit" value="Выйти" />
                     </form>                
                 </div>
             </section>

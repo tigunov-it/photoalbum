@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
 {{-- <html lang="ru"> --}}
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
@@ -19,7 +18,7 @@
 				</div>		
 			@show
 			{{-- Слайдер --}}
-			<x-slaider></x-slaider>
+			{{-- <x-slaider></x-slaider> --}}
 		</main>
 		<footer>
 			@section('head-footer')
@@ -28,13 +27,13 @@
 			<x-footer.footer-copyright></x-footer.footer-copyright>
 		</footer>
 	</body>
-=======
+{{-- =======
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <body>
 <div id="app">
-    
+ 
 
     <main class="py-4">
         @yield('content')
@@ -163,4 +162,4 @@
 </div>
 </body>
 >>>>>>> Start page. Add menu 'My profile', route
-</html>
+</html> --}}
