@@ -3,7 +3,7 @@
         <div class="wrap">
             <!-- логотип -->
             <div class="logotip">
-                <a href="#" aria-label="Logotip"> 
+                <a href="{{ url('/') }}" aria-label="Logotip"> 
                     <img src="{{ asset("svg/IMG/ImgIndex/logo.png")}}" alt="Logotip"> 
                 </a>
             </div>
@@ -19,6 +19,7 @@
                 </form>
             </section>
             <!--аккаунт и регистрация -->
+        @guest
             <section class="login">
                     <input type="radio" name="authorization" id="authorization-on" >
                     <label for="authorization-on" class="but-login" title="Вход">Войти</label>
@@ -39,11 +40,34 @@
                                     @csrf
                                     <div class="registr-name">
                                         <img src="{{ asset("svg/IMG/smail.svg")}}" alt="smail" class="registr-icon-smail">
-                                        <input class="registr-user-input" type="text" name="name" id="name" placeholder="Логин" >
+                                        <input id="email" type="text" class="registr-user-input @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Логин" >
+
+                                        {{-- <input class="registr-user-input" type="text" name="name" id="email" placeholder="Логин" > --}}
+                                        {{-- <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus> --}}
+                                        {{-- type email? --}}
+
+                                        @error('email')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+
+
                                     </div>
                                     <div class="registr-zamok">
                                         <img src="{{ asset("svg/IMG/zamok.svg")}}" alt="zamok" class="registr-icon-zamok">
-                                        <input class="registr-zamok-input" type="password" name="name" id="name" placeholder="Пароль">
+                                        <input id="password" type="password" class="registr-zamok-input @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Пароль">
+                                        
+                                        {{-- <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                        <input class="registr-zamok-input" type="password" name="name" id="name" placeholder="Пароль"> --}}
+                                       
+                                        @error('password')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror                                
+                                    
+                                    
                                     </div>
                                     <div class="regstr-entrance">
                                         <input class="registr-entrance-input" type="submit" value="Войти" />
@@ -51,9 +75,15 @@
                                     <div class="registr-remember">
                                         <div class="regstr-radio-check">   
                                             <input type="radio" class="radio-no" id="no" name="remember" value="no" checked>
-                                            <label for="no"><i class="fa fa-times"></i></label>  
-                                            <input type="radio" class="radio-yes" id="yes" name="remember" value="yes">
-                                            <label for="yes"><i class="fa fa-check"></i></label>
+                                            <label for="no"><i class="fa fa-times"></i></label> 
+                                            <input class="radio-yes" type="radio" name="remember" id="remember" value="yes" >
+
+                                            {{-- <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                                            <input type="radio" class="radio-yes" id="yes" name="remember" value="yes"> --}}
+                                            <label  for="remember"><i class="fa fa-check"></i></label>
+                                            
+                                            {{-- <label class="form-check-label" for="remember">
+                                            <label for="yes"><i class="fa fa-check"></i></label> --}}
                                             <span class="switch-selection"></span>
                                         </div>
                                             <span class="check-label">Запомнить меня</span>
@@ -62,7 +92,8 @@
                                 </form>
                             </div>
                         <div class="forma2" >
-                                <form action="#">
+                                <form method="POST" action="{{ route('register') }}">
+                                    @csrf
                                     <div class="registr-gender">
                                         <p class="registr-gender-p">Обращение</p>
                                         <label>
@@ -76,23 +107,61 @@
                                     </div>
                                     <div class="registr-name">
                                         <img src="{{ asset("svg/IMG/id.svg")}}" alt="smail" class="registr-icon-identificati-name">
-                                        <input class="registr-user-input-name" type="text" name="name" id="name" placeholder="Имя" >
+
+
+
+                                        <input id="name" type="text" placeholder="Имя" class="registr-user-input-name @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" autocomplete="name" autofocus>
+                
+                                        @error('name')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        {{-- <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" autocomplete="name" autofocus>
+                                        <input class="registr-user-input-name" type="text" name="name" id="name" placeholder="Имя" > --}}
                                     </div>	
                                     <div class="registr-surname">
                                         <img src="{{ asset("svg/IMG/id.svg")}}" alt="smail" class="registr-icon-surname">
-                                        <input class="registr-user-input-surname" type="text" name="name" id="name" placeholder="Фамилия" >
+                                        <input id="username" type="username" placeholder="Фамилия" class="registr-user-input-surname @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" autocomplete="username">
+                
+                                        @error('username')
+                                        <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        {{-- <input id="username" type="username" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" autocomplete="username">
+                                        <input class="registr-user-input-surname" type="text" name="name" id="name" placeholder="Фамилия" > --}}
                                     </div>
                                     <div class="registr-login">
                                         <img src="{{ asset("svg/IMG/smail.svg")}}" alt="smail" class="registr-icon-smail-login">
-                                        <input class="registr-user-input-login" type="text" name="name" id="name" placeholder="Логин" >
+                                        <input id="email" type="email" placeholder="Почта" class="registr-user-input-login @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email">
+                
+                                        @error('email')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        {{-- <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email">
+                                        <input class="registr-user-input-login" type="text" name="name" id="name" placeholder="Логин" > --}}
                                     </div>
                                     <div class="registr-zamok2">
                                         <img src="{{ asset("svg/IMG/zamok.svg")}}" alt="zamok" class="registr-icon-zamok2">
-                                        <input class="registr-zamok-input" type="password" name="name" id="name" placeholder="Пароль">
+                                        <input id="password" type="password"  placeholder="Пароль" class="registr-zamok-input @error('password') is-invalid @enderror" name="password" autocomplete="new-password">
+                
+                                        @error('password')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        {{-- <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="new-password">
+                                        <input class="registr-zamok-input" type="password" name="name" id="name" placeholder="Пароль"> --}}
                                     </div>
                                     <div class="registr-zamok2">
                                         <img src="{{ asset("svg/IMG/zamok.svg")}}" alt="zamok" class="registr-icon-zamok22">
-                                        <input class="registr-zamok-input" type="password" name="name" id="name" placeholder="Подтвердить пароль">
+                                        <input id="password-confirm" type="password" class="registr-zamok-input" name="password_confirmation" autocomplete="new-password">
+
+                                        {{-- <input id="password-confirm" type="password" class="form-control" name="password_confirmation" autocomplete="new-password">
+                                        <input class="registr-zamok-input" type="password" name="name" id="name" placeholder="Подтвердить пароль"> --}}
                                     </div>
                                     <div class="registr-remember2">
                                         <div class="regstr-radio-check2">   
@@ -109,11 +178,33 @@
                                         <input class="registr-reg-input" type="submit" value="Зарегистрироваться" />
                                     </div>
                                 </form>
+
                         </div>
                     </div>
                 </div>
                 <br>
             </section>
+        @else
+            <section class="login" style="background-color: aqua">
+                <div>
+                    Рады Вас видеть го-д(жа) {{ Auth::user()->username }}
+
+                </div>
+                <div>
+                    <div></div>
+                    <a class="nav-link" href="/profile/{{ Auth::user()->id }}">Мой профиль</a>
+                </div>
+                <div>
+                    <a class="dropdown-item"onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
+                        {{ __('Logout') }}
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" >
+                        @csrf
+                    </form>                
+                </div>
+            </section>
+        @endguest
         </div>
     <hr>
     <!-- навигация -->

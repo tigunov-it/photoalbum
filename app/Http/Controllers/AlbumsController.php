@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Intervention\Image\Facades\Image;
 
 class AlbumsController extends Controller
@@ -33,7 +34,7 @@ class AlbumsController extends Controller
         $this->authorize('update', $user->profile);
 
 
-        $posts = \DB::table('posts')->where('album_id', '=', $album->id)
+        $posts = DB::table('posts')->where('album_id', '=', $album->id)
             ->where('user_id', '=', $user->id)->get();
 
         return view('albums.show', [

@@ -43,14 +43,10 @@ class ProfilesController extends Controller
             'image' => '',
         ]);
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-    //    auth()->user()->profile->update($data);
 
-=======
->>>>>>> 1. Fix error when edit profile and no add photo;
-=======
->>>>>>> e521a57358549943c2d901c74ef4de38faeb1876
+       auth()->user()->profile->update($data);
+
+
         if (request('image')) {
             $imagePath = request('image')->store('profile', 'public');
             $image = Image::make(public_path("storage/{$imagePath}"))->fit(200, 200);
@@ -65,7 +61,6 @@ class ProfilesController extends Controller
         ));
 
 
-//        auth()->user()->profile->update($data);
 
         return redirect("/profile/{$user->id}");
     }
