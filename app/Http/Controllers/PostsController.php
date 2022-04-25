@@ -30,21 +30,26 @@ class PostsController extends Controller
             'title' => 'required',
             'description' => 'required',
             'album' => 'required',
-            'image' => ['required', 'image']
+            'image.*' => ['required', 'image']
         ]);
 
-        $imagePath = request('image')->store('uploads', 'public');
 
-//        $image = Image::make(public_path("storage/{$imagePath}"))->fit(1024, 768);
-        $image = Image::make(public_path("storage/{$imagePath}"))->encode('jpg', 30);
-        $image->save();
+        foreach (request('image') as $file) {
 
-        auth()->user()->posts()->create([
-            'title' => $data['title'],
-            'description' => $data['description'],
-            'album_id' => $data['album'],
-            'image' => $imagePath
-        ]);
+            $imagePath = $file->store('uploads', 'public');
+//            $image = Image::make(public_path("storage/{$imagePath}"))->encode('jpg', 30);
+            $image = Image::make(public_path("storage/{$imagePath}"))->fit(1024, 768)->encode('jpg', 30);
+            $image->save();
+
+            auth()->user()->posts()->create([
+                'title' => $data['title'],
+                'description' => $data['description'],
+                'album_id' => $data['album'],
+                'image' => $imagePath
+            ]);
+
+        }
+
         return redirect('/profile/' . auth()->user()->id);
     }
 

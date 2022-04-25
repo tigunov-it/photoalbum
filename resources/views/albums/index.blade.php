@@ -64,10 +64,11 @@
             @foreach($user->album as $album)
                 <div class="col-sm-4">
                     <a href="/a/{{ $user->id }}/{{ $album->id }}">
-                        <div class="mb-4"
+                        <div class="mb-4 d-flex justify-content-center align-items-center"
                              style="height: 300px; background-image: url('/storage/{{ $album->image }}');  background-size: cover;">
                             <div>
                                 <h3 class="text-white fs-1">{{ $album->title }}</h3>
+
                             </div>
                         </div>
                     </a>

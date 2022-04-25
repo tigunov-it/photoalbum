@@ -5421,9 +5421,9 @@ Vue.component('example-component', (__webpack_require__(/*! ./components/Example
 
 var app = new Vue({
   el: '#app'
-}); // require('bootstrap.bundle.min');
+});
 
-__webpack_require__(/*! ./mdb.min */ "./resources/js/mdb.min.js");
+__webpack_require__(/*! ./mdb.min */ "./resources/js/mdb.min.js"); // require('./bootstrap.bundle.min');
 
 /***/ }),
 
@@ -5526,7 +5526,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 
 /*!
  * MDB5
- *   Version: FREE 3.11.0
+ *   Version: FREE 4.0.0
  *
  *
  *   Copyright: Material Design for Bootstrap
@@ -5659,11 +5659,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
     "use strict";
 
     var i = n(17),
-        o = n(99),
+        o = n(100),
         r = n(44),
         s = n(28),
         a = n(8).f,
-        c = n(100),
+        c = n(101),
         l = n(26),
         n = n(6),
         u = "Array Iterator",
@@ -5730,8 +5730,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 
     var o,
         r = n(0),
-        s = n(103),
-        a = n(104),
+        s = n(104),
+        a = n(105),
         c = n(9),
         l = n(14),
         n = n(5),
@@ -5781,18 +5781,18 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
         o = t(61),
         l = t(89),
         u = t(14),
-        r = t(8).f,
-        s = t(57).f,
+        r = t(57).f,
         h = t(47),
         d = t(91),
         f = t(15),
-        a = t(62),
-        c = t(63),
+        s = t(62),
+        a = t(63),
+        c = t(92),
         p = t(20),
         g = t(2),
         m = t(7),
         _ = t(28).enforce,
-        v = t(92),
+        v = t(93),
         b = t(5),
         y = t(64),
         w = t(65),
@@ -5800,7 +5800,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
         x = n.RegExp,
         C = x.prototype,
         T = n.SyntaxError,
-        O = i(a),
+        O = i(s),
         R = i(C.exec),
         A = i("".charAt),
         S = i("".replace),
@@ -5810,42 +5810,14 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
         I = /a/g,
         k = /a/g,
         t = new x(I) !== I,
-        D = c.MISSED_STICKY,
-        F = c.UNSUPPORTED_Y,
+        D = a.MISSED_STICKY,
+        F = a.UNSUPPORTED_Y,
         b = e && (!t || D || y || w || g(function () {
       return k[E] = !1, x(I) != I || x(k) == k || "/a/i" != x(I, "i");
-    })),
-        U = function U(t) {
-      for (var e, n = t.length, i = 0, o = "", r = !1; i <= n; i++) {
-        "\\" === (e = A(t, i)) ? o += e + A(t, ++i) : r || "." !== e ? ("[" === e ? r = !0 : "]" === e && (r = !1), o += e) : o += "[\\s\\S]";
-      }
-
-      return o;
-    },
-        z = function z(t) {
-      for (var e, n = t.length, i = 0, o = "", r = [], s = {}, a = !1, c = !1, l = 0, u = ""; i <= n; i++) {
-        if ("\\" === (e = A(t, i))) e += A(t, ++i);else if ("]" === e) a = !1;else if (!a) switch (!0) {
-          case "[" === e:
-            a = !0;
-            break;
-
-          case "(" === e:
-            R(W, B(t, i + 1)) && (i += 2, c = !0), o += e, l++;
-            continue;
-
-          case ">" === e && c:
-            if ("" === u || m(s, u)) throw new T("Invalid capture group name");
-            s[u] = !0, c = !(r[r.length] = [u, l]), u = "";
-            continue;
-        }
-        c ? u += e : o += e;
-      }
-
-      return [o, r];
-    };
+    }));
 
     if (o("RegExp", b)) {
-      for (var N = function N(t, e) {
+      var N = function N(t, e) {
         var n,
             i,
             o = h(C, this),
@@ -5854,22 +5826,40 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
             a = [],
             c = t;
         if (!o && r && s && t.constructor === N) return t;
-        if ((r || h(C, t)) && (t = t.source, s && (e = ("flags" in c) ? c.flags : O(c))), t = void 0 === t ? "" : f(t), e = void 0 === e ? "" : f(e), c = t, r = e = y && ("dotAll" in I) && (n = !!e && -1 < L(e, "s")) ? S(e, /s/g, "") : e, D && ("sticky" in I) && (i = !!e && -1 < L(e, "y")) && F && (e = S(e, /y/g, "")), w && (t = (s = z(t))[0], a = s[1]), s = l(x(t, e), o ? this : C, N), (n || i || a.length) && (e = _(s), n && (e.dotAll = !0, e.raw = N(U(t), r)), i && (e.sticky = !0), a.length && (e.groups = a)), t !== c) try {
+        if ((r || h(C, t)) && (t = t.source, s && (e = "flags" in c ? c.flags : O(c))), t = void 0 === t ? "" : f(t), e = void 0 === e ? "" : f(e), c = t, r = e = y && "dotAll" in I && (n = !!e && -1 < L(e, "s")) ? S(e, /s/g, "") : e, D && "sticky" in I && (i = !!e && -1 < L(e, "y")) && F && (e = S(e, /y/g, "")), w && (t = (s = function (t) {
+          for (var e, n = t.length, i = 0, o = "", r = [], s = {}, a = !1, c = !1, l = 0, u = ""; i <= n; i++) {
+            if ("\\" === (e = A(t, i))) e += A(t, ++i);else if ("]" === e) a = !1;else if (!a) switch (!0) {
+              case "[" === e:
+                a = !0;
+                break;
+
+              case "(" === e:
+                R(W, B(t, i + 1)) && (i += 2, c = !0), o += e, l++;
+                continue;
+
+              case ">" === e && c:
+                if ("" === u || m(s, u)) throw new T("Invalid capture group name");
+                s[u] = !0, c = !(r[r.length] = [u, l]), u = "";
+                continue;
+            }
+            c ? u += e : o += e;
+          }
+
+          return [o, r];
+        }(t))[0], a = s[1]), s = l(x(t, e), o ? this : C, N), (n || i || a.length) && (e = _(s), n && (e.dotAll = !0, e.raw = N(function (t) {
+          for (var e, n = t.length, i = 0, o = "", r = !1; i <= n; i++) {
+            "\\" === (e = A(t, i)) ? o += e + A(t, ++i) : r || "." !== e ? ("[" === e ? r = !0 : "]" === e && (r = !1), o += e) : o += "[\\s\\S]";
+          }
+
+          return o;
+        }(t), r)), i && (e.sticky = !0), a.length && (e.groups = a)), t !== c) try {
           u(s, "source", "" === c ? "(?:)" : c);
         } catch (t) {}
         return s;
-      }, j = s(x), P = 0; j.length > P;) {
-        !function (e) {
-          e in N || r(N, e, {
-            configurable: !0,
-            get: function get() {
-              return x[e];
-            },
-            set: function set(t) {
-              x[e] = t;
-            }
-          });
-        }(j[P++]);
+      };
+
+      for (var j = r(x), P = 0; j.length > P;) {
+        c(N, x, j[P++]);
       }
 
       (C.constructor = N).prototype = C, p(n, "RegExp", N);
@@ -5923,10 +5913,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
   }, function (t, e, n) {
     "use strict";
 
-    var E = n(93),
+    var E = n(94),
         o = n(12),
         i = n(3),
-        r = n(94),
+        r = n(95),
         s = n(2),
         x = n(10),
         C = n(4),
@@ -5934,10 +5924,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
         O = n(60),
         A = n(15),
         a = n(18),
-        S = n(95),
+        S = n(96),
         c = n(51),
-        L = n(97),
-        I = n(98),
+        L = n(98),
+        I = n(99),
         l = n(5)("replace"),
         k = Math.max,
         D = Math.min,
@@ -6177,10 +6167,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
     (t.exports = function (t, e) {
       return o[t] || (o[t] = void 0 !== e ? e : {});
     })("versions", []).push({
-      version: "3.21.1",
+      version: "3.22.0",
       mode: i ? "pure" : "global",
       copyright: "© 2014-2022 Denis Pushkarev (zloirock.ru)",
-      license: "https://github.com/zloirock/core-js/blob/v3.21.1/LICENSE",
+      license: "https://github.com/zloirock/core-js/blob/v3.22.0/LICENSE",
       source: "https://github.com/zloirock/core-js"
     });
   }, function (t, e, n) {
@@ -6560,7 +6550,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
         r = n(4),
         s = n(27),
         a = n(38),
-        n = n(102),
+        n = n(103),
         c = a("IE_PROTO"),
         l = i.Object,
         u = l.prototype;
@@ -6829,6 +6819,20 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
       return i(t) && (void 0 !== (e = t[r]) ? !!e : "RegExp" == o(t));
     };
   }, function (t, e, n) {
+    var i = n(8).f;
+
+    t.exports = function (t, e, n) {
+      n in t || i(t, n, {
+        configurable: !0,
+        get: function get() {
+          return e[n];
+        },
+        set: function set(t) {
+          e[n] = t;
+        }
+      });
+    };
+  }, function (t, e, n) {
     "use strict";
 
     var i = n(19),
@@ -6905,7 +6909,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
   }, function (t, e, n) {
     "use strict";
 
-    var i = n(96).charAt;
+    var i = n(97).charAt;
 
     t.exports = function (t, e, n) {
       return e + (n ? i(t, e).length : 1);
@@ -7016,7 +7020,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
         v = n(26),
         i = n(40),
         b = n(4),
-        y = n(101),
+        y = n(102),
         w = n(69),
         E = n(67),
         x = n(70),
@@ -7152,12 +7156,12 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
         l = n(41),
         u = n(15),
         r = n(2),
-        h = n(106),
-        s = n(109),
-        d = n(110),
-        f = n(111),
+        h = n(107),
+        s = n(110),
+        d = n(111),
+        f = n(112),
         p = n(50),
-        g = n(112),
+        g = n(113),
         m = [],
         _ = o(m.sort),
         v = o(m.push),
@@ -7262,14 +7266,14 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
       return u;
     }
 
-    var b = n(107),
+    var b = n(108),
         y = Math.floor;
     t.exports = v;
   }, function (t, e, n) {
     var i = n(0),
         c = n(59),
         l = n(41),
-        u = n(108),
+        u = n(109),
         h = i.Array,
         d = Math.max;
 
@@ -10067,16 +10071,16 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
     f.on(document, w, '[data-mdb-toggle="modal"]', function (t) {
       var _this43 = this;
 
-      var e = l(this);
-      ["A", "AREA"].includes(this.tagName) && t.preventDefault(), f.one(e, jn, function (t) {
+      var e = l(this),
+          n = (["A", "AREA"].includes(this.tagName) && t.preventDefault(), f.one(e, jn, function (t) {
         t.defaultPrevented || f.one(e, Nn, function () {
           ut(_this43) && _this43.focus();
         });
-      });
-      t = y.findOne(".modal.show");
-      t && zn.getInstance(t).hide();
-      var n = zn.getOrCreateInstance(e);
-      n.toggle(this);
+      }), y.find(".modal.show")),
+          i = (n.forEach(function (t) {
+        t.classList.contains("modal-non-invasive-show") || zn.getInstance(t).hide();
+      }), zn.getOrCreateInstance(e));
+      i.toggle(this);
     }), ke(zn), t(zn);
     m = zn;
     var qn = "modal";
@@ -10368,8 +10372,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
         var e = -1 !== navigator.userAgent.toLowerCase().indexOf("firefox"),
             n = -1 !== navigator.userAgent.indexOf("Trident");
         if (n && O(t) && "fixed" === D(t).position) return null;
+        var i = Di(t);
 
-        for (var i = Di(t); O(i) && ["html", "body"].indexOf(C(i)) < 0;) {
+        for (Ci(i) && (i = i.host); O(i) && ["html", "body"].indexOf(C(i)) < 0;) {
           var o = D(i);
           if ("none" !== o.transform || "none" !== o.perspective || "paint" === o.contain || -1 !== ["transform", "perspective"].indexOf(o.willChange) || e && "filter" === o.willChange || e && o.filter && "none" !== o.filter) return i;
           i = i.parentNode;
@@ -10475,7 +10480,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
           m = I,
           _ = A,
           v = window,
-          o = (h && (n = "clientHeight", e = "clientWidth", (i = ji(o)) === T(o) && "static" !== D(i = N(o)).position && "absolute" === l && (n = "scrollHeight", e = "scrollWidth"), s !== A && (s !== I && s !== L || a !== si) || (_ = S, p = (p - ((t && v.visualViewport ? v.visualViewport.height : i[n]) - r.height)) * (u ? 1 : -1)), s !== I && (s !== A && s !== S || a !== si) || (m = L, f = (f - ((t && v.visualViewport ? v.visualViewport.width : i[e]) - r.width)) * (u ? 1 : -1))), Object.assign({
+          o = (h && (n = "clientHeight", e = "clientWidth", (i = ji(o)) === T(o) && "static" !== D(i = N(o)).position && "absolute" === l && (n = "scrollHeight", e = "scrollWidth"), s !== A && (s !== I && s !== L || a !== si) || (_ = S, p = (p - ((t && i === v && v.visualViewport ? v.visualViewport.height : i[n]) - r.height)) * (u ? 1 : -1)), s !== I && (s !== A && s !== S || a !== si) || (m = L, f = (f - ((t && i === v && v.visualViewport ? v.visualViewport.width : i[e]) - r.width)) * (u ? 1 : -1))), Object.assign({
         position: l
       }, h && Ui)),
           t = !0 === d ? (s = (n = {
@@ -11888,7 +11893,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
       }
     });
     var ir = nr;
-    e(105);
+    e(106);
     var or = "scrollspy";
     var rr = ".".concat("bs.scrollspy");
     var sr = {
@@ -12768,7 +12773,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
       }
     });
     var Os = Ts;
-    e(113);
+    e(114);
     var As = "input",
         Ss = "mdb.input";
     m = "form-outline";
@@ -13903,7 +13908,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
     return o.d(e, "a", e), e;
   }, o.o = function (t, e) {
     return Object.prototype.hasOwnProperty.call(t, e);
-  }, o.p = "", o(o.s = 116);
+  }, o.p = "", o(o.s = 117);
 
   function o(t) {
     if (i[t]) return i[t].exports;

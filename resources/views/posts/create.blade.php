@@ -66,7 +66,7 @@
 
                     <div class="row">
                         <label for="image" class="col-md-4 col-form-label">Image</label>
-                        <input type="file" class="form-control" id="image" name="image">
+                        <input type="file" multiple class="form-control" id="image" name="image[]">
                         @error('image')
 
                                         <strong>{{ $message }}</strong>

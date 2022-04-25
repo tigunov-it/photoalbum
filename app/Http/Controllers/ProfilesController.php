@@ -14,7 +14,7 @@ class ProfilesController extends Controller
         $this->authorize('update', $user->profile);
 
         return view('profiles.index', [
-            'user' => $user
+            'user' => $user,
         ]);
     }
 
@@ -45,7 +45,7 @@ class ProfilesController extends Controller
 
         if (request('image')) {
             $imagePath = request('image')->store('profile', 'public');
-            $image = Image::make(public_path("storage/{$imagePath}"))->fit(200, 200);
+            $image = Image::make(public_path("storage/{$imagePath}"))->fit(100, 100);
             $image->save();
 
             $imageArray = ['image' => $imagePath];
