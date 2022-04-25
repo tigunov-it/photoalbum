@@ -3,12 +3,12 @@
 @section('content')
 
     <div class="container">
-        <form action="/p" enctype="multipart/form-data" method="post">
+        <form action="/a" enctype="multipart/form-data" method="post">
             @csrf
             <div class="row">
                 <div class="col-8 offset-2">
                     <div class="row">
-                        <h1>Add new post</h1>
+                        <h1>Add new album</h1>
                     </div>
 
                     <div class="row mb-3">
@@ -30,7 +30,7 @@
                     </div>
 
                     <div class="row mb-3">
-                        <label for="description" class="col-md-4 col-form-label">Image Description</label>
+                        <label for="description" class="col-md-4 col-form-label">Album Description</label>
 
                         <input id="description"
                                type="text"
@@ -46,27 +46,9 @@
                         @enderror
 
                     </div>
-
-                    <div class="row mb-3">
-                        <label for="album" class="col-md-4 col-form-label">Album</label>
-
-                        <select class="form-select" aria-label="Default select example" name="album">
-                            @foreach($user->album as $album)
-                                <option value="{{ $album->id }}"> {{ $album->title }} </option>
-                            @endforeach
-                        </select>
-
-                        @error('album')
-                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                        @enderror
-
-                    </div>
-
                     <div class="row">
                         <label for="image" class="col-md-4 col-form-label">Image</label>
-                        <input type="file" multiple class="form-control" id="image" name="image[]">
+                        <input type="file" class="form-control" id="image" name="image">
                         @error('image')
 
                                         <strong>{{ $message }}</strong>
@@ -75,11 +57,9 @@
                     </div>
 
                     <div class="row mt-5">
-                        <button class="btn btn-primary">Add new post</button>
+                        <button class="btn btn-primary">Add new album</button>
                     </div>
                 </div>
-
-
 
             </div>
         </form>

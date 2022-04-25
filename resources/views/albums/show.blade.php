@@ -14,7 +14,6 @@
                 <h2>{{ $user->profile->title }}</h2>
                 <h3>{{ $user->profile->description }}</h3>
                 <a href="#">{{$user->profile->url }}</a>
-
                 <div class="pt-1">
                     @can('update', $user->profile)
                         <a href="/profile/{{$user->id}}/edit">
@@ -25,7 +24,7 @@
 
             </div>
 
-            <div class="col-lg-2 pt-2 d-flex justify-content-center align-items-baseline">
+            <div class="col-lg-2 d-flex justify-content-center align-items-baseline">
 
                 @can('update', $user->profile)
                     <a href="/p/create">
@@ -35,7 +34,7 @@
 
             </div>
 
-            <div class="col-lg-2 pt-2 d-flex justify-content-center align-items-baseline">
+            <div class="col-lg-2 d-flex justify-content-center align-items-baseline">
 
                 @can('update', $user->profile)
                     <a href="/a/create">
@@ -61,34 +60,24 @@
 
         </div>
 
-                <div class="row mt-5">
-                    @foreach($user->posts as $post)
-                        <div class="col-lg-4">
-                            <a href="/p/{{ $post->id }}">
-                                <div class="mb-4"
-                                     style="height: 300px; background-image: url('/storage/{{ $post->image }}');  background-size: cover;">
-                                </div>
-                            </a>
+        <h1 class="card-title">Album: {{ $album->title }}</h1>
+
+        <div class="row mt-5">
+
+            @foreach($posts as $post)
+                <div class="col-sm-4">
+                    <a href="/p/{{ $post->id }}">
+                        <div class="mb-4"
+                             style="height: 300px; background-image: url('/storage/{{ $post->image }}');  background-size: cover;">
                         </div>
-                    @endforeach
+                    </a>
                 </div>
+            @endforeach
 
+                {{ $posts->links() }}
 
-        {{--                <div class="row">--}}
-        {{--                    @foreach($user->posts as $post)--}}
-        {{--                        <div class="col-4">--}}
-        {{--                            <a href="/p/{{ $post->id }}">--}}
-        {{--                                <img--}}
-        {{--                                    src="/storage/{{ $post->image }}"--}}
-        {{--                                    class="w-100 shadow-1-strong rounded mb-4"--}}
-        {{--                                    alt="{{ $post->title }}"--}}
-        {{--                                />--}}
-        {{--                            </a>--}}
-        {{--                        </div>--}}
-        {{--                    @endforeach--}}
-        {{--                </div>--}}
+        </div>
 
 
     </div>
-
 @endsection
