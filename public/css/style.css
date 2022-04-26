@@ -366,10 +366,18 @@ display: none;
   top: 25px;
   padding:5px;
 }
+/* идлоооооооооооооооооо */
+ .invalid-feedback{
+  margin-left: 10px;
+    color: red;
+}
+
+
+
 
 .forma1 .registr-zamok{
   display: flex;
-  margin-top: 15px;
+  margin-top: 5px;
 }
 .forma1 .registr-zamok .registr-zamok-input{
   width:100%;
@@ -388,7 +396,7 @@ display: none;
   width:36px;
   height:36px;
   border-right: 1px solid black;
-  top: 85px;
+  top: 95px;
   padding:5px;
 }
 .forma1 .registr-user-input:focus, .forma1 .registr-zamok-input:focus {
@@ -519,7 +527,7 @@ form {position:relative;}
     justify-content: center;
 }
 
-.registr-gender{
+/* .registr-gender{
   display: flex;
   justify-content: space-between;
   margin-top: 10px;
@@ -530,7 +538,7 @@ form {position:relative;}
 }
 .registr-gender label{
   margin-right: 5px;
-}
+} */
 
 .forma2 .registr-name{
  display: flex;
@@ -556,7 +564,7 @@ form {position:relative;}
   width:39px;
   height:33px;
   border-right: 1px solid black;
-  top: 43px;
+  top: 14px;
   padding:0px;
 }
 .forma2 .registr-surname{
@@ -579,7 +587,7 @@ form {position:relative;}
   width:39px;
   height:33px;
   border-right: 1px solid black;
-  top: 84px;
+  top: 72px;
   padding:0px;
 }
 .forma2 .registr-login{
@@ -603,7 +611,7 @@ form {position:relative;}
   width:36px;
   height:27px;
   border-right: 1px solid black;
-  top: 123px;
+  top: 131px;
   padding:2px;
   
 }
@@ -631,7 +639,7 @@ form {position:relative;}
   width: 31px;
   height: 23px;
   border-right: 1px solid black;
-  top: 162px;
+  top: 189px;
   padding: 5px;
 }
 .forma2 .registr-icon-zamok22{
@@ -639,7 +647,7 @@ form {position:relative;}
   width: 31px;
   height: 23px;
   border-right: 1px solid black;
-  top: 203px;
+  top: 247px;
   padding: 5px;;
 }
 
