@@ -3,7 +3,7 @@
         <div class="wrap">
             <!-- логотип -->
             <div class="logotip">
-                <a href="{{ url('/') }}" aria-label="Logotip"> 
+                <a href="{{ asset("/")}}" aria-label="Logotip"> 
                     <img src="{{ asset("svg/IMG/ImgIndex/logo.png")}}" alt="Logotip"> 
                 </a>
             </div>

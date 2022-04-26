@@ -28,13 +28,12 @@ use SebastianBergmann\CodeCoverage\Node\CrapIndex;
 */
 
 
-
+Auth::routes();
 // Route::get('/', function () {
 //     return view('welcome');
 // });
 Route::get('/',[HomeController::class, 'index'])->name('home');
 
-Auth::routes();
 Route::get('/p/create', [PostsController::class, 'create'])->name('post.create');
 
 Route::post('/p', [PostsController::class, 'store']);

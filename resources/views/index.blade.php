@@ -1,6 +1,6 @@
 
 @extends('layouts.app')
-
+индекс старт
 
 {{-- @section('content')
     <div class="container">

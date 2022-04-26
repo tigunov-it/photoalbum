@@ -1,5 +1,11 @@
-{{-- @extends('layouts.app') --}}
-профилеь
+@extends('layouts.app')
+{{-- 
+<a href="{{route("home")."/"}}">route{{route("home")."/"}}</a>    <br>
+<a href="{{ asset('') }}">asset{{ asset("") }}</a>    <br>
+<a href="{{url('')."/"}}">url {{url("")."/"}}</a>   
+ --}}
+
+
 {{-- @section('content')
     <div class="container">
 

@@ -1,6 +1,6 @@
 @extends('layouts.app')
-
-@section('content')
+велкоме
+{{-- @section('content')
     <!-- Carousel wrapper -->
     <div id="carouselBasicExample" class="carousel slide carousel-fade" data-mdb-ride="carousel">
         <!-- Indicators -->
@@ -69,4 +69,4 @@
         </button>
     </div>
     <!-- Carousel wrapper -->
-@endsection
+@endsection --}}
