@@ -4,6 +4,17 @@
 
     <div class="container">
         <form action="/p" enctype="multipart/form-data" method="post">
+
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             @csrf
             <div class="row">
                 <div class="col-8 offset-2">
@@ -21,11 +32,11 @@
                                value="{{ old('title') }}"
                                autocomplete="title">
 
-                        @error('title')
-                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                        @enderror
+{{--                        @error('title')--}}
+{{--                        <span class="invalid-feedback" role="alert">--}}
+{{--                                        <strong>{{ $message }}</strong>--}}
+{{--                                    </span>--}}
+{{--                        @enderror--}}
 
                     </div>
 
@@ -39,11 +50,11 @@
                                value="{{ old('description') }}"
                                autocomplete="description">
 
-                        @error('description')
-                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                        @enderror
+{{--                        @error('description')--}}
+{{--                        <span class="invalid-feedback" role="alert">--}}
+{{--                                        <strong>{{ $message }}</strong>--}}
+{{--                                    </span>--}}
+{{--                        @enderror--}}
 
                     </div>
 
@@ -56,22 +67,20 @@
                             @endforeach
                         </select>
 
-                        @error('album')
-                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                        @enderror
+{{--                        @error('album')--}}
+{{--                        <span class="invalid-feedback" role="alert">--}}
+{{--                                        <strong>{{ $message }}</strong>--}}
+{{--                                    </span>--}}
+{{--                        @enderror--}}
 
                     </div>
 
                     <div class="row">
                         <label for="image" class="col-md-4 col-form-label">Image</label>
                         <input type="file" multiple class="form-control" id="image" name="image[]">
-                        @error('image')
-
-                                        <strong>{{ $message }}</strong>
-
-                        @enderror
+{{--                        @error('image')--}}
+{{--                                        <strong>{{ $message }}</strong>--}}
+{{--                        @enderror--}}
                     </div>
 
                     <div class="row mt-5">
