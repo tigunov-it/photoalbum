@@ -37,6 +37,9 @@ class PostsController extends Controller
             'image.*' => 'image'
         ]);
 
+       $album = \DB::select("select created_at from albums where id = {$data['album']}");
+       $albumCreatedAt = str_replace(" ", "_", implode(" ", array_column($album, 'created_at')));
+
         $client = new RekognitionClient([
             'region' => env('AWS_DEFAULT_REGION'),
             'version' => 'latest'
@@ -58,9 +61,10 @@ class PostsController extends Controller
                 return redirect()->back()->withErrors(['Banned_content' => 'The image contained Prohibited Content ' . '(' . $banned . ')']);
             };
 
+            $user = Auth::user();
 
 
-            $imagePath = $file->store('uploads', 'public');
+            $imagePath = $file->store("uploads/{$user->username}/{$albumCreatedAt}/", 'public');
 //            $image = Image::make(public_path("storage/{$imagePath}"))->encode('jpg', 30);
             $image = Image::make(public_path("storage/{$imagePath}"))->fit(1024, 768)->encode('jpg', 30);
             $image->save();
