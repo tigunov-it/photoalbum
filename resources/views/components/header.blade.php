@@ -152,7 +152,7 @@
                                         </span>                                    
                                     <div class="registr-zamok2">
                                         <img src="{{ asset("svg/IMG/zamok.svg")}}" alt="zamok" class="registr-icon-zamok22">
-                                        <input id="password-confirm" type="password" class="registr-zamok-input" name="password_confirmation" autocomplete="new-password">
+                                        <input id="password-confirm" type="password" placeholder="Повторите пароль" class="registr-zamok-input" name="password_confirmation" autocomplete="new-password">
 
                                         {{-- <input id="password-confirm" type="password" class="form-control" name="password_confirmation" autocomplete="new-password">
                                         <input class="registr-zamok-input" type="password" name="name" id="name" placeholder="Подтвердить пароль"> --}}

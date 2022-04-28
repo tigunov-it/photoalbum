@@ -1,9 +1,11 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{-- для каждой страницы ункальное --}}
 	<meta name="description" content="Photoalbum, фотоальбом  - сервис для хранения фото ">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+   {{-- для каждой страницы ункальное --}}
     <title>Что то сделать</title>
    {{-- <title>{{ config('app.name', 'Photoalbum') }}</title> --}}
 	
@@ -19,11 +21,17 @@
     <!-- Styles -->
     {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet">	 --}}
 	<link rel="stylesheet" href="{{ asset("css/style.css") }}">
+    <link rel="stylesheet" href="{{ asset("css/slaider1.css") }}">
+    
 	     <!-- Fonts -->
     {{-- <link rel="dns-prefetch" href="//fonts.gstatic.com"> --}}
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 	<!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
+ <script src="{{ asset('js/slaider.js') }}" defer></script>
+
+ 
+
 	<script src="https://kit.fontawesome.com/ca29c702c8.js" crossorigin="anonymous"></script>
 
 

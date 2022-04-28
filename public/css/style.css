@@ -1178,6 +1178,15 @@ width: 100%;
   width: 100%;
   justify-content:space-between; 
 }
+.head-footer .logotip img {
+  width: 350px;
+  height: 100px;
+}
+.head-footer .logotip a img:hover {
+  transform: scale(0.95);
+}
+
+
 .head-footer .footer-bisness{
   text-align: left;
 }
@@ -1215,6 +1224,13 @@ width: 100%;
 .head-footer .footer-inform section a:hover p {
   color: black;
 }
+.head-footer .icon{
+  margin-right: 10px;
+}
+
+
+
+
 
 .footer-copyright {
   width: 100%;

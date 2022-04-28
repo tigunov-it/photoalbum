@@ -6,7 +6,7 @@
 		<x-header></x-header>
 		<main>
 			<!-- Слоган -->
-			@section('starting')
+			{{-- @section('starting')
 				<div class="slider">
 					<section class="slider-brend-1  wrap">
 						<h2>
@@ -16,9 +16,10 @@
 						</h2> 
 					</section>
 				</div>		
-			@show
+			@show --}}
 			{{-- Слайдер --}}
 			{{-- <x-slaider></x-slaider> --}}
+            <x-slaider1></x-slaider1>
 		</main>
 		<footer>
 			@section('head-footer')
