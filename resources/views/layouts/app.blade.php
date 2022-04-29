@@ -17,9 +17,20 @@
 					</section>
 				</div>		
 			@show --}}
-			{{-- Слайдер --}}
-			{{-- <x-slaider></x-slaider> --}}
-            <x-slaider1></x-slaider1>
+            {{-- @yield('content') --}}
+            <div  class="wrap">
+                @section('content')
+                {{-- Слайдер --}}
+                {{-- <x-slaider></x-slaider> --}}
+                <x-slaider1></x-slaider1>            
+                @show                
+            </div>
+
+
+
+
+            
+
 		</main>
 		<footer>
 			@section('head-footer')

@@ -1,3 +1,4 @@
+<link href="{{ asset('css/app.css') }}" rel="stylesheet">	
 @extends('layouts.app')
 {{-- 
 <a href="{{route("home")."/"}}">route{{route("home")."/"}}</a>    <br>
@@ -5,8 +6,7 @@
 <a href="{{url('')."/"}}">url {{url("")."/"}}</a>   
  --}}
 
-
-{{-- @section('content')
+@section('content')
     <div class="container">
 
         <div class="row border-bottom pb-3 d-flex align-items-center">
@@ -78,23 +78,23 @@
                     </a>
                 </div>
             @endforeach
-        </div> --}}
+        </div>
 
 
-        {{--        <div class="row">--}}
-        {{--            @foreach($user->posts as $post)--}}
-        {{--                <div class="col-4">--}}
-        {{--                    <a href="/p/{{ $post->id }}">--}}
-        {{--                        <img--}}
-        {{--                            src="/storage/{{ $post->image }}"--}}
-        {{--                            class="w-100 shadow-1-strong rounded mb-4"--}}
-        {{--                            alt="{{ $post->title }}"--}}
-        {{--                        />--}}
-        {{--                    </a>--}}
-        {{--                </div>--}}
-        {{--            @endforeach--}}
-        {{--        </div>--}}
+               {{-- <div class="row">
+                   @foreach($user->posts as $post)
+                       <div class="col-4">
+                           <a href="/p/{{ $post->id }}">
+                               <img
+                                   src="/storage/{{ $post->image }}"
+                                   class="w-100 shadow-1-strong rounded mb-4"
+                                   alt="{{ $post->title }}"
+                               />
+                           </a>
+                       </div>
+                   @endforeach
+               </div> --}}
 
 
-    {{-- </div>
-@endsection --}}
+    </div>
+@endsection

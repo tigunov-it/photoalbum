@@ -179,19 +179,22 @@
                 <br>
             </section>
         @else
-            <section class="login" style="background-color: aqua">
-                <div>
-                    Рады Вас видеть  {{ Auth::user()->username }}
+            <section class="login" >
+                <div class="login-on">
+                    <div>
+                        Рады Вас видеть  
+                    </div>                   
+                    <div class="login-on-profile">
+                        <div class="img-profile"></div>
+                        {{-- <img src="https://mdbcdn.b-cdn.net/img/Photos/Slides/img%20(15).webp" class="img-profile" alt="Profile"/> --}}
+                        <a class="nav-link"  href="{{route ( 'profile.show', ['user'=>Auth::user()->id])}}">{{ Auth::user()->username }}</a>
+                    </div>                      
+
                 </div>
-                <div>
-                    <div>Здесь что нибудь из фото</div>
-                    <a class="nav-link" href="profile/{{ Auth::user()->id }}">Мой профиль</a>
-                    {{-- /profile-? --}}
-                </div>
-                <div style="background-color: blue">
+                <div class="login-off" >
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" >
                         @csrf
-                        <input class="registr-entrance-input" type="submit" value="Выйти" />
+                        <input class="registr-entrance-input login-bt-off" type="submit" value="Выйти" />
                     </form>                
                 </div>
             </section>

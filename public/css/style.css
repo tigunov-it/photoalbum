@@ -225,6 +225,53 @@ header {
       -ms-flex-align: center;
           align-items: center;
 }
+/* блок при авторизации */
+
+.login .login-on-profile{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.login .img-profile{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid;
+  margin: 5px;
+  display: block;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url("https://mdbcdn.b-cdn.net/img/Photos/Slides/img%20(15).webp");
+  background-size: cover;
+
+}
+.login .login-off{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: 5px;
+}
+
+.login-bt-off{
+  width: 85px;
+  height: 30px;
+  background: #dddddd;
+  border: none;
+  border-radius: 15px;
+  color: black;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+
 
 /* блок авторизации-регистрации*/
 
@@ -1176,11 +1223,12 @@ width: 100%;
   display: -ms-flexbox;
   display: flex;
   width: 100%;
-  justify-content:space-between; 
+  justify-content:space-around; 
+  align-items: center;
 }
 .head-footer .logotip img {
-  width: 350px;
-  height: 100px;
+  width: 300px;
+  height: 75px;
 }
 .head-footer .logotip a img:hover {
   transform: scale(0.95);
@@ -1203,12 +1251,15 @@ width: 100%;
 }
 
 .head-footer .footer-inform{
-  flex-grow:1;
   display: -webkit-flex; 
   display: flex; 
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: flex-start;
 }
+.head-footer .footer-inform section{
+margin:0 20px;
+}
+
 
 .head-footer .business-text p {
   font-size: 14px;

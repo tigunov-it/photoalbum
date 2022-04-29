@@ -9,7 +9,7 @@
         });
     });
 </script>
-<section id="slider_bl" class="wrap">
+<section id="slider_bl">
 <!-- Разметка слайдера (html код) -->
     <div class="itcss">
         <div class="itcss__wrapper">
