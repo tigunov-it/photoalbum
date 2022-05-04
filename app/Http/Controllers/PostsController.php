@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Album;
 use App\Models\Post;
 use Aws\AwsClient;
 use Aws\Rekognition\RekognitionClient;
@@ -29,6 +30,7 @@ class PostsController extends Controller
 
     public function store()
     {
+
         $data = request()->validate([
             'title' => 'required',
             'description' => 'required',
@@ -37,8 +39,6 @@ class PostsController extends Controller
             'image.*' => 'image'
         ]);
 
-       $album = \DB::select("select created_at from albums where id = {$data['album']}");
-       $albumCreatedAt = str_replace(" ", "_", implode(" ", array_column($album, 'created_at')));
 
         $client = new RekognitionClient([
             'region' => env('AWS_DEFAULT_REGION'),
@@ -62,7 +62,8 @@ class PostsController extends Controller
             };
 
             $user = Auth::user();
-
+            $album = \DB::select("select created_at from albums where id = {$data['album']}");
+            $albumCreatedAt = str_replace(" ", "_", implode(" ", array_column($album, 'created_at')));
 
             $imagePath = $file->store("uploads/{$user->username}/{$albumCreatedAt}/", 'public');
 //            $image = Image::make(public_path("storage/{$imagePath}"))->encode('jpg', 30);
