@@ -1,6 +1,12 @@
 @extends('layouts.app')
+@section('style')
+    <link rel="stylesheet" href="{{ asset("css/slaider1.css") }}">
+@endsection
 
-@section('content')
+
+{{-- @extends('layouts.app')
+
+@section('content1')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -70,4 +76,4 @@
         </div>
     </div>
 </div>
-@endsection
+@endsection --}}

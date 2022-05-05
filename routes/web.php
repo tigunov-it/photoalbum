@@ -43,7 +43,11 @@ Route::delete('/p/{post}', [PostsController::class, 'destroy'])->name('post.dest
 Route::get('/a/create', [AlbumsController::class, 'create']);
 Route::post('/a', [AlbumsController::class, 'store']);
 Route::get('/a/{user}', [AlbumsController::class, 'index'])->name('albums.index');
+
+Route::get('/a/{user}/foto',[AlbumsController::class,'showFoto'])->name('albums.showFoto');
+
 Route::get('/a/{user}/{album}', [AlbumsController::class, 'show'])->name('albums.show');
+
 
 
 Route::get('/profile/{user}', [ProfilesController::class, 'index'])->name('profile.show');

@@ -1,3 +1,4 @@
+@section('content')
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         // инициализация слайдера
@@ -15,9 +16,11 @@
         <div class="itcss__wrapper">
             <div class="itcss__items">
                 <div class="itcss__item">
-                    <article  class="slaider1-slaid1"></article>
+                    {{-- тут фон --}}
+                    <article  class="slaider1-slaid1">Тут че нить написать можно</article>
                 </div>
                 <div class="itcss__item">
+                    {{-- тут фотка  --}}
                     <img src="https://mdbcdn.b-cdn.net/img/Photos/Slides/img%20(15).webp" class="slaider1-slaid2" alt="Sunset Over the City"/>
                 </div>
                 <div class="itcss__item">
@@ -33,3 +36,4 @@
     <a class="itcss__control itcss__control_next" href="#" role="button" data-slide="next"></a>
     </div>
 </section>
+@endsection

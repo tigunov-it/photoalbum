@@ -26,6 +26,11 @@ class AlbumsController extends Controller
             'user' => $user
         ]);
     }
+    public function showFoto(User $user)
+    {
+        return view('albums.foto', [ 'user' => $user]);
+    }
+
 
     public function show(User $user, Album $album)
     {
@@ -60,7 +65,7 @@ class AlbumsController extends Controller
         $imagePath = request('image')->store('uploads', 'public');
 
         $image = Image::make(public_path("storage/{$imagePath}"))->fit(1024, 768);
-//        $image = Image::make(public_path("storage/{$imagePath}"))->encode('jpg', 30);
+        //        $image = Image::make(public_path("storage/{$imagePath}"))->encode('jpg', 30);
         $image->save();
 
         auth()->user()->album()->create([
@@ -70,5 +75,8 @@ class AlbumsController extends Controller
         ]);
         return redirect('/profile/' . auth()->user()->id);
     }
+
+
+
 
 }

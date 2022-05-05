@@ -21,7 +21,7 @@
     <!-- Styles -->
     {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet">	 --}}
 	<link rel="stylesheet" href="{{ asset("css/style.css") }}">
-    <link rel="stylesheet" href="{{ asset("css/slaider1.css") }}">
+    @yield('style')
     
 	     <!-- Fonts -->
     {{-- <link rel="dns-prefetch" href="//fonts.gstatic.com"> --}}

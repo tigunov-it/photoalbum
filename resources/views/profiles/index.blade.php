@@ -1,13 +1,43 @@
-<link href="{{ asset('css/app.css') }}" rel="stylesheet">	
+@section('style')
+    <link href="{{ asset('css/profile.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
+@endsection
 @extends('layouts.app')
-{{-- 
-<a href="{{route("home")."/"}}">route{{route("home")."/"}}</a>    <br>
-<a href="{{ asset('') }}">asset{{ asset("") }}</a>    <br>
-<a href="{{url('')."/"}}">url {{url("")."/"}}</a>   
- --}}
-
 @section('content')
-    <div class="container">
+<div class="profile">
+    {{-- фото --}}
+    <div class="profile-foto" {{$url='https://mdbcdn.b-cdn.net/img/Photos/Slides/img%20(15).webp'}} style="background-image:url('{{$url}}')">
+    </div>
+    <div class="profile-info">
+        <p><b>Имя:</b> {{ $user->username }}</p>
+        <p><b>Логин:</b> {{ $user->profile->title }}</p>
+        <p><b>О себе:</b> {{ $user->profile->description }}</p>
+            @can('update', $user->profile)
+                <a href="{{route('profile.edit', ['user'=>Auth::user()->id])}}">
+                    <button class="btn">Редактировать</button>
+                </a>
+            @endcan            
+    </div>
+    <div class="profile-add-foto">
+        @can('update', $user->profile)
+            <a href={{asset("/p/create")}}>
+                <button class="btn">Добавить фото</button>
+            </a>
+        @endcan
+        <br>
+        @can('update', $user->profile)
+            <a href={{asset("/a/create")}}>
+                <button class="btn">Добавить фотоальбом</button>
+            </a>
+        @endcan
+    </div>
+</div>
+ 
+
+
+
+{{-- @section('content')
+    <div class="profile">
 
         <div class="row border-bottom pb-3 d-flex align-items-center">
 
@@ -57,6 +87,7 @@
             <ul class="nav justify-content-center">
                 <li class="nav-item">
                     <a class="nav-link" href="/profile/{{ Auth::user()->id }}">PhotoStream</a>
+                
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/a/{{ Auth::user()->id }}">PhotoAlbums</a>
@@ -96,5 +127,7 @@
                </div> --}}
 
 
-    </div>
+    {{-- </div> --}} 
+@endsection
+@section('head-footer')
 @endsection
