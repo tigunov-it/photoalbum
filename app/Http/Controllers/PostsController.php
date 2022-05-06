@@ -50,19 +50,19 @@ class PostsController extends Controller
         foreach (request('image') as $file) {
 
  ############################  Модерация
-//            $imageForAnalise = fopen($file, 'r');
-//            $bytes = fread($imageForAnalise, filesize($file));
-//            $results = $client->detectModerationLabels([
-//                'Image' => ['Bytes' => $bytes],
-//                'MinConfidence' => 50
-//            ]);
-//            $resultLabels = $results->get('ModerationLabels');
-//
-//            $banned = implode(", ",array_column($resultLabels, 'Name'));
-//
-//            if(!empty($resultLabels)){
-//                return redirect()->back()->withErrors(['Banned_content' => 'The image contained Prohibited Content ' . '(' . $banned . ')']);
-//            };
+            $imageForAnalise = fopen($file, 'r');
+            $bytes = fread($imageForAnalise, filesize($file));
+            $results = $client->detectModerationLabels([
+                'Image' => ['Bytes' => $bytes],
+                'MinConfidence' => 50
+            ]);
+            $resultLabels = $results->get('ModerationLabels');
+
+            $banned = implode(", ",array_column($resultLabels, 'Name'));
+
+            if(!empty($resultLabels)){
+                return redirect()->back()->withErrors(['Banned_content' => 'The image contained Prohibited Content ' . '(' . $banned . ')']);
+            };
  ############################  Модерация
 
             $user = Auth::user();
