@@ -64,9 +64,12 @@
                 <div class="row mt-5">
                     @foreach($user->posts as $post)
                         <div class="col-lg-4">
-                            <a href="/p/{{ $post->id }}">
+                            <a href="/p/{{ $user->id }}/{{ $post->id }}">
+{{--                                <div class="mb-4"--}}
+{{--                                     style="height: 300px; background-image: url('/storage/{{ $post->image }}');  background-size: cover;">--}}
+{{--                                </div>--}}
                                 <div class="mb-4"
-                                     style="height: 300px; background-image: url('/storage/{{ $post->image }}');  background-size: cover;">
+                                     style="height: 300px; background-image: url('http://photoalbum.test/s3/{{ $user->id }}/{{ $post->id }}');  background-size: cover;">
                                 </div>
                             </a>
                         </div>

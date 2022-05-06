@@ -28,7 +28,8 @@ Auth::routes();
 Route::match(['get', 'post'],'/p/create', [PostsController::class, 'create'])->name('post.create');
 
 Route::post('/p', [PostsController::class, 'store']);
-Route::get('/p/{post}', [PostsController::class, 'show']);
+Route::get('/p/{user}/{post}', [PostsController::class, 'show']);
+Route::get('/s3/{user}/{post}', [PostsController::class, 'getSmallImageFromS3'])->name('post.getFromS3');
 Route::delete('/p/{post}', [PostsController::class, 'destroy'])->name('post.destroy');
 
 Route::get('/a/create', [AlbumsController::class, 'create']);
