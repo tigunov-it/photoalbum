@@ -112,7 +112,7 @@ class PostsController extends Controller
     {
         $this->authorize('update', $user->profile);
 
-        return Storage::disk('s3')->response("{$post->image}");
+        return Storage::disk('s3')->response("{$post->image_small}");
     }
 
 
