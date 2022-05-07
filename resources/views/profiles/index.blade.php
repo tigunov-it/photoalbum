@@ -69,7 +69,7 @@
 {{--                                     style="height: 300px; background-image: url('/storage/{{ $post->image }}');  background-size: cover;">--}}
 {{--                                </div>--}}
                                 <div class="mb-4"
-                                     style="height: 300px; background-image: url('http://photoalbum.test/s3/{{ $user->id }}/{{ $post->id }}');  background-size: cover;">
+                                     style="height: 300px; background-image: url('{{ env('APP_URL') }}/s3/{{ $user->id }}/{{ $post->id }}');  background-size: cover;">
                                 </div>
                             </a>
                         </div>
