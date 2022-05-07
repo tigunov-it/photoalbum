@@ -50,19 +50,19 @@ class PostsController extends Controller
         foreach (request('image') as $file) {
 
  ############################  Модерация
-            $imageForAnalise = fopen($file, 'r');
-            $bytes = fread($imageForAnalise, filesize($file));
-            $results = $client->detectModerationLabels([
-                'Image' => ['Bytes' => $bytes],
-                'MinConfidence' => 50
-            ]);
-            $resultLabels = $results->get('ModerationLabels');
-
-            $banned = implode(", ",array_column($resultLabels, 'Name'));
-
-            if(!empty($resultLabels)){
-                return redirect()->back()->withErrors(['Banned_content' => 'The image contained Prohibited Content ' . '(' . $banned . ')']);
-            };
+//            $imageForAnalise = fopen($file, 'r');
+//            $bytes = fread($imageForAnalise, filesize($file));
+//            $results = $client->detectModerationLabels([
+//                'Image' => ['Bytes' => $bytes],
+//                'MinConfidence' => 50
+//            ]);
+//            $resultLabels = $results->get('ModerationLabels');
+//
+//            $banned = implode(", ",array_column($resultLabels, 'Name'));
+//
+//            if(!empty($resultLabels)){
+//                return redirect()->back()->withErrors(['Banned_content' => 'The image contained Prohibited Content ' . '(' . $banned . ')']);
+//            };
  ############################  Модерация
 
             $user = Auth::user();
@@ -75,7 +75,10 @@ class PostsController extends Controller
             $imagePathSmallLocal = $file->store("uploads/{$user->username}/{$albumCreatedAt}/small/", 'public');
             $image = Image::make(public_path("storage/{$imagePathSmallLocal}"))->fit(1024, 768)->encode('jpg', 30);
             Storage::disk('s3')->put("uploads/{$user->username}/{$albumCreatedAt}/small/{$image->basename}", $image);
+
             //TODO Удалять локальные копии файлов
+
+
             $imagePathSmall = substr_replace($imagePath, '/small', 8+strlen($user->username)+strlen($albumCreatedAt)+1, 0);
 
 //            $image = Image::make(public_path("storage/{$imagePath}"))->encode('jpg', 30);
