@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-8">
 {{--                <img src="/storage/{{$post->image}}" alt="{{ $post->title }}" class="w-100">--}}
-                <img src="http://photoalbum.test/s3/{{$post->user->id}}/{{ $post->id }}" alt="{{ $post->title }}" class="w-100">
+                <img src="{{ env('APP_URL') }}/s3/{{$post->user->id}}/{{ $post->id }}" alt="{{ $post->title }}" class="w-100">
             </div>
             <div class="col-4">
                 <div>
