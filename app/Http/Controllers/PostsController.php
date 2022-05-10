@@ -76,8 +76,7 @@ class PostsController extends Controller
             $image = Image::make(public_path("storage/{$imagePathSmallLocal}"))->fit(1024, 768)->encode('jpg', 30);
             Storage::disk('s3')->put("uploads/{$user->username}/{$albumCreatedAt}/small/{$image->basename}", $image);
 
-            //TODO Удалять локальные копии файлов
-
+            unlink("storage/{$imagePathSmallLocal}"); // Удаляю локальный файл после обработки и загрузки в S3
 
             $imagePathSmall = substr_replace($imagePath, '/small', 8+strlen($user->username)+strlen($albumCreatedAt)+1, 0);
 
