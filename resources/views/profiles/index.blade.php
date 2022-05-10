@@ -62,7 +62,7 @@
         </div>
 
                 <div class="row mt-5">
-                    @foreach($user->posts as $post)
+                    @foreach($posts as $post)
                         <div class="col-lg-4">
                             <a href="/p/{{ $user->id }}/{{ $post->id }}">
 {{--                                <div class="mb-4"--}}
@@ -75,6 +75,8 @@
                         </div>
                     @endforeach
                 </div>
+
+        {{ $posts->links() }}
 
 
         {{--                <div class="row">--}}
