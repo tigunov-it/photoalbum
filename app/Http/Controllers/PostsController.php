@@ -122,6 +122,8 @@ class PostsController extends Controller
     public function destroy(Post $post)
     {
         $post->delete();
+        Storage::disk('s3')->delete("{$post->image}");
+        Storage::disk('s3')->delete("{$post->image_small}");
         return redirect('/');
     }
 }
