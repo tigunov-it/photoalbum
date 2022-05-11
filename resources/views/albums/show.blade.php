@@ -67,7 +67,7 @@
             <div class="row mt-5">
                 @foreach($posts as $post)
                     <div class="col-lg-4">
-                        <a data-fancybox="gallery" href="{{ env('APP_URL') }}/s3full/{{ $user->id }}/{{ $post->id }}">
+                        <a data-fancybox="gallery" data-thumb="{{ env('APP_URL') }}/s3/{{ $user->id }}/{{ $post->id }}" href="{{ env('APP_URL') }}/s3full/{{ $user->id }}/{{ $post->id }}">
                             <div class="mb-4"
                                  style="height: 300px; background-image: url('{{ env('APP_URL') }}/s3/{{ $user->id }}/{{ $post->id }}');  background-size: cover;">
                             </div>

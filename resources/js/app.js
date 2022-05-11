@@ -39,4 +39,3 @@ require('./fancybox.esm');
 
 
 
-
