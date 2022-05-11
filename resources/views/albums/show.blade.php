@@ -64,21 +64,33 @@
 
         <div class="row mt-5">
 
-            @foreach($posts as $post)
-                <div class="col-sm-4">
-                    <a href="/p/{{ $user->id }}/{{ $post->id }}">
-                        <div class="mb-4"
-{{--                             style="height: 300px; background-image: url('/storage/{{ $post->image }}');  background-size: cover;">--}}
-                            style="height: 300px; background-image: url('{{ env('APP_URL') }}/s3/{{ $user->id }}/{{ $post->id }}');  background-size: cover;">
-                        </div>
-                    </a>
-                </div>
-            @endforeach
+            <div class="row mt-5">
+                @foreach($posts as $post)
+                    <div class="col-lg-4">
+                        <a data-fancybox="gallery" href="{{ env('APP_URL') }}/s3full/{{ $user->id }}/{{ $post->id }}">
+                            <div class="mb-4"
+                                 style="height: 300px; background-image: url('{{ env('APP_URL') }}/s3/{{ $user->id }}/{{ $post->id }}');  background-size: cover;">
+                            </div>
+                        </a>
+                    </div>
+                @endforeach
+            </div>
 
-                {{ $posts->links() }}
+            {{ $posts->links() }}
+
+{{--            @foreach($posts as $post)--}}
+{{--                <div class="col-sm-4">--}}
+{{--                    <a href="/p/{{ $user->id }}/{{ $post->id }}">--}}
+{{--                        <div class="mb-4"--}}
+{{--                             style="height: 300px; background-image: url('/storage/{{ $post->image }}');  background-size: cover;">--}}
+{{--                            style="height: 300px; background-image: url('{{ env('APP_URL') }}/s3/{{ $user->id }}/{{ $post->id }}');  background-size: cover;">--}}
+{{--                        </div>--}}
+{{--                    </a>--}}
+{{--                </div>--}}
+{{--            @endforeach--}}
+{{--                {{ $posts->links() }}--}}
 
         </div>
-
 
     </div>
 @endsection

@@ -35,6 +35,8 @@ const app = new Vue({
 require('./mdb.min');
 // require('./bootstrap.bundle.min');
 
+require('./fancybox.esm');
+
 
 
 
