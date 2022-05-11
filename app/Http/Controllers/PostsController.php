@@ -118,6 +118,14 @@ class PostsController extends Controller
         return Storage::disk('s3')->response("{$post->image_small}");
     }
 
+    public function getFullImageFromS3(User $user, Post $post)
+
+    {
+        $this->authorize('update', $user->profile);
+
+        return Storage::disk('s3')->response("{$post->image}");
+    }
+
 
     public function destroy(Post $post)
     {
@@ -126,4 +134,5 @@ class PostsController extends Controller
         Storage::disk('s3')->delete("{$post->image_small}");
         return redirect('/');
     }
+
 }

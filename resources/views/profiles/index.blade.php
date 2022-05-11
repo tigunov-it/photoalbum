@@ -61,22 +61,38 @@
 
         </div>
 
-                <div class="row mt-5">
-                    @foreach($posts as $post)
-                        <div class="col-lg-4">
-                            <a href="/p/{{ $user->id }}/{{ $post->id }}">
-{{--                                <div class="mb-4"--}}
-{{--                                     style="height: 300px; background-image: url('/storage/{{ $post->image }}');  background-size: cover;">--}}
-{{--                                </div>--}}
-                                <div class="mb-4"
-                                     style="height: 300px; background-image: url('{{ env('APP_URL') }}/s3/{{ $user->id }}/{{ $post->id }}');  background-size: cover;">
-                                </div>
-                            </a>
+        <div class="row mt-5">
+            @foreach($posts as $post)
+                <div class="col-lg-4">
+                    <a data-fancybox="gallery" href="{{ env('APP_URL') }}/s3full/{{ $user->id }}/{{ $post->id }}">
+                        <div class="mb-4"
+                             style="height: 300px; background-image: url('{{ env('APP_URL') }}/s3/{{ $user->id }}/{{ $post->id }}');  background-size: cover;">
                         </div>
-                    @endforeach
+                    </a>
                 </div>
+            @endforeach
+        </div>
 
         {{ $posts->links() }}
+
+
+
+        {{--                <div class="row mt-5">--}}
+        {{--                    @foreach($posts as $post)--}}
+        {{--                        <div class="col-lg-4">--}}
+        {{--                            <a href="/p/{{ $user->id }}/{{ $post->id }}">--}}
+        {{--                                <div class="mb-4"--}}
+        {{--                                     style="height: 300px; background-image: url('/storage/{{ $post->image }}');  background-size: cover;">--}}
+        {{--                                </div>--}}
+        {{--                                <div class="mb-4"--}}
+        {{--                                     style="height: 300px; background-image: url('{{ env('APP_URL') }}/s3/{{ $user->id }}/{{ $post->id }}');  background-size: cover;">--}}
+        {{--                                </div>--}}
+        {{--                            </a>--}}
+        {{--                        </div>--}}
+        {{--                    @endforeach--}}
+        {{--                </div>--}}
+
+        {{--        {{ $posts->links() }}--}}
 
 
         {{--                <div class="row">--}}

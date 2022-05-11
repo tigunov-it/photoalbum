@@ -25,6 +25,13 @@
                         <p>{{$post->album->title}}</p>
                     </div>
 
+                    <form action="{{ route('post.rotate', ['post' => $post->id]) }}" method="GET">
+                        @csrf
+
+                        @method('GET')
+
+                        <button type="submit" class="m-sm-2 btn btn-primary btn-block"> <i class="fa-solid fa-rotate-left"></i> Rotate</button>
+                    </form>
 
 
                     <form action="{{ route('post.destroy', ['post' => $post->id]) }}" method="POST">
@@ -32,7 +39,7 @@
 
                         @method('DELETE')
 
-                        <button type="submit" class="btn btn-danger btn-block">Delete</button>
+                        <button type="submit" class="m-sm-2 btn btn-danger btn-block"> <i class="fa-solid fa-trash"></i> Delete</button>
                     </form>
 
                 </div>
