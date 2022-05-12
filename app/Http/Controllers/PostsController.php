@@ -46,6 +46,7 @@ class PostsController extends Controller
             'region' => env('AWS_DEFAULT_REGION'),
             'version' => 'latest'
         ]);
+// <<<<<<< HEAD
 
         foreach (request('image') as $file) {
 
@@ -95,6 +96,9 @@ class PostsController extends Controller
 
         }
 
+// =======
+        
+// >>>>>>> Den
         return redirect('/profile/' . auth()->user()->id);
     }
 

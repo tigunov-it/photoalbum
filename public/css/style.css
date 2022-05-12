@@ -1,0 +1,1114 @@
+/* @charset "UTF-8"; */
+body {
+  margin: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  min-height: 100vh;
+  word-break: break-all;
+  font-family: 'Lato', Arial, Helvetica, sans-serif;
+  flex-direction: column;
+}
+ /* Чтобы занимал оставшееся пространство */
+/* main {
+ 
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+} */
+
+footer {
+  /* Чтобы footer не уменьшался */
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+      margin-top: 20px;
+}
+
+
+a {
+  text-decoration: none;
+}
+
+mark {
+  background-color: inherit;
+}
+
+.hide {
+  display: none;
+}
+
+/* обертка */
+.wrap {
+  max-width: 1170px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 16px;
+  padding-right: 16px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex; 
+  display: flex;
+}
+
+header {
+  padding-top:5px;
+}
+ 
+
+/* логотип */
+.logotip{
+   flex-grow: 1;
+}
+.logotip a img:hover {
+  transform:scale(0.95);
+}
+.logotip img {
+  width: 350px;
+  height: 100px;
+}
+
+/* Поиск по сайту */
+.search {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+/* поиск в строке */
+.searsh-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  
+}
+
+.searsh-form input {
+  width: 150px;
+  height:29px;
+  background:  #dddddd;
+  border: none;
+  border-radius: 15px 0 0 15px;
+  padding: 0 15px;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  margin: 30px 0px 0px 0px;
+  color: #070707;
+}
+
+.searsh-form input:hover {
+  opacity: .8;
+  background:  #dddddd;
+}
+
+.searsh-form input::-webkit-input-placeholder {
+  font-size: 14px;
+  line-height: 32px;
+  font-weight: 300;
+  letter-spacing: 0.025em;
+  color: #070707;
+}
+
+.searsh-form input:-ms-input-placeholder {
+  font-size: 14px;
+  line-height: 32px;
+  font-weight: 300;
+  letter-spacing: 0.025em;
+  color: #070707;
+}
+
+.searsh-form input::-ms-input-placeholder {
+  font-size: 14px;
+  line-height: 32px;
+  font-weight: 300;
+  letter-spacing: 0.025em;
+  color: #070707;
+}
+
+.searsh-form input::placeholder {
+  font-size: 14px;
+  line-height: 32px;
+  font-weight: 300;
+  letter-spacing: 0.025em;
+  color: #070707;
+}
+
+.searsh-form input:focus {
+  outline: none;
+}
+
+.searsh-form .search-submit {
+  height: 29px;
+  width: 50px;
+  background-color:  #999999;
+  border: none;
+  border-radius: 0px 15px 15px 0px;
+  color: black;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  margin: 30px 0 0 0px;
+}
+
+.searsh-form .search-submit:hover {
+  background-color: black;
+  color:white;
+  opacity: .9;
+}
+
+.searsh-form .search-submit:focus {
+  outline: none;
+}
+
+.searsh-form .fa-search{
+  margin: 0 0 0 -3px;
+}
+
+/*  блок вход*/
+.login {
+  margin: 20px;
+}
+/* кнопка  войти */
+
+ .btn {
+  background: #dddddd;
+  border: none;
+  border-radius: 15px;
+  color: black;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 20px;
+  margin-left: 10px;
+  padding: 9px 15px;
+  cursor: pointer;
+}
+.btn:hover {
+  background: #dddddd;
+  border: none;
+  border-radius: 15px;
+  color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 20px;
+  margin-left: 10px;
+  padding: 9px 15px;
+  cursor: pointer;
+}
+.btn:active {
+  background: white;
+  border: none;
+  border-radius: 15px;
+  color: #dddddd;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 20px;
+  margin-left: 10px;
+  padding: 9px 15px;
+  cursor: pointer;
+}
+/* блок при авторизации */
+
+.login .login-on-profile{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.login .img-profile{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid;
+  margin: 5px;
+  display: block;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url("https://mdbcdn.b-cdn.net/img/Photos/Slides/img%20(15).webp");
+  background-size: cover;
+
+}
+.login .login-off{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: 5px;
+}
+
+.login-bt-off{
+  width: 85px;
+  height: 30px;
+  background: #dddddd;
+  border: none;
+  border-radius: 15px;
+  color: black;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+
+
+/* блок авторизации-регистрации*/
+
+
+.authorization-fon{
+  display: none;
+ } 
+.login #authorization-on,#authorization-off{
+  display: none;
+}
+
+input[id="authorization-on"]:checked +label~.authorization-fon
+ {
+  width: 100%;
+  height:80%; 
+  background-color: rgb(0, 0, 0, 0.7);
+  display:flex ;
+  justify-content:center; 
+  position: fixed;
+  z-index: 10;
+  top:0;
+  left:0;
+  }
+
+.but-login-off{
+  display: none;
+}
+/* выход из блока авторизации-регистрации */
+input[id="authorization-on"]:checked +label+.but-login-off
+ {
+  display: block;
+  top: 0;
+  right: 0;  
+  position: fixed;
+  z-index: 9;
+  background:rgb(0, 0, 0, 0);
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  }  
+
+/* кнопка перехода
+ {
+  color: black;
+  border: 1px solid #22272d;
+  padding: 7px 15px;
+  border-radius: 25px;
+  font-size: 15px;
+  margin-right: 10px;
+  margin-top: 15px;
+  height: 35px;
+} */
+.authorization{
+  margin-top: 50px;
+  width: 350px;
+  background-color:#dddddd;
+  position: fixed;
+  padding-bottom: 10px;
+  border-radius: 5px;
+  padding-top: 10px;
+
+}
+.but-authorization{
+  color:black;
+  font-size:30px;
+  margin-left: 25px;
+}
+.but-registration{
+  color:black;
+  font-size:30px;
+  margin-left: -310px;
+}
+input[id="tab-1" ]:checked ~.but-registration{
+  color:black;
+  border:1px solid #22272d;
+  padding:2px 5px;
+  border-radius:5px;
+  font-size:15px;
+  margin: 0;
+  margin-left: 8px;
+
+}
+input[id="tab-2" ]:checked ~.but-authorization{
+  color:black;
+  border:1px solid #22272d;
+  padding:2px 5px;
+  border-radius:5px;
+  font-size:15px;
+  margin-left: 228px;
+}
+input[id="tab-2" ]:checked ~.but-authorization:hover {
+  color:#22272d;
+  background:  white;
+  padding:2px 5px;
+  border-radius:5px;
+  font-size:15px;
+}
+input[id="tab-1" ]:checked ~.but-registration:hover {
+  color:#22272d;
+  background:  white;
+  padding:2px 5px;
+  border-radius:5px;
+  font-size:15px;
+}
+input[id="tab-1" ]:checked ~.forma2{
+display: none;
+}
+input[id="tab-2" ]:checked ~.forma1{
+display: none;
+}
+
+.forma1{
+  display: flex;
+  justify-content: center;
+}
+
+.forma1 .registr-name{
+ display: flex;
+ margin-top: 25px;
+}
+.forma1 .registr-name .registr-user-input{
+  width: 100%;
+    height: 40px;
+    border-radius: 3px;
+    outline: none;
+    background: transparent;
+    border: 2px solid #22272d;
+    padding-left: 80px;
+    color: black;
+    margin: 0;
+}
+
+
+.forma1 .registr-name .registr-icon-smail{
+  position:absolute;
+  width:36px;
+  height:36px;
+  border-right: 1px solid black;
+  top: 25px;
+  padding:5px;
+}
+/* идлоооооооооооооооооо */
+ .invalid-feedback{
+  margin-left: 10px;
+    color: red;
+}
+
+
+
+
+.forma1 .registr-zamok{
+  display: flex;
+  margin-top: 5px;
+}
+.forma1 .registr-zamok .registr-zamok-input{
+  width:100%;
+  height:40px;
+  border-radius:3px;
+  outline: none;
+  background:transparent; 
+  border:2px solid #22272d;
+  padding-left:80px;
+  color:black;
+  margin: 0;
+  
+}
+.registr-zamok .registr-icon-zamok{
+  position:absolute;
+  width:36px;
+  height:36px;
+  border-right: 1px solid black;
+  top: 95px;
+  padding:5px;
+}
+.forma1 .registr-user-input:focus, .forma1 .registr-zamok-input:focus {
+  width:100%;
+  height:40px;
+  border-radius:3px;
+  outline: none;
+  background:transparent; 
+  border:2px solid #22272d;
+  padding-left:80px;
+  color:black;
+  margin: 0;
+  background:white;
+}
+/* кнопка войти */
+.regstr-entrance{
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+}
+.regstr-entrance .registr-entrance-input{
+  width:80%;
+  height:40px;
+  border-radius:5px;
+  outline: none;
+  background:black; 
+  border:none;
+  color:white;
+  text-align:center;
+  font-size:20px;
+  cursor:pointer;
+}
+
+.regstr-entrance .registr-entrance-input:hover{
+  width:80%;
+  height:40px;
+  border-radius:5px;
+  border: none;
+  outline: none;
+  background:white; 
+  border:none;
+  color:black;
+  text-align:center;
+  font-size:20px;
+  cursor:pointer;
+}
+.regstr-entrance .registr-entrance-input:focus{
+  width:80%;
+  height:40px;
+  border-radius:5px;
+  outline: none;
+  background:black; 
+  border:none;
+  color:white;
+  text-align:center;
+  font-size:20px;
+  cursor:pointer;
+}
+
+.registr-remember{
+  display: flex;
+  justify-content: space-around;
+  align-items:center;
+  margin-top: 20px;
+}
+.registr-remember .regstr-radio-check{
+  width:50px;
+  height:15px;
+  border:1px solid black;
+  border-radius:30px;
+  text-align:center;
+  padding:3px 0;
+  color:black;
+  font-size:13px;
+}
+.registr-remember .radio-no,.registr-remember .radio-yes{
+  display:none; 
+}
+.registr-remember .regstr-radio-check   label{
+    margin:0 6px;
+    cursor:pointer;
+  }
+.regstr-radio-check  .switch-selection{
+  display: block;
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: rgb(0, 0, 0, 0.5);
+  margin-top: -15px;
+  margin-left: 4px;
+  transition: 0.2s cubic-bezier(0.4, 0, 1, 0.3);
+  } 
+ .radio-yes:checked ~ .switch-selection{
+    margin-left:30px;
+    background:rgb(0, 0, 0, 0.5);
+    
+  } 
+/* запомнить меня */
+.registr-remember .check-label {
+  font-size:13px;
+  color:#7f8084;
+  margin: 0;
+  margin-left: 10px;
+}
+/* збыли пароль */
+.registr-remember .forgot-label{
+    font-size:13px;
+  color:#7f8084;
+  margin-left: 45px;
+  cursor:pointer;
+}
+.registr-remember .forgot-label:hover{
+    font-size:13px;
+  color:black;
+  margin-left: 45px;
+}
+
+
+form {position:relative;}
+
+
+/* форма регистрации */
+
+/* ggggggggggggggggggggggggggggggggggggggggggggggggggg */
+.forma2{
+  display: flex;
+    justify-content: center;
+}
+
+/* .registr-gender{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+.registr-gender .registr-gender-p{
+  flex-grow: 1;
+  margin: 0;
+}
+.registr-gender label{
+  margin-right: 5px;
+} */
+
+.forma2 .registr-name{
+ display: flex;
+ margin-top: 8px;
+}
+/* jkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk */
+.forma2 .registr-user-input-name {
+  width:100%;
+  padding:5px;
+  height:20px;
+  border-radius:3px;
+  margin:5px 0;
+  outline: none;
+  background:transparent; 
+  border:2px solid #22272d;
+  padding-left:80px;
+  color:black;
+}
+
+
+.forma2 .registr-icon-identificati-name{
+  position:absolute;
+  width:39px;
+  height:33px;
+  border-right: 1px solid black;
+  top: 14px;
+  padding:0px;
+}
+.forma2 .registr-surname{
+  display: flex;
+  margin-top: 0px;
+}
+.forma2 .registr-user-input-surname{
+  width:100%;
+  padding:5px;
+  height:20px;
+  border-radius:3px;
+  outline: none;
+  background:transparent; 
+  border:2px solid #22272d;
+  padding-left:80px;
+  color:black;
+}
+.forma2 .registr-icon-surname{
+  position:absolute;
+  width:39px;
+  height:33px;
+  border-right: 1px solid black;
+  top: 72px;
+  padding:0px;
+}
+.forma2 .registr-login{
+  display: flex;
+  margin-top: 6px;
+}
+.forma2 .registr-user-input-login{
+  width:100%;
+  padding:5px;
+  height:20px;
+  border-radius:3px;
+  outline: none;
+  background:transparent; 
+  border:2px solid #22272d;
+  padding-left:80px;
+  color:black;
+}
+
+.forma2 .registr-icon-smail-login{
+  position:absolute;
+  width:36px;
+  height:27px;
+  border-right: 1px solid black;
+  top: 131px;
+  padding:2px;
+  
+}
+
+.forma2 .registr-zamok2{
+  display: flex;
+  margin: 0;
+  padding: 0;
+  margin-top: 6px;
+}
+.forma2 .registr-zamok-input{
+  width:100%;
+  padding:5px;
+  height:20px;
+  border-radius:3px;
+  outline: none;
+  background:transparent; 
+  border:2px solid #22272d;
+  padding-left:80px;
+  color:black;
+}
+
+.forma2 .registr-icon-zamok2{
+  position: absolute;
+  width: 31px;
+  height: 23px;
+  border-right: 1px solid black;
+  top: 189px;
+  padding: 5px;
+}
+.forma2 .registr-icon-zamok22{
+  position: absolute;
+  width: 31px;
+  height: 23px;
+  border-right: 1px solid black;
+  top: 250px;
+  padding: 5px;;
+}
+
+.forma2 .registr-remember2{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 20px;
+}
+.forma2 .registr-remember2 .regstr-radio-check2{
+   width: 50px;
+    height: 15px;
+    border: 1px solid black;
+    border-radius: 30px;
+    text-align: center;
+    padding: 3px 0;
+    color: black;
+    font-size: 13px;
+}
+.forma2 .registr-remember2 .radio-no2,.forma2 .registr-remember2 .radio-yes2{
+  display:none; 
+}
+.forma2 .registr-remember2 .regstr-radio-check2   label{
+    margin:0 6px;
+    cursor:pointer;
+  }
+.forma2 .registr-remember2 .regstr-radio-check2     .switch-selection2{
+  display: block;
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: rgb(0, 0, 0, 0.5);
+  margin-top: -15px;
+  margin-left: 4px;
+  transition: 0.2s cubic-bezier(0.4, 0, 1, 0.3);
+  } 
+  
+
+ .forma2 .registr-remember2 .radio-yes2:checked ~ .switch-selection2{
+    margin-left:30px;
+    background: rgb(0, 0, 0, 0.5);
+    
+  } 
+ .registr-remember2 .check-yes{
+  font-size: 13px;
+    color: black;
+  margin-left: 5px;
+}
+/* условия */
+ .forma2 .registr-terms{
+  font-size:13px;
+color:#7f8084;
+margin-left: 8px;
+}
+ .forma2 .registr-terms:hover{
+  font-size:13px;
+color:black;
+margin-left: 8px;
+}
+
+/* кнопка зарегать */
+ .forma2 .regstr-reg{
+  display: flex;
+  margin-top: 6px;
+  justify-content: center;
+ }
+
+
+.forma2 .registr-reg-input{
+  width:80%;
+  padding:5px;
+  height:40px;
+  border-radius:5px;
+  margin:5px 0;
+  outline: none;
+  background:black; 
+  border:none;
+  color:white;
+  text-align:center;
+  font-size:20px;
+  cursor:pointer;
+}
+
+.forma2 .registr-reg-input:hover{
+  width:80%;
+  padding:5px;
+  height:40px;
+  border-radius:5px;
+  margin:5px 0;
+  outline: none;
+  background:white; 
+  border:none;
+  color:black;
+  text-align:center;
+  font-size:20px;
+  cursor:pointer;
+}
+.forma2 .registr-reg-input:focus{
+  width:80%;
+  padding:5px;
+  height:40px;
+  border-radius:5px;
+  margin:5px 0;
+  outline: none;
+  background:black; 
+  border:none;
+  color:white;
+  text-align:center;
+  font-size:20px;
+  cursor:pointer;
+}
+.forma2 .registr-user-input:focus, .registr-zamok-input:focus {
+  border:3px solid black;
+  box-shadow:none;background:white;
+  
+}
+
+
+/* запомнить меня */
+.check-label {
+  font-size:13px;
+  color:#7f8084;
+  margin: 0 20px 0 0;
+}
+
+
+
+
+.regstr-reg{
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+
+
+
+
+
+/* разделительная линия */
+ hr {
+  border: none;
+  /* Убираем границу */
+  color: #dddddd;
+  /* Цвет линии для IE6-7 */
+  height: 5px;
+  /* Толщина линии */
+  background-color:#dddddd;
+  margin-top: 15px;
+}
+
+/* навигация */
+.nav-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 0 auto;
+  position: relative;
+}
+
+.nav-header .nav-header-a {
+  padding: 10px 10px;
+  margin: 0 5px;
+}
+
+.nav-header .nav-header-a mark {
+  font-size: 14px;
+  line-height: 26px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #222222;
+  text-align: center;
+}
+
+.nav-header .nav-header-a:hover {
+  background:#dddddd;
+  border-radius: 15px;
+}
+
+.nav-header .nav-header-a:focus {
+  background: #dddddd;
+  border-radius: 15px;
+}
+
+.nav-hide-megamenu {
+  display: none;
+}
+
+.nav-header .nav-header-a:hover + .nav-hide-megamenu {
+  position: absolute;
+  min-width: 500px;
+  height: auto;
+  background-color: #ffffff;
+  border-radius: 5px;
+  overflow: auto;
+  top: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-around;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  z-index: 3;
+}
+
+.nav-hide-megamenu:hover {
+  position: absolute;
+  min-width: 500px;
+  height: auto;
+  background-color: #ffffff;
+  border-radius: 5px;
+  overflow: auto;
+  top: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+      justify-content: space-around;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  z-index: 3;
+}
+.nav-header .nav-header-a:focus + .nav-hide-megamenu {
+  position: absolute;
+  min-width:500px;
+  height: auto;
+  background-color: #ffffff;
+  border-radius: 5px;
+  overflow: auto;
+  top: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-around;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  z-index: 3;
+}
+.nav-hide-megamenu .nav-megamenu-col h3 {
+  font-size: 16px;
+  line-height: 32px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  color: black;
+  margin: 0;
+  margin-top: 25px;
+  text-align: center; 
+  border-bottom: 1px solid black;
+}
+
+.nav-hide-megamenu .nav-megamenu-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-hide-megamenu .nav-megamenu-col ul a {
+  font-size: 14px;
+  line-height: 28px;
+  font-weight: 400;
+  letter-spacing: 0.025em;
+  color: #646464;
+  padding: 0px;
+}
+
+.nav-hide-megamenu ul a:hover {
+  font-size: 14px;
+  line-height: 28px;
+  font-weight: 400;
+  letter-spacing: 0.025em;
+  color: black;
+  padding: 0;
+  background-color: inherit;
+}
+/* main */
+
+
+
+/* Подвал */
+.head-footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  justify-content:space-around; 
+  align-items: center;
+}
+.head-footer .logotip img {
+  width: 300px;
+  height: 75px;
+}
+.head-footer .logotip a img:hover {
+  transform: scale(0.95);
+}
+
+
+.head-footer .footer-bisness{
+  text-align: left;
+}
+.head-footer .business-text {
+  width: 427px;
+  max-height: 218px ;
+  font-size: 14px;
+  line-height: 24px;
+  font-weight: 300;
+  letter-spacing: 0.025em;
+  color: #898989;
+  overflow: hidden;
+  padding: 10px;
+}
+
+.head-footer .footer-inform{
+  display: -webkit-flex; 
+  display: flex; 
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.head-footer .footer-inform section{
+margin:0 20px;
+}
+
+
+.head-footer .business-text p {
+  font-size: 14px;
+  line-height: 24px;
+  font-weight: 300;
+  letter-spacing: 0.025em;
+  color: #898989;
+}
+
+.head-footer .footer-inform section a p {
+  color: #898989;
+}
+.head-footer .footer-inform section a:hover p {
+  color: black;
+}
+.head-footer .icon{
+  margin-right: 10px;
+}
+
+
+
+
+
+.footer-copyright {
+  width: 100%;
+  height: 79px;
+  margin: 0 auto;
+  background-size: 100%;
+  background-color: #e6e6e6;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-around;
+      -ms-flex-pack: space-around;
+          justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.footer-copyright p {
+  font-size: 16px;
+  line-height: 42px;
+  font-weight: 400;
+  letter-spacing: 0.025em;
+  color: #7a7a7a;
+  margin-left: 100px;
+}
+
+.footer-label{
+  min-width: 200px ;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-around;
+      -ms-flex-pack: space-around;
+          justify-content: space-around;
+}
+.footer-label a {
+  width: 30px;
+  height: 25px;
+  border: 2px solid #7a7a7a;
+  border-radius: 15px;
+  margin: 0 15px;
+  padding: 5px 0 0 0;
+  text-align: center;
+}
+.footer-label a:hover .fab {
+  color: white;
+}
+
+.footer-copyright .fab {
+  color:#7a7a7a;
+}

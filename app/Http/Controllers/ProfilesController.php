@@ -46,6 +46,10 @@ class ProfilesController extends Controller
             'image' => '',
         ]);
 
+
+       auth()->user()->profile->update($data);
+
+
         if (request('image')) {
             $imagePath = request('image')->store('profile', 'public');
             $image = Image::make(public_path("storage/{$imagePath}"))->fit(100, 100);
@@ -60,7 +64,6 @@ class ProfilesController extends Controller
         ));
 
 
-//        auth()->user()->profile->update($data);
 
         return redirect("/profile/{$user->id}");
     }

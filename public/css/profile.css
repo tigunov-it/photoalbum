@@ -1,0 +1,100 @@
+.profile{
+    width: 100%;
+    padding-right: var(--bs-gutter-x, 0.75rem);
+    padding-left: var(--bs-gutter-x, 0.75rem);
+    margin-right: auto;
+    margin-left: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.profile .profile-foto{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 150px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 50%;
+    margin: 0 10px;
+}
+.profile .profile-info{
+    margin: 0px 10px 50px 15px;
+    max-width: 200px;
+}
+.profile .btn{
+    background: #dddddd;
+    border: none;
+    border-radius: 15px;
+    color: black;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    margin-top: 20px;
+    margin-left: 10px;
+    padding: 9px 15px;
+    cursor: pointer;
+}
+.profile .profile-add-foto{
+    margin: 0 10px;
+}
+
+
+
+
+/* форма */
+
+
+.profile-form{
+    margin: 0 25px;
+}
+#profile-form-hider {
+    display: none;
+}
+#profile-form-hider:checked + .profile-form-edit {
+    display: block;
+}
+
+.profile-form .profile-form-edit {
+    display: none;
+}
+
+.profile-form .profile-form-edit h3{
+    text-align: center;
+    margin: 0 0 17px 0;
+}
+.profile-form .profile-form-edit .profile-form-div{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.profile-form .profile-form-edit .input{
+    width: 110px;
+    height: 20px;
+    border-radius: 3px;
+    outline: none;
+    background: transparent;
+    border: 2px solid #22272d;
+    padding-left: 60px;
+    color: black;
+    margin-bottom: 8px;
+    margin-left: 5px;
+}
+
+.profile-form .profile-form-save{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+

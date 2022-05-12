@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Intervention\Image\Facades\Image;
 
 class AlbumsController extends Controller
@@ -25,6 +26,11 @@ class AlbumsController extends Controller
             'user' => $user
         ]);
     }
+    public function showFoto(User $user)
+    {
+        return view('albums.foto', [ 'user' => $user]);
+    }
+
 
     public function show(User $user, Album $album)
     {
@@ -33,8 +39,13 @@ class AlbumsController extends Controller
         $this->authorize('update', $user->profile);
 
 
+// <<<<<<< HEAD
         $posts = \DB::table('posts')->where('album_id', '=', $album->id)
             ->where('user_id', '=', $user->id)->paginate(3);
+// =======
+        $posts = DB::table('posts')->where('album_id', '=', $album->id)
+            ->where('user_id', '=', $user->id)->get();
+// >>>>>>> Den
 
         return view('albums.show', [
             'posts' => $posts,
@@ -59,7 +70,7 @@ class AlbumsController extends Controller
         $imagePath = request('image')->store('uploads', 'public');
 
         $image = Image::make(public_path("storage/{$imagePath}"))->fit(1024, 768);
-//        $image = Image::make(public_path("storage/{$imagePath}"))->encode('jpg', 30);
+        //        $image = Image::make(public_path("storage/{$imagePath}"))->encode('jpg', 30);
         $image->save();
 
         auth()->user()->album()->create([
@@ -69,5 +80,8 @@ class AlbumsController extends Controller
         ]);
         return redirect('/profile/' . auth()->user()->id);
     }
+
+
+
 
 }
