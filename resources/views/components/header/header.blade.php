@@ -22,7 +22,7 @@
     @guest
         <section class="login">
                 <input type="radio" name="authorization" id="authorization-on" >
-                <label for="authorization-on" class="but-login" title="Вход">Войти</label>
+                <label for="authorization-on" class="btn" title="Вход"><b>Войти</b></label>
 
                 <label for="authorization-off" class="but-login-off" title="Выход" ></label>
                 <input type="radio" name="authorization" id="authorization-off" checked >
@@ -32,8 +32,8 @@
                     <input type="radio" name="tabs" id="tab-1" checked style="display: none">
                     <input type="radio" name="tabs" id="tab-2" style="display: none">
 
-                    <label for="tab-1" class="but-authorization" title="Авторизация">Авторизация</label>
-                    <label for="tab-2" class="but-registration" title="Регистрация">Регистрация</label>	
+                    <label for="tab-1" class="but-authorization" title="Авторизация"><b>Авторизация</b></label>
+                    <label for="tab-2" class="but-registration" title="Регистрация"><b>Регистрация</b></label>	
 
                         <div  class="forma1">
                             <form  method="POST" action="{{ route('login') }}">

@@ -7,19 +7,6 @@
             <x-header.header></x-header.header>
         </header>
 		<main>
-			<!-- Слоган -->
-			{{-- @section('starting')
-				<div class="slider">
-					<section class="slider-brend-1  wrap">
-						<h2>
-							Мгновения проходят,  
-							<br>
-							<mark><span>а фото остаются.</span></mark>
-						</h2> 
-					</section>
-				</div>		
-			@show --}}
-            {{-- @yield('content') --}}
             <div  class="wrap">
                 @section('content')
                     {{-- Слайдер --}}
@@ -35,3 +22,4 @@
 			<x-footer.footer-copyright></x-footer.footer-copyright>
 		</footer>
 	</body>
+</html>

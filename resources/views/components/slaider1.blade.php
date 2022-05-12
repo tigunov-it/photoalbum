@@ -5,7 +5,7 @@
         new ItcSimpleSlider('.itcss', {
             loop: true,//зациклиность
             autoplay: false,//автопрокрутка
-            interval: 500,//время прокрутки
+            interval: 1800,//время прокрутки
             swipe: true, //менять свайпом
         });
     });
@@ -17,14 +17,21 @@
             <div class="itcss__items">
                 <div class="itcss__item">
                     {{-- тут фон --}}
-                    <article  class="slaider1-slaid1">Тут че нить написать можно</article>
+                    <section class="slider-brend-1  wrap">
+                        <h2>
+                            Мгновения проходят,  
+                            <br>
+                            <mark><span>а фото остаются.</span></mark>
+                        </h2> 
+                    </section>
                 </div>
                 <div class="itcss__item">
                     {{-- тут фотка  --}}
                     <img src="https://mdbcdn.b-cdn.net/img/Photos/Slides/img%20(15).webp" class="slaider1-slaid2" alt="Sunset Over the City"/>
                 </div>
                 <div class="itcss__item">
-                    <!-- Контент 3 слайда --><article  class="slaider1-slaid3"></article>
+                    <!-- Контент 3 слайда -->				
+	                <article  class="slaider1-slaid1">Тут че нить написать можно</article>
                 </div>
                 <div class="itcss__item">
                     <!-- Контент 4 слайда --><article  class="slaider1-slaid4"></article>
