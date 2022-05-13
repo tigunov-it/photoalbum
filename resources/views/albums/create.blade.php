@@ -45,7 +45,7 @@
                                     </span>
                         @enderror
 
-                    </div>
+                    {{-- </div>
                     <div class="row">
                         <label for="image" class="col-md-4 col-form-label">Image</label>
                         <input type="file" class="form-control" id="image" name="image">
@@ -54,7 +54,7 @@
                                         <strong>{{ $message }}</strong>
 
                         @enderror
-                    </div>
+                    </div> --}}
 
                     <div class="row mt-5">
                         <button class="btn btn-primary">Add new album</button>

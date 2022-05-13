@@ -47,3 +47,13 @@
     justify-content: center;
     margin-top: 10px;
 }
+/* форма для фото */
+.profile-form{
+    margin: 0 25px;
+}
+#profile-form-foto-hider {
+    display: none;
+}
+#profile-form-foto-hider:checked + .profile-form-edit {
+    display: block;
+}

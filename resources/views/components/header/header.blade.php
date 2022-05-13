@@ -88,17 +88,6 @@
                     <div class="forma2" >
                             <form method="POST" action="{{ route('register') }}">
                                 @csrf
-                                {{-- <div class="registr-gender">
-                                    <p class="registr-gender-p">Обращение</p>
-                                    <label>
-                                        <input type="radio" name="title" value="men" checked>
-                                        Г-н
-                                    </label>
-                                    <label>
-                                        <input type="radio" name="title" value="woman">
-                                        Г-жа
-                                    </label>
-                                </div> --}}
                                 <div class="registr-name">
                                     <img src="{{ asset("svg/IMG/id.svg")}}" alt="smail" class="registr-icon-identificati-name">
 
@@ -194,7 +183,11 @@
                     background-size: cover; --}}
                   
                     {{-- <img src="https://mdbcdn.b-cdn.net/img/Photos/Slides/img%20(15).webp" class="img-profile" alt="Profile"/> --}}
-                    <a class="nav-link"  href="{{route ( 'profile.show', ['user'=>Auth::user()->id])}}">{{ Auth::user()->username }}</a>
+                    
+                    {{-- стала --}}
+                    <a href="{{route('albums.showFoto', ['user'=>Auth::user()->id])}}" aria-label="Пока не понятно"  class="nav-header-a">{{ Auth::user()->username }}</a>
+                        {{-- была --}}
+                    {{-- <a class="nav-link"  href="{{route ( 'profile.show', ['user'=>Auth::user()->id])}}">{{ Auth::user()->username }}</a> --}}
                 </div>                      
 
             </div>

@@ -40,11 +40,11 @@ class AlbumsController extends Controller
 
 
 // <<<<<<< HEAD
-        $posts = \DB::table('posts')->where('album_id', '=', $album->id)
+        $posts = DB::table('posts')->where('album_id', '=', $album->id)
             ->where('user_id', '=', $user->id)->paginate(3);
 // =======
-        $posts = DB::table('posts')->where('album_id', '=', $album->id)
-            ->where('user_id', '=', $user->id)->get();
+        // $posts = DB::table('posts')->where('album_id', '=', $album->id)
+        //     ->where('user_id', '=', $user->id)->get();
 // >>>>>>> Den
 
         return view('albums.show', [

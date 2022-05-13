@@ -41,7 +41,7 @@ Route::match(['get', 'post'],'/p/create', [PostsController::class, 'create'])->n
 // });
 Route::get('',[HomeController::class, 'index'])->name('home');
 
-Route::get('/p/create', [PostsController::class, 'create'])->name('post.create');
+// Route::get('/p/create', [PostsController::class, 'create'])->name('post.create');
 // >>>>>>> Den
 
 Route::post('/p', [PostsController::class, 'store']);

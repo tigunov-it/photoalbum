@@ -9,6 +9,7 @@ use Aws\AwsClient;
 use Aws\Rekognition\RekognitionClient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
@@ -42,32 +43,32 @@ class PostsController extends Controller
         ]);
 
 
-        $client = new RekognitionClient([
-            'region' => env('AWS_DEFAULT_REGION'),
-            'version' => 'latest'
-        ]);
+        // $client = new RekognitionClient([
+        //     'region' => env('AWS_DEFAULT_REGION'),
+        //     'version' => 'latest'
+        // ]);
 // <<<<<<< HEAD
 
         foreach (request('image') as $file) {
 
  ############################  Модерация
-            $imageForAnalise = fopen($file, 'r');
-            $bytes = fread($imageForAnalise, filesize($file));
-            $results = $client->detectModerationLabels([
-                'Image' => ['Bytes' => $bytes],
-                'MinConfidence' => 50
-            ]);
-            $resultLabels = $results->get('ModerationLabels');
+            // $imageForAnalise = fopen($file, 'r');
+            // $bytes = fread($imageForAnalise, filesize($file));
+            // $results =$client->detectModerationLabels([
+            //     'Image' => ['Bytes' => $bytes],
+            //     'MinConfidence' => 50
+            // ]);
+            // $resultLabels = $results->get('ModerationLabels');
 
-            $banned = implode(", ",array_column($resultLabels, 'Name'));
+            // $banned = implode(", ",array_column($resultLabels, 'Name'));
 
-            if(!empty($resultLabels)){
-                return redirect()->back()->withErrors(['Banned_content' => 'The image contained Prohibited Content ' . '(' . $banned . ')']);
-            };
+            // if(!empty($resultLabels)){
+            //     return redirect()->back()->withErrors(['Banned_content' => 'The image contained Prohibited Content ' . '(' . $banned . ')']);
+            // };
  ############################  Модерация
 
             $user = Auth::user();
-            $album = \DB::select("select created_at from albums where id = {$data['album']}");
+            $album =DB::select("select created_at from albums where id = {$data['album']}");
             $albumCreatedAt = str_replace(" ", "_", implode(" ", array_column($album, 'created_at')));
 
 
