@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
 class ProfilesController extends Controller
@@ -47,9 +48,11 @@ class ProfilesController extends Controller
         ]);
 
         if (request('image')) {
-            $imagePath = request('image')->store('profile', 'public');
-            $image = Image::make(public_path("storage/{$imagePath}"))->fit(100, 100);
-            $image->save();
+            $imagePath = request('image')->store("uploads/{$user->username}/profile", 'public');
+            $image = Image::make(public_path("storage/{$imagePath}"))->fit(100, 100)->encode('jpg', 30);
+            Storage::disk('s3')->put("uploads/{$user->username}/profile/{$image->basename}", $image);
+            unlink("storage/{$imagePath}"); // Удаляю локальный файл после обработки и загрузки в S3
+
 
             $imageArray = ['image' => $imagePath];
         }
@@ -64,4 +67,14 @@ class ProfilesController extends Controller
 
         return redirect("/profile/{$user->id}");
     }
+
+    public function getAvatarFromS3(User $user)
+
+    {
+        $this->authorize('update', $user->profile);
+
+        return Storage::disk('s3')->response("{$user->profile->image}");
+
+    }
+
 }

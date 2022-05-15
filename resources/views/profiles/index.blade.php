@@ -6,7 +6,11 @@
         <div class="row border-bottom pb-3 d-flex align-items-center">
 
             <div class="col-lg-2">
+
                 <img src="{{ $user->profile->profileImage()}}" alt="" class="rounded-circle">
+
+{{--                <img src="{{ env('APP_URL') }}/s3avatar/{{ $user->id }}" alt="" class="rounded-circle">--}}
+
             </div>
 
             <div class="col-lg-5">
