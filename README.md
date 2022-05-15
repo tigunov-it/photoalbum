@@ -1,2 +1,2 @@
 # photoalbum
-create dev
+create stage

@@ -47,5 +47,6 @@ Route::get('/a/{user}/{album}', [AlbumsController::class, 'show'])->name('albums
 Route::get('/profile/{user}', [ProfilesController::class, 'index'])->name('profile.show');
 Route::get('/profile/{user}/edit', [ProfilesController::class, 'edit'])->name('profile.edit');
 Route::patch('/profile/{user}', [ProfilesController::class, 'update'])->name('profile.update');
+Route::get('/s3avatar/{user}', [ProfilesController::class, 'getAvatarFromS3'])->name('profile.getAvatarFromS3');
 
 
