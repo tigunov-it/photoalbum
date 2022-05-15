@@ -42,6 +42,7 @@ Route::get('/a/create', [AlbumsController::class, 'create']);
 Route::post('/a', [AlbumsController::class, 'store']);
 Route::get('/a/{user}', [AlbumsController::class, 'index'])->name('albums.index');
 Route::get('/a/{user}/{album}', [AlbumsController::class, 'show'])->name('albums.show');
+Route::get('/s3album/{user}/{album}', [AlbumsController::class, 'getCoverFromS3'])->name('album.getCoverFromS3');
 
 
 Route::get('/profile/{user}', [ProfilesController::class, 'index'])->name('profile.show');

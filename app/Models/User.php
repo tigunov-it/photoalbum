@@ -59,6 +59,6 @@ class User extends Authenticatable
 
     public function album(): HasMany
     {
-        return $this->hasMany(Album::class);
+        return $this->hasMany(Album::class)->orderBy('created_at', 'DESC');
     }
 }

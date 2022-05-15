@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
 class AlbumsController extends Controller
@@ -56,18 +57,35 @@ class AlbumsController extends Controller
             'image' => ['required', 'image']
         ]);
 
-        $imagePath = request('image')->store('uploads', 'public');
+        $album = auth()->user()->album()->create([
+            'title' => $data['title'],
+            'description' => $data['description'],
+            'image' => ''
+        ]);
 
-        $image = Image::make(public_path("storage/{$imagePath}"))->fit(1024, 768);
-//        $image = Image::make(public_path("storage/{$imagePath}"))->encode('jpg', 30);
-        $image->save();
+        $user = Auth::user();
+        $albumForUpload = \DB::select("select created_at from albums where id = {$album->id}");
+        $albumCreatedAt = str_replace(" ", "_", implode(" ", array_column($albumForUpload, 'created_at')));
 
-        auth()->user()->album()->create([
+        $imagePath = request('image')->store("uploads/{$user->username}/{$albumCreatedAt}/cover", 's3');
+
+        $album->update([
             'title' => $data['title'],
             'description' => $data['description'],
             'image' => $imagePath
         ]);
-        return redirect('/profile/' . auth()->user()->id);
+
+        return redirect('/a/' . auth()->user()->id);
+
+    }
+
+    public function getCoverFromS3(User $user, Album $album)
+
+    {
+        $this->authorize('update', $user->profile);
+
+        return Storage::disk('s3')->response("{$album->image}");
+
     }
 
 }

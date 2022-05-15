@@ -66,7 +66,7 @@
                 <div class="col-sm-4">
                     <a href="/a/{{ $user->id }}/{{ $album->id }}">
                         <div class="mb-4 d-flex justify-content-center align-items-center"
-                             style="height: 300px; background-image: url('/storage/{{ $album->image }}');  background-size: cover;">
+                             style="height: 300px; background-image: url('{{ env('APP_URL') }}/s3album/{{ $user->id }}/{{ $album->id }}');  background-size: cover;">
                             <div>
                                 <h3 class="text-white fs-1">{{ $album->title }}</h3>
 
