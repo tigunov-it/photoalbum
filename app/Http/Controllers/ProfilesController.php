@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Album;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -68,7 +69,7 @@ class ProfilesController extends Controller
         return redirect("/profile/{$user->id}");
     }
 
-    public function getAvatarFromS3(User $user)
+    public function getAvatarFromS3(User $user, Album $album)
 
     {
         $this->authorize('update', $user->profile);

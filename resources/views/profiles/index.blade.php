@@ -82,41 +82,6 @@
 
         {{ $posts->links() }}
 
-
-
-        {{--                <div class="row mt-5">--}}
-        {{--                    @foreach($posts as $post)--}}
-        {{--                        <div class="col-lg-4">--}}
-        {{--                            <a href="/p/{{ $user->id }}/{{ $post->id }}">--}}
-        {{--                                <div class="mb-4"--}}
-        {{--                                     style="height: 300px; background-image: url('/storage/{{ $post->image }}');  background-size: cover;">--}}
-        {{--                                </div>--}}
-        {{--                                <div class="mb-4"--}}
-        {{--                                     style="height: 300px; background-image: url('{{ env('APP_URL') }}/s3/{{ $user->id }}/{{ $post->id }}');  background-size: cover;">--}}
-        {{--                                </div>--}}
-        {{--                            </a>--}}
-        {{--                        </div>--}}
-        {{--                    @endforeach--}}
-        {{--                </div>--}}
-
-        {{--        {{ $posts->links() }}--}}
-
-
-        {{--                <div class="row">--}}
-        {{--                    @foreach($user->posts as $post)--}}
-        {{--                        <div class="col-4">--}}
-        {{--                            <a href="/p/{{ $post->id }}">--}}
-        {{--                                <img--}}
-        {{--                                    src="/storage/{{ $post->image }}"--}}
-        {{--                                    class="w-100 shadow-1-strong rounded mb-4"--}}
-        {{--                                    alt="{{ $post->title }}"--}}
-        {{--                                />--}}
-        {{--                            </a>--}}
-        {{--                        </div>--}}
-        {{--                    @endforeach--}}
-        {{--                </div>--}}
-
-
     </div>
 
 @endsection
