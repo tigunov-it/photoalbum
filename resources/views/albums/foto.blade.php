@@ -5,6 +5,17 @@
 
 @section('content')
 <div class="foto-albums">  
+    <div class="profile-foto" {{$url='https://mdbcdn.b-cdn.net/img/Photos/Slides/img%20(15).webp'}} style="background-image:url('{{$url}}')">
+    </div>
+    <div class="profile-info">
+        <p><b>Имя:</b> {{ $user->username }}</p>
+        <p><b>Логин:</b> {{ $user->profile->title }}</p>
+        <p><b>О себе:</b> {{ $user->profile->description }}</p>
+
+        <label class="btn" for="profile-form-hider" id="clickme"><b>Редактировать</b></label>
+    </div>
+
+
     <h2>Альбомы</h2>
     <label class="btn" for="profile-form-hider" id="clickme"><b>Добавить альбом</b></label>
     {{-- форма редактирования --}}
