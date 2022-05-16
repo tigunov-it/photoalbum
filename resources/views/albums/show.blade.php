@@ -63,20 +63,21 @@
         <h1 class="card-title">Album: {{ $album->title }}</h1>
 
         <div class="row mt-5">
+            @foreach($posts as $post)
+                <div class="col-lg-4">
+                    <a data-fancybox="gallery"
+                       data-thumb="{{ env('APP_URL') }}/s3small/{{ $user->id }}/{{ $post->id }}"
+                       data-download-src="{{ env('APP_URL') }}/s3large/{{ $user->id }}/{{ $post->id }}"
+                       href="{{ env('APP_URL') }}/s3large/{{ $user->id }}/{{ $post->id }}">
+                        <div class="mb-4"
+                             style="height: 300px; background-image: url('{{ env('APP_URL') }}/s3small/{{ $user->id }}/{{ $post->id }}');  background-size: cover;">
+                        </div>
+                    </a>
+                </div>
+            @endforeach
+        </div>
 
-            <div class="row mt-5">
-                @foreach($posts as $post)
-                    <div class="col-lg-4">
-                        <a data-fancybox="gallery" data-thumb="{{ env('APP_URL') }}/s3/{{ $user->id }}/{{ $post->id }}" href="{{ env('APP_URL') }}/s3full/{{ $user->id }}/{{ $post->id }}">
-                            <div class="mb-4"
-                                 style="height: 300px; background-image: url('{{ env('APP_URL') }}/s3/{{ $user->id }}/{{ $post->id }}');  background-size: cover;">
-                            </div>
-                        </a>
-                    </div>
-                @endforeach
-            </div>
-
-            {{ $posts->links() }}
+        {{ $posts->links() }}
 
 {{--            @foreach($posts as $post)--}}
 {{--                <div class="col-sm-4">--}}
@@ -90,7 +91,6 @@
 {{--            @endforeach--}}
 {{--                {{ $posts->links() }}--}}
 
-        </div>
 
     </div>
 @endsection

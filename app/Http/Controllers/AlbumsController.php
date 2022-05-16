@@ -35,7 +35,7 @@ class AlbumsController extends Controller
 
 
         $posts = \DB::table('posts')->where('album_id', '=', $album->id)
-            ->where('user_id', '=', $user->id)->paginate(3);
+            ->where('user_id', '=', $user->id)->paginate(20);
 
         return view('albums.show', [
             'posts' => $posts,
@@ -66,7 +66,6 @@ class AlbumsController extends Controller
         $user = Auth::user();
         $albumForUpload = \DB::select("select created_at from albums where id = {$album->id}");
         $albumCreatedAt = str_replace(" ", "_", implode(" ", array_column($albumForUpload, 'created_at')));
-
         $imagePath = request('image')->store("uploads/{$user->username}/{$albumCreatedAt}/cover", 's3');
 
         $album->update([
