@@ -1,5 +1,6 @@
 @section('style')
     <link href="{{ asset('css/foto.css') }}" rel="stylesheet">
+    
 @endsection
 @extends('layouts.app')
 
