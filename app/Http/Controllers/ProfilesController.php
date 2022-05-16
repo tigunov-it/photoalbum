@@ -15,7 +15,7 @@ class ProfilesController extends Controller
 
         $this->authorize('update', $user->profile);
 
-        $posts = $user->posts()->paginate(6);
+        $posts = $user->posts()->paginate(20);
 
         return view('profiles.index', [
             'user' => $user,

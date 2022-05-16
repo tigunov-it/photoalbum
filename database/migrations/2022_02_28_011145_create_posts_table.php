@@ -21,6 +21,8 @@ return new class extends Migration
             $table->text('description');
             $table->text('image');
             $table->text('image_small');
+            $table->text('image_medium');
+            $table->text('image_large');
             $table->timestamps();
 
             $table->index('user_id');
