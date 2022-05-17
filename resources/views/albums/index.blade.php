@@ -66,7 +66,7 @@
             @foreach($user->album as $album)
 
 
-                <div class="card-image col-md-3 mt-4">
+                <div class="card-image col mt-4">
 
 
                         <a href="/a/{{ $user->id }}/{{ $album->id }}">
