@@ -30,9 +30,7 @@ class AlbumsController extends Controller
     public function show(User $user, Album $album)
     {
 
-        //TODO: Сделать оптимальное решение для приватности фотоальбомов
         $this->authorize('update', $user->profile);
-
 
         $posts = \DB::table('posts')->where('album_id', '=', $album->id)
             ->where('user_id', '=', $user->id)->paginate(20);
@@ -62,6 +60,10 @@ class AlbumsController extends Controller
             'description' => $data['description'],
             'image' => ''
         ]);
+
+
+//TODO Уменьшить размер обложки для альбома
+
 
         $user = Auth::user();
         $albumForUpload = \DB::select("select created_at from albums where id = {$album->id}");

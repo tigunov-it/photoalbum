@@ -1,0 +1,16 @@
+.card-image {
+    position: relative;
+}
+
+.card-image:nth-child(1):hover {
+
+}
+
+.card-image-icons {
+    margin-top: -40px;
+    opacity: 0;
+}
+
+.card-image:hover .card-image-icons {
+    opacity: 1;
+}
