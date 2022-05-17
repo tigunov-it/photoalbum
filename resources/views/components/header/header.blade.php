@@ -175,7 +175,7 @@
                 </div>                   
                 <div class="login-on-profile">
                     <div class="img-profile"></div>
-
+                    
                     {{-- background-size: cover;
                     background-repeat: no-repeat;
                     background-position: center;
@@ -189,7 +189,6 @@
                         {{-- была --}}
                     {{-- <a class="nav-link"  href="{{route ( 'profile.show', ['user'=>Auth::user()->id])}}">{{ Auth::user()->username }}</a> --}}
                 </div>                      
-
             </div>
             <div class="login-off" >
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" >

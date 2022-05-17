@@ -5,19 +5,19 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="foto-albums">  
+
+<div class="foto-albums" style="width: 15%">  
+    
     <div class="profile-foto" {{$url='https://mdbcdn.b-cdn.net/img/Photos/Slides/img%20(15).webp'}} style="background-image:url('{{$url}}')">
     </div>
-    <div class="profile-info">
+    <div class="profile-info" >
         <p><b>Имя:</b> {{ $user->username }}</p>
-        <p><b>Логин:</b> {{ $user->profile->title }}</p>
+        {{-- <p><b>Логин:</b> {{ $user->profile->title }}</p> --}}
         <p><b>О себе:</b> {{ $user->profile->description }}</p>
-
-        <label class="btn" for="profile-form-hider" id="clickme"><b>Редактировать</b></label>
     </div>
-
-
-    <h2>Альбомы</h2>
+    
+</div>
+<div>  
     <label class="btn" for="profile-form-hider" id="clickme"><b>Добавить альбом</b></label>
     {{-- форма редактирования --}}
     {{-- НЕ РАБОТАЕТ?? --}}
@@ -29,9 +29,6 @@
                 @csrf
                 <div class="row">
                     <div class="col-8 offset-2">
-                        <div class="row">
-                            <h3>Создать альбом</h3>
-                        </div>
                         <div class="row mb-3">
                             <label for="title" class="col-md-4 col-form-label">Название альбома</label>
                             <input id="title"
@@ -70,10 +67,8 @@
                 </div>
             </form>
         </div>
-    </div>    
-</div>
-<div>  
-    <h2>Фотографии</h2>
+    </div>
+
     <label class="btn" for="profile-form-foto-hider" id="clickme"><b>Добавить фото</b></label>
         {{-- форма редактиррования --}}
         {{-- ТОЖЕ НЕ РАБОТАЕТ --}}
@@ -93,9 +88,6 @@
                     @csrf
                     <div class="row">
                         <div class="col-8 offset-2">
-                            <div class="row">
-                                <h3>Добавить новую фотку</h3>
-                            </div>
                             <div class="row mb-3">
                                 <label for="title" class="col-md-4 col-form-label">Название</label>
                                 <input id="title"
