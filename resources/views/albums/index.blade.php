@@ -5,15 +5,8 @@
 
         <div class="row border-bottom pb-3 d-flex align-items-center">
 
-            <div class="col-lg-2">
-                <img src="{{ $user->profile->profileImage()}}" alt="" class="rounded-circle">
-            </div>
-
-            <div class="col-lg-5">
-                <h1>{{ $user->username }}</h1>
-                <h2>{{ $user->profile->title }}</h2>
-                <h3>{{ $user->profile->description }}</h3>
-                <a href="#">{{$user->profile->url }}</a>
+            <div class="col-sm-2 d-flex flex-column align-items-center">
+                <img src="{{ $user->profile->profileImage()}}" alt="" class="w-75 rounded-circle">
 
                 <div class="pt-1">
                     @can('update', $user->profile)
@@ -22,6 +15,14 @@
                         </a>
                     @endcan
                 </div>
+
+            </div>
+
+            <div class="col-md-4">
+                <h1>{{ $user->username }}</h1>
+                <h2>{{ $user->profile->title }}</h2>
+                <h3>{{ $user->profile->description }}</h3>
+                <a href="#">{{$user->profile->url }}</a>
 
             </div>
 
@@ -63,17 +64,34 @@
 
         <div class="row mt-5">
             @foreach($user->album as $album)
-                <div class="col-sm-4">
-                    <a href="/a/{{ $user->id }}/{{ $album->id }}">
-                        <div class="mb-4 d-flex justify-content-center align-items-center"
-                             style="height: 300px; background-image: url('{{ env('APP_URL') }}/s3album/{{ $user->id }}/{{ $album->id }}');  background-size: cover;">
-                            <div>
-                                <h3 class="text-white fs-1">{{ $album->title }}</h3>
 
+
+                <div class="card-image col-md-3 mt-4">
+
+
+                        <a href="/a/{{ $user->id }}/{{ $album->id }}">
+                            <div class="d-flex justify-content-center align-items-end"
+                                 style="height: 252px; background-image: url('{{ env('APP_URL') }}/s3album/{{ $user->id }}/{{ $album->id }}');  background-size: cover;">
+                                <div class="mb-5">
+                                    <span class="text-white fs-4">{{ $album->title }}</span>
+                                </div>
                             </div>
-                        </div>
-                    </a>
+                        </a>
+
+                    <div class="card-image-icons d-flex w-100 justify-content-center">
+                        <a href="" class="link-dark px-5">
+                            <i class="fa-solid fa-info fs-2 text-white"></i>
+                        </a>
+                        <a href="" class="link-dark px-5">
+                            <i class="fa-solid fa-file-arrow-down fs-2 text-white"></i>
+                        </a>
+                        <a href="" class="link-dark px-5">
+                            <i class="fa-solid fa-trash-can fs-2 text-white"></i>
+                        </a>
+                    </div>
+
                 </div>
+
             @endforeach
         </div>
 

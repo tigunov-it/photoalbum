@@ -61,19 +61,20 @@ class AlbumsController extends Controller
             'image' => ''
         ]);
 
-
-//TODO Уменьшить размер обложки для альбома
-
-
         $user = Auth::user();
         $albumForUpload = \DB::select("select created_at from albums where id = {$album->id}");
         $albumCreatedAt = str_replace(" ", "_", implode(" ", array_column($albumForUpload, 'created_at')));
-        $imagePath = request('image')->store("uploads/{$user->username}/{$albumCreatedAt}/cover", 's3');
+
+        ############################# Делаем обложку альбома малого размера
+        $imagePathSmallLocal = request('image')->store("uploads/{$user->username}/{$albumCreatedAt}/cover/", 'public');
+        $image = Image::make(public_path("storage/{$imagePathSmallLocal}"))->fit(252, 252)->encode('jpg', 50);
+        Storage::disk('s3')->put("uploads/{$user->username}/{$albumCreatedAt}/cover/{$image->basename}", $image);
+        unlink("storage/{$imagePathSmallLocal}"); // Удаляю локальный файл после обработки и загрузки в S3
 
         $album->update([
             'title' => $data['title'],
             'description' => $data['description'],
-            'image' => $imagePath
+            'image' => $imagePathSmallLocal
         ]);
 
         return redirect('/a/' . auth()->user()->id);
