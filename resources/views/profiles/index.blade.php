@@ -64,21 +64,57 @@
         </div>
 
         <div class="row mt-5">
+
             @foreach($posts as $post)
-                <div class="col-lg-4">
-                    <a data-fancybox="gallery"
-                       data-thumb="{{ env('APP_URL') }}/s3small/{{ $user->id }}/{{ $post->id }}"
-                       data-download-src="{{ env('APP_URL') }}/s3large/{{ $user->id }}/{{ $post->id }}"
-                       href="{{ env('APP_URL') }}/s3large/{{ $user->id }}/{{ $post->id }}">
-                        <div class="mb-4"
-                             style="height: 300px; background-image: url('{{ env('APP_URL') }}/s3medium/{{ $user->id }}/{{ $post->id }}');  background-size: cover;">
-                        </div>
+            <div class="col-lg-4 card-image mb-4">
+
+                <a data-fancybox="gallery"
+                   data-thumb="{{ env('APP_URL') }}/s3small/{{ $user->id }}/{{ $post->id }}"
+                   data-download-src="{{ env('APP_URL') }}/s3large/{{ $user->id }}/{{ $post->id }}"
+                   href="{{ env('APP_URL') }}/s3large/{{ $user->id }}/{{ $post->id }}">
+
+                    <div class="flex-column"
+                         style="height: 300px; background-image: url('{{ env('APP_URL') }}/s3medium/{{ $user->id }}/{{ $post->id }}');  background-size: cover;">
+                    </div>
+
+                </a>
+
+                <div class="card-image-icons d-flex w-100 justify-content-center">
+                    <a href="/p/{{ $user->id }}/{{ $post->id }}" class="link-dark px-5">
+                        <i class="fa-solid fa-info fs-2 text-white"></i>
+                    </a>
+                    <a href="{{ $user->id }}/{{ $post->id }}" class="link-dark px-5">
+                        <i class="fa-solid fa-file-arrow-down fs-2 text-white"></i>
+                    </a>
+                    <a href="{{ route('post.destroy', ['post' => $post->id]) }}" class="link-dark px-5">
+                        <i class="fa-solid fa-trash-can fs-2 text-white"></i>
                     </a>
                 </div>
+
+            </div>
+
             @endforeach
         </div>
 
-        {{ $posts->links() }}
+
+{{--        <div class="row mt-5">--}}
+{{--            @foreach($posts as $post)--}}
+{{--                <div class="col-lg-4">--}}
+{{--                    <a data-fancybox="gallery"--}}
+{{--                       data-thumb="{{ env('APP_URL') }}/s3small/{{ $user->id }}/{{ $post->id }}"--}}
+{{--                       data-download-src="{{ env('APP_URL') }}/s3large/{{ $user->id }}/{{ $post->id }}"--}}
+{{--                       href="{{ env('APP_URL') }}/s3large/{{ $user->id }}/{{ $post->id }}">--}}
+{{--                        --}}
+{{--                        <div class="mb-4 flex-column"--}}
+{{--                             style="height: 300px; background-image: url('{{ env('APP_URL') }}/s3medium/{{ $user->id }}/{{ $post->id }}');  background-size: cover;">--}}
+{{--                        </div>--}}
+
+{{--                    </a>--}}
+{{--                </div>--}}
+{{--            @endforeach--}}
+{{--        </div>--}}
+
+{{--        {{ $posts->links() }}--}}
 
     </div>
 

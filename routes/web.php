@@ -34,7 +34,9 @@ Route::get('/s3small/{user}/{post}', [PostsController::class, 'getSmallImageFrom
 Route::get('/s3medium/{user}/{post}', [PostsController::class, 'getMediumImageFromS3'])->name('post.getMediumFromS3');
 Route::get('/s3large/{user}/{post}', [PostsController::class, 'getLargeImageFromS3'])->name('post.getLargeFromS3');
 Route::get('/s3full/{user}/{post}', [PostsController::class, 'getFullImageFromS3'])->name('post.getFullFromS3');
-Route::delete('/p/{post}', [PostsController::class, 'destroy'])->name('post.destroy');
+Route::match(['get', 'delete'],'/p/{post}', [PostsController::class, 'destroy'])->name('post.destroy');
+//Route::delete('/p/{post}', [PostsController::class, 'destroy'])->name('post.destroy');
+
 
 //TODO: Настроить rotate
 Route::get('{post}', [ImageController::class, 'rotate'])->name('post.rotate');

@@ -11329,3 +11329,15 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+.card-image {
+  position: relative;
+}
+
+.card-image-icons {
+  margin-top: -40px;
+  opacity: 0;
+}
+
+.card-image:hover .card-image-icons {
+  opacity: 1;
+}
