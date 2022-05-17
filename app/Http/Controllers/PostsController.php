@@ -50,19 +50,19 @@ class PostsController extends Controller
         foreach (request('image') as $file) {
 
  ############################  Модерация
-            $imageForAnalise = fopen($file, 'r');
-            $bytes = fread($imageForAnalise, filesize($file));
-            $results = $client->detectModerationLabels([
-                'Image' => ['Bytes' => $bytes],
-                'MinConfidence' => 50
-            ]);
-            $resultLabels = $results->get('ModerationLabels');
-
-            $banned = implode(", ",array_column($resultLabels, 'Name'));
-
-            if(!empty($resultLabels)){
-                return redirect()->back()->withErrors(['Banned_content' => 'The image contained Prohibited Content ' . '(' . $banned . ')']);
-            };
+//            $imageForAnalise = fopen($file, 'r');
+//            $bytes = fread($imageForAnalise, filesize($file));
+//            $results = $client->detectModerationLabels([
+//                'Image' => ['Bytes' => $bytes],
+//                'MinConfidence' => 50
+//            ]);
+//            $resultLabels = $results->get('ModerationLabels');
+//
+//            $banned = implode(", ",array_column($resultLabels, 'Name'));
+//
+//            if(!empty($resultLabels)){
+//                return redirect()->back()->withErrors(['Banned_content' => 'The image contained Prohibited Content ' . '(' . $banned . ')']);
+//            };
  ############################  Модерация
 
             $user = Auth::user();
@@ -74,29 +74,34 @@ class PostsController extends Controller
 
 ############################# Делаем картинку малого размера
             $imagePathSmallLocal = $file->store("uploads/{$user->username}/{$albumCreatedAt}/small/", 'public');
-            $image = Image::make(public_path("storage/{$imagePathSmallLocal}"))->fit(400, 267)->encode('jpg', 30);
+//            $image = Image::make(public_path("storage/{$imagePathSmallLocal}"))->fit(400, 267)->encode('jpg', 30);
+            $image = Image::make(public_path("storage/{$imagePathSmallLocal}"))->resize(400, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->encode('jpg', 30);
             Storage::disk('s3')->put("uploads/{$user->username}/{$albumCreatedAt}/small/{$image->basename}", $image);
             unlink("storage/{$imagePathSmallLocal}"); // Удаляю локальный файл после обработки и загрузки в S3
             $imagePathSmall = substr_replace($imagePath, '/small', 8+strlen($user->username)+strlen($albumCreatedAt)+1, 0);
 
 ############################# Делаем картинку среднего размера
             $imagePathMediumlLocal = $file->store("uploads/{$user->username}/{$albumCreatedAt}/medium/", 'public');
-            $image = Image::make(public_path("storage/{$imagePathMediumlLocal}"))->fit(800, 533)->encode('jpg', 30);
+//            $image = Image::make(public_path("storage/{$imagePathMediumlLocal}"))->fit(800, 533)->encode('jpg', 30);
+            $image = Image::make(public_path("storage/{$imagePathMediumlLocal}"))->resize(800, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->encode('jpg', 50);
             Storage::disk('s3')->put("uploads/{$user->username}/{$albumCreatedAt}/medium/{$image->basename}", $image);
             unlink("storage/{$imagePathMediumlLocal}"); // Удаляю локальный файл после обработки и загрузки в S3
             $imagePathMedium = substr_replace($imagePath, '/medium', 8+strlen($user->username)+strlen($albumCreatedAt)+1, 0);
 
 ############################# Делаем картинку большого размера
             $imagePathLargelLocal = $file->store("uploads/{$user->username}/{$albumCreatedAt}/large/", 'public');
-            $image = Image::make(public_path("storage/{$imagePathLargelLocal}"))->fit(2048, 1365)->encode('jpg', 90);
+//            $image = Image::make(public_path("storage/{$imagePathLargelLocal}"))->fit(2048, 1365)->encode('jpg', 90);
+            $image = Image::make(public_path("storage/{$imagePathLargelLocal}"))->resize(2048, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->encode('jpg', 80);
             Storage::disk('s3')->put("uploads/{$user->username}/{$albumCreatedAt}/large/{$image->basename}", $image);
             unlink("storage/{$imagePathLargelLocal}"); // Удаляю локальный файл после обработки и загрузки в S3
+
             $imagePathLarge = substr_replace($imagePath, '/large', 8+strlen($user->username)+strlen($albumCreatedAt)+1, 0);
-
-//            $image = Image::make(public_path("storage/{$imagePath}"))->encode('jpg', 30);
-//            $image = Image::make(public_path("storage/{$imagePath}"))->fit(1024, 768)->encode('jpg', 30);
-//            $image->save();
-
 
             auth()->user()->posts()->create([
                 'title' => $data['title'],
@@ -112,7 +117,6 @@ class PostsController extends Controller
 
         return redirect('/profile/' . auth()->user()->id);
     }
-
 
     public function show(User $user, Post $post)
     {
@@ -162,7 +166,9 @@ class PostsController extends Controller
         $post->delete();
         Storage::disk('s3')->delete("{$post->image}");
         Storage::disk('s3')->delete("{$post->image_small}");
-        return redirect('/');
+        Storage::disk('s3')->delete("{$post->image_medium}");
+        Storage::disk('s3')->delete("{$post->image_large}");
+        return redirect("{$_SERVER [ "HTTP_REFERER" ]}");
     }
 
 }
