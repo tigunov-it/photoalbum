@@ -5,15 +5,9 @@
 
         <div class="row border-bottom pb-3 d-flex align-items-center">
 
-            <div class="col-lg-2">
-                <img src="{{ $user->profile->profileImage()}}" alt="" class="rounded-circle">
-            </div>
+            <div class="col-sm-2 d-flex flex-column align-items-center">
+                <img src="{{ $user->profile->profileImage()}}" alt="" class="w-75 rounded-circle">
 
-            <div class="col-lg-5">
-                <h1>{{ $user->username }}</h1>
-                <h2>{{ $user->profile->title }}</h2>
-                <h3>{{ $user->profile->description }}</h3>
-                <a href="#">{{$user->profile->url }}</a>
                 <div class="pt-1">
                     @can('update', $user->profile)
                         <a href="/profile/{{$user->id}}/edit">
@@ -24,7 +18,15 @@
 
             </div>
 
-            <div class="col-lg-2 d-flex justify-content-center align-items-baseline">
+            <div class="col-md-4">
+                <h1>{{ $user->username }}</h1>
+                <h2>{{ $user->profile->title }}</h2>
+                <h3>{{ $user->profile->description }}</h3>
+                <a href="#">{{$user->profile->url }}</a>
+
+            </div>
+
+            <div class="col-lg-2 pt-2 d-flex justify-content-center align-items-baseline">
 
                 @can('update', $user->profile)
                     <a href="/p/create">
@@ -34,7 +36,7 @@
 
             </div>
 
-            <div class="col-lg-2 d-flex justify-content-center align-items-baseline">
+            <div class="col-lg-2 pt-2 d-flex justify-content-center align-items-baseline">
 
                 @can('update', $user->profile)
                     <a href="/a/create">

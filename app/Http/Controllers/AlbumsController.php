@@ -67,7 +67,7 @@ class AlbumsController extends Controller
 
         ############################# Делаем обложку альбома малого размера
         $imagePathSmallLocal = request('image')->store("uploads/{$user->username}/{$albumCreatedAt}/cover/", 'public');
-        $image = Image::make(public_path("storage/{$imagePathSmallLocal}"))->fit(200, 200)->encode('jpg', 50);
+        $image = Image::make(public_path("storage/{$imagePathSmallLocal}"))->fit(252, 252)->encode('jpg', 50);
         Storage::disk('s3')->put("uploads/{$user->username}/{$albumCreatedAt}/cover/{$image->basename}", $image);
         unlink("storage/{$imagePathSmallLocal}"); // Удаляю локальный файл после обработки и загрузки в S3
 
