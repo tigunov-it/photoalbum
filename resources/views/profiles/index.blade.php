@@ -65,7 +65,7 @@
         <div class="row mt-5">
 
             @foreach($posts as $post)
-            <div class="col-lg-4 card-image mb-4">
+            <div class="col card-image mb-4">
 
                 <a data-fancybox="gallery"
                    data-thumb="{{ env('APP_URL') }}/s3small/{{ $user->id }}/{{ $post->id }}"
