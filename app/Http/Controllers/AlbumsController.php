@@ -86,7 +86,10 @@ class AlbumsController extends Controller
     {
         $this->authorize('update', $user->profile);
 
-        return Storage::disk('s3')->response("{$album->image}");
+        $content = Storage::disk('s3')->get($album->image);
+        return response($content)->header('Content-Type', 'image/jpeg');
+
+//        return Storage::disk('s3')->response("{$album->image}");
 
     }
 

@@ -6,8 +6,6 @@ use App\Models\Album;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
-use Intervention\Image\Image;
-use League\Flysystem\Filesystem;
 
 class ImageController extends Controller
 {
