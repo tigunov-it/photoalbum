@@ -82,7 +82,7 @@
                         <a href="" class="link-dark px-5">
                             <i class="fa-solid fa-info fs-2 text-white"></i>
                         </a>
-                        <a href="" class="link-dark px-5">
+                        <a href="/downloadzip/{{ $user->id }}/{{ $album->id }}" class="link-dark px-5">
                             <i class="fa-solid fa-file-arrow-down fs-2 text-white"></i>
                         </a>
                         <a href="" class="link-dark px-5">

@@ -37,6 +37,8 @@ Route::get('/s3full/{user}/{post}', [PostsController::class, 'getFullImageFromS3
 Route::match(['get', 'delete'],'/p/{post}', [PostsController::class, 'destroy'])->name('post.destroy');
 //Route::delete('/p/{post}', [PostsController::class, 'destroy'])->name('post.destroy');
 
+Route::get('/download/{user}/{post}', [ImageController::class, 'download'])->name('image.download');
+
 
 //TODO: Настроить rotate
 Route::get('{post}', [ImageController::class, 'rotate'])->name('post.rotate');
@@ -47,11 +49,10 @@ Route::post('/a', [AlbumsController::class, 'store']);
 Route::get('/a/{user}', [AlbumsController::class, 'index'])->name('albums.index');
 Route::get('/a/{user}/{album}', [AlbumsController::class, 'show'])->name('albums.show');
 Route::get('/s3album/{user}/{album}', [AlbumsController::class, 'getCoverFromS3'])->name('album.getCoverFromS3');
-
+Route::get('/downloadzip/{user}/{album}', [ImageController::class, 'downloadZip'])->name('album.downloadZip');
 
 Route::get('/profile/{user}', [ProfilesController::class, 'index'])->name('profile.show');
 Route::get('/profile/{user}/edit', [ProfilesController::class, 'edit'])->name('profile.edit');
 Route::patch('/profile/{user}', [ProfilesController::class, 'update'])->name('profile.update');
 Route::get('/s3avatar/{user}', [ProfilesController::class, 'getAvatarFromS3'])->name('profile.getAvatarFromS3');
-
 
