@@ -173,9 +173,9 @@
     </div>
 
     {{-- тоже ничего --}}
-    <div class="col-lg-2" style="width: 200px">
+    {{-- <div class="col-lg-2" style="width: 200px">
         <img src="{{ $user->profile->profileImage()}}" alt="" class="rounded-circle" style="height: 200px">
-    </div>
+    </div> --}}
 </div>
 @endsection
 
