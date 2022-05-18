@@ -1,3 +1,3 @@
 # photoalbum
 create frontend
-test deploy
+test deploy 2
