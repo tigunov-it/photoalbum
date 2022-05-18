@@ -133,10 +133,15 @@ class PostsController extends Controller
     {
         $this->authorize('update', $user->profile);
 
+
         $content = Storage::disk('s3')->get($post->image_small);
         return response($content)->header('Content-Type', 'image/jpeg');
 
 //        return Storage::disk('s3')->response("{$post->image_small}");
+
+
+        return Storage::disk('s3')->response("{$post->image_small}");
+
     }
 
     public function getMediumImageFromS3(User $user, Post $post)
