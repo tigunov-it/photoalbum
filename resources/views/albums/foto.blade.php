@@ -103,7 +103,7 @@
                             @enderror                                    
                             <div class="profile-form-div">
                                 <label for="album" >Выбор альбома:</label>
-                                <select class="select" aria-label="Default select example" name="album" size="2" multiple>
+                                <select class="select" aria-label="Default select example" name="album">
                                     @foreach($user->album as $album)
                                         <option value="{{ $album->id }}"> {{ $album->title }} </option>
                                     @endforeach
