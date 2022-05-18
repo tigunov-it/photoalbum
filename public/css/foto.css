@@ -6,10 +6,6 @@
     display: flex;
     justify-content: space-around;
 }
-.managment .profile-info{
-    margin: 0 10px;
-    max-width: 35%;
-}
 .managment .profile-foto{
     width: 100px;
     height: 100px;
@@ -18,15 +14,30 @@
     background-position: center;
     background-size: cover;
     border-radius: 50%;
-    margin: 0 10px;
+    margin-left: auto;
+    margin-right: auto;
 }
-.btn2{
-    height: 70px;
+.managment .nav-header-a{
+    margin-left: auto;
+    margin-right: auto;
+}
+.managment .nav-header-a:hover{
+    margin-left: auto;
+    margin-right: auto;
+}
+.managment .profile-info{
+    margin: 0 10px;
+    max-width: 35%;
+}
+.foto-form-add-albums .btn2{
+    height: 70px;    
+    margin-left: auto;
+    margin-right: auto;
 }
 /* форма */
 
 
-.profile-form{
+.foto-form-add-albums .profile-form{
     margin: 0 25px;
 }
 #profile-form-hider {

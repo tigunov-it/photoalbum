@@ -10,7 +10,7 @@
         <div>
             <div class="profile-foto" {{$url='https://mdbcdn.b-cdn.net/img/Photos/Slides/img%20(15).webp'}} style="background-image:url('{{$url}}')">
             </div>   
-            <a class="nav-header-a"  href="{{route ( 'profile.show', ['user'=>Auth::user()->id])}}"><mark>Страница профиля</mark></a>        
+            <a class="nav-header-a btn"  href="{{route ( 'profile.show', ['user'=>Auth::user()->id])}}">Страница профиля</a>        
         </div>
 
         <div class="profile-info" >
@@ -18,53 +18,57 @@
             {{-- <p><b>Логин:</b> {{ $user->profile->title }}</p> --}}
             <p><b>О себе:</b> {{ $user->profile->description }}</p>
         </div>
-        <div>  
+        <div class="foto-form-add-albums">  
             <label class="btn btn2" for="profile-form-hider" id="clickme"><b>Добавить альбом</b></label>
             {{-- форма редактирования --}}
-            {{-- НЕ РАБОТАЕТ?? --}}
             <div class="profile-form">
                 <input type="checkbox" id="profile-form-hider">
                 <div class="profile-form-edit">
-                    {{-- action={{asset("/a")}} может тут ч ет не то? --}}
                     <form action={{asset("/a")}} enctype="multipart/form-data" method="post">  
                         @csrf
-                        <div class="row">
-                            <div class="col-8 offset-2">
-                                <div class="row mb-3">
-                                    <label for="title" class="col-md-4 col-form-label">Название альбома</label>
-                                    <input id="title"
-                                        type="text"
-                                        class="form-control @error('title') is-invalid @enderror"
-                                        name="title"
-                                        value="{{ old('title') }}"
-                                        autocomplete="title">
-                                    @error('title')
-                                        <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-                                    @enderror
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="description" class="col-md-4 col-form-label">Описание альбома</label>
-                                    <input id="description"
-                                        type="text"
-                                        class="form-control @error('description') is-invalid @enderror"
-                                        name="description"
-                                        value="{{ old('description') }}"
-                                        autocomplete="description">
-                                    @error('description')
-                                        <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-                                    @enderror
-                                </div>
-                                <div class="row">
-                                    <label for="image" class="col-md-4 col-form-label">Фото на заставку</label>
-                                    <input type="file" class="form-control" id="image" name="image">
-                                    @error('image')
-                                        <strong>{{ $message }}</strong>
-                                    @enderror
-                                </div>
-                                <div class="row mt-5">
-                                    <button class="btn btn-primary">Создать альбом</button>
-                                </div>
-                            </div>
+                        <div class="row mb-3">
+                            <label for="title" class="col-md-4 col-form-label">Название альбома</label>
+                            <input id="title"
+                                type="text"
+                                class="form-control @error('title') is-invalid @enderror"
+                                name="title"
+                                value="{{ old('title') }}"
+                                autocomplete="title">
+
+                        </div>
+                        @error('title')
+                            <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                        @enderror
+                        <div class="row mb-3">
+                            <label for="description" class="col-md-4 col-form-label">Описание альбома</label>
+                            <input id="description"
+                                type="text"
+                                class="form-control @error('description') is-invalid @enderror"
+                                name="description"
+                                value="{{ old('description') }}"
+                                autocomplete="description">
+                        </div>
+                        @error('description')
+                            <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                        @enderror                                
+                        {{-- <div class="row">
+                            <label for="image" class="col-md-4 col-form-label">Фото на заставку</label>
+                            <input type="file" class="form-control" id="image" name="image">
+
+                        </div> --}}
+
+                        <div class="profile-form-div">
+                            <label for="image" class="btn">Выбрать фото на заставку</label>
+                            <input type="file" id="image" style="display:none;" name="image" accept="image/*,image/jpeg">
+                        </div>
+
+
+
+                        @error('image')
+                            <strong>{{ $message }}</strong>
+                        @enderror                                
+                        <div class="row mt-5">
+                            <button class="btn btn-primary">Создать альбом</button>
                         </div>
                     </form>
                 </div>
