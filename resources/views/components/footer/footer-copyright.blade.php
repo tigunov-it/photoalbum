@@ -3,7 +3,7 @@
         <h2 class="hide">Соцсети</h2>
         <p>
             <script>
-                document.write("Copyright &copy; " + new Date().getFullYear() + " PHOTOalbum. Все Права Защищены.");
+                document.write("Copyright &copy; " + new Date().getFullYear() + " PHOTOalbum. Все Права Запрещены.");
             </script>
         </p>
         <div class="footer-label">
