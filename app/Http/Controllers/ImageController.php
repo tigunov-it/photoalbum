@@ -2,38 +2,73 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Album;
 use App\Models\Post;
-use Aws\S3\Exception\S3Exception;
-use Aws\S3\MultipartCopy;
-use Aws\S3\S3Client;
-use Illuminate\Http\Request;
+use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Image;
-use PhpParser\Node\Expr\New_;
+use League\Flysystem\Filesystem;
 
 class ImageController extends Controller
 {
-    public function rotate(Post $post) {
+    public function rotate(Post $post)
+    {
 
         return 'rotate';
+    }
 
-//       $image = Storage::disk('s3')->get("{$post->image}");
+    public function download(User $user, Post $post)
+    {
 
-//        $s3 = new S3Client([
-//            'version' => 'latest',
-//            'region'  => 'us-east-1'
-//        ]);
-//
-//        $bucket = env('AWS_BUCKET');
-//        $keyname = $post->image;
-//
-//        $result = $s3->getObject([
-//            'Bucket' => $bucket,
-//            'Key'    => $keyname
-//        ]);
-//
-//        dd($result);
+        $this->authorize('update', $user->profile);
 
+        $filename = substr(strrchr($post->image, '/'), 1);
+
+        $headers = [
+            'Content-Type' => 'application/jpeg',
+            'Content-Disposition' => 'attachment; filename="' . $filename . '"',
+        ];
+
+        return \Response::make(Storage::disk('s3')->get($post->image), 200, $headers);
+    }
+
+
+    public function downloadZip(User $user, Album $album)
+    {
+
+        $album = \DB::select("select created_at from albums where id = {$album->id}");
+        $albumCreatedAt = str_replace(" ", "_", implode(" ", array_column($album, 'created_at')));
+        $directory = "uploads/{$user->username}/{$albumCreatedAt}/";
+
+        $file_names = Storage::disk('s3')->files($directory);
+
+        $zip_file = 'storage/forzip/album.zip';
+        $zip = new \ZipArchive();
+
+        $zip->open($zip_file, \ZipArchive::CREATE | \ZipArchive::OVERWRITE);
+
+        foreach ($file_names as $file_name) {
+
+            $file_content = Storage::disk('s3')->get($file_name);
+            $imagename = substr(strrchr($file_name, '/'), 1);
+            $s3 = Storage::disk('public');
+            $s3->put("/forzip/$imagename", $file_content);
+
+
+            $invoice_file = "storage/forzip/$imagename";
+            $zip->addFile(public_path($invoice_file), $imagename);
+
+        }
+
+        $zip->close();
+
+        $headers = [
+            'Content-Type' => 'application/zip',
+            'Content-Disposition' => 'attachment; filename="album.zip"',
+        ];
+
+        return \Response::make(Storage::disk('public')->get('forzip/album.zip'), 200, $headers);
 
     }
+
 }
