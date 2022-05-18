@@ -26,11 +26,11 @@
                 <div class="profile-form-edit">
                     <form action={{asset("/a")}} enctype="multipart/form-data" method="post">  
                         @csrf
-                        <div class="row mb-3">
-                            <label for="title" class="col-md-4 col-form-label">Название альбома</label>
+                        <div class="profile-form-div">
+                            <label for="title" class="col-md-4 col-form-label">Название альбома:</label>
                             <input id="title"
                                 type="text"
-                                class="form-control @error('title') is-invalid @enderror"
+                                class="input @error('title') is-invalid @enderror"
                                 name="title"
                                 value="{{ old('title') }}"
                                 autocomplete="title">
@@ -39,11 +39,11 @@
                         @error('title')
                             <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                         @enderror
-                        <div class="row mb-3">
-                            <label for="description" class="col-md-4 col-form-label">Описание альбома</label>
+                        <div class="profile-form-div">
+                            <label for="description" class="col-md-4 col-form-label">Описание альбома:</label>
                             <input id="description"
                                 type="text"
-                                class="form-control @error('description') is-invalid @enderror"
+                                class="input @error('description') is-invalid @enderror"
                                 name="description"
                                 value="{{ old('description') }}"
                                 autocomplete="description">
@@ -51,21 +51,12 @@
                         @error('description')
                             <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                         @enderror                                
-                        {{-- <div class="row">
-                            <label for="image" class="col-md-4 col-form-label">Фото на заставку</label>
-                            <input type="file" class="form-control" id="image" name="image">
-
-                        </div> --}}
-
                         <div class="profile-form-div">
-                            <label for="image" class="btn">Выбрать фото на заставку</label>
+                            <label for="image" class="btn label">Выбрать фото на заставку</label>
                             <input type="file" id="image" style="display:none;" name="image" accept="image/*,image/jpeg">
                         </div>
-
-
-
                         @error('image')
-                            <strong>{{ $message }}</strong>
+                            <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
                         @enderror                                
                         <div class="row mt-5">
                             <button class="btn btn-primary">Создать альбом</button>
