@@ -1,11 +1,16 @@
 .foto-albums{
-    background-color: rgb(0, 140, 255);
+    display: block;
+    width: 100%;
 }
-
-.profile-foto{
+.managment{
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-around;
+}
+.managment .profile-info{
+    margin: 0 10px;
+    max-width: 35%;
+}
+.managment .profile-foto{
     width: 100px;
     height: 100px;
     background-size: cover;
@@ -14,6 +19,9 @@
     background-size: cover;
     border-radius: 50%;
     margin: 0 10px;
+}
+.btn2{
+    height: 70px;
 }
 /* форма */
 
@@ -69,4 +77,12 @@
 }
 #profile-form-foto-hider:checked + .profile-form-edit {
     display: block;
+}
+
+.foto-view{
+    display: flex;
+    justify-content: space-around;
+}
+.foto-albums-hr{
+    margin: 10px 35px;
 }
