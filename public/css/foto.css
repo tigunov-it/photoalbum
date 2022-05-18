@@ -27,7 +27,7 @@
 }
 .managment .profile-info{
     margin: 0 10px;
-    max-width: 35%;
+    max-width: 30%;
 }
 .btn2{
     height: 70px;    
@@ -35,7 +35,7 @@
 /* форма */
 
 
-.foto-form-add-albums .profile-form{
+.profile-form{
     margin: 0 25px;
 }
 #profile-form-hider {
@@ -53,6 +53,11 @@
     justify-content: space-between;
     align-items: center;
     margin: 5px 0;
+}
+.profile-form .profile-form-edit .profile-form-div-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .profile-form .profile-form-edit .profile-form-div .input{
     width: 75px;
@@ -74,16 +79,29 @@ margin: 0;
     margin-top: 10px;
 }
 /* форма для фото */
-.profile-form{
-    margin: 0 25px;
-}
 #profile-form-foto-hider {
     display: none;
 }
 #profile-form-foto-hider:checked + .profile-form-edit {
     display: block;
 }
+.foto-form-add-foto .profile-form-edit .profile-form-div .select{
+    width: 90px;
+    height: 26px;
+    border-radius: 3px;
+    outline: none;
+    background: transparent;
+    border: 2px solid #22272d;
+    padding-left: 10px;
+    color: black;
+    margin-left: 5px;
+}
+.foto-form-add-foto .profile-form-edit .foto-add{
+    margin-top: 25px;
+}
 
+
+/* навигация просмотр фото */
 .foto-view{
     display: flex;
     justify-content: space-around;
