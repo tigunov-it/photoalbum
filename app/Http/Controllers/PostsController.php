@@ -49,7 +49,7 @@ class PostsController extends Controller
 
         foreach (request('image') as $file) {
 
- ############################  Модерация
+            ############################  Модерация
 //            $imageForAnalise = fopen($file, 'r');
 //            $bytes = fread($imageForAnalise, filesize($file));
 //            $results = $client->detectModerationLabels([
@@ -63,7 +63,7 @@ class PostsController extends Controller
 //            if(!empty($resultLabels)){
 //                return redirect()->back()->withErrors(['Banned_content' => 'The image contained Prohibited Content ' . '(' . $banned . ')']);
 //            };
- ############################  Модерация
+            ############################  Модерация
 
             $user = Auth::user();
             $album = \DB::select("select created_at from albums where id = {$data['album']}");
@@ -80,7 +80,7 @@ class PostsController extends Controller
             })->encode('jpg', 30);
             Storage::disk('s3')->put("uploads/{$user->username}/{$albumCreatedAt}/small/{$image->basename}", $image);
             unlink("storage/{$imagePathSmallLocal}"); // Удаляю локальный файл после обработки и загрузки в S3
-            $imagePathSmall = substr_replace($imagePath, '/small', 8+strlen($user->username)+strlen($albumCreatedAt)+1, 0);
+            $imagePathSmall = substr_replace($imagePath, '/small', 8 + strlen($user->username) + strlen($albumCreatedAt) + 1, 0);
 
 ############################# Делаем картинку среднего размера
             $imagePathMediumlLocal = $file->store("uploads/{$user->username}/{$albumCreatedAt}/medium/", 'public');
@@ -90,7 +90,7 @@ class PostsController extends Controller
             })->encode('jpg', 50);
             Storage::disk('s3')->put("uploads/{$user->username}/{$albumCreatedAt}/medium/{$image->basename}", $image);
             unlink("storage/{$imagePathMediumlLocal}"); // Удаляю локальный файл после обработки и загрузки в S3
-            $imagePathMedium = substr_replace($imagePath, '/medium', 8+strlen($user->username)+strlen($albumCreatedAt)+1, 0);
+            $imagePathMedium = substr_replace($imagePath, '/medium', 8 + strlen($user->username) + strlen($albumCreatedAt) + 1, 0);
 
 ############################# Делаем картинку большого размера
             $imagePathLargelLocal = $file->store("uploads/{$user->username}/{$albumCreatedAt}/large/", 'public');
@@ -101,7 +101,7 @@ class PostsController extends Controller
             Storage::disk('s3')->put("uploads/{$user->username}/{$albumCreatedAt}/large/{$image->basename}", $image);
             unlink("storage/{$imagePathLargelLocal}"); // Удаляю локальный файл после обработки и загрузки в S3
 
-            $imagePathLarge = substr_replace($imagePath, '/large', 8+strlen($user->username)+strlen($albumCreatedAt)+1, 0);
+            $imagePathLarge = substr_replace($imagePath, '/large', 8 + strlen($user->username) + strlen($albumCreatedAt) + 1, 0);
 
             auth()->user()->posts()->create([
                 'title' => $data['title'],
@@ -134,15 +134,28 @@ class PostsController extends Controller
         $this->authorize('update', $user->profile);
 
 
+        $content = Storage::disk('s3')->get($post->image_small);
+        return response($content)->header('Content-Type', 'image/jpeg');
+
+//        return Storage::disk('s3')->response("{$post->image_small}");
+
+
         return Storage::disk('s3')->response("{$post->image_small}");
+
     }
 
     public function getMediumImageFromS3(User $user, Post $post)
 
     {
+
         $this->authorize('update', $user->profile);
 
-        return Storage::disk('s3')->response("{$post->image_medium}");
+        $content = Storage::disk('s3')->get($post->image_medium);
+        return response($content)->header('Content-Type', 'image/jpeg');
+
+//        return Storage::disk('s3')->response("{$post->image_medium}");
+
+
     }
 
     public function getLargeImageFromS3(User $user, Post $post)
@@ -150,7 +163,11 @@ class PostsController extends Controller
     {
         $this->authorize('update', $user->profile);
 
-        return Storage::disk('s3')->response("{$post->image_large}");
+        $content = Storage::disk('s3')->get($post->image_large);
+        return response($content)->header('Content-Type', 'image/jpeg');
+
+//        return Storage::disk('s3')->response("{$post->image_large}");
+
     }
 
     public function getFullImageFromS3(User $user, Post $post)
@@ -158,7 +175,10 @@ class PostsController extends Controller
     {
         $this->authorize('update', $user->profile);
 
-        return Storage::disk('s3')->response("{$post->image}");
+        $content = Storage::disk('s3')->get($post->image);
+        return response($content)->header('Content-Type', 'image/jpeg');
+
+//        return Storage::disk('s3')->response("{$post->image}");
     }
 
 
