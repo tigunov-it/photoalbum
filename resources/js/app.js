@@ -37,5 +37,5 @@ require('./mdb.min');
 
 require('./fancybox.esm');
 
-
+require('./masonry');
 

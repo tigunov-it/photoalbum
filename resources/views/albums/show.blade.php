@@ -64,19 +64,17 @@
 
         <h1 class="card-title">Album: {{ $album->title }}</h1>
 
-        <div class="row mt-5">
+        <div class="grid mt-5">
 
             @foreach($posts as $post)
-                <div class="col card-image mb-4">
+                <div class="card-image mb-4">
 
                     <a data-fancybox="gallery"
                        data-thumb="{{ env('APP_URL') }}/s3small/{{ $user->id }}/{{ $post->id }}"
                        data-download-src="{{ env('APP_URL') }}/s3large/{{ $user->id }}/{{ $post->id }}"
                        href="{{ env('APP_URL') }}/s3large/{{ $user->id }}/{{ $post->id }}">
 
-                        <div class="flex-column"
-                             style="height: 300px; background-image: url('{{ env('APP_URL') }}/s3medium/{{ $user->id }}/{{ $post->id }}');  background-size: cover;">
-                        </div>
+                        <img src="{{ env('APP_URL') }}/s3medium/{{ $user->id }}/{{ $post->id }}" alt="">
 
                     </a>
 
@@ -84,7 +82,7 @@
                         <a href="/p/{{ $user->id }}/{{ $post->id }}" class="link-dark px-5">
                             <i class="fa-solid fa-info fs-2 text-white"></i>
                         </a>
-                        <a href="{{ $user->id }}/{{ $post->id }}" class="link-dark px-5">
+                        <a href="/download/{{ $user->id }}/{{ $post->id }}" class="link-dark px-5">
                             <i class="fa-solid fa-file-arrow-down fs-2 text-white"></i>
                         </a>
                         <a href="{{ route('post.destroy', ['post' => $post->id]) }}" class="link-dark px-5">
