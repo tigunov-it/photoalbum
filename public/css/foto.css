@@ -1,12 +1,3 @@
-/* просмотр альбомов */
-.foto-albums .view{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap:wrap;
-    width: 100%;
-}
-
 .foto-albums{
     display: block;
     width: 100%;
@@ -117,6 +108,10 @@ margin: 0;
 
 .foto-albums-hr{
     margin: 10px 35px;
+}
+.foto-albums-view-albums{
+    display: flex;
+    justify-content: space-between;
 }
 
 /* .foto-albums-view .foto-albums-view-albums{
