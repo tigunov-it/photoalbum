@@ -139,7 +139,7 @@
     <hr class="foto-albums-hr">
     <div class="foto-albums-view-albums">
         @foreach($user->album as $album)
-            <a href="{{ asset(/a/{{ $user->id }}/{{ $album->id }})}}">
+            <a href="{{asset("/a/ $user->id / $album->id" )}}">
                 <div class="foto-albums-album" style="background-image: url('/storage/{{ $album->image }}');">
                     <p class="p">{{ $album->title }}</p>
                 </div>
