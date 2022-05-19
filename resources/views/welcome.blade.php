@@ -2,9 +2,10 @@
 
 @section('content')
 
+    <h1>FRONT 2</h1>
+
     <!-- Carousel wrapper -->
     <div id="carouselBasicExample" class="carousel slide carousel-fade" data-mdb-ride="carousel">
-
         <!-- Indicators -->
 {{--        <div class="carousel-indicators">--}}
 {{--            <button--}}
