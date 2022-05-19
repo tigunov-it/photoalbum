@@ -145,9 +145,8 @@
                     <p class="p">{{ $album->title }}</p>
                 </div>
             </a>
-        @endforeach
+        @endforeach 
     </div>
-
     {{-- профиль--}}
     {{-- <div class="col-lg-2" style="width: 200px">
         <img src="{{ $user->profile->profileImage()}}" alt="" class="rounded-circle" style="height: 200px">
