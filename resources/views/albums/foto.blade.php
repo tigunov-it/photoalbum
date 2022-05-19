@@ -138,7 +138,7 @@
     </div>
     <hr class="foto-albums-hr">
     {{-- вывод альбомов --}}
-    <div class="foto-view">
+    <div class="view">
         {{-- @foreach($user->album as $album)
             <a href="/a/{{ $user->id }}/{{ $album->id }}">
                 <div class="foto-albums-view-albums" style="background-image: url('/storage/{{ $album->image }}');">
