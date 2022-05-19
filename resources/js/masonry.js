@@ -5,7 +5,7 @@ window.onload = () => {
 
     const masonry = new Masonry(grid, {
         itemSelector: '.card-image',
-        gutter: 10
+        gutter: 10,
     });
 
 
