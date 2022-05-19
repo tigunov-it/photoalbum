@@ -119,10 +119,12 @@ margin: 0;
     height: 200px;
     background-size: cover;
     width: 300px;
-    margin: 0 5px;
+    margin:5px;
     text-align: center;
 }
 .foto-albums-view-albums .foto-albums-album .p{
     color: white;
     background: gray;
-} 
+    margin: 0 40px;
+}
+
