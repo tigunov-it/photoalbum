@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <h1>FRONT 2</h1>
+    <h1>FRONT 2 test Deploy</h1>
 
     <!-- Carousel wrapper -->
     <div id="carouselBasicExample" class="carousel slide carousel-fade" data-mdb-ride="carousel">
