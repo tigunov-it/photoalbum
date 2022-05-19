@@ -1,5 +1,9 @@
 .card-image {
     position: relative;
+    width: 400px;
+    img {
+        width: 100%;
+    }
 }
 
 .card-image:nth-child(1):hover {

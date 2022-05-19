@@ -11331,6 +11331,10 @@ textarea.form-control-lg {
 }
 .card-image {
   position: relative;
+  width: 400px;
+}
+.card-image img {
+  width: 100%;
 }
 
 .card-image-icons {

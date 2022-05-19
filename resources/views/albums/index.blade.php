@@ -68,7 +68,6 @@
 
                 <div class="card-image col mt-4">
 
-
                         <a href="/a/{{ $user->id }}/{{ $album->id }}">
                             <div class="d-flex justify-content-center align-items-end"
                                  style="height: 252px; background-image: url('{{ env('APP_URL') }}/s3album/{{ $user->id }}/{{ $album->id }}');  background-size: cover;">
