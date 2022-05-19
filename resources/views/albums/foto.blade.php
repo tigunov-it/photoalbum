@@ -140,7 +140,7 @@
     <div class="foto-albums-view-albums">
         @foreach($user->album as $album)
             <a href="/a/{{ $user->id }}/{{ $album->id }}">
-                <div class="foto-albums-view-albums" style="background-image: url('/storage/{{ $album->image }}');">
+                <div class="foto-albums-album" style="background-image: url('/storage/{{ $album->image }}');">
                     <p class="p">{{ $album->title }}</p>
                 </div>
             </a>

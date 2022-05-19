@@ -112,12 +112,12 @@ margin: 0;
 .foto-albums-view-albums{
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
-
-/* .foto-albums-view .foto-albums-view-albums{
-    height: 300px;
+.foto-albums-view-albums .foto-albums-album{
+        height: 300px;
     background-size: cover;
 }
 .foto-albums-view .foto-albums-view-albums .p{
     color: aqua;
-} */
+} 
