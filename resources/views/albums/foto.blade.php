@@ -137,7 +137,9 @@
         <a class="nav-link" href="{{route('albums.showFoto', ['user'=>Auth::user()->id])}}">Фотоальбом</a>
     </div>
     <hr class="foto-albums-hr">
-    {{-- вывод альбомов --}}
+    <div class="foto-albums-view-albums">
+        чето
+    </div>
     <div class="view">
         {{-- @foreach($user->album as $album)
             <a href="/a/{{ $user->id }}/{{ $album->id }}">
