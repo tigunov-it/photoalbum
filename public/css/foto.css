@@ -105,9 +105,6 @@ margin: 0;
     display: flex;
     justify-content: space-around;
 }
-.foto-albums-hr{
-    margin: 10px 35px;
-}
 /* просмотр альбомов */
 .foto-albums .view{
     display: flex;
@@ -116,6 +113,10 @@ margin: 0;
     flex-wrap:wrap;
     width: 100%;
 }
+.foto-albums-hr{
+    margin: 10px 35px;
+}
+
 /* .foto-albums-view .foto-albums-view-albums{
     height: 300px;
     background-size: cover;
