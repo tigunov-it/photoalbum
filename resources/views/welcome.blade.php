@@ -71,7 +71,7 @@
                     <div class="text-white mb-8">
                         <h1 class="mb-3">Let your imagination run riot</h1>
                         <h4 class="mb-3">Magic touch</h4>
-                        <a class="btn btn-outline-light btn-lg" href="http://photoalbum.test/login" role="button"
+                        <a class="btn btn-outline-light btn-lg" href="{{ env('APP_URL') . '/login' }}" role="button"
                         >Start for free</a
                         >
                     </div>
@@ -80,6 +80,7 @@
             </div>
         </div>
         <!-- Inner -->
+
 
         <!-- Controls -->
         <button class="carousel-control-prev" type="button" data-mdb-target="#carouselBasicExample" data-mdb-slide="prev">
