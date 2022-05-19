@@ -133,8 +133,8 @@
     </div> 
     <hr>
     <div class="foto-view">
+        <a class="nav-link" href="{{route('albums.showFoto', ['user'=>Auth::user()->id])}}">Фотоальбомы</a>
         <a class="nav-link" href="{{route('albums.showFoto', ['user'=>Auth::user()->id])}}">Все фото</a>
-        <a class="nav-link" href="{{route('albums.showFoto', ['user'=>Auth::user()->id])}}">Фотоальбом</a>
     </div>
     <hr class="foto-albums-hr">
     <div class="foto-albums-view-albums">

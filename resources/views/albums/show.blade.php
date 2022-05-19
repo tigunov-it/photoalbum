@@ -7,7 +7,7 @@
 
         <div class="row mt-5">
 чето в цикле
-            <div class="row mt-5">
+            <div style="display: flex">
                 @foreach($posts as $post)
                     <div class="col-lg-4">
                         <a data-fancybox="gallery" data-thumb="{{ env('APP_URL') }}/s3/{{ $user->id }}/{{ $post->id }}" href="{{ env('APP_URL') }}/s3full/{{ $user->id }}/{{ $post->id }}">
@@ -20,6 +20,7 @@
             </div>
 конец цикла
             {{ $posts->links() }}
+            <br>
 еще цикл
            @foreach($posts as $post)
                <div class="col-sm-4">
