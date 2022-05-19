@@ -115,7 +115,7 @@
                             </span>
                         @enderror 
                         <div class="profile-form-div foto-add">
-                            <label for="image" class="btn label">Выбрать фото на заставку</label>
+                            <label for="image" class="btn label">Выбрать фото</label>
                             <input type="file" id="image" multiple style="display:none;" name="image[]" accept="image/*,image/jpeg">
                         </div>                                   
                         @error('image')
