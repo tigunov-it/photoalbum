@@ -81,7 +81,6 @@
         </div>
         <!-- Inner -->
 
-
         <!-- Controls -->
         <button class="carousel-control-prev" type="button" data-mdb-target="#carouselBasicExample" data-mdb-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
