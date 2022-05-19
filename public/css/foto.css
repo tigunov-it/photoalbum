@@ -109,7 +109,7 @@ margin: 0;
     margin: 10px 35px;
 }
 /* просмотр альбомов */
-.foto-albums-view{
+.foto-albums-views{
     display: flex;
     justify-content: space-between;
     align-items: center;
