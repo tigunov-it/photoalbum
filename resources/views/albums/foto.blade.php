@@ -138,16 +138,13 @@
     </div>
     <hr class="foto-albums-hr">
     <div class="foto-albums-view-albums">
-        чето
-    </div>
-    <div class="view">
-        {{-- @foreach($user->album as $album)
+        @foreach($user->album as $album)
             <a href="/a/{{ $user->id }}/{{ $album->id }}">
                 <div class="foto-albums-view-albums" style="background-image: url('/storage/{{ $album->image }}');">
                     <p class="p">{{ $album->title }}</p>
                 </div>
             </a>
-        @endforeach  --}}
+        @endforeach        
     </div>
     {{-- профиль--}}
     {{-- <div class="col-lg-2" style="width: 200px">
