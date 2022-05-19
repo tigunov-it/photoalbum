@@ -701,7 +701,7 @@ progress {
 }
 @media (min-width: 1400px) {
   .container-xxl, .container-xl, .container-lg, .container-md, .container-sm, .container {
-    max-width: 1320px;
+    max-width: 1590px;
   }
 }
 .row {
@@ -11331,7 +11331,7 @@ textarea.form-control-lg {
 }
 .card-image {
   position: relative;
-  width: 400px;
+  width: 350px;
 }
 .card-image img {
   width: 100%;

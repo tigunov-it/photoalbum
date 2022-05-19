@@ -1,46 +1,49 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
 
-        <div class="row border-bottom pb-3 d-flex align-items-center">
+    <div class="container-fluid">
 
-            <div class="col-sm-2 d-flex flex-column align-items-center">
-                <img src="{{ $user->profile->profileImage()}}" alt="" class="w-75 rounded-circle">
+        <div class="row border-bottom pb-3 d-flex align-items-center justify-content-md-center"
+             style="background-image: url('{{ env('APP_URL') . '/images/slides/slide3.webp' }}'); background-size: cover;"
+        >
+
+            <div class="container col-sm-2 d-flex flex-column align-items-center justify-content-end">
+
+                <img src="{{ $user->profile->profileImage()}}" alt="" class="w-25 rounded-circle">
 
                 <div class="pt-1">
                     @can('update', $user->profile)
                         <a href="/profile/{{$user->id}}/edit">
-                            <button class="btn btn-warning btn-sm btn-block">Edit profile</button>
+                            <button class="btn btn-sm btn-outline-light"><i class="fa-solid fa-ellipsis text-white"></i></button>
                         </a>
                     @endcan
                 </div>
 
             </div>
 
-            <div class="col-md-4">
-                <h1>{{ $user->username }}</h1>
-                <h2>{{ $user->profile->title }}</h2>
-                <h3>{{ $user->profile->description }}</h3>
-                <a href="#">{{$user->profile->url }}</a>
-
+            <div class="container col-sm-4">
+                <h2 class="text-white">{{ $user->username }}</h2>
+                <h3 class="text-white">{{ $user->profile->title }}</h3>
+                <h4 class="text-white">{{ $user->profile->description }}</h4>
+                <a class="text-white" href="#">{{$user->profile->url }}</a>
             </div>
 
             <div class="col-lg-2 pt-2 d-flex justify-content-center align-items-baseline">
 
                 @can('update', $user->profile)
                     <a href="/p/create">
-                        <button class="btn btn-success btn-lg btn-block">Add new photo</button>
+                        <button class="btn btn-outline-light">Add new photo</button>
                     </a>
                 @endcan
 
             </div>
 
-            <div class="col-lg-2 pt-2 d-flex justify-content-center align-items-baseline">
+            <div class="container col-lg-2 pt-2 d-flex justify-content-center align-items-baseline">
 
                 @can('update', $user->profile)
                     <a href="/a/create">
-                        <button class="btn btn-success btn-lg btn-block">Add new album</button>
+                        <button class="btn btn-outline-light">Add new album</button>
                     </a>
                 @endcan
 
@@ -63,69 +66,69 @@
         </div>
 
 
-        <div class="grid mt-5">
+                <div class="container grid mt-5">
 
-            @foreach($posts as $post)
-                <div class="card-image mb-3">
+                    @foreach($posts as $post)
+                        <div class="card-image mb-3">
 
-                    <a data-fancybox="gallery"
-                       data-thumb="{{ env('APP_URL') }}/s3small/{{ $user->id }}/{{ $post->id }}"
-                       data-download-src="{{ env('APP_URL') }}/s3large/{{ $user->id }}/{{ $post->id }}"
-                       href="{{ env('APP_URL') }}/s3large/{{ $user->id }}/{{ $post->id }}">
+                            <a data-fancybox="gallery"
+                               data-thumb="{{ env('APP_URL') }}/s3small/{{ $user->id }}/{{ $post->id }}"
+                               data-download-src="{{ env('APP_URL') }}/s3large/{{ $user->id }}/{{ $post->id }}"
+                               href="{{ env('APP_URL') }}/s3large/{{ $user->id }}/{{ $post->id }}">
 
-                        <img src="{{ env('APP_URL') }}/s3medium/{{ $user->id }}/{{ $post->id }}" alt="">
+                                <img src="{{ env('APP_URL') }}/s3medium/{{ $user->id }}/{{ $post->id }}" alt="">
 
-                    </a>
+                            </a>
 
-                    <div class="card-image-icons d-flex w-100 justify-content-center">
-                        <a href="/p/{{ $user->id }}/{{ $post->id }}" class="link-dark px-5">
-                            <i class="fa-solid fa-info fs-2 text-white"></i>
-                        </a>
-                        <a href="/download/{{ $user->id }}/{{ $post->id }}" class="link-dark px-5">
-                            <i class="fa-solid fa-file-arrow-down fs-2 text-white"></i>
-                        </a>
-                        <a href="{{ route('post.destroy', ['post' => $post->id]) }}" class="link-dark px-5">
-                            <i class="fa-solid fa-trash-can fs-2 text-white"></i>
-                        </a>
-                    </div>
+                            <div class="card-image-icons d-flex w-100 justify-content-center">
+                                <a href="/p/{{ $user->id }}/{{ $post->id }}" class="link-dark px-5">
+                                    <i class="fa-solid fa-info fs-2 text-white"></i>
+                                </a>
+                                <a href="/download/{{ $user->id }}/{{ $post->id }}" class="link-dark px-5">
+                                    <i class="fa-solid fa-file-arrow-down fs-2 text-white"></i>
+                                </a>
+                                <a href="{{ route('post.destroy', ['post' => $post->id]) }}" class="link-dark px-5">
+                                    <i class="fa-solid fa-trash-can fs-2 text-white"></i>
+                                </a>
+                            </div>
 
+                        </div>
+
+                    @endforeach
                 </div>
 
-            @endforeach
-        </div>
+{{--                <div class="row mt-5">--}}
 
-{{--        <div class="row mt-5">--}}
+{{--                    @foreach($posts as $post)--}}
+{{--                    <div class="col card-image mb-4">--}}
 
-{{--            @foreach($posts as $post)--}}
-{{--            <div class="col card-image mb-4">--}}
+{{--                        <a data-fancybox="gallery"--}}
+{{--                           data-thumb="{{ env('APP_URL') }}/s3small/{{ $user->id }}/{{ $post->id }}"--}}
+{{--                           data-download-src="{{ env('APP_URL') }}/s3large/{{ $user->id }}/{{ $post->id }}"--}}
+{{--                           href="{{ env('APP_URL') }}/s3large/{{ $user->id }}/{{ $post->id }}">--}}
 
-{{--                <a data-fancybox="gallery"--}}
-{{--                   data-thumb="{{ env('APP_URL') }}/s3small/{{ $user->id }}/{{ $post->id }}"--}}
-{{--                   data-download-src="{{ env('APP_URL') }}/s3large/{{ $user->id }}/{{ $post->id }}"--}}
-{{--                   href="{{ env('APP_URL') }}/s3large/{{ $user->id }}/{{ $post->id }}">--}}
+{{--                            <div class="flex-column"--}}
+{{--                                 style="height: 300px; background-image: url('{{ env('APP_URL') }}/s3medium/{{ $user->id }}/{{ $post->id }}');  background-size: cover;">--}}
+{{--                            </div>--}}
 
-{{--                    <div class="flex-column"--}}
-{{--                         style="height: 300px; background-image: url('{{ env('APP_URL') }}/s3medium/{{ $user->id }}/{{ $post->id }}');  background-size: cover;">--}}
+{{--                        </a>--}}
+
+{{--                        <div class="card-image-icons d-flex w-100 justify-content-center">--}}
+{{--                            <a href="/p/{{ $user->id }}/{{ $post->id }}" class="link-dark px-5">--}}
+{{--                                <i class="fa-solid fa-info fs-2 text-white"></i>--}}
+{{--                            </a>--}}
+{{--                            <a href="/download/{{ $user->id }}/{{ $post->id }}" class="link-dark px-5">--}}
+{{--                                <i class="fa-solid fa-file-arrow-down fs-2 text-white"></i>--}}
+{{--                            </a>--}}
+{{--                            <a href="{{ route('post.destroy', ['post' => $post->id]) }}" class="link-dark px-5">--}}
+{{--                                <i class="fa-solid fa-trash-can fs-2 text-white"></i>--}}
+{{--                            </a>--}}
+{{--                        </div>--}}
+
 {{--                    </div>--}}
 
-{{--                </a>--}}
-
-{{--                <div class="card-image-icons d-flex w-100 justify-content-center">--}}
-{{--                    <a href="/p/{{ $user->id }}/{{ $post->id }}" class="link-dark px-5">--}}
-{{--                        <i class="fa-solid fa-info fs-2 text-white"></i>--}}
-{{--                    </a>--}}
-{{--                    <a href="/download/{{ $user->id }}/{{ $post->id }}" class="link-dark px-5">--}}
-{{--                        <i class="fa-solid fa-file-arrow-down fs-2 text-white"></i>--}}
-{{--                    </a>--}}
-{{--                    <a href="{{ route('post.destroy', ['post' => $post->id]) }}" class="link-dark px-5">--}}
-{{--                        <i class="fa-solid fa-trash-can fs-2 text-white"></i>--}}
-{{--                    </a>--}}
+{{--                    @endforeach--}}
 {{--                </div>--}}
-
-{{--            </div>--}}
-
-{{--            @endforeach--}}
-{{--        </div>--}}
 
     </div>
 
