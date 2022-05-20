@@ -4,7 +4,7 @@
 
     <div class="container-fluid">
 
-        <div class="row border-bottom d-flex align-items-end justify-content-around pb-5 pt-5"
+        <div class="header2 row border-bottom d-flex align-items-end justify-content-around pb-5"
              style="background-image: url('{{ env('APP_URL') . '/images/slides/slide3.webp' }}'); background-size: cover;"
         >
 

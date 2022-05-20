@@ -11360,3 +11360,21 @@ textarea.form-control-lg {
 .card-image:hover .card-image-icons {
   opacity: 1;
 }
+
+.carousel {
+  margin-top: -75px;
+}
+
+.carousel-item {
+  height: 100%;
+  min-height: 640px;
+}
+
+.navbar {
+  z-index: 10;
+}
+
+.header2 {
+  padding-top: 95px;
+  margin-top: -75px;
+}

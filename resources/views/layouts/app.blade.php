@@ -29,15 +29,24 @@
 <body>
 
 <div id="app">
-    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+{{--    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">--}}
+        <nav class="navbar navbar-expand-md bg-opacity-75 bg-dark navbar-light">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
+
                 {{--                    {{ config('app.name', 'Laravel') }}--}}
-                <div><img src="/svg/camera2.svg" alt="logo" style="height: 50px; border-right: 1px solid black"
-                          class="px-3"></div>
-                <div class="px-3">PhotoAlbum</div>
+{{--                <div><img src="/svg/camera2.svg" alt="logo" style="height: 50px; border-right: 1px solid black"--}}
+{{--                          class="px-3"></div>--}}
+
+                <svg style="fill: red;" xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-camera2" viewBox="0 0 16 16">
+                    <path d="M5 8c0-1.657 2.343-3 4-3V4a4 4 0 0 0-4 4z"/>
+                    <path d="M12.318 3h2.015C15.253 3 16 3.746 16 4.667v6.666c0 .92-.746 1.667-1.667 1.667h-2.015A5.97 5.97 0 0 1 9 14a5.972 5.972 0 0 1-3.318-1H1.667C.747 13 0 12.254 0 11.333V4.667C0 3.747.746 3 1.667 3H2a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1h.682A5.97 5.97 0 0 1 9 2c1.227 0 2.367.368 3.318 1zM2 4.5a.5.5 0 1 0-1 0 .5.5 0 0 0 1 0zM14 8A5 5 0 1 0 4 8a5 5 0 0 0 10 0z"/>
+                </svg>
+
+                <div class="ms-3 px-3 text-white" style="border-left: 1px solid white" >PhotoAlbum</div>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+
+            <button class="bg-light navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                 <span class="navbar-toggler-icon"></span>
@@ -55,23 +64,23 @@
                     @guest
                         @if (Route::has('login'))
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="text-white nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
                         @endif
 
                         @if (Route::has('register'))
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                <a class="text-white nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                             </li>
                         @endif
                     @else
 
                         <li class="nav-item">
-                            <a class="nav-link" href="/profile/{{ Auth::user()->id }}">My proffile</a>
+                            <a class="text-white nav-link" href="/profile/{{ Auth::user()->id }}">My proffile</a>
                         </li>
 
                         <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                            <a id="navbarDropdown" class="text-white nav-link dropdown-toggle" href="#" role="button"
                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->username }}
                             </a>
@@ -102,7 +111,7 @@
 </div>
 
 
-<div class="container">
+<div class="container-fluid">
 
     <!-- Footer -->
     <footer class="text-center text-lg-start bg-light text-muted">
@@ -213,7 +222,7 @@
         <!-- Section: Links  -->
 
         <!-- Copyright -->
-        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+        <div class="bg-dark text-white text-center p-4">
             <script>
                 document.write("Copyright &copy; " + new Date().getFullYear() + " PhotoAlbum. All rights reserved.");
             </script>
