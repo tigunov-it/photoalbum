@@ -1,0 +1,22 @@
+
+
+.card-image {
+    position: relative;
+    width: 350px;
+    img {
+        width: 100%;
+    }
+}
+
+.card-image:nth-child(1):hover {
+
+}
+
+.card-image-icons {
+    margin-top: -40px;
+    opacity: 0;
+}
+
+.card-image:hover .card-image-icons {
+    opacity: 1;
+}

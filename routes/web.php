@@ -43,9 +43,15 @@ Route::get('',[HomeController::class, 'index'])->name('home');
 
 Route::post('/p', [PostsController::class, 'store']);
 Route::get('/p/{user}/{post}', [PostsController::class, 'show']);
-Route::get('/s3/{user}/{post}', [PostsController::class, 'getSmallImageFromS3'])->name('post.getFromS3');
+Route::get('/s3small/{user}/{post}', [PostsController::class, 'getSmallImageFromS3'])->name('post.getSmallFromS3');
+Route::get('/s3medium/{user}/{post}', [PostsController::class, 'getMediumImageFromS3'])->name('post.getMediumFromS3');
+Route::get('/s3large/{user}/{post}', [PostsController::class, 'getLargeImageFromS3'])->name('post.getLargeFromS3');
 Route::get('/s3full/{user}/{post}', [PostsController::class, 'getFullImageFromS3'])->name('post.getFullFromS3');
-Route::delete('/p/{post}', [PostsController::class, 'destroy'])->name('post.destroy');
+Route::match(['get', 'delete'],'/p/{post}', [PostsController::class, 'destroy'])->name('post.destroy');
+//Route::delete('/p/{post}', [PostsController::class, 'destroy'])->name('post.destroy');
+
+Route::get('/download/{user}/{post}', [ImageController::class, 'download'])->name('image.download');
+
 
 //TODO: Настроить rotate
 Route::get('{post}', [ImageController::class, 'rotate'])->name('post.rotate');
@@ -58,13 +64,14 @@ Route::get('/a/{user}', [AlbumsController::class, 'index'])->name('albums.index'
 Route::get('/a/{user}/foto',[AlbumsController::class,'showFoto'])->name('albums.showFoto');
 
 Route::get('/a/{user}/{album}', [AlbumsController::class, 'show'])->name('albums.show');
-
+Route::get('/s3album/{user}/{album}', [AlbumsController::class, 'getCoverFromS3'])->name('album.getCoverFromS3');
+Route::get('/downloadzip/{user}/{album}', [ImageController::class, 'downloadZip'])->name('album.downloadZip');
 
 
 Route::get('/profile/{user}', [ProfilesController::class, 'index'])->name('profile.show');
 Route::get('/profile/{user}/edit', [ProfilesController::class, 'edit'])->name('profile.edit');
 Route::patch('/profile/{user}', [ProfilesController::class, 'update'])->name('profile.update');
-
+Route::get('/s3avatar/{user}', [ProfilesController::class, 'getAvatarFromS3'])->name('profile.getAvatarFromS3');
 
 // <<<<<<< HEAD
 // =======

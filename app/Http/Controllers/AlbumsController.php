@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
 class AlbumsController extends Controller
@@ -35,7 +36,6 @@ class AlbumsController extends Controller
     public function show(User $user, Album $album)
     {
 
-        //TODO: Сделать оптимальное решение для приватности фотоальбомов
         $this->authorize('update', $user->profile);
 
 
@@ -46,6 +46,8 @@ class AlbumsController extends Controller
         // $posts = DB::table('posts')->where('album_id', '=', $album->id)
         //     ->where('user_id', '=', $user->id)->get();
 // >>>>>>> Den
+        $posts = \DB::table('posts')->where('album_id', '=', $album->id)
+            ->where('user_id', '=', $user->id)->paginate(20);
 
         return view('albums.show', [
             'posts' => $posts,
@@ -67,20 +69,46 @@ class AlbumsController extends Controller
             'image' => ['required', 'image']
         ]);
 
-        $imagePath = request('image')->store('uploads', 'public');
+        $album = auth()->user()->album()->create([
+            'title' => $data['title'],
+            'description' => $data['description'],
+            'image' => ''
+        ]);
+
+        $user = Auth::user();
+        $albumForUpload = \DB::select("select created_at from albums where id = {$album->id}");
+        $albumCreatedAt = str_replace(" ", "_", implode(" ", array_column($albumForUpload, 'created_at')));
 
         $image = Image::make(public_path("storage/{$imagePath}"))->fit(1024, 768);
         //        $image = Image::make(public_path("storage/{$imagePath}"))->encode('jpg', 30);
         $image->save();
+        ############################# Делаем обложку альбома малого размера
+        $imagePathSmallLocal = request('image')->store("uploads/{$user->username}/{$albumCreatedAt}/cover/", 'public');
+        $image = Image::make(public_path("storage/{$imagePathSmallLocal}"))->fit(252, 252)->encode('jpg', 50);
+        Storage::disk('s3')->put("uploads/{$user->username}/{$albumCreatedAt}/cover/{$image->basename}", $image);
+        unlink("storage/{$imagePathSmallLocal}"); // Удаляю локальный файл после обработки и загрузки в S3
 
-        auth()->user()->album()->create([
+        $album->update([
             'title' => $data['title'],
             'description' => $data['description'],
-            'image' => $imagePath
+            'image' => $imagePathSmallLocal
         ]);
-        return redirect('/profile/' . auth()->user()->id);
+
+        return redirect('/a/' . auth()->user()->id);
+
     }
 
+    public function getCoverFromS3(User $user, Album $album)
+
+    {
+        $this->authorize('update', $user->profile);
+
+        $content = Storage::disk('s3')->get($album->image);
+        return response($content)->header('Content-Type', 'image/jpeg');
+
+//        return Storage::disk('s3')->response("{$album->image}");
+
+    }
 
 
 
