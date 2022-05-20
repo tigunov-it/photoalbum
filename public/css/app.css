@@ -11331,10 +11331,25 @@ textarea.form-control-lg {
 }
 .card-image {
   position: relative;
-  width: 350px;
+  width: 24%;
 }
 .card-image img {
   width: 100%;
+}
+@media (max-width: 1390px) {
+  .card-image {
+    width: 350px;
+  }
+}
+@media (max-width: 1198px) {
+  .card-image {
+    width: 45%;
+  }
+}
+@media (max-width: 499px) {
+  .card-image {
+    width: 95%;
+  }
 }
 
 .card-image-icons {

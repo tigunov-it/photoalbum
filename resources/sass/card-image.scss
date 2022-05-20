@@ -1,10 +1,17 @@
-
-
 .card-image {
     position: relative;
-    width: 350px;
+    width: 24%;
     img {
         width: 100%;
+    }
+    @media (max-width: 1390px) {
+        width: 350px;
+    }
+    @media (max-width: 1198px) {
+        width: 45%;
+    }
+    @media (max-width: 499px) {
+        width: 95%;
     }
 }
 
