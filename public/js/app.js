@@ -9665,10 +9665,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 window.onload = function () {
-  var grid = document.querySelector('.grid');
+  var grid = document.querySelector('.grid-masonry');
   var masonry = new (masonry_layout__WEBPACK_IMPORTED_MODULE_0___default())(grid, {
     itemSelector: '.card-image',
-    gutter: 10
+    gutter: 10,
+    percentPosition: true
   });
 };
 

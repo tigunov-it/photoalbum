@@ -3,29 +3,30 @@
 @section('content')
     <div class="container-fluid">
 
-        <div class="row border-bottom pb-3 d-flex align-items-center justify-content-md-center"
+        <div class="row border-bottom d-flex align-items-end justify-content-around pb-5 pt-5"
              style="background-image: url('{{ env('APP_URL') . '/images/slides/slide3.webp' }}'); background-size: cover;"
         >
 
-            <div class="container col-sm-2 d-flex flex-column align-items-center justify-content-end">
+            <div class="col-lg-3 d-flex align-items-end">
 
-                <img src="{{ $user->profile->profileImage()}}" alt="" class="w-25 rounded-circle">
+                <img src="{{ $user->profile->profileImage()}}" alt="" class="me-3 w-25 rounded-circle">
 
-                <div class="pt-1">
-                    @can('update', $user->profile)
-                        <a href="/profile/{{$user->id}}/edit">
-                            <button class="btn btn-sm btn-outline-light"><i class="fa-solid fa-ellipsis text-white"></i></button>
-                        </a>
-                    @endcan
+                <div class="">
+                    <h2 class="text-white">{{ $user->username }}</h2>
+                    <h3 class="text-white">{{ $user->profile->title }}</h3>
+                    <h4 class="text-white">{{ $user->profile->description }}</h4>
+                    <a class="text-white" href="#">{{$user->profile->url }}</a>
+
+                    <div class="pt-1">
+                        @can('update', $user->profile)
+                            <a href="/profile/{{$user->id}}/edit">
+                                <button class="btn btn-sm btn-outline-light"><i class="fa-solid fa-ellipsis text-white"></i></button>
+                            </a>
+                        @endcan
+                    </div>
+
                 </div>
 
-            </div>
-
-            <div class="container col-sm-4">
-                <h2 class="text-white">{{ $user->username }}</h2>
-                <h3 class="text-white">{{ $user->profile->title }}</h3>
-                <h4 class="text-white">{{ $user->profile->description }}</h4>
-                <a class="text-white" href="#">{{$user->profile->url }}</a>
             </div>
 
             <div class="col-lg-2 pt-2 d-flex justify-content-center align-items-baseline">
@@ -38,7 +39,7 @@
 
             </div>
 
-            <div class="container col-lg-2 pt-2 d-flex justify-content-center align-items-baseline">
+            <div class="col-lg-2 pt-2 d-flex justify-content-center align-items-baseline">
 
                 @can('update', $user->profile)
                     <a href="/a/create">
@@ -66,7 +67,7 @@
 
         <h1 class="container card-title">Album: {{ $album->title }}</h1>
 
-        <div class="container grid mt-5">
+        <div class="container grid-masonry mt-5">
 
             @foreach($posts as $post)
                 <div class="card-image mb-3">
