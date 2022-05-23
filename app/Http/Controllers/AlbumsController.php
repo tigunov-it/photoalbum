@@ -76,12 +76,12 @@ class AlbumsController extends Controller
         ]);
 
         $user = Auth::user();
-        $albumForUpload = \DB::select("select created_at from albums where id = {$album->id}");
+        $albumForUpload = DB::select("select created_at from albums where id = {$album->id}");
         $albumCreatedAt = str_replace(" ", "_", implode(" ", array_column($albumForUpload, 'created_at')));
 
-        $image = Image::make(public_path("storage/{$imagePath}"))->fit(1024, 768);
-        //        $image = Image::make(public_path("storage/{$imagePath}"))->encode('jpg', 30);
-        $image->save();
+        // $image = Image::make(public_path("storage/{$imagePath}"))->fit(1024, 768);
+        // //        $image = Image::make(public_path("storage/{$imagePath}"))->encode('jpg', 30);
+        // $image->save();
         ############################# Делаем обложку альбома малого размера
         $imagePathSmallLocal = request('image')->store("uploads/{$user->username}/{$albumCreatedAt}/cover/", 'public');
         $image = Image::make(public_path("storage/{$imagePathSmallLocal}"))->fit(252, 252)->encode('jpg', 50);
