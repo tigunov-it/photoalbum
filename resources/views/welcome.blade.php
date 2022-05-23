@@ -9,7 +9,7 @@
         <div class="carousel-inner">
 
             <!-- Single item -->
-            <div style="background-image: url('{{ env('APP_URL') . '/images/slides/slide1.webp' }}');
+            <div style="background-image: url('{{ env('APP_URL') . '/images/slides/sakura.jpg' }}');
             background-repeat: no-repeat;
             background-size: cover"
                  class="carousel-item active">
@@ -28,7 +28,7 @@
             </div>
 
             <!-- Single item -->
-            <div style="background-image: url('{{ env('APP_URL') . '/images/slides/slide2.webp' }}');
+            <div style="background-image: url('{{ env('APP_URL') . '/images/slides/nepal.jpg' }}');
             background-repeat: no-repeat;
             background-size: cover"
                  class="carousel-item">
