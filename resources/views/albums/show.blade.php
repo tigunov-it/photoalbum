@@ -3,7 +3,7 @@
 @section('content')
     <div class="container-fluid">
 
-<<<<<<< HEAD
+{{-- <<<<<<< HEAD --}}
         <h2 class="card-title">Название альбома: {{ $album->title }}</h2>
 
         <div class="row mt-5">
@@ -36,7 +36,7 @@
            конец
            $posts->links()
                {{ $posts->links() }}
-=======
+{{-- ======= --}}
         <div class="row border-bottom pb-3 d-flex align-items-center justify-content-md-center"
              style="background-image: url('{{ env('APP_URL') . '/images/slides/slide3.webp' }}'); background-size: cover;"
         >
@@ -127,7 +127,7 @@
                     </div>
 
                 </div>
->>>>>>> origin/front2
+{{-- >>>>>>> origin/front2 --}}
 
             @endforeach
         </div>

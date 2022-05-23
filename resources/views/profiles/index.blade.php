@@ -3,7 +3,6 @@
 @endsection
 @extends('layouts.app')
 @section('content')
-<<<<<<< HEAD
 <div class="profile">
     {{-- фото --}}
     <div class="profile-foto" {{$url='https://mdbcdn.b-cdn.net/img/Photos/Slides/img%20(15).webp'}} style="background-image:url('{{$url}}')">
@@ -80,7 +79,6 @@
                 </div>
             </form>
         </div>
-=======
 
     <div class="container-fluid">
 
@@ -131,19 +129,7 @@
 
         </div>
 
-        <div class=" border-bottom">
 
-            <ul class="nav justify-content-center">
-                <li class="nav-item">
-                    <a class="nav-link" href="/profile/{{ Auth::user()->id }}">PhotoStream</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/a/{{ Auth::user()->id }}">PhotoAlbums</a>
-                </li>
-
-            </ul>
-
-        </div>
 
 
                 <div class="container grid mt-5">
@@ -210,7 +196,6 @@
 {{--                    @endforeach--}}
 {{--                </div>--}}
 
->>>>>>> origin/front2
     </div>
 </div>
 @endsection

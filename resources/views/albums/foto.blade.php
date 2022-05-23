@@ -140,16 +140,21 @@
     <div class="foto-albums-view-albums">
         @foreach($user->album as $album)
             <a href="{{asset("/a/ $user->id / $album->id" )}}">
-                <div class="foto-albums-album" style="background-image: url('/storage/{{ $album->image }}');">
+                <div class="foto-albums-album" style="background-image: url('{{ env('APP_URL') }}/s3album/{{ $user->id }}/{{ $album->id }}');">
                     <p class="p">{{ $album->title }}</p>
                 </div>
             </a>
         @endforeach        
     </div>
+    background-image: url('{{ env('APP_URL') }}/s3album/{{ $user->id }}/{{ $album->id }}')
+
+    
     {{-- профиль--}}
     {{-- <div class="col-lg-2" style="width: 200px">
         <img src="{{ $user->profile->profileImage()}}" alt="" class="rounded-circle" style="height: 200px">
     </div> --}}
+
+    
 </div>
 @endsection
 
