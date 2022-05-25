@@ -28,4 +28,31 @@
     opacity: 1;
 }
 
+.card-album {
+    width: 300px;
+    height: 300px;
+}
 
+.card-album::before {
+    content: '';
+    position: absolute;
+    border-color: black;
+    border-style: inset;
+    border-width: 0 0 0.1em 0;
+    top: -18px;
+    left: 18px;
+    margin-top: 1em;
+    width: 18.5em;
+}
+
+.card-album::after {
+    content: '';
+    position: absolute;
+    border-color: black;
+    border-style: inset;
+    border-width: 0 0 0.1em 0;
+    top: -20px;
+    left: 21px;
+    margin-top: 1em;
+    width: 18em;
+}

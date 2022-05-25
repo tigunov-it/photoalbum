@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="container">
+    <div class="container vh-100 mt-5">
         <form action="/a" enctype="multipart/form-data" method="post">
             @csrf
             <div class="row">

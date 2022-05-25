@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="container">
+    <div class="container vh-100 mt-5">
         <form action="/p" enctype="multipart/form-data" method="post">
 
             @if ($errors->any())
@@ -19,7 +19,7 @@
             <div class="row">
                 <div class="col-8 offset-2">
                     <div class="row">
-                        <h1>Add new post</h1>
+                        <h1>Add new photo</h1>
                     </div>
 
                     <div class="row mb-3">
