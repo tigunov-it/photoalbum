@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container-fluid">
+    <div class="container-fluid vh-100">
 
         <div class="header2 row border-bottom d-flex align-items-end justify-content-around pb-5"
              style="background-image: url('{{ env('APP_URL') . '/images/slides/slide3.webp' }}'); background-size: cover;"
@@ -65,12 +65,12 @@
 
         </div>
 
+        <div class="container row mt-5 m-auto justify-content-center">
 
-        <div class="container row mt-5">
             @foreach($user->album as $album)
 
 
-                <div class="card-image col mt-4">
+                <div class="card-image card-album mt-4">
 
                         <a href="/a/{{ $user->id }}/{{ $album->id }}">
                             <div class="d-flex justify-content-center align-items-end"
