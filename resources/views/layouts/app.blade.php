@@ -223,7 +223,7 @@
 
 <footer class="footer">
     <!-- Copyright -->
-    <div class="bg-dark text-white text-center bg-opacity-75 p-4">
+    <div class="bg-dark text-white text-center p-3">
         <script>
             document.write("Copyright &copy; " + new Date().getFullYear() + " PhotoAlbum. All rights reserved.");
         </script>
