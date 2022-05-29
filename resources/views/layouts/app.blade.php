@@ -225,7 +225,7 @@
     <!-- Copyright -->
     <div class="bg-dark text-white text-center p-3">
         <script>
-            document.write("Copyright &copy; " + new Date().getFullYear() + " PhotoAlbum. All rights reserved.");
+            document.write("Copyright &copy; " + new Date().getFullYear() + " ti-it. All rights reserved.");
         </script>
     </div>
     <!-- Copyright -->
