@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Album;
 use App\Models\Post;
 use App\Models\User;
+use Aws\Rekognition\RekognitionClient;
 use Illuminate\Support\Facades\Storage;
 
 class ImageController extends Controller
 {
+
+
     public function rotate(Post $post)
     {
 

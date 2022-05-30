@@ -32,11 +32,11 @@
                                value="{{ old('title') }}"
                                autocomplete="title">
 
-{{--                        @error('title')--}}
-{{--                        <span class="invalid-feedback" role="alert">--}}
-{{--                                        <strong>{{ $message }}</strong>--}}
-{{--                                    </span>--}}
-{{--                        @enderror--}}
+                        {{--                        @error('title')--}}
+                        {{--                        <span class="invalid-feedback" role="alert">--}}
+                        {{--                                        <strong>{{ $message }}</strong>--}}
+                        {{--                                    </span>--}}
+                        {{--                        @enderror--}}
 
                     </div>
 
@@ -50,44 +50,54 @@
                                value="{{ old('description') }}"
                                autocomplete="description">
 
-{{--                        @error('description')--}}
-{{--                        <span class="invalid-feedback" role="alert">--}}
-{{--                                        <strong>{{ $message }}</strong>--}}
-{{--                                    </span>--}}
-{{--                        @enderror--}}
+                        {{--                        @error('description')--}}
+                        {{--                        <span class="invalid-feedback" role="alert">--}}
+                        {{--                                        <strong>{{ $message }}</strong>--}}
+                        {{--                                    </span>--}}
+                        {{--                        @enderror--}}
 
                     </div>
 
                     <div class="row mb-3">
                         <label for="album" class="col-md-4 col-form-label">Album</label>
 
-                        <select class="form-select" aria-label="Default select example" name="album">
-                            @foreach($user->album as $album)
-                                <option value="{{ $album->id }}"> {{ $album->title }} </option>
-                            @endforeach
-                        </select>
+                        <div class="d-flex p-0 justify-content-between">
+                            <select class="form-select" aria-label="Default select example" name="album">
+                                @foreach($user->album as $album)
+                                    <option value="{{ $album->id }}"> {{ $album->title }} </option>
+                                @endforeach
 
-{{--                        @error('album')--}}
-{{--                        <span class="invalid-feedback" role="alert">--}}
-{{--                                        <strong>{{ $message }}</strong>--}}
-{{--                                    </span>--}}
-{{--                        @enderror--}}
+                            </select>
+
+                            <div class="ms-2">
+                                <a href="{{env('APP_URL')}}/a/create">
+                                    <div class="btn btn-success">Add new album</div>
+                                </a>
+                            </div>
+                        </div>
+
+
+                        {{--                        @error('album')--}}
+                        {{--                        <span class="invalid-feedback" role="alert">--}}
+                        {{--                                        <strong>{{ $message }}</strong>--}}
+                        {{--                                    </span>--}}
+                        {{--                        @enderror--}}
+
 
                     </div>
 
                     <div class="row">
                         <label for="image" class="col-md-4 col-form-label">Image</label>
                         <input type="file" multiple class="form-control" id="image" name="image[]">
-{{--                        @error('image')--}}
-{{--                                        <strong>{{ $message }}</strong>--}}
-{{--                        @enderror--}}
+                        {{--                        @error('image')--}}
+                        {{--                                        <strong>{{ $message }}</strong>--}}
+                        {{--                        @enderror--}}
                     </div>
 
                     <div class="row mt-5">
                         <button class="btn btn-primary">Add new post</button>
                     </div>
                 </div>
-
 
 
             </div>

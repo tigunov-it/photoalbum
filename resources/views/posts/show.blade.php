@@ -2,8 +2,8 @@
 
 @section('content')
 
-    <div class="container">
-        <div class="row">
+    <div class="container vh-100">
+        <div class="row mt-4">
             <div class="col-8">
                 {{--                <img src="/storage/{{$post->image}}" alt="{{ $post->title }}" class="w-100">--}}
                 <img src="{{ env('APP_URL') }}/s3medium/{{ $post->user->id }}/{{ $post->id }}" alt="{{ $post->title }}"
