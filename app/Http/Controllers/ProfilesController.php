@@ -63,7 +63,6 @@ class ProfilesController extends Controller
             $imageArray ?? []
         ));
 
-
 //        auth()->user()->profile->update($data);
 
         return redirect("/profile/{$user->id}");
