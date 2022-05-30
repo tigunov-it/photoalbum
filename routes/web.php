@@ -39,8 +39,7 @@ Route::match(['get', 'delete'],'/p/{post}', [PostsController::class, 'destroy'])
 
 Route::get('/download/{user}/{post}', [ImageController::class, 'download'])->name('image.download');
 
-//Route::get('{post}', [ImageController::class, 'rotate'])->name('post.rotate');
-
+Route::get('{post}', [ImageController::class, 'rotate'])->name('post.rotate');
 
 Route::get('/a/create', [AlbumsController::class, 'create']);
 Route::post('/a', [AlbumsController::class, 'store']);

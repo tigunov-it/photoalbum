@@ -41,7 +41,6 @@ class PostsController extends Controller
             'image.*' => 'image|max:5400'
         ]);
 
-
         $client = new RekognitionClient([
             'region' => env('AWS_DEFAULT_REGION'),
             'version' => 'latest'
@@ -49,7 +48,7 @@ class PostsController extends Controller
 
         foreach (request('image') as $file) {
 
-            ############################  Модерация
+############################  Модерация
             $imageForAnalise = fopen($file, 'r');
             $bytes = fread($imageForAnalise, filesize($file));
             $results = $client->detectModerationLabels([
@@ -58,12 +57,13 @@ class PostsController extends Controller
             ]);
             $resultLabels = $results->get('ModerationLabels');
 
-            $banned = implode(", ",array_column($resultLabels, 'Name'));
+            $banned = implode(", ", array_column($resultLabels, 'Name'));
 
-            if(!empty($resultLabels)){
+            if (!empty($resultLabels)) {
                 return redirect()->back()->withErrors(['Banned_content' => 'The image contained Prohibited Content ' . '(' . $banned . ')']);
             };
-            ############################  Модерация
+############################  Модерация
+
 
             $user = Auth::user();
             $album = \DB::select("select created_at from albums where id = {$data['album']}");
