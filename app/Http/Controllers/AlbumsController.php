@@ -93,5 +93,19 @@ class AlbumsController extends Controller
 
     }
 
+    public function destroy(Album $album)
+    {
+
+        $albumFolder = strstr($album->image, '/cover', true);
+
+        Storage::disk('s3')->deleteDirectory("{$albumFolder}");
+
+        \DB::table('posts')->where('album_id', '=', $album->id)->delete();
+
+        $album->delete();
+
+        return redirect("{$_SERVER [ "HTTP_REFERER" ]}");
+
+    }
 
 }

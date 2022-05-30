@@ -51,6 +51,8 @@
 
         </div>
 
+        <header2-component></header2-component>
+
         <div class=" border-bottom">
 
             <ul class="nav justify-content-center">
@@ -88,7 +90,7 @@
                         <a href="/downloadzip/{{ $user->id }}/{{ $album->id }}" class="link-dark px-5">
                             <i class="fa-solid fa-file-arrow-down fs-2 text-white"></i>
                         </a>
-                        <a href="" class="link-dark px-5">
+                        <a href="{{ route('album.destroy', ['album' => $album->id]) }}" class="link-dark px-5">
                             <i class="fa-solid fa-trash-can fs-2 text-white"></i>
                         </a>
                     </div>
