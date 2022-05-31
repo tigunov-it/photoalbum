@@ -184,12 +184,20 @@ class PostsController extends Controller
 
     public function destroy(Post $post)
     {
+
         $post->delete();
         Storage::disk('s3')->delete("{$post->image}");
         Storage::disk('s3')->delete("{$post->image_small}");
         Storage::disk('s3')->delete("{$post->image_medium}");
         Storage::disk('s3')->delete("{$post->image_large}");
-        return redirect("{$_SERVER [ "HTTP_REFERER" ]}");
-    }
 
+        $refer = $_SERVER ["HTTP_REFERER"];
+        $infopage = env('APP_URL') . '/p/';
+
+        if (str_starts_with($refer, $infopage)) { // Если удаление происходит со страницы инфо о фото, редирект после удаления идет на страницу профиля
+            return redirect(route('profile.show', ['user' => Auth::user()]));
+        } else {
+            return redirect("{$_SERVER [ "HTTP_REFERER" ]}");
+        }
+    }
 }
