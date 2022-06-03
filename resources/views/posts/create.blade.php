@@ -59,7 +59,7 @@
                     </div>
 
                     <div class="row mb-3">
-                        <label for="album" class="col-md-4 col-form-label">Album</label>
+                        <label for="album" class="col-md-4 col-form-label">Select or add a new album</label>
 
                         <div class="d-flex p-0 justify-content-between">
                             <select class="form-select" aria-label="Default select example" name="album">

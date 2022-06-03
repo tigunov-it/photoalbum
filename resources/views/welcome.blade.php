@@ -25,9 +25,13 @@
                             >Go to My Profile</a
                             >
                         @else
-                            <a class="btn btn-outline-light btn-lg" href="{{ env('APP_URL') . '/register' }}"
+                            <a class="btn m-1 btn-outline-light btn-lg" href="{{ env('APP_URL') . '/register' }}"
                                role="button"
                             >Start for free</a
+                            >
+                            <a class="btn m-1 btn-outline-light btn-lg" href="{{ env('APP_URL') . '/login' }}"
+                               role="button"
+                            >Log in</a
                             >
                         @endif
                     </div>
@@ -52,9 +56,13 @@
                             >Go to My Profile</a
                             >
                         @else
-                            <a class="btn btn-outline-light btn-lg" href="{{ env('APP_URL') . '/register' }}"
+                            <a class="btn m-1 btn-outline-light btn-lg" href="{{ env('APP_URL') . '/register' }}"
                                role="button"
                             >Start for free</a
+                            >
+                            <a class="btn m-1 btn-outline-light btn-lg" href="{{ env('APP_URL') . '/login' }}"
+                               role="button"
+                            >Log in</a
                             >
                         @endif
                     </div>
@@ -79,9 +87,13 @@
                             >Go to My Profile</a
                             >
                         @else
-                            <a class="btn btn-outline-light btn-lg" href="{{ env('APP_URL') . '/register' }}"
+                            <a class="btn m-1 btn-outline-light btn-lg" href="{{ env('APP_URL') . '/register' }}"
                                role="button"
                             >Start for free</a
+                            >
+                            <a class="btn m-1 btn-outline-light btn-lg" href="{{ env('APP_URL') . '/login' }}"
+                               role="button"
+                            >Log in</a
                             >
                         @endif
                     </div>
