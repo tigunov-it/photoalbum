@@ -80,7 +80,7 @@
 
                     <div class="text-white mb-12">
                         <h1 class="mb-3">Let your imagination run riot</h1>
-                        <h4 class="mb-3">Magic touch</h4>
+                        <h4 class="mb-3">Magic touch beta</h4>
                         @if(Auth::user())
                             <a class="btn btn-outline-light btn-lg" href="/profile/{{ Auth::user()->id }}"
                                role="button"
