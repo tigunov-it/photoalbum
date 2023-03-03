@@ -55,7 +55,8 @@ pipeline {
                                           rm -rf /var/www/$UNIX_TIME/.git && \
                                           rm /var/www/latest && \
                                           ln -s /var/www/$UNIX_TIME /var/www/latest && \
-                                          docker restart photoalbum_php && \
+                                          docker-compose -f /usr/share/app/docker-compose.yml down && \
+                                          docker-compose -f /usr/share/app/docker-compose.yml up -d && \
                                           docker exec photoalbum_php composer install && \
                                           docker exec photoalbum_php php artisan migrate --force",
                             execTimeout: 120000,
