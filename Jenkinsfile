@@ -57,8 +57,6 @@ pipeline {
                                           ln -s /var/www/$UNIX_TIME /var/www/latest && \
                                           docker restart photoalbum_php && \
                                           docker exec photoalbum_php composer install && \
-                                          sudo chown -R www-data:www-data /var/www/latest/vendor && \
-                                          sudo chown -R www-data:www-data /var/www/latest/storage && \
                                           docker exec photoalbum_php php artisan migrate --force",
                             execTimeout: 120000,
                             flatten: false,
