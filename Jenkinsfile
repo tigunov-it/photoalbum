@@ -56,8 +56,8 @@ pipeline {
                                           rm /var/www/latest && \
                                           ln -s /var/www/$UNIX_TIME /var/www/latest && \
                                           docker-compose -f /usr/share/app/docker-compose.yml down && \
-                                          docker-compose -f /usr/share/app/docker-compose.yml up -d && \
-                                          docker exec photoalbum_php composer install && \
+                                          docker-compose -f /usr/share/app/docker-compose.yml up -d --build && \
+                                          docker exec photoalbum_php composer install --optimize-autoloader && \
                                           docker exec photoalbum_php php artisan migrate --force",
                             execTimeout: 120000,
                             flatten: false,
