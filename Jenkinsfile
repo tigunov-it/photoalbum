@@ -5,7 +5,7 @@ pipeline {
             environment {
                 UNIX_TIME = sh(returnStdout: true, script: 'date +"%Y_%m_%d_%H_%M_%S"').trim()
                 APP_KEY = credentials("photo-app-key")
-                APP_URL = credentials("photo-app-url")
+//                 APP_URL = credentials("photo-app-url")
                 DB_HOST = credentials("photo-db-host")
                 DB_PORT = credentials("photo-db-port")
                 DB_DATABASE = credentials("photo-db-database")
@@ -22,7 +22,8 @@ pipeline {
             steps {
                 sh 'cp .env.example .env'
                 sh 'echo APP_KEY=$APP_KEY >> .env'
-                sh 'echo APP_URL=$APP_URL >> .env'
+                sh 'echo APP_URL=http://dev-photoalbum.tigunov.com >> .env'
+//                 sh 'echo APP_URL=$APP_URL >> .env'
                 sh 'echo DB_HOST=$DB_HOST >> .env'
                 sh 'echo DB_PORT=$DB_PORT >> .env'
                 sh 'echo DB_DATABASE=$DB_DATABASE >> .env'
@@ -45,7 +46,7 @@ pipeline {
             }
             steps {
                 sshPublisher alwaysPublishFromMaster: true, publishers: [sshPublisherDesc(
-                    configName: 'stage-photoalbum',
+                    configName: 'dev-photoalbum',
                     transfers: [
                         sshTransfer(
                             cleanRemote: false,
@@ -55,9 +56,11 @@ pipeline {
                                           rm -rf /var/www/$UNIX_TIME/.git && \
                                           rm /var/www/latest && \
                                           ln -s /var/www/$UNIX_TIME /var/www/latest && \
-                                          docker restart photoalbum_php && \
-                                          docker exec photoalbum_php composer install && \
-                                          docker exec photoalbum_php php artisan migrate --force",
+                                          docker-compose -f /usr/share/app/docker-compose.yml down && \
+                                          docker-compose -f /usr/share/app/docker-compose.yml up -d --build && \
+                                          docker exec photoalbum_php composer install --optimize-autoloader && \
+                                          docker exec photoalbum_php php artisan migrate --force && \
+                                          docker exec photoalbum_php php artisan l5-swagger:generate",
                             execTimeout: 120000,
                             flatten: false,
                             makeEmptyDirs: false,
@@ -74,3 +77,4 @@ pipeline {
         }
     }
 }
+
