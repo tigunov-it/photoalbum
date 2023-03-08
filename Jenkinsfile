@@ -46,7 +46,7 @@ pipeline {
             }
             steps {
                 sshPublisher alwaysPublishFromMaster: true, publishers: [sshPublisherDesc(
-                    configName: 'dev-photoalbum',
+                    configName: 'stage-photoalbum',
                     transfers: [
                         sshTransfer(
                             cleanRemote: false,
