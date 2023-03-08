@@ -18,12 +18,14 @@
         "ext-zip": "*"
     },
     "require-dev": {
+        "driftingly/rector-laravel": "^0.16.1",
         "fakerphp/faker": "^1.9.1",
         "laravel/pint": "^1.0",
         "laravel/sail": "^1.18",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^7.0",
         "phpunit/phpunit": "^10.0",
+        "rector/rector": "^0.15.21",
         "spatie/laravel-ignition": "^2.0"
     },
     "autoload": {
