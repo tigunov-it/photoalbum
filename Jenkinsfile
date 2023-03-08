@@ -22,7 +22,7 @@ pipeline {
             steps {
                 sh 'cp .env.example .env'
                 sh 'echo APP_KEY=$APP_KEY >> .env'
-                sh 'echo APP_URL=http://dev-photoalbum.tigunov.com >> .env'
+                sh 'echo APP_URL=http://stage-photoalbum.tigunov.com >> .env'
 //                 sh 'echo APP_URL=$APP_URL >> .env'
                 sh 'echo DB_HOST=$DB_HOST >> .env'
                 sh 'echo DB_PORT=$DB_PORT >> .env'
