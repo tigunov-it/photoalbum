@@ -69,7 +69,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(Profile::class, 'user_id', 'id');
     }
 
-    public function album(): HasMany
+    public function albums(): HasMany
     {
         return $this->hasMany(Album::class)->orderBy('created_at', 'DESC');
     }

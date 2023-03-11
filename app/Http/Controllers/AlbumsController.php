@@ -55,7 +55,7 @@ class AlbumsController extends Controller
             'image' => ['required', 'image']
         ]);
 
-        $album = auth()->user()->album()->create([
+        $album = auth()->user()->albums()->create([
             'title' => $data['title'],
             'description' => $data['description'],
             'image' => ''
