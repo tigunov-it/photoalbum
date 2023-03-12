@@ -60,7 +60,8 @@ pipeline {
                                           docker-compose -f /usr/share/app/docker-compose.yml up -d --build && \
                                           docker exec photoalbum_php composer install --optimize-autoloader && \
                                           docker exec photoalbum_php php artisan migrate --force && \
-                                          docker exec photoalbum_php php artisan l5-swagger:generate",
+                                          docker exec photoalbum_php php artisan l5-swagger:generate && \
+                                          docker exec photoalbum_php php artisan test",
                             execTimeout: 120000,
                             flatten: false,
                             makeEmptyDirs: false,
