@@ -9,13 +9,32 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Validation\ValidationException;
 use OpenApi\Attributes as OAT;
 
-class PasswordResetLinkController extends Controller
+final class PasswordResetLinkController extends Controller
 {
     /**
-     * Handle an incoming password reset link request.
-     *
      * @throws \Illuminate\Validation\ValidationException
      */
+    #[OAT\Post(
+        path: '/api/v1/forgot-password',
+        description: 'Send password reset link request',
+        tags: ['auth'],
+        requestBody: new OAT\RequestBody(
+            required: true,
+            content: new OAT\JsonContent(required: ['email'], properties: [
+                new OAT\Property(property: 'email', type: 'string', format: 'email'),
+            ]),
+        ),
+        responses: [
+            new OAT\Response(
+                response: JsonResponse::HTTP_OK,
+                description: 'Password reset link sent',
+                content: new OAT\JsonContent(required: ['status'], properties: [
+                    new OAT\Property(property: 'status', type: 'string'),
+                ]),
+            ),
+            new OAT\Response(response: JsonResponse::HTTP_UNPROCESSABLE_ENTITY, ref: '#/components/responses/UnprocessableEntity'),
+        ],
+    )]
     public function store(Request $request): JsonResponse
     {
         $request->validate([

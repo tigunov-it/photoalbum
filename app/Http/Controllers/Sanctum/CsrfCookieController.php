@@ -11,11 +11,12 @@ class CsrfCookieController extends BaseCsrfCookieController
 {
     #[OAT\Get(
         path: '/api/sanctum/csrf-cookie',
+        description: 'Return an empty response simply to trigger the storage of the CSRF/XSRF cookie in the browser',
         tags: ['sanctum'],
         responses: [
             new OAT\Response(
                 response: JsonResponse::HTTP_NO_CONTENT,
-                description: 'Return an empty response simply to trigger the storage of the CSRF/XSRF cookie in the browser',
+                description: 'Empty response simply to trigger the storage of the CSRF/XSRF cookie in the browser',
                 content: new OAT\JsonContent(),
             ),
         ],

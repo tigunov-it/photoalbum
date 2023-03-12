@@ -5,6 +5,7 @@ namespace App\Http\Controllers\V1\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -13,13 +14,36 @@ use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules;
 use OpenApi\Attributes as OAT;
 
-class RegisteredUserController extends Controller
+final class RegisteredUserController extends Controller
 {
     /**
-     * Handle an incoming registration request.
-     *
      * @throws \Illuminate\Validation\ValidationException
      */
+    #[OAT\Post(
+        path: '/api/v1/register',
+        description: 'Send registration request',
+        tags: ['auth'],
+        requestBody: new OAT\RequestBody(
+            required: true,
+            content: new OAT\JsonContent(required: [
+                'name', 'email', 'username', 'password', 'password_confirmation',
+            ], properties: [
+                new OAT\Property(property: 'name', type: 'string', maxLength: 255),
+                new OAT\Property(property: 'email', type: 'string', format: 'email'),
+                new OAT\Property(property: 'username', type: 'string', maxLength: 255),
+                new OAT\Property(property: 'password', type: 'string', format: 'password'),
+                new OAT\Property(property: 'password_confirmation', type: 'string', format: 'password'),
+            ]),
+        ),
+        responses: [
+            new OAT\Response(
+                response: JsonResponse::HTTP_NO_CONTENT,
+                description: 'Registration successfull',
+                content: new OAT\JsonContent(),
+            ),
+            new OAT\Response(response: JsonResponse::HTTP_UNPROCESSABLE_ENTITY, ref: '#/components/responses/UnprocessableEntity'),
+        ],
+    )]
     public function store(Request $request): Response
     {
         $request->validate([

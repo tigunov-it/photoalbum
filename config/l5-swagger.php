@@ -64,10 +64,10 @@ return [
              * Middleware allows to prevent unexpected access to API documentation
             */
             'middleware' => [
-                'api' => ['web', 'auth'],
-                'asset' => ['web', 'auth'],
-                'docs' => ['web', 'auth'],
-                'oauth2_callback' => ['web', 'auth'],
+                'api' => ['web'],
+                'asset' => ['web'],
+                'docs' => ['web'],
+                'oauth2_callback' => ['web'],
             ],
 
             /*
@@ -206,7 +206,8 @@ return [
                     'name' => 'Authorization', // The name of the header or query parameter to be used.
                     'in' => 'header', // The location of the API key. Valid values are "query" or "header".
                 ],
-                */],
+                */
+            ],
             'security' => [
                 /*
                  * Examples of Securities

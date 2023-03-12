@@ -13,13 +13,37 @@ use Illuminate\Validation\Rules;
 use Illuminate\Validation\ValidationException;
 use OpenApi\Attributes as OAT;
 
-class NewPasswordController extends Controller
+final class NewPasswordController extends Controller
 {
     /**
-     * Handle an incoming new password request.
-     *
      * @throws \Illuminate\Validation\ValidationException
      */
+    #[OAT\Post(
+        path: '/api/v1/reset-password',
+        description: 'Send new password request',
+        tags: ['auth'],
+        requestBody: new OAT\RequestBody(
+            required: true,
+            content: new OAT\JsonContent(required: [
+                'token', 'email', 'password', 'password_confirmation',
+            ], properties: [
+                new OAT\Property(property: 'token', type: 'string'),
+                new OAT\Property(property: 'email', type: 'string', format: 'email'),
+                new OAT\Property(property: 'password', type: 'string', format: 'password'),
+                new OAT\Property(property: 'password_confirmation', type: 'string', format: 'password'),
+            ]),
+        ),
+        responses: [
+            new OAT\Response(
+                response: JsonResponse::HTTP_OK,
+                description: 'Password updated',
+                content: new OAT\JsonContent(required: ['status'], properties: [
+                    new OAT\Property(property: 'status', type: 'string'),
+                ]),
+            ),
+            new OAT\Response(response: JsonResponse::HTTP_UNPROCESSABLE_ENTITY, ref: '#/components/responses/UnprocessableEntity'),
+        ],
+    )]
     public function store(Request $request): JsonResponse
     {
         $request->validate([
@@ -36,12 +60,11 @@ class NewPasswordController extends Controller
         // database. Otherwise we will parse the error and return the response.
         $status = Password::reset(
             $request->only('email', 'password', 'password_confirmation', 'token'),
-            function ($user) use ($request) {
+            static function ($user) use ($request): void {
                 $user->forceFill([
                     'password' => Hash::make($request->password),
                     'remember_token' => Str::random(60),
                 ])->save();
-
                 event(new PasswordReset($user));
             }
         );

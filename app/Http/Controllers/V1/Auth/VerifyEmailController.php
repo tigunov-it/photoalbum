@@ -6,14 +6,43 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use OpenApi\Attributes as OAT;
 
-class VerifyEmailController extends Controller
+final class VerifyEmailController extends Controller
 {
-    /**
-     * Mark the authenticated user's email address as verified.
-     */
+    #[OAT\Get(
+        path: '/api/v1/verify-email/{id}/{hash}',
+        description: 'Mark the authenticated user\'s email address as verified',
+        tags: ['auth'],
+        parameters: [
+            new OAT\Parameter(
+                name: 'id',
+                in: 'path',
+                required: true,
+                schema: new OAT\Schema(type: 'integer', format: 'int64', minimum: 1),
+            ),
+            new OAT\Parameter(
+                name: 'hash',
+                in: 'path',
+                required: true,
+                schema: new OAT\Schema(type: 'string'),
+            ),
+        ],
+        responses: [
+            new OAT\Response(
+                response: JsonResponse::HTTP_FOUND,
+                description: 'Email verified',
+                content: new OAT\JsonContent(),
+            ),
+            new OAT\Response(
+                response: JsonResponse::HTTP_FORBIDDEN,
+                description: 'Forbidden',
+                content: new OAT\JsonContent(),
+            ),
+        ],
+    )]
     public function __invoke(EmailVerificationRequest $request): RedirectResponse
     {
         if ($request->user()->hasVerifiedEmail()) {

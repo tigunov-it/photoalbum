@@ -9,11 +9,22 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use OpenApi\Attributes as OAT;
 
-class EmailVerificationNotificationController extends Controller
+final class EmailVerificationNotificationController extends Controller
 {
-    /**
-     * Send a new email verification notification.
-     */
+    #[OAT\Post(
+        path: '/api/v1/email/verification-notification',
+        description: 'Send a new email verification notification',
+        tags: ['auth'],
+        responses: [
+            new OAT\Response(
+                response: JsonResponse::HTTP_OK,
+                description: 'Email verification notification sent',
+                content: new OAT\JsonContent(required: ['status'], properties: [
+                    new OAT\Property(property: 'status', type: 'string'),
+                ]),
+            ),
+        ],
+    )]
     public function store(Request $request): JsonResponse|RedirectResponse
     {
         if ($request->user()->hasVerifiedEmail()) {
