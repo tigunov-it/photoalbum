@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'default' => 'V1',
+    'default' => 'v1',
     'documentations' => [
-        'V1' => [
+        'v1' => [
             'api' => [
                 'title' => 'Photoalbum API',
             ],
@@ -40,6 +40,8 @@ return [
                 */
                 'annotations' => [
                     base_path('app/Http/Controllers/V1'),
+                    base_path('app/Http/Controllers/Sanctum'),
+                    base_path('app/Http/Controllers/Swagger'),
                     base_path('app/Models'),
                 ],
 
@@ -51,7 +53,7 @@ return [
             /*
              * Route for accessing parsed swagger annotations.
             */
-            'docs' => 'docs',
+            'docs' => 'api/docs',
 
             /*
              * Route for Oauth2 authentication callback.
