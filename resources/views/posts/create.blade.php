@@ -63,7 +63,7 @@
 
                         <div class="d-flex p-0 justify-content-between">
                             <select class="form-select" aria-label="Default select example" name="album">
-                                @foreach($user->album as $album)
+                                @foreach($user->albums as $album)
                                     <option value="{{ $album->id }}"> {{ $album->title }} </option>
                                 @endforeach
 

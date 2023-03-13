@@ -69,7 +69,7 @@
 
         <div class="container row mt-5 m-auto justify-content-center">
 
-            @foreach($user->album as $album)
+            @foreach($user->albums as $album)
 
 
                 <div class="card-image card-album mt-4">
