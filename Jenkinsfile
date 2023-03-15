@@ -67,7 +67,7 @@ pipeline {
                             makeEmptyDirs: false,
                             noDefaultExcludes: false,
                             patternSeparator: '[, ]+',
-                            remoteDirectory: "$UNIX_TIME",
+                            remoteDirectory: "/var/www/$UNIX_TIME",
                             remoteDirectorySDF: false,
                             removePrefix: '',
                             sourceFiles: 'build.tar.gz')],
