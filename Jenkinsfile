@@ -61,12 +61,7 @@ pipeline {
                                           php artisan storage:link && \
                                           php artisan optimize:clear && \
                                           php artisan l5-swagger:generate",
-//                                           docker exec photoalbum_php composer install --optimize-autoloader && \
-//                                           docker exec photoalbum_php php artisan migrate --force && \
-//                                           docker exec photoalbum_php php artisan storage:link && \
-//                                           docker exec photoalbum_php php artisan optimize:clear && \
-//                                           docker exec photoalbum_php php artisan l5-swagger:generate && \
-//                                           docker exec photoalbum_php php artisan test",
+//                                           php artisan test",
                             execTimeout: 120000,
                             flatten: false,
                             makeEmptyDirs: false,
