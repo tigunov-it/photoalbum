@@ -56,14 +56,18 @@ pipeline {
                                           rm -rf /var/www/$UNIX_TIME/.git && \
                                           rm /var/www/latest && \
                                           ln -s /var/www/$UNIX_TIME /var/www/latest && \
-                                          docker-compose -f /usr/share/app/docker-compose.yml down && \
-                                          docker-compose -f /usr/share/app/docker-compose.yml up -d --build && \
-                                          docker exec photoalbum_php composer install --optimize-autoloader && \
-                                          docker exec photoalbum_php php artisan migrate --force && \
-                                          docker exec photoalbum_php php artisan storage:link && \
-                                          docker exec photoalbum_php php artisan optimize:clear && \
-                                          docker exec photoalbum_php php artisan l5-swagger:generate && \
-                                          docker exec photoalbum_php php artisan test",
+                                          php composer install --optimize-autoloader && \
+                                          php artisan migrate --force && \
+                                          php artisan storage:link && \
+                                          php artisan optimize:clear && \
+                                          php artisan l5-swagger:generate && \
+                                          php artisan test",
+//                                           docker exec photoalbum_php composer install --optimize-autoloader && \
+//                                           docker exec photoalbum_php php artisan migrate --force && \
+//                                           docker exec photoalbum_php php artisan storage:link && \
+//                                           docker exec photoalbum_php php artisan optimize:clear && \
+//                                           docker exec photoalbum_php php artisan l5-swagger:generate && \
+//                                           docker exec photoalbum_php php artisan test",
                             execTimeout: 120000,
                             flatten: false,
                             makeEmptyDirs: false,
