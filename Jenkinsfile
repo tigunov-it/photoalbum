@@ -56,8 +56,8 @@ pipeline {
                                           rm -rf /var/www/$UNIX_TIME/.git && \
                                           rm /var/www/latest && \
                                           ln -s /var/www/$UNIX_TIME /var/www/latest && \
-                                          chown -R www-data.www-data /var/www/latest/storage && \
-                                          chown -R www-data.www-data /var/www/latest/bootstrap/cache && \
+                                          sudo chown -R www-data.www-data /var/www/$UNIX_TIME/storage && \
+                                          sudo chown -R www-data.www-data /var/www/$UNIX_TIME/bootstrap/cache && \
                                           cd /var/www/$UNIX_TIME && composer install --optimize-autoloader && \
                                           cd /var/www/$UNIX_TIME && php artisan migrate --force && \
                                           cd /var/www/$UNIX_TIME && php artisan storage:link && \
