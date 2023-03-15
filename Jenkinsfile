@@ -59,8 +59,7 @@ pipeline {
                                           sudo chown -R www-data.www-data /var/www/$UNIX_TIME/storage && \
                                           sudo chown -R www-data.www-data /var/www/$UNIX_TIME/bootstrap/cache && \
                                           sudo chown -R www-data.www-data /var/www/$UNIX_TIME/storage/api-docs && \
-                                          sudo chmod 0664 /var/www/$UNIX_TIME/storage/api-docs/api-docs-v1.json && \
-                                          sudo chmod -R 0775 /var/www/$UNIX_TIME/storage/ && \
+                                          sudo chmod -R 0775 /var/www/$UNIX_TIME/storage && \
                                           cd /var/www/$UNIX_TIME && composer install --optimize-autoloader && \
                                           cd /var/www/$UNIX_TIME && php artisan migrate --force && \
                                           cd /var/www/$UNIX_TIME && php artisan storage:link && \
