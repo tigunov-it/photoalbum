@@ -56,18 +56,18 @@ pipeline {
                                           rm -rf /var/www/$UNIX_TIME/.git && \
                                           rm /var/www/latest && \
                                           ln -s /var/www/$UNIX_TIME /var/www/latest && \
-                                          composer install --optimize-autoloader && \
-                                          php artisan migrate --force && \
-                                          php artisan storage:link && \
-                                          php artisan optimize:clear && \
-                                          php artisan l5-swagger:generate",
+                                          cd /var/www/$UNIX_TIME && composer install --optimize-autoloader && \
+                                          cd /var/www/$UNIX_TIME && php artisan migrate --force && \
+                                          cd /var/www/$UNIX_TIME && php artisan storage:link && \
+                                          cd /var/www/$UNIX_TIME && php artisan optimize:clear && \
+                                          cd /var/www/$UNIX_TIME && php artisan l5-swagger:generate",
 //                                           php artisan test",
                             execTimeout: 120000,
                             flatten: false,
                             makeEmptyDirs: false,
                             noDefaultExcludes: false,
                             patternSeparator: '[, ]+',
-                            remoteDirectory: "/var/www/$UNIX_TIME",
+                            remoteDirectory: "$UNIX_TIME",
                             remoteDirectorySDF: false,
                             removePrefix: '',
                             sourceFiles: 'build.tar.gz')],
