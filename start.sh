@@ -1,12 +1,9 @@
 #!/bin/bash
 
-cd -- "$(dirname -- "${BASH_SOURCE[0]}")"
+cd "$(dirname -- "$0")"
 
 if [ ! -d photoalbum_front ]; then
     git clone git@github.com:tsoyvi/photoalbum_front.git
-    cd photoalbum_front
-    git switch lesson_2 # Delete
-    cd ..
 fi
 
 if [ ! -f .env ]; then
