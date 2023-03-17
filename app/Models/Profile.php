@@ -2,16 +2,35 @@
 
 namespace App\Models;
 
-use App\Http\Controllers\ProfilesController;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use OpenApi\Attributes as OAT;
 
+#[OAT\Schema(
+    properties: [
+        new OAT\Property(property: 'id', type: 'integer', format: 'int64', minimum: 1),
+        new OAT\Property(property: 'user_id', type: 'integer', format: 'int64', minimum: 1),
+        new OAT\Property(property: 'title', type: 'string', default: null, maxLength: 255, nullable: true),
+        new OAT\Property(property: 'description', type: 'string', default: null, maxLength: 16383, nullable: true),
+        new OAT\Property(property: 'url', type: 'string', default: null, maxLength: 255, nullable: true),
+        new OAT\Property(property: 'image', type: 'string', default: null, maxLength: 255, nullable: true),
+        new OAT\Property(property: 'created_at', type: 'string', format: 'date-time', nullable: true),
+        new OAT\Property(property: 'updated_at', type: 'string', format: 'date-time', nullable: true),
+        new OAT\Property(property: 'deleted_at', type: 'string', format: 'date-time', nullable: true),
+    ],
+)]
 class Profile extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'title',
+        'description',
+        'url',
+        'image',
+    ];
 
     public function profileImage()
     {

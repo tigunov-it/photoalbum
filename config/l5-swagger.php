@@ -42,6 +42,8 @@ return [
                     base_path('app/Http/Controllers/V1'),
                     base_path('app/Http/Controllers/Sanctum'),
                     base_path('app/Http/Controllers/Swagger'),
+                    base_path('app/Http/Responses'),
+                    base_path('app/Http/Requests'),
                     base_path('app/Models'),
                 ],
 

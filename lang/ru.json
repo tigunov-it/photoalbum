@@ -21,6 +21,8 @@
     "Name": "Имя",
     "Not Found": "Не найдено",
     "of": "из",
+    "Operation completed successfully": "Операция завершена успешно",
+    "Operation failed": "Операция завершилась неудачно",
     "Page Expired": "Страница устарела",
     "Pagination Navigation": "Навигация",
     "Password": "Пароль",

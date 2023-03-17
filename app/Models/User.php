@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -20,11 +21,15 @@ use OpenApi\Attributes as OAT;
         new OAT\Property(property: 'email_verified_at', type: 'string', format: 'date-time', nullable: true),
         new OAT\Property(property: 'created_at', type: 'string', format: 'date-time', nullable: true),
         new OAT\Property(property: 'updated_at', type: 'string', format: 'date-time', nullable: true),
+        new OAT\Property(property: 'deleted_at', type: 'string', format: 'date-time', nullable: true),
     ],
 )]
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens;
+    use HasFactory;
+    use Notifiable;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.

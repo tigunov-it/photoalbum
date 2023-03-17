@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Sanctum\ApiTokenController;
 use App\Http\Controllers\Sanctum\CsrfCookieController;
+use App\Http\Controllers\V1\ProfileController;
 use App\Http\Controllers\V1\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,17 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
     Route::group(['as' => 'auth.'], base_path('routes/auth.php'));
 
     Route::middleware('auth:sanctum')->group(function () {
+
         Route::get('/user', [UserController::class, 'user'])->name('user');
+
+        Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
+            Route::get('/', [ProfileController::class, 'index'])->name('show');
+            Route::get('/s3avatar', [ProfileController::class, 'getAvatarFromS3'])->name('show.s3avatar');
+            Route::patch('/', [ProfileController::class, 'update'])->name('update');
+            Route::delete('/', [ProfileController::class, 'destroy'])->name('destroy');
+        });
+
+
+
     });
 });
