@@ -21,7 +21,6 @@ use OpenApi\Attributes as OAT;
         new OAT\Property(property: 'email_verified_at', type: 'string', format: 'date-time', nullable: true),
         new OAT\Property(property: 'created_at', type: 'string', format: 'date-time', nullable: true),
         new OAT\Property(property: 'updated_at', type: 'string', format: 'date-time', nullable: true),
-        new OAT\Property(property: 'deleted_at', type: 'string', format: 'date-time', nullable: true),
     ],
 )]
 class User extends Authenticatable implements MustVerifyEmail
@@ -51,6 +50,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $hidden = [
         'password',
         'remember_token',
+        'deleted_at',
     ];
 
     protected static function boot()

@@ -13,11 +13,11 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        /** Create test user */
-        if (!User::where('email', '=', 'test@test.com')->exists()) {
-            User::factory()->create(['email' => 'test@test.com']);
-        }
-
         User::factory(10)->create();
+
+        /** Create test user if not exists */
+        if (!User::where('email', '=', 'user@example.com')->exists()) {
+            User::factory()->create(['email' => 'user@example.com']);
+        }
     }
 }

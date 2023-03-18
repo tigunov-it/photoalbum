@@ -5,6 +5,10 @@ ARG UID
 ARG PHP_UPLOAD_LIMIT
 
 RUN apt update && apt install -y \
+    libfreetype6-dev \
+    libgd-dev \
+    libjpeg-dev \
+    libjpeg62-turbo-dev \
     libmagickwand-dev \
     libonig-dev \
     libpng-dev \
@@ -14,6 +18,8 @@ RUN apt update && apt install -y \
     zip
 
 RUN docker-php-ext-install bcmath exif gd intl mbstring pcntl pdo_mysql soap zip
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install -j$(nproc) gd
 
 RUN pecl install xdebug
 RUN docker-php-ext-enable xdebug

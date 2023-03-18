@@ -17,7 +17,6 @@ use OpenApi\Attributes as OAT;
         new OAT\Property(property: 'image', type: 'string', default: null, maxLength: 255, nullable: true),
         new OAT\Property(property: 'created_at', type: 'string', format: 'date-time', nullable: true),
         new OAT\Property(property: 'updated_at', type: 'string', format: 'date-time', nullable: true),
-        new OAT\Property(property: 'deleted_at', type: 'string', format: 'date-time', nullable: true),
     ],
 )]
 class Profile extends Model
@@ -30,6 +29,10 @@ class Profile extends Model
         'description',
         'url',
         'image',
+    ];
+
+    protected $hidden = [
+        'deleted_at',
     ];
 
     public function profileImage()

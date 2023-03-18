@@ -35,18 +35,21 @@ final class ProfileController extends Controller
         path: '/api/v1/profile/s3avatar',
         summary: 'Display avatar',
         tags: ['profile'],
-        responses: [new OAT\Response(
-            response: JsonResponse::HTTP_OK,
-            description: 'Avatar',
-            content: new OAT\JsonContent(),
-        )],
+        responses: [
+            new OAT\Response(
+                response: JsonResponse::HTTP_OK,
+                description: 'Avatar',
+                content: new OAT\MediaType(mediaType: 'image/jpeg'),
+            ),
+            new OAT\Response(response: JsonResponse::HTTP_NOT_FOUND, ref: '#/components/responses/UnsuccessfullResponse'),
+        ],
     )]
     public function getAvatarFromS3(Request $request, ProfileService $service): StreamedResponse
     {
         return $service->getAvatarFromS3($request->user());
     }
 
-    #[OAT\Patch(
+    #[OAT\Post(
         path: '/api/v1/profile',
         summary: 'Update profile',
         requestBody: new OAT\RequestBody(ref: '#/components/requestBodies/ProfileUpdateRequest'),
@@ -72,8 +75,13 @@ final class ProfileController extends Controller
         ])),
         tags: ['profile'],
         responses: [
-            new OAT\Response(response: JsonResponse::HTTP_NO_CONTENT, ref: '#/components/responses/SuccessfullResponse'),
+            new OAT\Response(
+                response: JsonResponse::HTTP_NO_CONTENT,
+                description: 'Deactivation successful',
+                content: new OAT\JsonContent(),
+            ),
             new OAT\Response(response: JsonResponse::HTTP_BAD_REQUEST, ref: '#/components/responses/UnsuccessfullResponse'),
+            new OAT\Response(response: JsonResponse::HTTP_UNPROCESSABLE_ENTITY, ref: '#/components/responses/UnprocessableEntity'),
         ],
     )]
     public function destroy(Request $request): BaseResponse
@@ -85,7 +93,7 @@ final class ProfileController extends Controller
         $user = $request->user();
         /** @var \App\Models\User $user */
 
-        Auth::logout();
+        Auth::guard('web')->logout();
 
         $profileDeleted = $user->profile->delete();
         $userDeleted = $user->delete();
@@ -94,7 +102,7 @@ final class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         if ($profileDeleted && $userDeleted) {
-            return new SuccessfullResponse(status: JsonResponse::HTTP_NO_CONTENT);
+            return new BaseResponse(status: JsonResponse::HTTP_NO_CONTENT);
         }
         return new UnsuccessfullResponse;
     }

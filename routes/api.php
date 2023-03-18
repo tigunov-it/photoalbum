@@ -31,7 +31,7 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
         Route::get('/user', [UserController::class, 'user'])->name('user');
 
         Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
-            Route::get('/', [ProfileController::class, 'index'])->name('show');
+            Route::get('/', [ProfileController::class, 'show'])->name('show');
             Route::get('/s3avatar', [ProfileController::class, 'getAvatarFromS3'])->name('show.s3avatar');
             Route::patch('/', [ProfileController::class, 'update'])->name('update');
             Route::delete('/', [ProfileController::class, 'destroy'])->name('destroy');
