@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Sanctum;
 
+use App\Http\Responses\BaseResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Laravel\Sanctum\Http\Controllers\CsrfCookieController as BaseCsrfCookieController;
@@ -21,8 +22,8 @@ class CsrfCookieController extends BaseCsrfCookieController
             ),
         ],
     )]
-    public function show(Request $request)
+    public function show(Request $request): BaseResponse
     {
-        return parent::show($request);
+        return new BaseResponse(status: JsonResponse::HTTP_NO_CONTENT);
     }
 }

@@ -4,9 +4,9 @@ namespace App\Http\Controllers\V1\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Responses\BaseResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use OpenApi\Attributes as OAT;
 
@@ -32,13 +32,13 @@ final class AuthenticatedSessionController extends Controller
             new OAT\Response(response: JsonResponse::HTTP_UNPROCESSABLE_ENTITY, ref: '#/components/responses/UnprocessableEntity'),
         ],
     )]
-    public function store(LoginRequest $request): Response
+    public function store(LoginRequest $request): BaseResponse
     {
         $request->authenticate();
 
         $request->session()->regenerate();
 
-        return response()->noContent();
+        return new BaseResponse(status: JsonResponse::HTTP_NO_CONTENT);
     }
 
     #[OAT\Post(
@@ -53,7 +53,7 @@ final class AuthenticatedSessionController extends Controller
             ),
         ],
     )]
-    public function destroy(Request $request): Response
+    public function destroy(Request $request): BaseResponse
     {
         Auth::guard('web')->logout();
 
@@ -61,6 +61,6 @@ final class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return response()->noContent();
+        return new BaseResponse(status: JsonResponse::HTTP_NO_CONTENT);
     }
 }

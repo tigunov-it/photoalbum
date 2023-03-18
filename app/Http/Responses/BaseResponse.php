@@ -11,8 +11,8 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class BaseResponse implements Responsable
 {
     public function __construct(
-        protected readonly Collection|JsonResource|Model|array|string $data,
-        protected readonly int                                        $status = JsonResponse::HTTP_OK,
+        protected readonly Collection|JsonResource|Model|array|string|null $data   = null,
+        protected readonly int                                             $status = JsonResponse::HTTP_OK,
     ) {
     }
 

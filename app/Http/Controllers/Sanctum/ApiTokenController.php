@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Sanctum;
 
 use App\Http\Controllers\Controller;
+use App\Http\Responses\BaseResponse;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -21,7 +22,7 @@ class ApiTokenController extends Controller
             content: new OAT\JsonContent(required: ['email', 'password', 'device_name'], properties: [
                 new OAT\Property(property: 'email', type: 'string', format: 'email'),
                 new OAT\Property(property: 'password', type: 'string', format: 'password'),
-                new OAT\Property(property: 'device_name', type: 'string', example: 'phone'),
+                new OAT\Property(property: 'device_name', type: 'string', maxLength: 255, example: 'phone'),
             ]),
         ),
         responses: [
@@ -33,12 +34,12 @@ class ApiTokenController extends Controller
             new OAT\Response(response: JsonResponse::HTTP_UNPROCESSABLE_ENTITY, ref: '#/components/responses/UnprocessableEntity'),
         ],
     )]
-    public function store(Request $request): JsonResponse
+    public function store(Request $request): BaseResponse
     {
         $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-            'device_name' => 'required',
+            'email' => ['required', 'email'],
+            'password' => ['required', 'string'],
+            'device_name' => ['required', 'string', 'max:255'],
         ]);
 
         $user = User::where('email', $request->email)->first();
@@ -49,6 +50,6 @@ class ApiTokenController extends Controller
             ]);
         }
 
-        return new JsonResponse($user->createToken($request->device_name)->plainTextToken);
+        return new BaseResponse($user->createToken($request->device_name)->plainTextToken);
     }
 }

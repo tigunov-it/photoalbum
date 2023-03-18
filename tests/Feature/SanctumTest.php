@@ -13,7 +13,7 @@ final class SanctumTest extends TestCase
     {
         $response = $this->get(route('v1.user'));
 
-        $response->assertRedirect();
+        $response->assertUnauthorized();
     }
 
     public function testTokenCanBeReceived(): void

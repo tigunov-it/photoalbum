@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\V1\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Responses\BaseResponse;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -25,7 +26,7 @@ final class EmailVerificationNotificationController extends Controller
             ),
         ],
     )]
-    public function store(Request $request): JsonResponse|RedirectResponse
+    public function store(Request $request): BaseResponse|RedirectResponse
     {
         if ($request->user()->hasVerifiedEmail()) {
             return redirect()->intended(RouteServiceProvider::HOME);
@@ -33,6 +34,6 @@ final class EmailVerificationNotificationController extends Controller
 
         $request->user()->sendEmailVerificationNotification();
 
-        return response()->json(['status' => 'verification-link-sent']);
+        return new BaseResponse(['status' => 'verification-link-sent']);
     }
 }

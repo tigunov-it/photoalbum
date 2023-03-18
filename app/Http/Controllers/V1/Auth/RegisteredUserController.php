@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\V1\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Responses\BaseResponse;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
@@ -44,7 +44,7 @@ final class RegisteredUserController extends Controller
             new OAT\Response(response: JsonResponse::HTTP_UNPROCESSABLE_ENTITY, ref: '#/components/responses/UnprocessableEntity'),
         ],
     )]
-    public function store(Request $request): Response
+    public function store(Request $request): BaseResponse
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
@@ -67,6 +67,6 @@ final class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return response()->noContent();
+        return new BaseResponse(status: JsonResponse::HTTP_NO_CONTENT);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\V1\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Responses\BaseResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
@@ -35,7 +36,7 @@ final class PasswordResetLinkController extends Controller
             new OAT\Response(response: JsonResponse::HTTP_UNPROCESSABLE_ENTITY, ref: '#/components/responses/UnprocessableEntity'),
         ],
     )]
-    public function store(Request $request): JsonResponse
+    public function store(Request $request): BaseResponse
     {
         $request->validate([
             'email' => ['required', 'email'],
@@ -54,6 +55,6 @@ final class PasswordResetLinkController extends Controller
             ]);
         }
 
-        return response()->json(['status' => __($status)]);
+        return new BaseResponse(['status' => __($status)]);
     }
 }

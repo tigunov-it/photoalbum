@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Responses\BaseResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use OpenApi\Attributes as OAT;
@@ -20,8 +21,8 @@ final class UserController extends Controller
             ),
         ],
     )]
-    public function user(Request $request): JsonResponse
+    public function user(Request $request): BaseResponse
     {
-        return new JsonResponse($request->user());
+        return new BaseResponse($request->user());
     }
 }

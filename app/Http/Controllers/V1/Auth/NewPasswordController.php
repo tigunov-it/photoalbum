@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\V1\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Responses\BaseResponse;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -44,7 +45,7 @@ final class NewPasswordController extends Controller
             new OAT\Response(response: JsonResponse::HTTP_UNPROCESSABLE_ENTITY, ref: '#/components/responses/UnprocessableEntity'),
         ],
     )]
-    public function store(Request $request): JsonResponse
+    public function store(Request $request): BaseResponse
     {
         $request->validate([
             'token' => ['required'],
@@ -75,6 +76,6 @@ final class NewPasswordController extends Controller
             ]);
         }
 
-        return response()->json(['status' => __($status)]);
+        return new BaseResponse(['status' => __($status)]);
     }
 }

@@ -32,7 +32,9 @@ class AuthenticationTest extends TestCase
             'password' => 'wrong-password',
         ]);
 
-        $response->assertRedirect();
+        $response->assertUnprocessable()->assertJson([
+            'errors' => ['email' => [__('auth.failed')]]
+        ]);
         $this->assertGuest();
     }
 }
