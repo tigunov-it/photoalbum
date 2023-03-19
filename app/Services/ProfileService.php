@@ -10,9 +10,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 final class ProfileService
 {
-    /**
-     * TODO: test it
-     */
     public function update(User $user, $data): bool
     {
         $profile = $user->profile;

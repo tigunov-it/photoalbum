@@ -5,7 +5,6 @@ namespace App\Http\Controllers\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Http\Responses\BaseResponse;
-use App\Http\Responses\SuccessfullResponse;
 use App\Http\Responses\UnsuccessfullResponse;
 use App\Services\ProfileService;
 use Illuminate\Http\JsonResponse;
@@ -41,7 +40,11 @@ final class ProfileController extends Controller
                 description: 'Avatar',
                 content: new OAT\MediaType(mediaType: 'image/jpeg'),
             ),
-            new OAT\Response(response: JsonResponse::HTTP_NOT_FOUND, ref: '#/components/responses/UnsuccessfullResponse'),
+            new OAT\Response(
+                response: JsonResponse::HTTP_NOT_FOUND,
+                description: 'Not found',
+                content: new OAT\JsonContent(),
+            ),
         ],
     )]
     public function getAvatarFromS3(Request $request, ProfileService $service): StreamedResponse
@@ -55,14 +58,19 @@ final class ProfileController extends Controller
         requestBody: new OAT\RequestBody(ref: '#/components/requestBodies/ProfileUpdateRequest'),
         tags: ['profile'],
         responses: [
-            new OAT\Response(response: JsonResponse::HTTP_NO_CONTENT, ref: '#/components/responses/SuccessfullResponse'),
+            new OAT\Response(
+                response: JsonResponse::HTTP_NO_CONTENT,
+                description: 'Profile updated',
+                content: new OAT\JsonContent(),
+            ),
             new OAT\Response(response: JsonResponse::HTTP_BAD_REQUEST, ref: '#/components/responses/UnsuccessfullResponse'),
+            new OAT\Response(response: JsonResponse::HTTP_UNPROCESSABLE_ENTITY, ref: '#/components/responses/UnprocessableEntity'),
         ],
     )]
     public function update(ProfileUpdateRequest $request, ProfileService $service): BaseResponse
     {
         if ($service->update($request->user(), $request->validated())) {
-            return new SuccessfullResponse(status: JsonResponse::HTTP_NO_CONTENT);
+            return new BaseResponse(status: JsonResponse::HTTP_NO_CONTENT);
         }
         return new UnsuccessfullResponse;
     }
