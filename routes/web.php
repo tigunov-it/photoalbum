@@ -68,4 +68,3 @@ Route::get('/profile/{user}/edit', [ProfilesController::class, 'edit'])->name('p
 Route::patch('/profile/{user}', [ProfilesController::class, 'update'])->name('profile.update');
 Route::get('/s3avatar/{user}', [ProfilesController::class, 'getAvatarFromS3'])->name('profile.getAvatarFromS3');
 
-

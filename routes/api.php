@@ -36,8 +36,5 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
             Route::patch('/', [ProfileController::class, 'update'])->name('update');
             Route::delete('/', [ProfileController::class, 'destroy'])->name('destroy');
         });
-
-
-
     });
 });
