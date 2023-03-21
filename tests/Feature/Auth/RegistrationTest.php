@@ -16,7 +16,7 @@ class RegistrationTest extends TestCase
     {
         Notification::fake();
 
-        $response = $this->post(route('v1.auth.register'), [
+        $response = $this->post(route('register'), [
             'name' => 'Test User',
             'email' => 'test@example.com',
             'username' => 'username',

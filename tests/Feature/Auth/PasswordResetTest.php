@@ -19,7 +19,7 @@ class PasswordResetTest extends TestCase
 
         $user = User::factory()->create();
 
-        $response = $this->post(route('v1.auth.password.email'), [
+        $response = $this->post(route('password.email'), [
             'email' => $user->email,
         ]);
 
@@ -40,10 +40,10 @@ class PasswordResetTest extends TestCase
 
         $user = User::factory()->create();
 
-        $this->post(route('v1.auth.password.email'), ['email' => $user->email]);
+        $this->post(route('password.email'), ['email' => $user->email]);
 
         Notification::assertSentTo($user, ResetPassword::class, function (object $notification) use ($user) {
-            $response = $this->post(route('v1.auth.password.store'), [
+            $response = $this->post(route('password.store'), [
                 'token' => $notification->token,
                 'email' => $user->email,
                 'password' => 'Password@123',

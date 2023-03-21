@@ -38,7 +38,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+// Auth::routes();
 Route::match(['get', 'post'],'/p/create', [PostsController::class, 'create'])->name('post.create');
 
 Route::post('/p', [PostsController::class, 'store']);
