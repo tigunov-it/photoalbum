@@ -61,6 +61,11 @@ class User extends Authenticatable implements MustVerifyEmail
             $user->profile()->create([
                 'title' => $user->username,
             ]);
+            $user->albums()->create([
+                'title' => 'Unsorted',
+                'description' => '',
+                'image' => '',
+            ]);
         });
     }
 

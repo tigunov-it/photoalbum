@@ -2,12 +2,12 @@
 
 namespace App\Policies;
 
-use App\Models\Profile;
+use App\Models\Album;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Auth\Access\Response;
 
-final class ProfilePolicy
+final class AlbumPolicy
 {
     use HandlesAuthorization;
 
@@ -22,9 +22,9 @@ final class ProfilePolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Profile $profile): Response|bool
+    public function view(User $user, Album $album): Response|bool
     {
-        return $user->id === $profile->user_id;
+        return $user->id === $album->user_id;
     }
 
     /**
@@ -32,37 +32,37 @@ final class ProfilePolicy
      */
     public function create(User $user): Response|bool
     {
-        return false;
+        return true;
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Profile $profile): Response|bool
+    public function update(User $user, Album $album): Response|bool
     {
-        return $user->id === $profile->user_id;
+        return $user->id === $album->user_id;
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Profile $profile): Response|bool
+    public function delete(User $user, Album $album): Response|bool
     {
-        return $user->id === $profile->user_id;
+        return $user->id === $album->user_id;
     }
 
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Profile $profile): Response|bool
+    public function restore(User $user, Album $album): Response|bool
     {
-        return $user->id === $profile->user_id;
+        return false;
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Profile $profile): Response|bool
+    public function forceDelete(User $user, Album $album): Response|bool
     {
         return false;
     }

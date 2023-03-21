@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Sanctum\ApiTokenController;
 use App\Http\Controllers\Sanctum\CsrfCookieController;
+use App\Http\Controllers\V1\AlbumController;
 use App\Http\Controllers\V1\ProfileController;
 use App\Http\Controllers\V1\UserController;
 use Illuminate\Support\Facades\Route;
@@ -22,24 +23,28 @@ Route::group(['prefix' => 'sanctum', 'as' => 'sanctum.'], function () {
     Route::get('/csrf-cookie', [CsrfCookieController::class, 'show'])->middleware('web')->name('csrf-cookie');
 });
 
-Route::group([], base_path('routes/auth.php'));
+Route::prefix('v1')->group(function () {
 
-Route::middleware('auth:sanctum')->group(function () {
+    Route::group([], base_path('routes/auth.php'));
 
-    Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
+    Route::middleware('auth:sanctum')->group(function () {
 
-        Route::get('/user', [UserController::class, 'user'])->name('user');
+        Route::as('v1.')->group(function () {
 
-        Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
-            Route::get('/', [ProfileController::class, 'show'])->name('show');
-            Route::get('/s3avatar', [ProfileController::class, 'getAvatarFromS3'])->name('show.s3avatar');
-            Route::patch('/', [ProfileController::class, 'update'])->name('update');
-            Route::delete('/', [ProfileController::class, 'destroy'])->name('destroy');
+            Route::get('/user', [UserController::class, 'user'])->name('user');
+
+            Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
+                Route::get('/', [ProfileController::class, 'show'])->name('show');
+                Route::get('/s3avatar', [ProfileController::class, 'getAvatarFromS3'])->name('show.s3avatar');
+                Route::patch('/', [ProfileController::class, 'update'])->name('update');
+                Route::delete('/', [ProfileController::class, 'destroy'])->name('destroy');
+            });
+
+            Route::apiResource('albums', AlbumController::class);
+            // Route::group(['prefix' => 'albums', 'as' => 'albums.'], function () {
+            // });
+
+
         });
-
-
-
-
-
     });
 });
