@@ -22,11 +22,11 @@ Route::group(['prefix' => 'sanctum', 'as' => 'sanctum.'], function () {
     Route::get('/csrf-cookie', [CsrfCookieController::class, 'show'])->middleware('web')->name('csrf-cookie');
 });
 
-Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
+Route::group([], base_path('routes/auth.php'));
 
-    Route::group(['as' => 'auth.'], base_path('routes/auth.php'));
+Route::middleware('auth:sanctum')->group(function () {
 
-    Route::middleware('auth:sanctum')->group(function () {
+    Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
 
         Route::get('/user', [UserController::class, 'user'])->name('user');
 
@@ -36,5 +36,10 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
             Route::patch('/', [ProfileController::class, 'update'])->name('update');
             Route::delete('/', [ProfileController::class, 'destroy'])->name('destroy');
         });
+
+
+
+
+
     });
 });
