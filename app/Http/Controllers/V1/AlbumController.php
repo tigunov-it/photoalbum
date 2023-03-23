@@ -4,7 +4,9 @@ namespace App\Http\Controllers\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AlbumIndexRequest;
+use App\Http\Requests\AlbumStoreRequest;
 use App\Http\Responses\BaseResponse;
+use App\Http\Responses\UnsuccessfullResponse;
 use App\Models\Album;
 use App\Services\AlbumService;
 use Illuminate\Http\JsonResponse;
@@ -14,7 +16,7 @@ final class AlbumController extends Controller
 {
     #[OAT\Get(
         path: '/api/v1/albums',
-        summary: 'Display a listing of the albums.',
+        summary: 'Display a listing of the albums',
         tags: ['albums'],
         parameters: [
             new OAT\Parameter(ref: '#/components/parameters/page'),
@@ -34,5 +36,27 @@ final class AlbumController extends Controller
         $this->authorize('viewAny', Album::class);
 
         return new BaseResponse($service->getAlbums($request->user(), $request->validated()));
+    }
+
+    #[OAT\Post(
+        path: '/api/v1/albums',
+        summary: 'Store a newly created album in storage',
+        requestBody: new OAT\RequestBody(ref: '#/components/requestBodies/AlbumStoreRequest'),
+        tags: ['albums'],
+        responses: [new OAT\Response(
+            response: JsonResponse::HTTP_CREATED,
+            description: 'Created',
+            content: new OAT\JsonContent(ref: '#/components/schemas/Album'),
+        )],
+    )]
+    public function store(AlbumStoreRequest $request, AlbumService $service): BaseResponse
+    {
+        $created = $service->createAlbum($request->user(), $request->validated());
+
+        if ($created) {
+            return new BaseResponse($created, JsonResponse::HTTP_CREATED);
+        }
+
+        return new UnsuccessfullResponse;
     }
 }
