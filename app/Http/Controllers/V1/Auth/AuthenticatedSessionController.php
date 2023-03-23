@@ -21,6 +21,7 @@ final class AuthenticatedSessionController extends Controller
             content: new OAT\JsonContent(required: ['email', 'password'], properties: [
                 new OAT\Property(property: 'email', type: 'string', format: 'email'),
                 new OAT\Property(property: 'password', type: 'string', format: 'password'),
+                new OAT\Property(property: 'remember', type: 'boolean', default: false),
             ]),
         ),
         responses: [

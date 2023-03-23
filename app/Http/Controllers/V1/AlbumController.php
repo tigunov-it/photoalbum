@@ -18,6 +18,7 @@ final class AlbumController extends Controller
         tags: ['albums'],
         parameters: [
             new OAT\Parameter(ref: '#/components/parameters/page'),
+            new OAT\Parameter(ref: '#/components/parameters/per_page'),
             new OAT\Parameter(ref: '#/components/parameters/query'),
         ],
         responses: [new OAT\Response(

@@ -7,7 +7,7 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 final class AlbumService
 {
-    public function getAlbums(User $user, $data): LengthAwarePaginator
+    public function getAlbums(User $user, array $data): LengthAwarePaginator
     {
         $builder = $user->albums();
 
@@ -15,6 +15,6 @@ final class AlbumService
             $builder = QueryBuilderService::addSearchQuery($builder, $data['query'], 'title');
         }
 
-        return $builder->paginate();
+        return $builder->paginate(perPage: $data['per_page'], page: $data['page']);
     }
 }
