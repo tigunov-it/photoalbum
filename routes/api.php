@@ -40,9 +40,10 @@ Route::prefix('v1')->group(function () {
                 Route::delete('/', [ProfileController::class, 'destroy'])->name('destroy');
             });
 
-            Route::apiResource('albums', AlbumController::class);
-            // Route::group(['prefix' => 'albums', 'as' => 'albums.'], function () {
-            // });
+            Route::apiResource('albums', AlbumController::class)->except('update');
+            Route::group(['prefix' => 'albums', 'as' => 'albums.'], function () {
+                Route::get('/{album}/s3cover', [AlbumController::class, 'getCoverFromS3'])->name('show.s3cover');
+            });
 
 
         });

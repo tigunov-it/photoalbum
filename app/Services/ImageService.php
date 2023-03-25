@@ -8,6 +8,9 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Intervention\Image\File;
+use Psr\Http\Message\StreamInterface;
+use Symfony\Component\HttpFoundation\StreamedResponse;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 final class ImageService
 {
@@ -38,10 +41,32 @@ final class ImageService
         return self::uploadFile($path, $image);
     }
 
-    public static function uploadFile(string $path, File $image): string
+    public static function uploadFile(string $path, StreamInterface|File|UploadedFile|string $file): string
     {
-        Storage::disk('s3')->put($path, $image);
+        Storage::disk('s3')->put($path, $file);
 
         return $path;
+    }
+
+    /**
+     * @throws NotFoundHttpException
+     */
+    public static function getImage(string $path): StreamedResponse
+    {
+        if (!Storage::disk('s3')->fileExists($path)) {
+            throw new NotFoundHttpException(__('http-statuses.404'));
+        }
+
+        return Storage::disk('s3')->response($path);
+    }
+
+    public static function delete(string $path): bool
+    {
+        return Storage::disk('s3')->delete($path);
+    }
+
+    public static function deleteFolder(string $folder): bool
+    {
+        return Storage::disk('s3')->deleteDirectory($folder);
     }
 }

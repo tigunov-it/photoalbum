@@ -5,6 +5,8 @@ namespace App\Services;
 use App\Models\Album;
 use App\Models\User;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Symfony\Component\HttpFoundation\StreamedResponse;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 final class AlbumService
 {
@@ -31,5 +33,19 @@ final class AlbumService
             'image' => $path,
             'created_at' => $now,
         ]);
+    }
+
+    /**
+     * @throws NotFoundHttpException
+     */
+    public function getCoverFromS3(Album $album): StreamedResponse
+    {
+        return ImageService::getImage($album->image);
+    }
+
+    public function deleteAlbum(Album $album): ?bool
+    {
+        ImageService::deleteFolder(strstr($album->image, '/cover', true));
+        return $album->delete();
     }
 }

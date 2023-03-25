@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Models\User;
-use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -16,7 +15,7 @@ final class ProfileService
         if (array_key_exists('image', $data)) {
 
             if ($profile->image !== null) {
-                Storage::disk('s3')->delete($profile->image);
+                ImageService::delete($profile->image);
             }
 
             if (!empty($data['image'])) {
@@ -36,6 +35,6 @@ final class ProfileService
             throw new NotFoundHttpException(__('http-statuses.404'));
         }
 
-        return Storage::disk('s3')->response("{$user->profile->image}");
+        return ImageService::getImage($user->profile->image);
     }
 }

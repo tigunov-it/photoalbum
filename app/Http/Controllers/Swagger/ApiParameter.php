@@ -6,6 +6,14 @@ use OpenApi\Attributes as OAT;
 
 #[
     OAT\Parameter(
+        parameter: 'album_id',
+        name: 'album_id',
+        description: 'Album ID',
+        in: 'path',
+        required: true,
+        schema: new OAT\Schema(type: 'integer', format: 'int64', minimum: 1),
+    ),
+    OAT\Parameter(
         parameter: 'page',
         name: 'page',
         description: 'Page number',

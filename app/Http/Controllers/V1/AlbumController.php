@@ -11,6 +11,7 @@ use App\Models\Album;
 use App\Services\AlbumService;
 use Illuminate\Http\JsonResponse;
 use OpenApi\Attributes as OAT;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 final class AlbumController extends Controller
 {
@@ -51,6 +52,8 @@ final class AlbumController extends Controller
     )]
     public function store(AlbumStoreRequest $request, AlbumService $service): BaseResponse
     {
+        $this->authorize('create', Album::class);
+
         $created = $service->createAlbum($request->user(), $request->validated());
 
         if ($created) {
@@ -59,4 +62,69 @@ final class AlbumController extends Controller
 
         return new UnsuccessfullResponse;
     }
+
+    #[OAT\Get(
+        path: '/api/v1/albums/{album_id}',
+        summary: 'Display the specified album',
+        tags: ['albums'],
+        parameters: [
+            new OAT\Parameter(ref: '#/components/parameters/album_id'),
+        ],
+        responses: [new OAT\Response(
+            response: JsonResponse::HTTP_OK,
+            description: 'Display the specified album',
+            content: new OAT\JsonContent(ref: '#/components/schemas/Album'),
+        )],
+    )]
+    public function show(Album $album): BaseResponse
+    {
+        $this->authorize('view', $album);
+
+        return new BaseResponse($album);
+    }
+
+    #[OAT\Get(
+        path: '/api/v1/albums/{album_id}/s3cover',
+        summary: 'Display album cover',
+        tags: ['albums'],
+        parameters: [
+            new OAT\Parameter(ref: '#/components/parameters/album_id'),
+        ],
+        responses: [new OAT\Response(
+            response: JsonResponse::HTTP_OK,
+            description: 'Cover',
+            content: new OAT\MediaType(mediaType: 'image/jpeg'),
+        )],
+    )]
+    public function getCoverFromS3(Album $album, AlbumService $service): StreamedResponse
+    {
+        $this->authorize('view', $album);
+
+        return $service->getCoverFromS3($album);
+    }
+
+    #[OAT\Delete(
+        path: '/api/v1/albums/{album_id}',
+        summary: 'Remove the specified album from storage',
+        tags: ['albums'],
+        parameters: [new OAT\Parameter(ref: '#/components/parameters/album_id')],
+        responses: [new OAT\Response(
+            response: JsonResponse::HTTP_NO_CONTENT,
+            description: 'Deleted',
+            content: new OAT\JsonContent(),
+        )],
+    )]
+    public function destroy(Album $album, AlbumService $service): BaseResponse
+    {
+        $this->authorize('delete', $album);
+
+        $deleted = $service->deleteAlbum($album);
+
+        if ($deleted) {
+            return new BaseResponse(status: JsonResponse::HTTP_NO_CONTENT);
+        }
+
+        return new BaseResponse(status: JsonResponse::HTTP_BAD_REQUEST);
+    }
+
 }
