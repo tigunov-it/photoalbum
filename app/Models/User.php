@@ -57,14 +57,15 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         parent::boot();
 
-        static::created(function ($user){
+        static::created(function (User $user){
             $user->profile()->create([
                 'title' => $user->username,
             ]);
-            $user->albums()->create([
+            $user->albums()->forceCreate([
                 'title' => 'Unsorted',
                 'description' => '',
                 'image' => '',
+                'is_default' => true,
             ]);
         });
     }
@@ -82,5 +83,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function albums(): HasMany
     {
         return $this->hasMany(Album::class)->orderBy('created_at', 'DESC');
+    }
+
+    public function defaultAlbum(): HasOne
+    {
+        return $this->hasOne(Album::class)->where('is_default', '=', true);
     }
 }

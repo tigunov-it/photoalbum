@@ -16,6 +16,7 @@ use OpenApi\Attributes as OAT;
         new OAT\Property(property: 'image', type: 'string', maxLength: 16383),
         new OAT\Property(property: 'created_at', type: 'string', format: 'date-time', nullable: true),
         new OAT\Property(property: 'updated_at', type: 'string', format: 'date-time', nullable: true),
+        new OAT\Property(property: 'is_default', type: 'boolean', default: false),
     ],
 )]
 class Album extends Model
