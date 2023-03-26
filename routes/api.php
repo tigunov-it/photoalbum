@@ -47,7 +47,7 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
 
         Route::apiResource('albums.posts', AlbumPostController::class)->only(['index']);
 
-        Route::apiResource('posts', PostController::class)->only('index');
+        Route::apiResource('posts', PostController::class)->only(['index', 'store']);
 
 
     });

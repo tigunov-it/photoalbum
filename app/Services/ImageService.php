@@ -2,10 +2,12 @@
 
 namespace App\Services;
 
+use App\Enums\Size;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Constraint;
 use Intervention\Image\Facades\Image;
 use Intervention\Image\File;
 use Psr\Http\Message\StreamInterface;
@@ -39,6 +41,58 @@ final class ImageService
         );
 
         return self::uploadFile($path, $image);
+    }
+
+    /**
+     * @return array{image: string, image_small: string, image_medium: string, image_large: string}
+     */
+    public static function uploadPostImage(User $user, UploadedFile $image, Carbon $dateTime): array
+    {
+        $imagePath = self::uploadFile(sprintf(
+            'uploads/%s/%s',
+            $user->username,
+            $dateTime->format('Y-m-d_H:i:s'),
+        ), $image);
+
+        $imageSmall = Image::make($image)
+            ->resize(Size::S->value, null, static fn (Constraint $constraint): void => $constraint->aspectRatio())
+            ->encode('jpg', 30);
+
+        $imagePathSmall = self::uploadFile(sprintf(
+            'uploads/%s/%s/small/%s',
+            $user->username,
+            $dateTime->format('Y-m-d_H:i:s'),
+            $imageSmall->basename,
+        ), $imageSmall);
+
+        $imageMedium = Image::make($image)
+            ->resize(Size::M->value, null, static fn (Constraint $constraint): void => $constraint->aspectRatio())
+            ->encode('jpg', 50);
+
+        $imagePathMedium = self::uploadFile(sprintf(
+            'uploads/%s/%s/medium/%s',
+            $user->username,
+            $dateTime->format('Y-m-d_H:i:s'),
+            $imageMedium->basename,
+        ), $imageMedium);
+
+        $imageLarge = Image::make($image)
+            ->resize(Size::L->value, null, static fn (Constraint $constraint): void => $constraint->aspectRatio())
+            ->encode('jpg', 80);
+
+        $imagePathLarge = self::uploadFile(sprintf(
+            'uploads/%s/%s/large/%s',
+            $user->username,
+            $dateTime->format('Y-m-d_H:i:s'),
+            $imageLarge->basename,
+        ), $imageLarge);
+
+        return [
+            'image' => $imagePath,
+            'image_small' => $imagePathSmall,
+            'image_medium' => $imagePathMedium,
+            'image_large' => $imagePathLarge,
+        ];
     }
 
     public static function uploadFile(string $path, StreamInterface|File|UploadedFile|string $file): string

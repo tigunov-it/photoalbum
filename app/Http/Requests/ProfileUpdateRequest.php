@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\RekognitionRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\File;
@@ -51,6 +52,7 @@ final class ProfileUpdateRequest extends FormRequest
                 'nullable',
                 File::types(['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'])->max(20 * 1024),
                 Rule::dimensions()->maxWidth(4096)->maxHeight(4096),
+                new RekognitionRule,
             ],
         ];
     }
