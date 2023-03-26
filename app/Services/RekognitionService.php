@@ -19,8 +19,11 @@ final readonly class RekognitionService
 
     public function moderate(UploadedFile $file)
     {
+        $imageForAnalise = fopen($file, 'r');
+        $bytes = fread($imageForAnalise, filesize($file));
+
         return $this->client->detectModerationLabels([
-            'Image' => ['Bytes' => $file],
+            'Image' => ['Bytes' => $bytes],
             'MinConfidence' => 50
         ])->get('ModerationLabels');
     }
