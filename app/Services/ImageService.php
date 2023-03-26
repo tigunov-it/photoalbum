@@ -55,7 +55,7 @@ final class ImageService
         ), $image);
 
         $imageSmall = Image::make($image)
-            ->resize(Size::S->value, null, static fn (Constraint $constraint): void => $constraint->aspectRatio())
+            ->resize(Size::S->value, null, static fn (Constraint $constraint) => $constraint->aspectRatio())
             ->encode('jpg', 30);
 
         $imagePathSmall = self::uploadFile(sprintf(
@@ -66,7 +66,7 @@ final class ImageService
         ), $imageSmall);
 
         $imageMedium = Image::make($image)
-            ->resize(Size::M->value, null, static fn (Constraint $constraint): void => $constraint->aspectRatio())
+            ->resize(Size::M->value, null, static fn (Constraint $constraint) => $constraint->aspectRatio())
             ->encode('jpg', 50);
 
         $imagePathMedium = self::uploadFile(sprintf(
@@ -77,7 +77,7 @@ final class ImageService
         ), $imageMedium);
 
         $imageLarge = Image::make($image)
-            ->resize(Size::L->value, null, static fn (Constraint $constraint): void => $constraint->aspectRatio())
+            ->resize(Size::L->value, null, static fn (Constraint $constraint) => $constraint->aspectRatio())
             ->encode('jpg', 80);
 
         $imagePathLarge = self::uploadFile(sprintf(

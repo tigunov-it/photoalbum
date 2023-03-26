@@ -44,7 +44,7 @@ final class PostService
         $albumCreatedAt = Carbon::parse($album->created_at);
 
         foreach ($images as &$image) {
-            $image = ImageService::uploadPostImage($user, $image, $albumCreatedAt);
+            $image = array_merge($image, ImageService::uploadPostImage($user, $image, $albumCreatedAt));
         }
 
         return $album->posts()->createMany($images);
