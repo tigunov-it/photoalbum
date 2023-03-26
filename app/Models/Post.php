@@ -25,7 +25,15 @@ class Post extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'album_id',
+        'title',
+        'description',
+        'image',
+        'image_small',
+        'image_medium',
+        'image_large',
+    ];
 
     public function user()
     {

@@ -3,6 +3,8 @@
 use App\Http\Controllers\Sanctum\ApiTokenController;
 use App\Http\Controllers\Sanctum\CsrfCookieController;
 use App\Http\Controllers\V1\AlbumController;
+use App\Http\Controllers\V1\AlbumPostController;
+use App\Http\Controllers\V1\PostController;
 use App\Http\Controllers\V1\ProfileController;
 use App\Http\Controllers\V1\UserController;
 use Illuminate\Support\Facades\Route;
@@ -44,6 +46,10 @@ Route::prefix('v1')->group(function () {
             Route::group(['prefix' => 'albums', 'as' => 'albums.'], function () {
                 Route::get('/{album}/s3cover', [AlbumController::class, 'getCoverFromS3'])->name('show.s3cover');
             });
+
+            Route::apiResource('albums.posts', AlbumPostController::class)->only(['index']);
+
+            Route::apiResource('posts', PostController::class)->only('index');
 
 
         });
