@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\V1\Auth;
+namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Responses\BaseResponse;
@@ -20,7 +20,7 @@ final class NewPasswordController extends Controller
      * @throws \Illuminate\Validation\ValidationException
      */
     #[OAT\Post(
-        path: '/api/v1/reset-password',
+        path: '/api/reset-password',
         description: 'Send new password request',
         tags: ['auth'],
         requestBody: new OAT\RequestBody(

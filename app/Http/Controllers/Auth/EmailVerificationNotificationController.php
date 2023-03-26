@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\V1\Auth;
+namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Responses\BaseResponse;
@@ -13,7 +13,7 @@ use OpenApi\Attributes as OAT;
 final class EmailVerificationNotificationController extends Controller
 {
     #[OAT\Post(
-        path: '/api/v1/email/verification-notification',
+        path: '/api/email/verification-notification',
         description: 'Send a new email verification notification',
         tags: ['auth'],
         responses: [

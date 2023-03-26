@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\V1\Auth;
+namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Responses\BaseResponse;
@@ -16,7 +16,7 @@ final class PasswordResetLinkController extends Controller
      * @throws \Illuminate\Validation\ValidationException
      */
     #[OAT\Post(
-        path: '/api/v1/forgot-password',
+        path: '/api/forgot-password',
         description: 'Send password reset link request',
         tags: ['auth'],
         requestBody: new OAT\RequestBody(

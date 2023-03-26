@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\V1\Auth;
+namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
@@ -13,7 +13,7 @@ use OpenApi\Attributes as OAT;
 final class VerifyEmailController extends Controller
 {
     #[OAT\Get(
-        path: '/api/v1/verify-email/{id}/{hash}',
+        path: '/api/verify-email/{id}/{hash}',
         description: 'Mark the authenticated user\'s email address as verified',
         tags: ['auth'],
         parameters: [

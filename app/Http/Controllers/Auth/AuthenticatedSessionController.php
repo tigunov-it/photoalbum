@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\V1\Auth;
+namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
@@ -13,7 +13,7 @@ use OpenApi\Attributes as OAT;
 final class AuthenticatedSessionController extends Controller
 {
     #[OAT\Post(
-        path: '/api/v1/login',
+        path: '/api/login',
         description: 'Send authentication request',
         tags: ['auth'],
         requestBody: new OAT\RequestBody(
@@ -43,7 +43,7 @@ final class AuthenticatedSessionController extends Controller
     }
 
     #[OAT\Post(
-        path: '/api/v1/logout',
+        path: '/api/logout',
         description: 'Destroy an authenticated session',
         tags: ['auth'],
         responses: [
