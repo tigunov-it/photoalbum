@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Album;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -41,6 +42,20 @@ final class AlbumService
     public function getCoverFromS3(Album $album): StreamedResponse
     {
         return ImageService::getImage($album->image);
+    }
+
+    public function updateAlbum(User $user, Album $album, array $data): bool
+    {
+        if (!empty($data['image'])) {
+
+            if ($album->image !== null) {
+                ImageService::delete($album->image);
+            }
+
+            $data['image'] = ImageService::uploadAlbumImage($user, $data['image'], Carbon::parse($album->created_at));
+        }
+
+        return $album->update($data);
     }
 
     public function deleteAlbum(Album $album): ?bool

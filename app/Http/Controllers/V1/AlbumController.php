@@ -5,6 +5,7 @@ namespace App\Http\Controllers\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AlbumIndexRequest;
 use App\Http\Requests\AlbumStoreRequest;
+use App\Http\Requests\AlbumUpdateRequest;
 use App\Http\Responses\BaseResponse;
 use App\Http\Responses\UnsuccessfullResponse;
 use App\Models\Album;
@@ -101,6 +102,31 @@ final class AlbumController extends Controller
         $this->authorize('view', $album);
 
         return $service->getCoverFromS3($album);
+    }
+
+    #[OAT\Post(
+        path: '/api/v1/albums/{album_id}',
+        summary: 'Update the specified album in storage',
+        requestBody: new OAT\RequestBody(ref: '#/components/requestBodies/AlbumUpdateRequest'),
+        tags: ['albums'],
+        parameters: [new OAT\Parameter(ref: '#/components/parameters/album_id')],
+        responses: [new OAT\Response(
+            response: JsonResponse::HTTP_NO_CONTENT,
+            description: 'Updated',
+            content: new OAT\JsonContent(),
+        )],
+    )]
+    public function update(AlbumUpdateRequest $request, Album $album, AlbumService $service): BaseResponse
+    {
+        $this->authorize('update', $album);
+
+        $updated = $service->updateAlbum($request->user(), $album, $request->validated());
+
+        if ($updated) {
+            return new BaseResponse(status: JsonResponse::HTTP_NO_CONTENT);
+        }
+
+        return new BaseResponse(status: JsonResponse::HTTP_BAD_REQUEST);
     }
 
     #[OAT\Delete(
