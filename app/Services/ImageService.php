@@ -6,6 +6,7 @@ use App\Enums\Size;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Constraint;
 use Intervention\Image\Facades\Image;
@@ -48,44 +49,37 @@ final class ImageService
      */
     public static function uploadPostImage(User $user, UploadedFile $image, Carbon $dateTime): array
     {
-        $imagePath = self::uploadFile(sprintf(
-            'uploads/%s/%s',
-            $user->username,
-            $dateTime->format('Y-m-d_H:i:s'),
-        ), $image);
+        $imagePath = self::uploadFile(
+            self::generatePostsDirectoryName($user, $dateTime),
+            $image,
+        );
 
         $imageSmall = Image::make($image)
             ->resize(Size::S->value, null, static fn (Constraint $constraint) => $constraint->aspectRatio())
             ->encode('jpg', 30);
 
-        $imagePathSmall = self::uploadFile(sprintf(
-            'uploads/%s/%s/small/%s',
-            $user->username,
-            $dateTime->format('Y-m-d_H:i:s'),
-            $imageSmall->basename,
-        ), $imageSmall);
+        $imagePathSmall = self::uploadFile(
+            self::generatePostsSubDirectoryName($user, $dateTime, $imageSmall, Size::S),
+            $imageSmall,
+        );
 
         $imageMedium = Image::make($image)
             ->resize(Size::M->value, null, static fn (Constraint $constraint) => $constraint->aspectRatio())
             ->encode('jpg', 50);
 
-        $imagePathMedium = self::uploadFile(sprintf(
-            'uploads/%s/%s/medium/%s',
-            $user->username,
-            $dateTime->format('Y-m-d_H:i:s'),
-            $imageMedium->basename,
-        ), $imageMedium);
+        $imagePathMedium = self::uploadFile(
+            self::generatePostsSubDirectoryName($user, $dateTime, $imageMedium, Size::M),
+            $imageMedium,
+        );
 
         $imageLarge = Image::make($image)
             ->resize(Size::L->value, null, static fn (Constraint $constraint) => $constraint->aspectRatio())
             ->encode('jpg', 80);
 
-        $imagePathLarge = self::uploadFile(sprintf(
-            'uploads/%s/%s/large/%s',
-            $user->username,
-            $dateTime->format('Y-m-d_H:i:s'),
-            $imageLarge->basename,
-        ), $imageLarge);
+        $imagePathLarge = self::uploadFile(
+            self::generatePostsSubDirectoryName($user, $dateTime, $imageLarge, Size::L),
+            $imageLarge,
+        );
 
         return [
             'image' => $imagePath,
@@ -93,6 +87,31 @@ final class ImageService
             'image_medium' => $imagePathMedium,
             'image_large' => $imagePathLarge,
         ];
+    }
+
+    public static function generatePostsDirectoryName(User $user, Carbon $dateTime): string
+    {
+        return sprintf(
+            'uploads/%s/%s',
+            $user->username,
+            $dateTime->format('Y-m-d_H:i:s'),
+        );
+    }
+
+    public static function generatePostsSubDirectoryName(User $user, Carbon $dateTime, File $file, Size $size): string
+    {
+        return sprintf(
+            'uploads/%s/%s/%s/%s',
+            $user->username,
+            $dateTime->format('Y-m-d_H:i:s'),
+            match ($size) {
+                Size::S => 'small',
+                Size::M => 'medium',
+                Size::L => 'large',
+                default => '',
+            },
+            $file->basename,
+        );;
     }
 
     public static function uploadFile(string $path, StreamInterface|File|UploadedFile|string $file): string
@@ -122,5 +141,34 @@ final class ImageService
     public static function deleteFolder(string $folder): bool
     {
         return Storage::disk('s3')->deleteDirectory($folder);
+    }
+
+    public static function downloadZip(Carbon $dateTime): StreamedResponse
+    {
+        $user = Auth::user();
+
+        $directory = self::generatePostsDirectoryName($user, $dateTime);
+
+        $fileNames = Storage::disk('s3')->files($directory);
+
+        $zipFile = 'storage/forzip/album.zip';
+        $zip = new \ZipArchive();
+
+        $zip->open($zipFile, \ZipArchive::CREATE | \ZipArchive::OVERWRITE);
+
+        foreach ($fileNames as $fileName) {
+
+            $fileContent = Storage::disk('s3')->get($fileName);
+            $imageName = substr(strrchr($fileName, '/'), 1);
+            $s3 = Storage::disk('public');
+            $s3->put("/forzip/$imageName", $fileContent);
+
+            $file = "storage/forzip/$imageName";
+            $zip->addFile(public_path($file), $imageName);
+        }
+
+        $zip->close();
+
+        return Storage::disk('public')->download('forzip/album.zip');
     }
 }

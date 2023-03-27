@@ -104,6 +104,26 @@ final class AlbumController extends Controller
         return $service->getCoverFromS3($album);
     }
 
+    #[OAT\Get(
+        path: '/api/v1/albums/{album_id}/download-zip',
+        summary: 'Download album as ZIP',
+        tags: ['albums'],
+        parameters: [
+            new OAT\Parameter(ref: '#/components/parameters/album_id'),
+        ],
+        responses: [new OAT\Response(
+            response: JsonResponse::HTTP_OK,
+            description: 'Download as ZIP',
+            content: new OAT\MediaType(mediaType: 'application/zip'),
+        )],
+    )]
+    public function downloadZip(Album $album, AlbumService $service): StreamedResponse
+    {
+        $this->authorize('view', $album);
+
+        return $service->downloadZip($album);
+    }
+
     #[OAT\Post(
         path: '/api/v1/albums/{album_id}',
         summary: 'Update the specified album in storage',

@@ -44,6 +44,7 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
         Route::apiResource('albums', AlbumController::class);
         Route::group(['prefix' => 'albums', 'as' => 'albums.'], function () {
             Route::get('/{album}/s3cover', [AlbumController::class, 'getCoverFromS3'])->name('show.s3cover');
+            Route::get('/{album}/download-zip', [AlbumController::class, 'downloadZip'])->name('download-zip');
         });
 
         Route::apiResource('users.posts', UserPostController::class)->only(['index']);

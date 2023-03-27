@@ -44,6 +44,11 @@ final class AlbumService
         return ImageService::getImage($album->image);
     }
 
+    public function downloadZip(Album $album): StreamedResponse
+    {
+        return ImageService::downloadZip(Carbon::parse($album->created_at));
+    }
+
     public function updateAlbum(User $user, Album $album, array $data): bool
     {
         if (!empty($data['image'])) {
