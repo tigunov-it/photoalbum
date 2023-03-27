@@ -111,7 +111,7 @@ final class ImageService
             throw new NotFoundHttpException(__('http-statuses.404'));
         }
 
-        return Storage::disk('s3')->response($path);
+        return Storage::disk('s3')->download($path);
     }
 
     public static function delete(string $path): bool
