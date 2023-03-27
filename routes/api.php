@@ -7,6 +7,7 @@ use App\Http\Controllers\V1\AlbumPostController;
 use App\Http\Controllers\V1\PostController;
 use App\Http\Controllers\V1\ProfileController;
 use App\Http\Controllers\V1\UserController;
+use App\Http\Controllers\V1\UserPostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -45,9 +46,16 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
             Route::get('/{album}/s3cover', [AlbumController::class, 'getCoverFromS3'])->name('show.s3cover');
         });
 
+        Route::apiResource('users.posts', UserPostController::class)->only(['index']);
         Route::apiResource('albums.posts', AlbumPostController::class)->only(['index']);
 
-        Route::apiResource('posts', PostController::class)->only(['index', 'store']);
+        Route::apiResource('posts', PostController::class);
+        Route::group(['prefix' => 'posts', 'as' => 'posts.'], function () {
+            Route::get('/{post}/s3small', [PostController::class, 'getSmallImageFromS3'])->name('show.s3small');
+            Route::get('/{post}/s3medium', [PostController::class, 'getMediumImageFromS3'])->name('show.s3medium');
+            Route::get('/{post}/s3large', [PostController::class, 'getLargeImageFromS3'])->name('show.s3large');
+            Route::get('/{post}/s3full', [PostController::class, 'getFullImageFromS3'])->name('show.s3full');
+        });
 
 
     });

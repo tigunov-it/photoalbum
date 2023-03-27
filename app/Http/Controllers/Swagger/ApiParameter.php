@@ -14,6 +14,22 @@ use OpenApi\Attributes as OAT;
         schema: new OAT\Schema(type: 'integer', format: 'int64', minimum: 1),
     ),
     OAT\Parameter(
+        parameter: 'post_id',
+        name: 'post_id',
+        description: 'Post ID',
+        in: 'path',
+        required: true,
+        schema: new OAT\Schema(type: 'integer', format: 'int64', minimum: 1),
+    ),
+    OAT\Parameter(
+        parameter: 'user_id',
+        name: 'user_id',
+        description: 'User ID',
+        in: 'path',
+        required: true,
+        schema: new OAT\Schema(type: 'integer', format: 'int64', minimum: 1),
+    ),
+    OAT\Parameter(
         parameter: 'page',
         name: 'page',
         description: 'Page number',

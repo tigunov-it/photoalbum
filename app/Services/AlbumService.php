@@ -61,6 +61,13 @@ final class AlbumService
     public function deleteAlbum(Album $album): ?bool
     {
         ImageService::deleteFolder(strstr($album->image, '/cover', true));
+
+        $postService = app(PostService::class);
+
+        foreach ($album->posts as $post) {
+            $postService->deletePost($post);
+        }
+
         return $album->delete();
     }
 }
