@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\User;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -29,10 +30,10 @@ final class ProfileService
     /**
      * @throws NotFoundHttpException
      */
-    public function getAvatarFromS3(User $user): StreamedResponse
+    public function getAvatarFromS3(User $user): StreamedResponse|BinaryFileResponse
     {
         if ($user->profile?->image === null) {
-            throw new NotFoundHttpException(__('http-statuses.404'));
+            return response()->download(public_path('images/avatar.png'));
         }
 
         return ImageService::getImage($user->profile->image);

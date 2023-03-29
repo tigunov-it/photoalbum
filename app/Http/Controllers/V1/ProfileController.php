@@ -11,6 +11,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use OpenApi\Attributes as OAT;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 final class ProfileController extends Controller
@@ -38,16 +39,11 @@ final class ProfileController extends Controller
             new OAT\Response(
                 response: JsonResponse::HTTP_OK,
                 description: 'Avatar',
-                content: new OAT\MediaType(mediaType: 'image/jpeg'),
-            ),
-            new OAT\Response(
-                response: JsonResponse::HTTP_NOT_FOUND,
-                description: 'Not found',
-                content: new OAT\JsonContent(),
+                content: new OAT\MediaType(mediaType: 'image/*'),
             ),
         ],
     )]
-    public function getAvatarFromS3(Request $request, ProfileService $service): StreamedResponse
+    public function getAvatarFromS3(Request $request, ProfileService $service): StreamedResponse|BinaryFileResponse
     {
         return $service->getAvatarFromS3($request->user());
     }
