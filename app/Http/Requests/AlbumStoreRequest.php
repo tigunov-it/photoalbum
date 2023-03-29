@@ -17,6 +17,7 @@ use OpenApi\Attributes as OAT;
                 new OAT\Property(property: 'title', type: 'string', maxLength: 255),
                 new OAT\Property(property: 'description', type: 'string', maxLength: 16383),
                 new OAT\Property(property: 'image', type: 'string', format: 'binary', maximum: 20480),
+                new OAT\Property(property: 'is_public', type: 'boolean', default: false),
             ]),
             encoding: [
                 'image' => ['contentType' => [
@@ -51,6 +52,7 @@ final class AlbumStoreRequest extends FormRequest
                 Rule::dimensions()->maxWidth(4096)->maxHeight(4096),
                 new RekognitionRule,
             ],
+            'is_public' => ['boolean'],
         ];
     }
 }

@@ -20,6 +20,7 @@ final class AlbumFactory extends Factory
             'title' => $this->faker->sentence(),
             'description' => $this->faker->realText(),
             'image' => $this->faker->image(),
+            'is_public' => $this->faker->boolean(),
         ];
     }
 }

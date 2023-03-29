@@ -70,7 +70,7 @@ class User extends Authenticatable implements MustVerifyEmail
         });
     }
 
-    public function posts(): HasMany
+    public function posts(): HasMany|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder
     {
         return $this->hasMany(Post::class)->orderBy('created_at', 'DESC');
     }
@@ -80,13 +80,18 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(Profile::class, 'user_id', 'id');
     }
 
-    public function albums(): HasMany
+    public function albums(): HasMany|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder
     {
         return $this->hasMany(Album::class)->orderBy('created_at', 'DESC');
     }
 
-    public function defaultAlbum(): HasOne
+    public function defaultAlbum(): HasOne|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder
     {
         return $this->hasOne(Album::class)->where('is_default', '=', true);
+    }
+
+    public function publicAlbums(): HasMany|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder
+    {
+        return $this->albums()->where('is_public', '=', true);
     }
 }

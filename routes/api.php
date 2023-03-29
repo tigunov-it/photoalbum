@@ -6,6 +6,7 @@ use App\Http\Controllers\V1\AlbumController;
 use App\Http\Controllers\V1\AlbumPostController;
 use App\Http\Controllers\V1\PostController;
 use App\Http\Controllers\V1\ProfileController;
+use App\Http\Controllers\V1\UserAlbumController;
 use App\Http\Controllers\V1\UserController;
 use App\Http\Controllers\V1\UserPostController;
 use Illuminate\Support\Facades\Route;
@@ -47,6 +48,7 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
             Route::get('/{album}/download-zip', [AlbumController::class, 'downloadZip'])->name('download-zip');
         });
 
+        Route::apiResource('users.albums', UserAlbumController::class)->only(['index']);
         Route::apiResource('users.posts', UserPostController::class)->only(['index']);
         Route::apiResource('albums.posts', AlbumPostController::class)->only(['index']);
 

@@ -22,6 +22,21 @@ final class AlbumService
         return $builder->paginate(perPage: $data['per_page'], page: $data['page']);
     }
 
+    public function getPublicAlbumsByUser(
+        User $user,
+        ?string $query = null,
+        ?int $perPage = null,
+        ?int $page = null,
+    ): LengthAwarePaginator {
+        $builder = $user->publicAlbums();
+
+        if ($query !== null) {
+            $builder = QueryBuilderService::addSearchQuery($builder, $query, 'title');
+        }
+
+        return $builder->paginate(perPage: $perPage, page: $page);
+    }
+
     public function createAlbum(User $user, array $data): Album
     {
         $now = now();

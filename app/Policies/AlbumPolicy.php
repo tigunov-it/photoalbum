@@ -24,7 +24,7 @@ final class AlbumPolicy
      */
     public function view(User $user, Album $album): Response|bool
     {
-        return $user->id === $album->user_id;
+        return $album->is_public || $user->id === $album->user_id;
     }
 
     /**

@@ -17,6 +17,7 @@ use OpenApi\Attributes as OAT;
         new OAT\Property(property: 'created_at', type: 'string', format: 'date-time', nullable: true),
         new OAT\Property(property: 'updated_at', type: 'string', format: 'date-time', nullable: true),
         new OAT\Property(property: 'is_default', type: 'boolean', default: false),
+        new OAT\Property(property: 'is_public', type: 'boolean', default: false),
     ],
 )]
 class Album extends Model
@@ -27,6 +28,7 @@ class Album extends Model
         'title',
         'description',
         'image',
+        'is_public',
     ];
 
     public function user()
@@ -34,7 +36,7 @@ class Album extends Model
         return $this->belongsTo(User::class, 'id', 'user_id');
     }
 
-    public function posts(): HasMany
+    public function posts(): HasMany|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder
     {
         return $this->hasMany(Post::class)->orderBy('created_at', 'DESC');
     }
