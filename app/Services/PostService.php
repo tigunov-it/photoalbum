@@ -11,31 +11,36 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 
 final class PostService
 {
-    /**
-     * TODO: not implemented
-     */
-    public function getPublicPostsByUser(
-        User $user,
-        ?string $query = null,
-        ?int $perPage = null,
-        ?int $page = null,
-    ): LengthAwarePaginator {
-        return $this->getPostsByUser($user, $query, $perPage, $page);
-    }
-
     public function getPostsByUser(
         User $user,
         ?string $query = null,
         ?int $perPage = null,
         ?int $page = null,
     ): LengthAwarePaginator {
-        $builder = $user->posts();
 
-        if ($query !== null) {
-            $builder = QueryBuilderService::addSearchQuery($builder, $query, 'title');
-        }
+        return QueryBuilderService::addSearchWithPaginate(
+            $user->posts(),
+            $query,
+            'title',
+            $perPage,
+            $page,
+        );
+    }
 
-        return $builder->paginate(perPage: $perPage, page: $page);
+    public function getPublicPostsByUser(
+        User $user,
+        ?string $query = null,
+        ?int $perPage = null,
+        ?int $page = null,
+    ): LengthAwarePaginator {
+
+        return QueryBuilderService::addSearchWithPaginate(
+            $user->publicPosts(),
+            $query,
+            'title',
+            $perPage,
+            $page,
+        );
     }
 
     public function getPostsByAlbum(
@@ -44,15 +49,24 @@ final class PostService
         ?int $perPage = null,
         ?int $page = null,
     ): LengthAwarePaginator {
-        $builder = $album->posts();
 
-        if ($query !== null) {
-            $builder = QueryBuilderService::addSearchQuery($builder, $query, 'title');
-        }
-
-        return $builder->paginate(perPage: $perPage, page: $page);
+        return QueryBuilderService::addSearchWithPaginate(
+            $album->posts(),
+            $query,
+            'title',
+            $perPage,
+            $page,
+        );
     }
 
+    /**
+     * @param array{
+     *  album_id: int,
+     *  titles?: array<int, string>,
+     *  descriptions?: array<int, string>,
+     *  images: array<int, \Illuminate\Http\UploadedFile>,
+     * } $data
+     */
     public function createPosts(User $user, Album $album, array $data): \Illuminate\Database\Eloquent\Collection
     {
         $albumCreatedAt = Carbon::parse($album->created_at);
@@ -90,6 +104,13 @@ final class PostService
         return ImageService::getImage($post->image);
     }
 
+    /**
+     * @param array{
+     *  album_id?: int,
+     *  title?: string,
+     *  description?: string,
+     * } $data
+     */
     public function updatePost(Post $post, array $data): bool
     {
         return $post->update($data);

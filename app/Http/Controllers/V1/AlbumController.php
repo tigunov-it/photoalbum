@@ -30,15 +30,25 @@ final class AlbumController extends Controller
             response: JsonResponse::HTTP_OK,
             description: 'Listing of the albums',
             content: new OAT\JsonContent(required: ['data'], properties: [
-                new OAT\Property(property: 'data', type: 'array', items: new OAT\Items(ref: '#/components/schemas/Album')),
+                new OAT\Property(property: 'data', type: 'array', items: new OAT\Items(allOf: [
+                    new OAT\Schema(ref: '#/components/schemas/Album'),
+                    new OAT\Schema(properties: [
+                        new OAT\Property(property: 'posts_count', type: 'integer', minimum: 0),
+                    ]),
+                ])),
             ]),
         )],
     )]
     public function index(AlbumIndexRequest $request, AlbumService $service): BaseResponse
     {
         $this->authorize('viewAny', Album::class);
+        [
+            'page' => $page,
+            'per_page' => $perPage,
+            'query' => $query,
+        ] = $request->validated();
 
-        return new BaseResponse($service->getAlbums($request->user(), $request->validated()));
+        return new BaseResponse($service->getAlbums($request->user(), $query, $perPage, $page));
     }
 
     #[OAT\Post(
@@ -46,11 +56,7 @@ final class AlbumController extends Controller
         summary: 'Store a newly created album in storage',
         requestBody: new OAT\RequestBody(ref: '#/components/requestBodies/AlbumStoreRequest'),
         tags: ['albums'],
-        responses: [new OAT\Response(
-            response: JsonResponse::HTTP_CREATED,
-            description: 'Created',
-            content: new OAT\JsonContent(ref: '#/components/schemas/Album'),
-        )],
+        responses: [new OAT\Response(response: JsonResponse::HTTP_CREATED, ref: '#/components/responses/AlbumResponse')],
     )]
     public function store(AlbumStoreRequest $request, AlbumService $service): BaseResponse
     {
@@ -72,11 +78,7 @@ final class AlbumController extends Controller
         parameters: [
             new OAT\Parameter(ref: '#/components/parameters/album_id'),
         ],
-        responses: [new OAT\Response(
-            response: JsonResponse::HTTP_OK,
-            description: 'Display the specified album',
-            content: new OAT\JsonContent(ref: '#/components/schemas/Album'),
-        )],
+        responses: [new OAT\Response(response: JsonResponse::HTTP_OK, ref: '#/components/responses/AlbumResponse')],
     )]
     public function show(Album $album): BaseResponse
     {
@@ -147,7 +149,7 @@ final class AlbumController extends Controller
             return new BaseResponse(status: JsonResponse::HTTP_NO_CONTENT);
         }
 
-        return new BaseResponse(status: JsonResponse::HTTP_BAD_REQUEST);
+        return new UnsuccessfulResponse;
     }
 
     #[OAT\Delete(
@@ -171,7 +173,7 @@ final class AlbumController extends Controller
             return new BaseResponse(status: JsonResponse::HTTP_NO_CONTENT);
         }
 
-        return new BaseResponse(status: JsonResponse::HTTP_BAD_REQUEST);
+        return new UnsuccessfulResponse;
     }
 
 }

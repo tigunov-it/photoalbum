@@ -37,10 +37,11 @@ final class PostController extends Controller
     public function index(PostIndexRequest $request, PostService $service): BaseResponse
     {
         $this->authorize('viewAny', Post::class);
-
-        $query = $request->validated('query');
-        $perPage = $request->validated('per_page');
-        $page = $request->validated('page');
+        [
+            'page' => $page,
+            'per_page' => $perPage,
+            'query' => $query,
+        ] = $request->validated();
 
         return new BaseResponse($service->getPostsByUser($request->user(), $query, $perPage, $page));
     }
@@ -193,7 +194,7 @@ final class PostController extends Controller
             return new BaseResponse(status: JsonResponse::HTTP_NO_CONTENT);
         }
 
-        return new BaseResponse(status: JsonResponse::HTTP_BAD_REQUEST);
+        return new UnsuccessfulResponse;
     }
 
     #[OAT\Delete(
@@ -217,6 +218,6 @@ final class PostController extends Controller
             return new BaseResponse(status: JsonResponse::HTTP_NO_CONTENT);
         }
 
-        return new BaseResponse(status: JsonResponse::HTTP_BAD_REQUEST);
+        return new UnsuccessfulResponse;
     }
 }

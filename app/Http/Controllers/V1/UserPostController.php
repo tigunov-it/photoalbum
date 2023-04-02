@@ -21,6 +21,7 @@ final class UserPostController extends Controller
             new OAT\Parameter(ref: '#/components/parameters/user_id'),
             new OAT\Parameter(ref: '#/components/parameters/page'),
             new OAT\Parameter(ref: '#/components/parameters/per_page'),
+            new OAT\Parameter(ref: '#/components/parameters/query'),
         ],
         responses: [new OAT\Response(
             response: JsonResponse::HTTP_OK,
@@ -33,10 +34,11 @@ final class UserPostController extends Controller
     public function index(PostIndexRequest $request, User $user, PostService $service): BaseResponse
     {
         $this->authorize('viewAny', Post::class);
-
-        $query = $request->validated('query');
-        $perPage = $request->validated('per_page');
-        $page = $request->validated('page');
+        [
+            'page' => $page,
+            'per_page' => $perPage,
+            'query' => $query,
+        ] = $request->validated();
 
         return new BaseResponse($service->getPublicPostsByUser($user, $query, $perPage, $page));
     }

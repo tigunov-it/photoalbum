@@ -11,15 +11,20 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 final class AlbumService
 {
-    public function getAlbums(User $user, array $data): LengthAwarePaginator
-    {
-        $builder = $user->albums()->withCount('posts');
+    public function getAlbums(
+        User $user,
+        ?string $query = null,
+        ?int $perPage = null,
+        ?int $page = null,
+    ): LengthAwarePaginator {
 
-        if (!empty($data['query'])) {
-            $builder = QueryBuilderService::addSearchQuery($builder, $data['query'], 'title');
-        }
-
-        return $builder->paginate(perPage: $data['per_page'], page: $data['page']);
+        return QueryBuilderService::addSearchWithPaginate(
+            $user->albums()->withCount('posts'),
+            $query,
+            'title',
+            $perPage,
+            $page,
+        );
     }
 
     public function getPublicAlbumsByUser(
@@ -28,27 +33,30 @@ final class AlbumService
         ?int $perPage = null,
         ?int $page = null,
     ): LengthAwarePaginator {
-        $builder = $user->publicAlbums()->withCount('posts');
 
-        if ($query !== null) {
-            $builder = QueryBuilderService::addSearchQuery($builder, $query, 'title');
-        }
-
-        return $builder->paginate(perPage: $perPage, page: $page);
+        return QueryBuilderService::addSearchWithPaginate(
+            $user->publicAlbums()->withCount('posts'),
+            $query,
+            'title',
+            $perPage,
+            $page,
+        );
     }
 
+    /**
+     * @param array{
+     *  title: string,
+     *  description: string,
+     *  image: \Illuminate\Http\UploadedFile,
+     *  is_public?: bool,
+     * } $data
+     */
     public function createAlbum(User $user, array $data): Album
     {
-        $now = now();
+        $data['created_at'] = now();
+        $data['image'] = ImageService::uploadAlbumImage($user, $data['image'], $data['created_at']);
 
-        $path = ImageService::uploadAlbumImage($user, $data['image'], $now);
-
-        return $user->albums()->forceCreate([
-            'title' => $data['title'],
-            'description' => $data['description'],
-            'image' => $path,
-            'created_at' => $now,
-        ]);
+        return $user->albums()->forceCreate($data);
     }
 
     /**
@@ -64,6 +72,14 @@ final class AlbumService
         return ImageService::downloadZip(Carbon::parse($album->created_at));
     }
 
+    /**
+     * @param array{
+     *  title?: string,
+     *  description?: string,
+     *  image?: \Illuminate\Http\UploadedFile,
+     *  is_public?: bool,
+     * } $data
+     */
     public function updateAlbum(User $user, Album $album, array $data): bool
     {
         if (!empty($data['image'])) {
@@ -80,7 +96,7 @@ final class AlbumService
 
     public function deleteAlbum(Album $album): ?bool
     {
-        ImageService::deleteFolder(strstr($album->image, '/cover', true));
+        ImageService::deleteFolder(strstr((string) $album->image, '/cover', true));
 
         $postService = app(PostService::class);
 

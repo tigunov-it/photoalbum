@@ -3,8 +3,19 @@
 namespace App\Http\Responses;
 
 use Illuminate\Http\JsonResponse;
+use OpenApi\Attributes as OAT;
 
-class AlbumResponse extends BaseResponse
+#[OAT\Response(
+    response: 'AlbumResponse',
+    description: 'Album response',
+    content: new OAT\JsonContent(allOf: [
+        new OAT\Schema(ref: '#/components/schemas/Album'),
+        new OAT\Schema(properties: [
+            new OAT\Property(property: 'posts_count', type: 'integer', minimum: 0),
+        ]),
+    ]),
+)]
+final class AlbumResponse extends BaseResponse
 {
     public function toResponse($request): JsonResponse
     {

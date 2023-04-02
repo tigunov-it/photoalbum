@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -53,11 +54,11 @@ class User extends Authenticatable implements MustVerifyEmail
         'deleted_at',
     ];
 
-    protected static function boot()
+    protected static function boot(): void
     {
         parent::boot();
 
-        static::created(function (User $user){
+        static::created(static function (User $user): void {
             $user->profile()->create([
                 'title' => $user->username,
             ]);
@@ -70,9 +71,17 @@ class User extends Authenticatable implements MustVerifyEmail
         });
     }
 
-    public function posts(): HasMany|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder
+    public function posts(): HasMany|Builder|\Illuminate\Database\Query\Builder
     {
         return $this->hasMany(Post::class)->orderBy('created_at', 'DESC');
+    }
+
+    public function publicPosts(): HasMany|Builder|\Illuminate\Database\Query\Builder
+    {
+        return $this->posts()->whereHas(
+            'album',
+            static fn (Builder $query): Builder => $query->where('is_public', '=', true),
+        );
     }
 
     public function profile(): HasOne
@@ -80,17 +89,17 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(Profile::class, 'user_id', 'id');
     }
 
-    public function albums(): HasMany|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder
+    public function albums(): HasMany|Builder|\Illuminate\Database\Query\Builder
     {
         return $this->hasMany(Album::class)->orderBy('created_at', 'DESC');
     }
 
-    public function defaultAlbum(): HasOne|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder
+    public function defaultAlbum(): HasOne|Builder|\Illuminate\Database\Query\Builder
     {
         return $this->hasOne(Album::class)->where('is_default', '=', true);
     }
 
-    public function publicAlbums(): HasMany|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder
+    public function publicAlbums(): HasMany|Builder|\Illuminate\Database\Query\Builder
     {
         return $this->albums()->where('is_public', '=', true);
     }
