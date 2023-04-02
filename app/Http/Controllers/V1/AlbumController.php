@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AlbumIndexRequest;
 use App\Http\Requests\AlbumStoreRequest;
 use App\Http\Requests\AlbumUpdateRequest;
+use App\Http\Responses\AlbumResponse;
 use App\Http\Responses\BaseResponse;
 use App\Http\Responses\UnsuccessfulResponse;
 use App\Models\Album;
@@ -58,7 +59,7 @@ final class AlbumController extends Controller
         $created = $service->createAlbum($request->user(), $request->validated());
 
         if ($created) {
-            return new BaseResponse($created, JsonResponse::HTTP_CREATED);
+            return new AlbumResponse($created, JsonResponse::HTTP_CREATED);
         }
 
         return new UnsuccessfulResponse;
@@ -81,7 +82,7 @@ final class AlbumController extends Controller
     {
         $this->authorize('view', $album);
 
-        return new BaseResponse($album);
+        return new AlbumResponse($album);
     }
 
     #[OAT\Get(

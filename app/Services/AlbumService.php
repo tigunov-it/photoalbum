@@ -13,7 +13,7 @@ final class AlbumService
 {
     public function getAlbums(User $user, array $data): LengthAwarePaginator
     {
-        $builder = $user->albums();
+        $builder = $user->albums()->withCount('posts');
 
         if (!empty($data['query'])) {
             $builder = QueryBuilderService::addSearchQuery($builder, $data['query'], 'title');
@@ -28,7 +28,7 @@ final class AlbumService
         ?int $perPage = null,
         ?int $page = null,
     ): LengthAwarePaginator {
-        $builder = $user->publicAlbums();
+        $builder = $user->publicAlbums()->withCount('posts');
 
         if ($query !== null) {
             $builder = QueryBuilderService::addSearchQuery($builder, $query, 'title');
