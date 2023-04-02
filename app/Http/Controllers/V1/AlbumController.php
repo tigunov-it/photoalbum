@@ -7,7 +7,7 @@ use App\Http\Requests\AlbumIndexRequest;
 use App\Http\Requests\AlbumStoreRequest;
 use App\Http\Requests\AlbumUpdateRequest;
 use App\Http\Responses\BaseResponse;
-use App\Http\Responses\UnsuccessfullResponse;
+use App\Http\Responses\UnsuccessfulResponse;
 use App\Models\Album;
 use App\Services\AlbumService;
 use Illuminate\Http\JsonResponse;
@@ -61,7 +61,7 @@ final class AlbumController extends Controller
             return new BaseResponse($created, JsonResponse::HTTP_CREATED);
         }
 
-        return new UnsuccessfullResponse;
+        return new UnsuccessfulResponse;
     }
 
     #[OAT\Get(

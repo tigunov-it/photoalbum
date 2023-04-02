@@ -5,7 +5,7 @@ namespace App\Http\Controllers\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Http\Responses\BaseResponse;
-use App\Http\Responses\UnsuccessfullResponse;
+use App\Http\Responses\UnsuccessfulResponse;
 use App\Services\ProfileService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -59,7 +59,7 @@ final class ProfileController extends Controller
                 description: 'Profile updated',
                 content: new OAT\JsonContent(),
             ),
-            new OAT\Response(response: JsonResponse::HTTP_BAD_REQUEST, ref: '#/components/responses/UnsuccessfullResponse'),
+            new OAT\Response(response: JsonResponse::HTTP_BAD_REQUEST, ref: '#/components/responses/UnsuccessfulResponse'),
             new OAT\Response(response: JsonResponse::HTTP_UNPROCESSABLE_ENTITY, ref: '#/components/responses/UnprocessableEntity'),
         ],
     )]
@@ -68,7 +68,7 @@ final class ProfileController extends Controller
         if ($service->update($request->user(), $request->validated())) {
             return new BaseResponse(status: JsonResponse::HTTP_NO_CONTENT);
         }
-        return new UnsuccessfullResponse;
+        return new UnsuccessfulResponse;
     }
 
     #[OAT\Delete(
@@ -84,7 +84,7 @@ final class ProfileController extends Controller
                 description: 'Deactivation successful',
                 content: new OAT\JsonContent(),
             ),
-            new OAT\Response(response: JsonResponse::HTTP_BAD_REQUEST, ref: '#/components/responses/UnsuccessfullResponse'),
+            new OAT\Response(response: JsonResponse::HTTP_BAD_REQUEST, ref: '#/components/responses/UnsuccessfulResponse'),
             new OAT\Response(response: JsonResponse::HTTP_UNPROCESSABLE_ENTITY, ref: '#/components/responses/UnprocessableEntity'),
         ],
     )]
@@ -108,6 +108,6 @@ final class ProfileController extends Controller
         if ($profileDeleted && $userDeleted) {
             return new BaseResponse(status: JsonResponse::HTTP_NO_CONTENT);
         }
-        return new UnsuccessfullResponse;
+        return new UnsuccessfulResponse;
     }
 }

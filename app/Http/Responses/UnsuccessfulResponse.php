@@ -7,7 +7,7 @@ use Illuminate\Http\JsonResponse;
 use OpenApi\Attributes as OAT;
 
 #[OAT\Response(
-    response: 'UnsuccessfullResponse',
+    response: 'UnsuccessfulResponse',
     description: 'Unsuccessfull Response',
     content: new OAT\JsonContent(
         required: ['message'],
@@ -16,7 +16,7 @@ use OpenApi\Attributes as OAT;
         ],
     ),
 )]
-final class UnsuccessfullResponse extends BaseResponse implements Responsable
+final class UnsuccessfulResponse extends BaseResponse implements Responsable
 {
     public function __construct(
         ?string $data = null,

@@ -7,7 +7,7 @@ use App\Http\Requests\PostIndexRequest;
 use App\Http\Requests\PostStoreRequest;
 use App\Http\Requests\PostUpdateRequest;
 use App\Http\Responses\BaseResponse;
-use App\Http\Responses\UnsuccessfullResponse;
+use App\Http\Responses\UnsuccessfulResponse;
 use App\Models\Album;
 use App\Models\Post;
 use App\Services\PostService;
@@ -68,7 +68,7 @@ final class PostController extends Controller
             return new BaseResponse($created, JsonResponse::HTTP_CREATED);
         }
 
-        return new UnsuccessfullResponse;
+        return new UnsuccessfulResponse;
     }
 
     #[OAT\Get(
