@@ -24,8 +24,8 @@ final class QueryBuilderService
         BuilderContract|Builder|QueryBuilder $builder,
         ?string $value,
         string $property,
-        int $perPage,
-        int $page,
+        ?int $perPage,
+        ?int $page,
     ): LengthAwarePaginator {
 
         if ($value !== null) {
