@@ -151,7 +151,7 @@ final class ImageService
 
         $fileNames = Storage::disk('s3')->files($directory);
 
-        $zipFile = 'storage/forzip/album.zip';
+        $zipFile = Storage::disk('public')->path('forzip/album.zip');
         $zip = new \ZipArchive();
 
         $zip->open($zipFile, \ZipArchive::CREATE | \ZipArchive::OVERWRITE);
@@ -160,11 +160,10 @@ final class ImageService
 
             $fileContent = Storage::disk('s3')->get($fileName);
             $imageName = substr(strrchr($fileName, '/'), 1);
-            $s3 = Storage::disk('public');
-            $s3->put("/forzip/$imageName", $fileContent);
+            Storage::disk('public')->put("/forzip/$imageName", $fileContent);
 
-            $file = "storage/forzip/$imageName";
-            $zip->addFile(public_path($file), $imageName);
+            $path = Storage::disk('public')->path("/forzip/$imageName");
+            $zip->addFile($path, $imageName);
         }
 
         $zip->close();

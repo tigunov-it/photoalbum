@@ -32,6 +32,11 @@ class Album extends Model
         'is_public',
     ];
 
+    protected $casts = [
+        'is_default' => 'boolean',
+        'is_public' => 'boolean',
+    ];
+
     public function user(): BelongsTo|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder
     {
         return $this->belongsTo(User::class);
