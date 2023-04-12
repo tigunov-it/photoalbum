@@ -11,8 +11,8 @@ use OpenApi\Attributes as OAT;
     request: 'PostUpdateRequest',
     content: new OAT\JsonContent(properties: [
         new OAT\Property(property: 'album_id', type: 'integer', format: 'int64', minimum: 1),
-        new OAT\Property(property: 'title', type: 'string', maxLength: 255),
-        new OAT\Property(property: 'description', type: 'string', maxLength: 16383),
+        new OAT\Property(property: 'title', type: 'string', default: '', maxLength: 255, nullable: true),
+        new OAT\Property(property: 'description', type: 'string', default: '', maxLength: 16383, nullable: true),
     ]),
 )]
 final class PostUpdateRequest extends FormRequest
@@ -29,8 +29,8 @@ final class PostUpdateRequest extends FormRequest
                 'required', 'integer', 'min:1',
                 Rule::exists(Album::class, 'id')->where('user_id', $this->user()?->id),
             ],
-            'title' => ['string', 'max:255'],
-            'description' => ['string', 'max:16383'],
+            'title' => ['nullable', 'string', 'max:255'],
+            'description' => ['nullable', 'string', 'max:16383'],
         ];
     }
 }

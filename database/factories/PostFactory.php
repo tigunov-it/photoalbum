@@ -19,8 +19,8 @@ final class PostFactory extends Factory
         $image = $this->faker->image();
 
         return [
-            'title' => $this->faker->sentence(),
-            'description' => $this->faker->realText(),
+            'title' => random_int(0, 1) ? $this->faker->sentence() : '',
+            'description' => random_int(0, 1) ? $this->faker->realText() : '',
             'image' => $image,
             'image_small' => $image,
             'image_medium' => $image,

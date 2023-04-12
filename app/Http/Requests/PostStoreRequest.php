@@ -14,14 +14,14 @@ use OpenApi\Attributes as OAT;
     content: [
         new OAT\MediaType(
             mediaType: 'multipart/form-data',
-            schema: new OAT\Schema(required: ['album_id', 'images[]'], properties: [
+            schema: new OAT\Schema(required: ['album_id', 'image'], properties: [
                 new OAT\Property(property: 'album_id', type: 'integer', format: 'int64', minimum: 1),
-                new OAT\Property(property: 'titles[]', type: 'array', items: new OAT\Items(type: 'string', maxLength: 255)),
-                new OAT\Property(property: 'descriptions[]', type: 'array', items: new OAT\Items(type: 'string', maxLength: 16383)),
-                new OAT\Property(property: 'images[]', type: 'array', items: new OAT\Items(type: 'string', format: 'binary', maximum: 10240)),
+                new OAT\Property(property: 'title', type: 'string', default: '', maxLength: 255, nullable: true),
+                new OAT\Property(property: 'description', type: 'string', default: '', maxLength: 16383, nullable: true),
+                new OAT\Property(property: 'image', type: 'string', format: 'binary', maximum: 10240),
             ]),
             encoding: [
-                'images[*]' => ['contentType' => [
+                'image' => ['contentType' => [
                     'image/jpeg',
                     'image/pjpeg',
                     'image/png',
@@ -49,12 +49,10 @@ final class PostStoreRequest extends FormRequest
                 'required', 'integer', 'min:1',
                 Rule::exists(Album::class, 'id')->where('user_id', $this->user()?->id),
             ],
-            'titles' => ['array'],
-            'titles.*' => ['string', 'max:255'],
-            'descriptions' => ['array'],
-            'descriptions.*' => ['string', 'max:16383'],
-            'images' => ['required', 'array'],
-            'images.*' => [
+            'title' => ['nullable', 'string', 'max:255'],
+            'description' => ['nullable', 'string', 'max:16383'],
+            'image' => [
+                'required',
                 File::types(['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'])->max(10 * 1024),
                 Rule::dimensions()->maxWidth(4096)->maxHeight(4096),
                 new RekognitionRule,

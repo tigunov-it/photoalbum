@@ -62,6 +62,25 @@ final class PostService
     /**
      * @param array{
      *  album_id: int,
+     *  title: string,
+     *  description: string,
+     *  image: \Illuminate\Http\UploadedFile,
+     * } $data
+     */
+    public function createPost(User $user, Album $album, array $data): Post
+    {
+        $albumCreatedAt = Carbon::parse($album->created_at);
+
+        $data['title'] ??= '';
+        $data['description'] ??= '';
+        $data = array_merge($data, ImageService::uploadPostImage($user, $data['image'], $albumCreatedAt));
+
+        return $user->posts()->create($data);
+    }
+
+    /**
+     * @param array{
+     *  album_id: int,
      *  titles?: array<int, string>,
      *  descriptions?: array<int, string>,
      *  images: array<int, \Illuminate\Http\UploadedFile>,

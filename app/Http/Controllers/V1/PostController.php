@@ -48,13 +48,13 @@ final class PostController extends Controller
 
     #[OAT\Post(
         path: '/api/v1/posts',
-        summary: 'Store a newly created posts in storage',
+        summary: 'Store a newly created post in storage',
         requestBody: new OAT\RequestBody(ref: '#/components/requestBodies/PostStoreRequest'),
         tags: ['posts'],
         responses: [new OAT\Response(
             response: JsonResponse::HTTP_CREATED,
             description: 'Created',
-            content: new OAT\JsonContent(type: 'array', items: new OAT\Items(ref: '#/components/schemas/Post')),
+            content: new OAT\JsonContent(ref: '#/components/schemas/Post'),
         )],
     )]
     public function store(PostStoreRequest $request, PostService $service): BaseResponse
@@ -63,7 +63,9 @@ final class PostController extends Controller
 
         $album = Album::findOrFail($request->validated('album_id'));
 
-        $created = $service->createPosts($request->user(), $album, $request->validated());
+        $this->authorize('update', $album);
+
+        $created = $service->createPost($request->user(), $album, $request->validated());
 
         if ($created) {
             return new BaseResponse($created, JsonResponse::HTTP_CREATED);
