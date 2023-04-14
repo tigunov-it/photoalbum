@@ -2,18 +2,18 @@
 
 namespace App\Http\Responses;
 
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use ArrayAccess;
+use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Contracts\Support\Responsable;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Resources\Json\JsonResource;
+use JsonSerializable;
 
 class BaseResponse implements Responsable
 {
     public function __construct(
-        protected readonly Collection|JsonResource|Model|LengthAwarePaginator|array|string|null $data   = null,
-        protected readonly int                                                                  $status = JsonResponse::HTTP_OK,
+        protected readonly Arrayable|ArrayAccess|Jsonable|JsonSerializable|array|string|null $data = null,
+        protected readonly int                                                             $status = JsonResponse::HTTP_OK,
     ) {
     }
 
