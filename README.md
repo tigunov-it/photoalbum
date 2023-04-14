@@ -16,19 +16,19 @@
 
 3. Клонируем проект
 
-    ```
+    ```bash
     git@github.com:tigunov-it/photoalbum.git
     ```
 
 4. Переходим в папку проекта
 
-    ```
+    ```bash
     cd photoalbum/
     ```
 
 5. Запускаем скрипт
 
-    ```
+    ```bash
     ./start.sh
     ```
 
@@ -38,7 +38,7 @@
 
 ## Проверка кода через rector
 
-```
+```bash
 vendor/bin/rector process src
 ```
 
@@ -46,7 +46,7 @@ vendor/bin/rector process src
 
 ## Генерация swagger-документации
 
-```
+```bash
 php artisan l5-swagger:generate
 ```
 
@@ -56,13 +56,13 @@ php artisan l5-swagger:generate
 
 В терминале:
 
-```
+```bash
 nano ~/.bash_aliases
 ```
 
 Вставляем:
 
-```
+```bash
 alias docker-up='docker compose up -d --build'
 alias docker-down='docker compose down'
 alias docker-restart='docker-down && docker-up'
@@ -91,18 +91,18 @@ npm() {
 
 Проверяем, чтобы файл `~/.bash_aliases` был подключен в `~/.bashrc`
 
-```
+```bash
 nano ~/.bashrc
 ```
 
 Если не подключен, вставляем в конце файла:
 
-```
+```bash
 if [ -f ~/.bash_aliases ]; then . ~/.bash_aliases fi
 ```
 
 Перезагружаем терминал:
 
-```
+```bash
 source ~/.bashrc
 ```
