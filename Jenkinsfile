@@ -18,6 +18,8 @@ pipeline {
                 AWS_ACCESS_KEY_ID = credentials("photo-aws-access-key-id")
                 AWS_SECRET_ACCESS_KEY = credentials("photo-aws-secret-access-key")
                 AWS_BUCKET = credentials("photo-aws-bucket")
+                TELEGRAM_API_KEY = credentials("photo-telegram-api-key")
+                TELEGRAM_CHANNEL = credentials("photo-telegram-chanel")
             }
             steps {
                 sh 'cp .env.example .env'
@@ -36,6 +38,8 @@ pipeline {
                 sh 'echo AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID >> .env'
                 sh 'echo AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY >> .env'
                 sh 'echo AWS_BUCKET=$AWS_BUCKET >> .env'
+                sh 'echo TELEGRAM_API_KEY=$TELEGRAM_API_KEY >> .env'
+                sh 'echo TELEGRAM_CHANNEL=$TELEGRAM_CHANNEL >> .env'
                 sh 'tar -zcvf /tmp/build.tar.gz .'
                 sh 'mv /tmp/build.tar.gz build.tar.gz'
             }
