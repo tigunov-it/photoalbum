@@ -20,7 +20,7 @@ final class ProfileFactory extends Factory
             'title' => $this->faker->sentence(),
             'description' => $this->faker->realText(),
             'url' => $this->faker->url(),
-            'image' => $this->faker->image(),
+            'image' => $this->faker->image('storage/app/s3cache', 100, 100, 'profile', false),
         ];
     }
 }

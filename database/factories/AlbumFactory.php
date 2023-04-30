@@ -19,7 +19,7 @@ final class AlbumFactory extends Factory
         return [
             'title' => $this->faker->sentence(),
             'description' => $this->faker->realText(),
-            'image' => $this->faker->image(),
+            'image' => $this->faker->image('storage/app/s3cache', 252, 252, 'album', false),
             'is_public' => $this->faker->boolean(),
         ];
     }

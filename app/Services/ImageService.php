@@ -126,11 +126,16 @@ final class ImageService
      */
     public static function getImage(string $path): StreamedResponse
     {
-        if (!Storage::disk('s3')->fileExists($path)) {
-            throw new NotFoundHttpException(__('http-statuses.404'));
+        if (!Storage::disk('s3cache')->fileExists($path)) {
+            $file = Storage::disk('s3')->get($path);
+            if ($file === null) {
+                throw new NotFoundHttpException(__('http-statuses.404'));
+            }
+
+            Storage::disk('s3cache')->put($path, $file);
         }
 
-        return Storage::disk('s3')->download($path);
+        return Storage::disk('s3cache')->download($path);
     }
 
     public static function delete(string $path): bool

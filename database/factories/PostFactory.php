@@ -16,7 +16,7 @@ final class PostFactory extends Factory
      */
     public function definition(): array
     {
-        $image = $this->faker->image();
+        $image = $this->faker->image('storage/app/s3cache', 400, 400, 'post', false);
 
         return [
             'title' => random_int(0, 1) ? $this->faker->sentence() : '',

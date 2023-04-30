@@ -14,14 +14,14 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(5)
-            // ->has(Album::factory(random_int(1, 3)))
+        User::factory(3)
+            ->has(Album::factory(random_int(1, 2)))
             ->create();
 
         /** Create test user if not exists */
         if (!User::where('email', '=', 'user@example.com')->exists()) {
             User::factory()
-                // ->has(Album::factory(random_int(1, 3)))
+                ->has(Album::factory(random_int(1, 2)))
                 ->create(['email' => 'user@example.com']);
         }
     }

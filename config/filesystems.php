@@ -56,6 +56,14 @@ return [
             'throw' => false,
         ],
 
+        's3cache' => [
+            'driver' => 'local',
+            'root' => storage_path('app/s3cache'),
+            'visibility' => 'private',
+            'directory_visibility' => 'private',
+            'throw' => false,
+        ],
+
     ],
 
     /*

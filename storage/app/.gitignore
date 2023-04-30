@@ -1,3 +1,4 @@
 *
 !public/
+!s3cache/
 !.gitignore

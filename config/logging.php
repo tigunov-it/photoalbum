@@ -55,7 +55,9 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['single', 'telegram'],
+            'channels' => env('TELEGRAM_API_KEY') !== null && env('TELEGRAM_CHANNEL') !== null
+                ? ['single', 'telegram']
+                : ['single'],
             'ignore_exceptions' => false,
         ],
 
@@ -87,7 +89,7 @@ return [
             'handler_with' => [
                 'host' => env('PAPERTRAIL_URL'),
                 'port' => env('PAPERTRAIL_PORT'),
-                'connectionString' => 'tls://'.env('PAPERTRAIL_URL').':'.env('PAPERTRAIL_PORT'),
+                'connectionString' => 'tls://' . env('PAPERTRAIL_URL') . ':' . env('PAPERTRAIL_PORT'),
             ],
         ],
 
@@ -126,7 +128,7 @@ return [
             'handler' => FilterHandler::class,
             'level' => env('LOG_LEVEL', 'debug'),
             'with' => [
-                'handler' => new TelegramBotHandler($apiKey = env('TELEGRAM_API_KEY'), $channel = env('TELEGRAM_CHANNEL')),
+                'handler' => new TelegramBotHandler(env('TELEGRAM_API_KEY', ''), env('TELEGRAM_CHANNEL', '')),
             ],
         ],
     ],
