@@ -12,7 +12,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->command('s3cache:clear')->daily()->at('03:00');
+        $schedule->command('s3cache:clear', ['--days' => 30])->daily()->at('03:00');
     }
 
     /**

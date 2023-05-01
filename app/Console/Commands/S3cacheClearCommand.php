@@ -13,7 +13,7 @@ final class S3cacheClearCommand extends Command
      *
      * @var string
      */
-    protected $signature = 's3cache:clear {--days=30 : The number of days to keep files in the cache}';
+    protected $signature = 's3cache:clear {--days=0 : The number of days to keep files in the cache}';
 
     /**
      * The console command description.
