@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Enums\Size;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Http\Response;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -124,9 +125,10 @@ final class ImageService
     /**
      * @throws NotFoundHttpException
      */
-    public static function getImage(string $path): StreamedResponse
+    public static function getImage(string $path): Response
     {
-        if (!Storage::disk('s3cache')->fileExists($path)) {
+        $file = Storage::disk('s3cache')->get($path);
+        if ($file === null) {
             $file = Storage::disk('s3')->get($path);
             if ($file === null) {
                 throw new NotFoundHttpException(__('http-statuses.404'));
@@ -135,7 +137,7 @@ final class ImageService
             Storage::disk('s3cache')->put($path, $file);
         }
 
-        return Storage::disk('s3cache')->download($path);
+        return response($file)->header('Content-Type', Storage::disk('s3cache')->mimeType($path));
     }
 
     public static function delete(string $path): bool

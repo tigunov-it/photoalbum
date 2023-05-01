@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Album;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Http\Response;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -62,7 +63,7 @@ final class AlbumService
     /**
      * @throws NotFoundHttpException
      */
-    public function getCoverFromS3(Album $album): StreamedResponse
+    public function getCoverFromS3(Album $album): Response
     {
         return ImageService::getImage($album->image);
     }

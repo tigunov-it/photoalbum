@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Services\ProfileService;
-use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\StreamedResponse;
+use Illuminate\Http\Response;
 
 class ProfilesController extends Controller
 {
@@ -52,7 +51,7 @@ class ProfilesController extends Controller
         return redirect("/profile/{$user->id}");
     }
 
-    public function getAvatarFromS3(User $user, ProfileService $service): StreamedResponse
+    public function getAvatarFromS3(User $user, ProfileService $service): Response
     {
         $this->authorize('update', $user->profile);
 

@@ -12,6 +12,7 @@ use App\Models\Album;
 use App\Models\Post;
 use App\Services\PostService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 use OpenApi\Attributes as OAT;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
@@ -107,7 +108,7 @@ final class PostController extends Controller
             content: new OAT\MediaType(mediaType: 'image/jpeg'),
         )],
     )]
-    public function getSmallImageFromS3(Post $post, PostService $service): StreamedResponse
+    public function getSmallImageFromS3(Post $post, PostService $service): Response
     {
         $this->authorize('view', $post);
 
@@ -127,7 +128,7 @@ final class PostController extends Controller
             content: new OAT\MediaType(mediaType: 'image/jpeg'),
         )],
     )]
-    public function getMediumImageFromS3(Post $post, PostService $service): StreamedResponse
+    public function getMediumImageFromS3(Post $post, PostService $service): Response
     {
         $this->authorize('view', $post);
 
@@ -147,7 +148,7 @@ final class PostController extends Controller
             content: new OAT\MediaType(mediaType: 'image/jpeg'),
         )],
     )]
-    public function getLargeImageFromS3(Post $post, PostService $service): StreamedResponse
+    public function getLargeImageFromS3(Post $post, PostService $service): Response
     {
         $this->authorize('view', $post);
 
@@ -167,7 +168,7 @@ final class PostController extends Controller
             content: new OAT\MediaType(mediaType: 'image/jpeg'),
         )],
     )]
-    public function getFullImageFromS3(Post $post, PostService $service): StreamedResponse
+    public function getFullImageFromS3(Post $post, PostService $service): Response
     {
         $this->authorize('view', $post);
 

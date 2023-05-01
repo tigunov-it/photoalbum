@@ -12,6 +12,7 @@ use App\Http\Responses\UnsuccessfulResponse;
 use App\Models\Album;
 use App\Services\AlbumService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 use OpenApi\Attributes as OAT;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
@@ -100,7 +101,7 @@ final class AlbumController extends Controller
             content: new OAT\MediaType(mediaType: 'image/jpeg'),
         )],
     )]
-    public function getCoverFromS3(Album $album, AlbumService $service): StreamedResponse
+    public function getCoverFromS3(Album $album, AlbumService $service): Response
     {
         $this->authorize('view', $album);
 

@@ -6,6 +6,7 @@ use App\Models\Album;
 use App\Models\Post;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Http\Response;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
@@ -103,22 +104,22 @@ final class PostService
         return $album->posts()->createMany($images);
     }
 
-    public function getSmallImageFromS3(Post $post): StreamedResponse
+    public function getSmallImageFromS3(Post $post): Response
     {
         return ImageService::getImage($post->image_small);
     }
 
-    public function getMediumImageFromS3(Post $post): StreamedResponse
+    public function getMediumImageFromS3(Post $post): Response
     {
         return ImageService::getImage($post->image_medium);
     }
 
-    public function getLargeImageFromS3(Post $post): StreamedResponse
+    public function getLargeImageFromS3(Post $post): Response
     {
         return ImageService::getImage($post->image_large);
     }
 
-    public function getFullImageFromS3(Post $post): StreamedResponse
+    public function getFullImageFromS3(Post $post): Response
     {
         return ImageService::getImage($post->image);
     }

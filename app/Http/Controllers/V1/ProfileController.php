@@ -9,10 +9,9 @@ use App\Http\Responses\UnsuccessfulResponse;
 use App\Services\ProfileService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use OpenApi\Attributes as OAT;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
-use Symfony\Component\HttpFoundation\StreamedResponse;
 
 final class ProfileController extends Controller
 {
@@ -43,7 +42,7 @@ final class ProfileController extends Controller
             ),
         ],
     )]
-    public function getAvatarFromS3(Request $request, ProfileService $service): StreamedResponse|BinaryFileResponse
+    public function getAvatarFromS3(Request $request, ProfileService $service): Response
     {
         return $service->getAvatarFromS3($request->user());
     }
