@@ -204,7 +204,7 @@ final class ImageService
     public static function rotateImage(string $path, float $angle, string $bgcolor): array
     {
         $image = self::getImage($path);
-        $image = Image::make($image)->rotate($angle, $bgcolor);
+        $image = Image::make($image)->rotate($angle, $bgcolor)->encode(quality: 100);
 
         self::deleteCacheFolder(dirname($path));
 
