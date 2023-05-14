@@ -2,8 +2,8 @@
 
 namespace App\Services;
 
+use App\Http\Responses\ImageResponse;
 use App\Models\User;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\File;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -30,15 +30,20 @@ final class ProfileService
     /**
      * @throws NotFoundHttpException
      */
-    public function getAvatarFromS3(User $user): Response
+    public function getAvatarFromS3(User $user): ImageResponse
     {
         if ($user->profile?->image === null) {
             $path = public_path('images/avatar.png');
-            $file = File::get($path);
-            $type = File::mimeType($path);
-            return response($file)->header('Content-Type', $type);
+
+            return new ImageResponse(
+                File::get($path),
+                File::mimeType($path),
+            );
         }
 
-        return ImageService::getImage($user->profile->image);
+        return new ImageResponse(
+            ImageService::getImage($user->profile->image),
+            ImageService::getImageType($user->profile->image),
+        );
     }
 }

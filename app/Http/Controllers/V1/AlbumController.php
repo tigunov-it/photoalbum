@@ -8,11 +8,11 @@ use App\Http\Requests\AlbumStoreRequest;
 use App\Http\Requests\AlbumUpdateRequest;
 use App\Http\Responses\AlbumResponse;
 use App\Http\Responses\BaseResponse;
+use App\Http\Responses\ImageResponse;
 use App\Http\Responses\UnsuccessfulResponse;
 use App\Models\Album;
 use App\Services\AlbumService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Response;
 use OpenApi\Attributes as OAT;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
@@ -63,13 +63,10 @@ final class AlbumController extends Controller
     {
         $this->authorize('create', Album::class);
 
-        $created = $service->createAlbum($request->user(), $request->validated());
-
-        if ($created) {
-            return new AlbumResponse($created, JsonResponse::HTTP_CREATED);
-        }
-
-        return new UnsuccessfulResponse;
+        return new AlbumResponse(
+            $service->createAlbum($request->user(), $request->validated()),
+            JsonResponse::HTTP_CREATED,
+        );
     }
 
     #[OAT\Get(
@@ -92,16 +89,10 @@ final class AlbumController extends Controller
         path: '/api/v1/albums/{album_id}/s3cover',
         summary: 'Display album cover',
         tags: ['albums'],
-        parameters: [
-            new OAT\Parameter(ref: '#/components/parameters/album_id'),
-        ],
-        responses: [new OAT\Response(
-            response: JsonResponse::HTTP_OK,
-            description: 'Cover',
-            content: new OAT\MediaType(mediaType: 'image/jpeg'),
-        )],
+        parameters: [new OAT\Parameter(ref: '#/components/parameters/album_id')],
+        responses: [new OAT\Response(response: JsonResponse::HTTP_OK, ref: '#/components/responses/ImageResponse')],
     )]
-    public function getCoverFromS3(Album $album, AlbumService $service): Response
+    public function getCoverFromS3(Album $album, AlbumService $service): ImageResponse
     {
         $this->authorize('view', $album);
 
@@ -176,5 +167,4 @@ final class AlbumController extends Controller
 
         return new UnsuccessfulResponse;
     }
-
 }

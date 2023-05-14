@@ -38,7 +38,7 @@ final class RegisteredUserController extends Controller
         responses: [
             new OAT\Response(
                 response: JsonResponse::HTTP_NO_CONTENT,
-                description: 'Registration successfull',
+                description: 'Registration completed successfully',
                 content: new OAT\JsonContent(),
             ),
             new OAT\Response(response: JsonResponse::HTTP_UNPROCESSABLE_ENTITY, ref: '#/components/responses/UnprocessableEntity'),

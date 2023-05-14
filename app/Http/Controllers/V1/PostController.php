@@ -4,17 +4,17 @@ namespace App\Http\Controllers\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PostIndexRequest;
+use App\Http\Requests\PostRotateRequest;
 use App\Http\Requests\PostStoreRequest;
 use App\Http\Requests\PostUpdateRequest;
 use App\Http\Responses\BaseResponse;
+use App\Http\Responses\ImageResponse;
 use App\Http\Responses\UnsuccessfulResponse;
 use App\Models\Album;
 use App\Models\Post;
 use App\Services\PostService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Response;
 use OpenApi\Attributes as OAT;
-use Symfony\Component\HttpFoundation\StreamedResponse;
 
 final class PostController extends Controller
 {
@@ -66,13 +66,10 @@ final class PostController extends Controller
 
         $this->authorize('update', $album);
 
-        $created = $service->createPost($request->user(), $album, $request->validated());
-
-        if ($created) {
-            return new BaseResponse($created, JsonResponse::HTTP_CREATED);
-        }
-
-        return new UnsuccessfulResponse;
+        return new BaseResponse(
+            $service->createPost($request->user(), $album, $request->validated()),
+            JsonResponse::HTTP_CREATED,
+        );
     }
 
     #[OAT\Get(
@@ -99,16 +96,10 @@ final class PostController extends Controller
         path: '/api/v1/posts/{post_id}/s3small',
         summary: 'Display post small image',
         tags: ['posts'],
-        parameters: [
-            new OAT\Parameter(ref: '#/components/parameters/post_id'),
-        ],
-        responses: [new OAT\Response(
-            response: JsonResponse::HTTP_OK,
-            description: 'Small image',
-            content: new OAT\MediaType(mediaType: 'image/jpeg'),
-        )],
+        parameters: [new OAT\Parameter(ref: '#/components/parameters/post_id')],
+        responses: [new OAT\Response(response: JsonResponse::HTTP_OK, ref: '#/components/responses/ImageResponse')],
     )]
-    public function getSmallImageFromS3(Post $post, PostService $service): Response
+    public function getSmallImageFromS3(Post $post, PostService $service): ImageResponse
     {
         $this->authorize('view', $post);
 
@@ -119,16 +110,10 @@ final class PostController extends Controller
         path: '/api/v1/posts/{post_id}/s3medium',
         summary: 'Display post medium image',
         tags: ['posts'],
-        parameters: [
-            new OAT\Parameter(ref: '#/components/parameters/post_id'),
-        ],
-        responses: [new OAT\Response(
-            response: JsonResponse::HTTP_OK,
-            description: 'Medium image',
-            content: new OAT\MediaType(mediaType: 'image/jpeg'),
-        )],
+        parameters: [new OAT\Parameter(ref: '#/components/parameters/post_id')],
+        responses: [new OAT\Response(response: JsonResponse::HTTP_OK, ref: '#/components/responses/ImageResponse')],
     )]
-    public function getMediumImageFromS3(Post $post, PostService $service): Response
+    public function getMediumImageFromS3(Post $post, PostService $service): ImageResponse
     {
         $this->authorize('view', $post);
 
@@ -139,16 +124,10 @@ final class PostController extends Controller
         path: '/api/v1/posts/{post_id}/s3large',
         summary: 'Display post large image',
         tags: ['posts'],
-        parameters: [
-            new OAT\Parameter(ref: '#/components/parameters/post_id'),
-        ],
-        responses: [new OAT\Response(
-            response: JsonResponse::HTTP_OK,
-            description: 'Large image',
-            content: new OAT\MediaType(mediaType: 'image/jpeg'),
-        )],
+        parameters: [new OAT\Parameter(ref: '#/components/parameters/post_id')],
+        responses: [new OAT\Response(response: JsonResponse::HTTP_OK, ref: '#/components/responses/ImageResponse')],
     )]
-    public function getLargeImageFromS3(Post $post, PostService $service): Response
+    public function getLargeImageFromS3(Post $post, PostService $service): ImageResponse
     {
         $this->authorize('view', $post);
 
@@ -159,16 +138,10 @@ final class PostController extends Controller
         path: '/api/v1/posts/{post_id}/s3full',
         summary: 'Display post full image',
         tags: ['posts'],
-        parameters: [
-            new OAT\Parameter(ref: '#/components/parameters/post_id'),
-        ],
-        responses: [new OAT\Response(
-            response: JsonResponse::HTTP_OK,
-            description: 'Full image',
-            content: new OAT\MediaType(mediaType: 'image/jpeg'),
-        )],
+        parameters: [new OAT\Parameter(ref: '#/components/parameters/post_id')],
+        responses: [new OAT\Response(response: JsonResponse::HTTP_OK, ref: '#/components/responses/ImageResponse')],
     )]
-    public function getFullImageFromS3(Post $post, PostService $service): Response
+    public function getFullImageFromS3(Post $post, PostService $service): ImageResponse
     {
         $this->authorize('view', $post);
 
@@ -222,5 +195,23 @@ final class PostController extends Controller
         }
 
         return new UnsuccessfulResponse;
+    }
+
+    #[OAT\Post(
+        path: '/api/v1/posts/{post_id}/rotate',
+        summary: 'Rotate and display image',
+        requestBody: new OAT\RequestBody(ref: '#/components/requestBodies/PostRotateRequest'),
+        tags: ['posts'],
+        parameters: [new OAT\Parameter(ref: '#/components/parameters/post_id')],
+        responses: [
+            new OAT\Response(response: JsonResponse::HTTP_OK, ref: '#/components/responses/ImageResponse'),
+            new OAT\Response(response: JsonResponse::HTTP_BAD_REQUEST, ref: '#/components/responses/UnsuccessfulResponse'),
+        ],
+    )]
+    public function rotate(PostRotateRequest $request, Post $post, PostService $service): ImageResponse|BaseResponse
+    {
+        $this->authorize('update', $post);
+
+        return $service->rotateImage($post, $request->validated()) ?: new UnsuccessfulResponse;
     }
 }

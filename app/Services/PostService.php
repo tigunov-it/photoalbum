@@ -2,13 +2,13 @@
 
 namespace App\Services;
 
+use App\Enums\Size;
+use App\Http\Responses\ImageResponse;
 use App\Models\Album;
 use App\Models\Post;
 use App\Models\User;
 use Carbon\Carbon;
-use Illuminate\Http\Response;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Symfony\Component\HttpFoundation\StreamedResponse;
 
 final class PostService
 {
@@ -63,8 +63,8 @@ final class PostService
     /**
      * @param array{
      *  album_id: int,
-     *  title: string,
-     *  description: string,
+     *  title?: ?string,
+     *  description?: ?string,
      *  image: \Illuminate\Http\UploadedFile,
      * } $data
      */
@@ -104,24 +104,36 @@ final class PostService
         return $album->posts()->createMany($images);
     }
 
-    public function getSmallImageFromS3(Post $post): Response
+    public function getSmallImageFromS3(Post $post): ImageResponse
     {
-        return ImageService::getImage($post->image_small);
+        return new ImageResponse(
+            ImageService::getImage($post->image_small),
+            ImageService::getImageType($post->image_small),
+        );
     }
 
-    public function getMediumImageFromS3(Post $post): Response
+    public function getMediumImageFromS3(Post $post): ImageResponse
     {
-        return ImageService::getImage($post->image_medium);
+        return new ImageResponse(
+            ImageService::getImage($post->image_medium),
+            ImageService::getImageType($post->image_medium),
+        );
     }
 
-    public function getLargeImageFromS3(Post $post): Response
+    public function getLargeImageFromS3(Post $post): ImageResponse
     {
-        return ImageService::getImage($post->image_large);
+        return new ImageResponse(
+            ImageService::getImage($post->image_large),
+            ImageService::getImageType($post->image_large),
+        );
     }
 
-    public function getFullImageFromS3(Post $post): Response
+    public function getFullImageFromS3(Post $post): ImageResponse
     {
-        return ImageService::getImage($post->image);
+        return new ImageResponse(
+            ImageService::getImage($post->image),
+            ImageService::getImageType($post->image),
+        );
     }
 
     /**
@@ -143,5 +155,43 @@ final class PostService
         ImageService::delete($post->image_medium);
         ImageService::delete($post->image_large);
         return $post->delete();
+    }
+
+    /**
+     * @param array{
+     *  size?: string,
+     *  angle?: numeric,
+     *  bgcolor?: string,
+     * } $data
+     */
+    public function rotateImage(Post $post, array $data): ImageResponse|false
+    {
+        $result = ImageService::rotateImage(
+            $post->image,
+            $data['angle'] ?? 90,
+            $data['bgcolor'] ?? '#ffffff',
+        );
+
+        if ($result === $post->only([
+            'image',
+            'image_small',
+            'image_medium',
+            'image_large',
+        ])) {
+            $size = isset($data['size']) ? Size::tryFromName($data['size']) : null;
+            $path = match ($size) {
+                Size::S => $post->image_small,
+                Size::M => $post->image_medium,
+                Size::L => $post->image_large,
+                default => $post->image,
+            };
+
+            return new ImageResponse(
+                ImageService::getImage($path),
+                ImageService::getImageType($path),
+            );
+        }
+
+        return false;
     }
 }

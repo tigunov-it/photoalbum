@@ -22,7 +22,7 @@ final class SuccessfulResponse extends BaseResponse implements Responsable
         ?string $data = null,
         ?int $status  = null,
     ) {
-        return parent::__construct(
+        parent::__construct(
             $data   ?? __('Operation completed successfully'),
             $status ?? JsonResponse::HTTP_OK,
         );

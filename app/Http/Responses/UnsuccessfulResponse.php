@@ -8,7 +8,7 @@ use OpenApi\Attributes as OAT;
 
 #[OAT\Response(
     response: 'UnsuccessfulResponse',
-    description: 'Unsuccessfull Response',
+    description: 'Unsuccessful Response',
     content: new OAT\JsonContent(
         required: ['message'],
         properties: [
@@ -22,7 +22,7 @@ final class UnsuccessfulResponse extends BaseResponse implements Responsable
         ?string $data = null,
         ?int $status  = null,
     ) {
-        return parent::__construct(
+        parent::__construct(
             $data   ?? __('Operation failed'),
             $status ?? JsonResponse::HTTP_BAD_REQUEST,
         );

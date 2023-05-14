@@ -5,11 +5,11 @@ namespace App\Http\Controllers\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Http\Responses\BaseResponse;
+use App\Http\Responses\ImageResponse;
 use App\Http\Responses\UnsuccessfulResponse;
 use App\Services\ProfileService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use OpenApi\Attributes as OAT;
 
@@ -34,15 +34,9 @@ final class ProfileController extends Controller
         path: '/api/v1/profile/s3avatar',
         summary: 'Display avatar',
         tags: ['profile'],
-        responses: [
-            new OAT\Response(
-                response: JsonResponse::HTTP_OK,
-                description: 'Avatar',
-                content: new OAT\MediaType(mediaType: 'image/*'),
-            ),
-        ],
+        responses: [new OAT\Response(response: JsonResponse::HTTP_OK, ref: '#/components/responses/ImageResponse')],
     )]
-    public function getAvatarFromS3(Request $request, ProfileService $service): Response
+    public function getAvatarFromS3(Request $request, ProfileService $service): ImageResponse
     {
         return $service->getAvatarFromS3($request->user());
     }
@@ -67,6 +61,7 @@ final class ProfileController extends Controller
         if ($service->update($request->user(), $request->validated())) {
             return new BaseResponse(status: JsonResponse::HTTP_NO_CONTENT);
         }
+
         return new UnsuccessfulResponse;
     }
 
@@ -93,8 +88,8 @@ final class ProfileController extends Controller
             'password' => ['required', 'current-password'],
         ]);
 
+        /** @var \App\Models\User */
         $user = $request->user();
-        /** @var \App\Models\User $user */
 
         Auth::guard('web')->logout();
 
@@ -107,6 +102,7 @@ final class ProfileController extends Controller
         if ($profileDeleted && $userDeleted) {
             return new BaseResponse(status: JsonResponse::HTTP_NO_CONTENT);
         }
+
         return new UnsuccessfulResponse;
     }
 }

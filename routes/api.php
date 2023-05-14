@@ -58,6 +58,7 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
             Route::get('/{post}/s3medium', [PostController::class, 'getMediumImageFromS3'])->name('show.s3medium');
             Route::get('/{post}/s3large', [PostController::class, 'getLargeImageFromS3'])->name('show.s3large');
             Route::get('/{post}/s3full', [PostController::class, 'getFullImageFromS3'])->name('show.s3full');
+            Route::post('/{post}/rotate', [PostController::class, 'rotate'])->name('rotate');
         });
 
 
