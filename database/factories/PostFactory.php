@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Post>
@@ -16,11 +17,11 @@ final class PostFactory extends Factory
      */
     public function definition(): array
     {
-        $image = $this->faker->image('storage/app/s3cache', 400, 400, 'post', false);
+        $image = $this->faker->image(Storage::disk('s3cache')->path(''), 400, 400, 'post', false);
 
         return [
-            'title' => random_int(0, 1) ? $this->faker->sentence() : '',
-            'description' => random_int(0, 1) ? $this->faker->realText() : '',
+            'title' => $this->faker->sentence(),
+            'description' => $this->faker->realText(),
             'image' => $image,
             'image_small' => $image,
             'image_medium' => $image,

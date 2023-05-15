@@ -30,6 +30,7 @@ final class PostControllerTest extends TestCase
             $mock->shouldReceive('detectModerationLabels')->once()->andReturn(new Result);
         });
         Storage::fake('s3');
+        Storage::fake('s3cache');
 
         $response = $this->actingAs($user)->post(route('v1.posts.store'), $post->toArray());
 

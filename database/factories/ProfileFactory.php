@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Profile>
@@ -20,7 +21,7 @@ final class ProfileFactory extends Factory
             'title' => $this->faker->sentence(),
             'description' => $this->faker->realText(),
             'url' => $this->faker->url(),
-            'image' => $this->faker->image('storage/app/s3cache', 100, 100, 'profile', false),
+            'image' => $this->faker->image(Storage::disk('s3cache')->path(''), 100, 100, 'profile', false),
         ];
     }
 }

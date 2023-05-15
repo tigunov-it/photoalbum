@@ -156,11 +156,18 @@ final class ImageService
 
     public static function delete(string $path): bool
     {
+        self::deleteCache($path);
         return Storage::disk('s3')->delete($path);
+    }
+
+    public static function deleteCache(string $path): bool
+    {
+        return Storage::disk('s3cache')->delete($path);
     }
 
     public static function deleteFolder(string $folder): bool
     {
+        self::deleteCacheFolder($folder);
         return Storage::disk('s3')->deleteDirectory($folder);
     }
 
@@ -205,8 +212,6 @@ final class ImageService
     {
         $image = self::getImage($path);
         $image = Image::make($image)->rotate($angle, $bgcolor)->encode(quality: 100);
-
-        self::deleteCacheFolder(dirname($path));
 
         return self::uploadPostImageToPath(dirname($path), $image, basename($path));
     }

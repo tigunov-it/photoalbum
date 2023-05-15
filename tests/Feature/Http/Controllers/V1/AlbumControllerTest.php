@@ -43,6 +43,7 @@ final class AlbumControllerTest extends TestCase
             $mock->shouldNotReceive('detectModerationLabels');
         });
         Storage::fake('s3');
+        Storage::fake('s3cache');
 
         $response = $this->post(route('v1.albums.store'), $album->toArray());
 
@@ -60,6 +61,7 @@ final class AlbumControllerTest extends TestCase
             $mock->shouldReceive('detectModerationLabels')->once()->andReturn(new Result);
         });
         Storage::fake('s3');
+        Storage::fake('s3cache');
 
         $response = $this->actingAs($user)->post(route('v1.albums.store'), $album->toArray());
 
@@ -114,6 +116,7 @@ final class AlbumControllerTest extends TestCase
         $album = Album::factory()->for($user)->create();
 
         Storage::fake('s3');
+        Storage::fake('s3cache');
         Storage::disk('s3')->putFileAs($image, $album->image);
 
         $response = $this->actingAs($user)->get(route('v1.albums.show.s3cover', ['album' => $album->id]));
@@ -128,7 +131,7 @@ final class AlbumControllerTest extends TestCase
         $album = Album::factory()->for($user)->create(['created_at' => '2023-01-01 00:00:00']);
 
         Storage::fake('s3');
-        Storage::fake('public');
+        Storage::fake('s3cache');
 
         Storage::disk('s3')->put("uploads/{$user->username}/2023-01-01_00:00:00", $image);
 
@@ -148,6 +151,7 @@ final class AlbumControllerTest extends TestCase
             $mock->shouldReceive('detectModerationLabels')->once()->andReturn(new Result);
         });
         Storage::fake('s3');
+        Storage::fake('s3cache');
 
         $response = $this->actingAs($user)->put(
             route('v1.albums.update', ['album' => $albumCreated->id]),
@@ -173,6 +177,7 @@ final class AlbumControllerTest extends TestCase
         $album = Album::factory()->for($user)->create();
 
         Storage::fake('s3');
+        Storage::fake('s3cache');
         Storage::disk('s3')->putFileAs($image, $album->image);
 
         $response = $this->actingAs($user)->delete(route('v1.albums.destroy', ['album' => $album->id]));

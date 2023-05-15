@@ -72,7 +72,7 @@ final class PostService
     {
         $albumCreatedAt = Carbon::parse($album->created_at);
 
-        $data['title'] ??= '';
+        $data['title'] ??= pathinfo($data['image']->getClientOriginalName(), \PATHINFO_FILENAME);
         $data['description'] ??= '';
         $data = array_merge($data, ImageService::uploadPostImage($user, $data['image'], $albumCreatedAt));
 
@@ -96,7 +96,7 @@ final class PostService
         foreach ($images as $key => &$image) {
             $image = array_merge([
                 'user_id' => $album->user_id,
-                'title' => $data['titles'][$key] ?? '',
+                'title' => $data['titles'][$key] ?? pathinfo($image->getClientOriginalName(), \PATHINFO_FILENAME),
                 'description' => $data['descriptions'][$key] ?? '',
             ], ImageService::uploadPostImage($user, $image, $albumCreatedAt));
         }
@@ -171,6 +171,11 @@ final class PostService
             $data['angle'] ?? 90,
             $data['bgcolor'] ?? '#ffffff',
         );
+
+        ImageService::deleteCache($post->image);
+        ImageService::deleteCache($post->image_small);
+        ImageService::deleteCache($post->image_medium);
+        ImageService::deleteCache($post->image_large);
 
         if ($result === $post->only([
             'image',
