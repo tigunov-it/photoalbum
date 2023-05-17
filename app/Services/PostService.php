@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Enums\Size;
 use App\Http\Responses\ImageResponse;
 use App\Models\Album;
 use App\Models\Post;
@@ -154,6 +153,7 @@ final class PostService
         ImageService::delete($post->image_small);
         ImageService::delete($post->image_medium);
         ImageService::delete($post->image_large);
+
         return $post->delete();
     }
 
@@ -164,7 +164,7 @@ final class PostService
      *  bgcolor?: string,
      * } $data
      */
-    public function rotateImage(Post $post, array $data): ImageResponse|false
+    public function rotateImage(Post $post, array $data): bool
     {
         $result = ImageService::rotateImage(
             $post->image,
@@ -177,26 +177,11 @@ final class PostService
         ImageService::deleteCache($post->image_medium);
         ImageService::deleteCache($post->image_large);
 
-        if ($result === $post->only([
+        return $result === $post->only([
             'image',
             'image_small',
             'image_medium',
             'image_large',
-        ])) {
-            $size = isset($data['size']) ? Size::tryFromName($data['size']) : null;
-            $path = match ($size) {
-                Size::S => $post->image_small,
-                Size::M => $post->image_medium,
-                Size::L => $post->image_large,
-                default => $post->image,
-            };
-
-            return new ImageResponse(
-                ImageService::getImage($path),
-                ImageService::getImageType($path),
-            );
-        }
-
-        return false;
+        ]);
     }
 }

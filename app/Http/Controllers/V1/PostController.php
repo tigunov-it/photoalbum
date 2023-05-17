@@ -9,6 +9,7 @@ use App\Http\Requests\PostStoreRequest;
 use App\Http\Requests\PostUpdateRequest;
 use App\Http\Responses\BaseResponse;
 use App\Http\Responses\ImageResponse;
+use App\Http\Responses\SuccessfulResponse;
 use App\Http\Responses\UnsuccessfulResponse;
 use App\Models\Album;
 use App\Models\Post;
@@ -204,14 +205,16 @@ final class PostController extends Controller
         tags: ['posts'],
         parameters: [new OAT\Parameter(ref: '#/components/parameters/post_id')],
         responses: [
-            new OAT\Response(response: JsonResponse::HTTP_OK, ref: '#/components/responses/ImageResponse'),
+            new OAT\Response(response: JsonResponse::HTTP_OK, ref: '#/components/responses/SuccessfulResponse'),
             new OAT\Response(response: JsonResponse::HTTP_BAD_REQUEST, ref: '#/components/responses/UnsuccessfulResponse'),
         ],
     )]
-    public function rotate(PostRotateRequest $request, Post $post, PostService $service): ImageResponse|BaseResponse
+    public function rotate(PostRotateRequest $request, Post $post, PostService $service): BaseResponse
     {
         $this->authorize('update', $post);
 
-        return $service->rotateImage($post, $request->validated()) ?: new UnsuccessfulResponse;
+        return $service->rotateImage($post, $request->validated())
+            ? new SuccessfulResponse
+            : new UnsuccessfulResponse;
     }
 }
