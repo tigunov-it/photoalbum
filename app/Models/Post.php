@@ -19,6 +19,8 @@ use OpenApi\Attributes as OAT;
         new OAT\Property(property: 'image_large', type: 'string', maxLength: 16383),
         new OAT\Property(property: 'created_at', type: 'string', format: 'date-time', nullable: true),
         new OAT\Property(property: 'updated_at', type: 'string', format: 'date-time', nullable: true),
+        new OAT\Property(property: 'share_token', type: 'string', format: 'uuid', nullable: true),
+        new OAT\Property(property: 'share_link', type: 'string', maxLength: 255, nullable: true),
     ],
 )]
 class Post extends Model
@@ -33,6 +35,8 @@ class Post extends Model
         'image_small',
         'image_medium',
         'image_large',
+        'share_token',
+        'share_link',
     ];
 
     public function user()

@@ -59,8 +59,16 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
             Route::get('/{post}/s3large', [PostController::class, 'getLargeImageFromS3'])->name('show.s3large');
             Route::get('/{post}/s3full', [PostController::class, 'getFullImageFromS3'])->name('show.s3full');
             Route::post('/{post}/rotate', [PostController::class, 'rotate'])->name('rotate');
+            Route::post('/{post}/share', [PostController::class, 'share'])->name('share');
+            Route::post('/{post}/unshare', [PostController::class, 'unshare'])->name('unshare');
         });
 
 
+    });
+
+    Route::middleware('signed')->group(function () {
+        Route::group(['prefix' => 'posts', 'as' => 'posts.'], function () {
+            Route::post('/{post:share_token}', [PostController::class, 'showShared'])->name('show.shared');
+        });
     });
 });

@@ -8,6 +8,8 @@ use App\Models\Post;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Str;
 
 final class PostService
 {
@@ -182,6 +184,23 @@ final class PostService
             'image_small',
             'image_medium',
             'image_large',
+        ]);
+    }
+
+    public function share(Post $post): Post
+    {
+        $post->share_token = (string) Str::orderedUuid();
+        $post->share_link = URL::signedRoute('v1.posts.show.shared', ['post' => $post]);
+        $post->save();
+
+        return $post;
+    }
+
+    public function unshare(Post $post): bool
+    {
+        return $post->update([
+            'share_token' => null,
+            'share_link' => null,
         ]);
     }
 }

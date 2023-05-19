@@ -217,4 +217,57 @@ final class PostController extends Controller
             ? new SuccessfulResponse
             : new UnsuccessfulResponse;
     }
+
+    #[OAT\Get(
+        path: '/api/v1/posts/{post_share_token}',
+        summary: 'Display shared post full image',
+        tags: ['posts'],
+        parameters: [
+            new OAT\Parameter(ref: '#/components/parameters/post_share_token'),
+            new OAT\Parameter(ref: '#/components/parameters/signature'),
+        ],
+        responses: [new OAT\Response(response: JsonResponse::HTTP_OK, ref: '#/components/responses/ImageResponse')],
+    )]
+    public function showShared(Post $post, PostService $service): ImageResponse
+    {
+        return $service->getFullImageFromS3($post);
+    }
+
+    #[OAT\Post(
+        path: '/api/v1/posts/{post_id}/share',
+        summary: 'Generate share link',
+        tags: ['posts'],
+        parameters: [new OAT\Parameter(ref: '#/components/parameters/post_id')],
+        responses: [new OAT\Response(
+            response: JsonResponse::HTTP_OK,
+            description: 'Shared post',
+            content: new OAT\JsonContent(ref: '#/components/schemas/Post'),
+        )],
+    )]
+    public function share(Post $post, PostService $service): BaseResponse
+    {
+        $this->authorize('update', $post);
+
+        return new BaseResponse($service->share($post));
+    }
+
+    #[OAT\Post(
+        path: '/api/v1/posts/{post_id}/unshare',
+        summary: 'Remove share link',
+        tags: ['posts'],
+        parameters: [new OAT\Parameter(ref: '#/components/parameters/post_id')],
+        responses: [new OAT\Response(
+            response: JsonResponse::HTTP_NO_CONTENT,
+            description: 'Removed share link',
+            content: new OAT\JsonContent(),
+        )],
+    )]
+    public function unshare(Post $post, PostService $service): BaseResponse
+    {
+        $this->authorize('update', $post);
+
+        return $service->unshare($post)
+            ? new BaseResponse(status: JsonResponse::HTTP_NO_CONTENT)
+            : new UnsuccessfulResponse;
+    }
 }
