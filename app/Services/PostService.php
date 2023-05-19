@@ -179,12 +179,18 @@ final class PostService
         ImageService::deleteCache($post->image_medium);
         ImageService::deleteCache($post->image_large);
 
-        return $result === $post->only([
+        $checkKeys = [
             'image',
             'image_small',
             'image_medium',
             'image_large',
-        ]);
+        ];
+
+        return array_filter(
+            $result,
+            static fn (string $key): bool => in_array($key, $checkKeys),
+            ARRAY_FILTER_USE_KEY,
+        ) === $post->only($checkKeys);
     }
 
     public function share(Post $post): Post

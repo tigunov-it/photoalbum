@@ -21,6 +21,7 @@ use OpenApi\Attributes as OAT;
         new OAT\Property(property: 'updated_at', type: 'string', format: 'date-time', nullable: true),
         new OAT\Property(property: 'share_token', type: 'string', format: 'uuid', nullable: true),
         new OAT\Property(property: 'share_link', type: 'string', maxLength: 255, nullable: true),
+        new OAT\Property(property: 'exif', type: 'object'),
     ],
 )]
 class Post extends Model
@@ -37,6 +38,11 @@ class Post extends Model
         'image_large',
         'share_token',
         'share_link',
+        'exif',
+    ];
+
+    protected $casts = [
+        'exif' => 'array'
     ];
 
     public function user()

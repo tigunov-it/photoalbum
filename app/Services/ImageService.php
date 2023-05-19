@@ -46,7 +46,7 @@ final class ImageService
     }
 
     /**
-     * @return array{image: string, image_small: string, image_medium: string, image_large: string}
+     * @return array{image: string, image_small: string, image_medium: string, image_large: string, exif: array}
      */
     public static function uploadPostImage(User $user, ImageFile|UploadedFile $image, Carbon $dateTime): array
     {
@@ -62,7 +62,7 @@ final class ImageService
     }
 
     /**
-     * @return array{image: string, image_small: string, image_medium: string, image_large: string}
+     * @return array{image: string, image_small: string, image_medium: string, image_large: string, exif: array}
      */
     public static function uploadPostImageToPath(string $path, ImageFile|UploadedFile $image, string $fileName): array
     {
@@ -74,6 +74,7 @@ final class ImageService
             'image_small' => self::resizeAndUploadPostImage($path, $image, $fileName, Size::S),
             'image_medium' => self::resizeAndUploadPostImage($path, $image, $fileName, Size::M),
             'image_large' => self::resizeAndUploadPostImage($path, $image, $fileName, Size::L),
+            'exif' => $image->exif(),
         ];
     }
 
@@ -206,7 +207,7 @@ final class ImageService
     }
 
     /**
-     * @return array{image: string, image_small: string, image_medium: string, image_large: string}
+     * @return array{image: string, image_small: string, image_medium: string, image_large: string, exif: array}
      */
     public static function rotateImage(string $path, float $angle, string $bgcolor): array
     {
