@@ -16,7 +16,7 @@ use OpenApi\Attributes as OAT;
             schema: new OAT\Schema(required: ['title', 'description', 'image'], properties: [
                 new OAT\Property(property: 'title', type: 'string', maxLength: 255),
                 new OAT\Property(property: 'description', type: 'string', maxLength: 16383),
-                new OAT\Property(property: 'image', type: 'string', format: 'binary', maximum: 20480),
+                new OAT\Property(property: 'image', type: 'string', format: 'binary', maximum: 5120),
                 new OAT\Property(property: 'is_public', type: 'boolean', default: false),
             ]),
             encoding: [
@@ -48,7 +48,7 @@ final class AlbumStoreRequest extends FormRequest
             'description' => ['required', 'string', 'max:16383'],
             'image' => [
                 'required',
-                File::types(['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'])->max(20 * 1024),
+                File::types(['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'])->max(5 * 1024),
                 Rule::dimensions()->maxWidth(4096)->maxHeight(4096),
                 new RekognitionRule,
             ],

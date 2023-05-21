@@ -18,7 +18,7 @@ use OpenApi\Attributes as OAT;
                 new OAT\Property(property: 'title', type: 'string', maxLength: 255, nullable: true),
                 new OAT\Property(property: 'description', type: 'string', maxLength: 16383, nullable: true),
                 new OAT\Property(property: 'url', type: 'string', maxLength: 255, nullable: true),
-                new OAT\Property(property: 'image', type: 'string', format: 'binary', maximum: 20480, nullable: true),
+                new OAT\Property(property: 'image', type: 'string', format: 'binary', maximum: 5120, nullable: true),
             ]),
             encoding: [
                 'image' => ['contentType' => [
@@ -50,7 +50,7 @@ final class ProfileUpdateRequest extends FormRequest
             'url' => ['nullable', 'url', 'max:255'],
             'image' => [
                 'nullable',
-                File::types(['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'])->max(20 * 1024),
+                File::types(['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'])->max(5 * 1024),
                 Rule::dimensions()->maxWidth(4096)->maxHeight(4096),
                 new RekognitionRule,
             ],
