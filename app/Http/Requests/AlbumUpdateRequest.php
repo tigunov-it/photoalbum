@@ -17,7 +17,7 @@ use OpenApi\Attributes as OAT;
                 new OAT\Property(property: '_method', enum: ['PUT', 'PATCH']),
                 new OAT\Property(property: 'title', type: 'string', maxLength: 255),
                 new OAT\Property(property: 'description', type: 'string', maxLength: 16383),
-                new OAT\Property(property: 'image', type: 'string', format: 'binary', maximum: 5120),
+                new OAT\Property(property: 'image', type: 'string', format: 'binary', maximum: 10240),
                 new OAT\Property(property: 'is_public', type: 'boolean', default: false),
             ]),
             encoding: [
@@ -48,7 +48,7 @@ final class AlbumUpdateRequest extends FormRequest
             'title' => ['string', 'max:255'],
             'description' => ['string', 'max:16383'],
             'image' => [
-                File::types(['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'])->max(5 * 1024),
+                File::types(['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'])->max(10 * 1024),
                 Rule::dimensions()->maxWidth(4096)->maxHeight(4096),
                 new RekognitionRule,
             ],

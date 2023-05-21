@@ -102,6 +102,28 @@ final class ImageService
         };
     }
 
+    public static function getReducedImage(UploadedFile $image, int $maxFileSize): bool|string
+    {
+        $fileSize = $image->getSize();
+
+        if ($fileSize > $maxFileSize) {
+            ini_set('memory_limit', '-1');
+
+            $image = Image::make($image);
+
+            while ($fileSize > $maxFileSize) {
+                $reducedWidth = (int) round($image->getWidth() / 2);
+                $image->resize($reducedWidth, null, static fn (Constraint $constraint) => $constraint->aspectRatio())
+                    ->encode('jpg');
+                $fileSize = mb_strlen($image->getEncoded(), '8bit');
+            }
+
+            return $image->getEncoded();
+        }
+
+        return $image->get();
+    }
+
     public static function generatePostsSubDirectoryName(string $path, Size $size): string
     {
         return sprintf('%s/%s', $path, $size->title());

@@ -18,7 +18,7 @@ use OpenApi\Attributes as OAT;
                 new OAT\Property(property: 'album_id', type: 'integer', format: 'int64', minimum: 1),
                 new OAT\Property(property: 'title', type: 'string', default: '', maxLength: 255, nullable: true),
                 new OAT\Property(property: 'description', type: 'string', default: '', maxLength: 16383, nullable: true),
-                new OAT\Property(property: 'image', type: 'string', format: 'binary', maximum: 5120),
+                new OAT\Property(property: 'image', type: 'string', format: 'binary', maximum: 10240),
             ]),
             encoding: [
                 'image' => ['contentType' => [
@@ -53,7 +53,7 @@ final class PostStoreRequest extends FormRequest
             'description' => ['nullable', 'string', 'max:16383'],
             'image' => [
                 'required',
-                File::types(['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'])->max(5 * 1024),
+                File::types(['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'])->max(10 * 1024),
                 Rule::dimensions()->maxWidth(4096)->maxHeight(4096),
                 new RekognitionRule,
             ],
