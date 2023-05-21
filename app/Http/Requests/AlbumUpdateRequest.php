@@ -55,4 +55,14 @@ final class AlbumUpdateRequest extends FormRequest
             'is_public' => ['boolean'],
         ];
     }
+
+    /**
+     * Prepare the data for validation.
+     */
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'is_public' => $this->boolean('is_public'),
+        ]);
+    }
 }
