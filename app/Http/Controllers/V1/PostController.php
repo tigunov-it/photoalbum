@@ -219,7 +219,7 @@ final class PostController extends Controller
     }
 
     #[OAT\Get(
-        path: '/api/v1/posts/{post_share_token}',
+        path: '/api/v1/shared/post/{post_share_token}',
         summary: 'Display shared post full image',
         tags: ['posts'],
         parameters: [

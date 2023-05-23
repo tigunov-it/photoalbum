@@ -67,8 +67,8 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
     });
 
     Route::middleware('signed')->group(function () {
-        Route::group(['prefix' => 'posts', 'as' => 'posts.'], function () {
-            Route::post('/{post:share_token}', [PostController::class, 'showShared'])->name('show.shared');
+        Route::group(['prefix' => 'shared', 'as' => 'shared.'], function () {
+            Route::get('/post/{post:share_token}', [PostController::class, 'showShared'])->name('post');
         });
     });
 });
