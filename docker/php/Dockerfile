@@ -12,12 +12,13 @@ RUN apt update && apt install -y \
     libonig-dev \
     libpng-dev \
     libpq-dev \
+    libwebp-dev\
     libxml2-dev \
     libzip-dev \
     zip
 
 RUN docker-php-ext-install bcmath exif gd intl mbstring pcntl pdo_mysql soap zip
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
     && docker-php-ext-install -j$(nproc) gd
 
 RUN docker-php-ext-install opcache
