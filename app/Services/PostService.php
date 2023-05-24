@@ -196,7 +196,7 @@ final class PostService
     public function share(Post $post): Post
     {
         $post->share_token = (string) Str::orderedUuid();
-        $post->share_link = URL::signedRoute('v1.posts.show.shared', ['post' => $post]);
+        $post->share_link = URL::signedRoute('v1.shared.post', ['post' => $post]);
         $post->save();
 
         return $post;
