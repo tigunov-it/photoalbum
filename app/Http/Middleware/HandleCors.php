@@ -21,7 +21,7 @@ class HandleCors extends \Illuminate\Http\Middleware\HandleCors
         }
 
         $options = $this->container['config']->get('cors', []);
-        Log::debug('options', $options);
+        Log::channel('telegram')->debug('options', $options);
 
         $this->cors->setOptions($options);
 
@@ -30,7 +30,7 @@ class HandleCors extends \Illuminate\Http\Middleware\HandleCors
 
             $this->cors->varyHeader($response, 'Access-Control-Request-Method');
 
-            Log::debug('preflight', $response->headers->all());
+            Log::channel('telegram')->debug('preflight', $response->headers->all());
 
             return $response;
         }
@@ -43,7 +43,7 @@ class HandleCors extends \Illuminate\Http\Middleware\HandleCors
 
         $response = $this->cors->addActualRequestHeaders($response, $request);
 
-        Log::debug('headers', $response->headers->all());
+        Log::channel('telegram')->debug('headers', $response->headers->all());
 
         return $response;
     }
