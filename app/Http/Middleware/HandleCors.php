@@ -19,9 +19,11 @@ class HandleCors extends \Illuminate\Http\Middleware\HandleCors
         if (!$this->hasMatchingPath($request)) {
             return $next($request);
         }
-
+        
         $options = $this->container['config']->get('cors', []);
-        Log::channel('telegram')->debug('options', $options);
+        Log::channel('telegram')->debug('allowed_origins', $options['allowed_origins']);
+        Log::channel('telegram')->debug('app url: ' . config('app.url'));
+        Log::channel('telegram')->debug('stateful', config('sanctum.stateful'));
 
         $this->cors->setOptions($options);
 
