@@ -355,14 +355,11 @@ spec:
           command: ["/bin/sh", "-c"]
           args:
             -
-              chown 1001:1001 -R /bitnami/mariadb;rm -rf /bitnami/mariadb/data
+              chown 1001:1001 -R /bitnami/mariadb
       volumes:
         - name: mysql-data
           persistentVolumeClaim:
             claimName: db
-        - name: sql
-          configMap:
-            name: mysql
         - name: secret
           secret:
             secretName: mysql
