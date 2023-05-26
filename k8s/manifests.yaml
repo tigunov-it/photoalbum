@@ -1,0 +1,633 @@
+---
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: gb-dev-2023-02-team05
+  labels:
+    kubernetes.io/metadata.name: gb-dev-2023-02-team05
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: fronted-app
+  namespace: gb-dev-2023-02-team05
+  labels:
+    app: fronted
+spec:
+  storageClassName: zfs-hddz1
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: backend-app
+  namespace: gb-dev-2023-02-team05
+  labels:
+    app: backend
+spec:
+  storageClassName: zfs-hddz1
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: meilisearch
+  namespace: gb-dev-2023-02-team05
+  labels:
+    app: meilisearch
+spec:
+  storageClassName: zfs-hddz1
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: redis
+  namespace: gb-dev-2023-02-team05
+  labels:
+    app: redis
+spec:
+  storageClassName: zfs-hddz1
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: db
+  namespace: gb-dev-2023-02-team05
+  labels:
+    app: mysql
+spec:
+  storageClassName: zfs-hddz1
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app
+  namespace: gb-dev-2023-02-team05
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 0
+  selector:
+    matchLabels:
+      app: app
+  template:
+    metadata:
+      labels:
+        app: app
+    spec:
+      containers:
+        - name: fronted-app
+          image: docker.io/bitnami/nginx:latest
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: 500m
+              memory: 150Mi
+            limits:
+              cpu: 500m
+              memory: 600Mi
+          volumeMounts:
+            - name: fronted-app
+              mountPath: /app
+            - name: app
+              mountPath: /apt/.env
+              subPath: vue-env
+              readOnly: true
+            - name: nginx-etc
+              mountPath: /opt/bitnami/nginx/conf/nginx.conf
+              subPath: fronted-nginx.conf
+              readOnly: true
+          ports:
+            - protocol: TCP
+              name: front-http
+              containerPort: 8080
+            - protocol: TCP
+              containerPort: 8443
+              name: front-https
+        - name: backend-app
+          image: docker.io/bitnami/php-fpm:8.2
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: 500m
+              memory: 150Mi
+            limits:
+              cpu: 500m
+              memory: 600Mi
+          volumeMounts:
+            - name: backend-app
+              mountPath: /app
+            - name: app
+              mountPath: /app/.env
+              subPath: laravel-env
+              readOnly: true
+          command:
+            - php
+            - -S
+            - "0.0.0.0:8081"
+            - -t
+            - /app/public
+          ports:
+            - protocol: TCP
+              name: back-http
+              containerPort: 8081
+            - protocol: TCP
+              containerPort: 8444
+              name: back-https
+      initContainers:
+        - name: node-init
+          image: docker.io/bitnami/node:18.16.0
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: fronted-app
+              mountPath: /app
+            - name: app
+              mountPath: /apt/.env
+              subPath: vue-env
+              readOnly: true
+          env:
+            - name: REPO_URL
+              value: https://github.com/tsoyvi/photoalbum_front.git
+          command:
+            - /bin/sh
+            - -c
+            - |
+              if [ ! -f /app/.initialized_npm ];then
+                find /app -name . -o -prune -exec rm -rf -- {} +  > /dev/null 2>&1;
+                git clone --branch dev ${REPO_URL} /app  > /dev/null 2>&1;
+                npm install && npm run build;
+                touch /app/.initialized_npm
+              fi
+              echo "done"
+        - name: git-laravel-init
+          image: docker.io/bitnami/git
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: backend-app
+              mountPath: /app
+          env:
+            - name: REPO_URL
+              value: https://github.com/tigunov-it/photoalbum.git
+          command:
+            - /bin/sh
+            - -c
+            - |
+              if [ ! -f /app/.initialized_git ];then
+                find /app -name . -o -prune -exec rm -rf -- {} +  > /dev/null 2>&1;
+                git clone --branch dev ${REPO_URL} /app  > /dev/null 2>&1;
+                touch /app/.initialized_git
+              fi
+              echo "done"
+        - name: laravel-init
+          image: docker.io/bitnami/php-fpm:8.2
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: backend-app
+              mountPath: /app
+            - name: app
+              mountPath: /app/.env
+              subPath: laravel-env
+              readOnly: true
+          command:
+            - /bin/sh
+            - -c
+            - |
+              if [ ! -f /app/.initialized_laravel ];then                
+                php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+                php -r "if (hash_file('sha384', 'composer-setup.php') === '55ce33d7678c5a611085589f1f3ddf8b3c52d662cd01d4ba75c0ee0459970c2200a51f492d557530c71c15d8dba01eae') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+                php composer-setup.php
+                php -r "unlink('composer-setup.php');"
+                composer.phar --no-interaction install;
+                if [ ! -f .env ]; then
+                  cp .env.example .env
+                fi
+                if [ ! -L public/storage ]; then
+                  php artisan storage:link
+                fi
+                php artisan optimize:clear
+                php artisan migrate:fresh --seed --no-interaction --force
+                php artisan l5-swagger:generate --no-interaction
+                touch /app/.initialized_laravel
+              fi
+              echo "done"
+      volumes:
+        - name: fronted-app
+          persistentVolumeClaim:
+            claimName: fronted-app
+        - name: backend-app
+          persistentVolumeClaim:
+            claimName: backend-app
+        - name: nginx-etc
+          configMap:
+            name: nginx-etc
+        - name: app
+          configMap:
+            name: app
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db
+  namespace: gb-dev-2023-02-team05
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 0
+  selector:
+    matchLabels:
+      app: db
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      containers:
+        - name: mariadb
+          image: bitnami/mariadb:10.8
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: mysql
+              protocol: TCP
+              containerPort: 3306
+          env:
+            - name: MARIADB_ROOT_PASSWORD_FILE
+              value: /tmp/secrets/root.pwd
+            - name: MARIADB_PASSWORD_FILE
+              value: /tmp/secrets/user.pwd
+            - name: MARIADB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mysql
+                  key: db-user-name
+                  optional: false
+            - name: MARIADB_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: mysql
+                  key: db-name
+                  optional: false
+            - name: MARIADB_COLLATE
+              value: utf8mb4_unicode_ci
+            - name: MARIADB_CHARACTER_SET
+              value: utf8mb4
+          startupProbe:
+            exec:
+              command:
+                - /bin/bash
+                - -ec
+                - |
+                  password_aux="${MARIADB_ROOT_PASSWORD:-}"
+                  if [[ -f "${MARIADB_ROOT_PASSWORD_FILE:-}" ]]; then
+                      password_aux=$(cat "$MARIADB_ROOT_PASSWORD_FILE")
+                  fi
+                  mysqladmin status -uroot -p"${password_aux}"
+          livenessProbe:
+            exec:
+              command:
+                - /bin/bash
+                - -ec
+                - |
+                  password_aux="${MARIADB_ROOT_PASSWORD:-}"
+                  if [[ -f "${MARIADB_ROOT_PASSWORD_FILE:-}" ]]; then
+                      password_aux=$(cat "$MARIADB_ROOT_PASSWORD_FILE")
+                  fi
+                  mysqladmin status -uroot -p"${password_aux}"
+          readinessProbe:
+            exec:
+              command:
+                - /bin/bash
+                - -ec
+                - |
+                  password_aux="${MARIADB_ROOT_PASSWORD:-}"
+                  if [[ -f "${MARIADB_ROOT_PASSWORD_FILE:-}" ]]; then
+                      password_aux=$(cat "$MARIADB_ROOT_PASSWORD_FILE")
+                  fi
+                  mysqladmin status -uroot -p"${password_aux}"
+          resources:
+            requests:
+              cpu: 250m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 320Mi
+          volumeMounts:
+            - name: mysql-data
+              mountPath: /bitnami/mariadb
+            - name: secret
+              mountPath: /tmp/secrets
+              readOnly: true
+      initContainers:
+        - name: volume-dirs-init
+          imagePullPolicy: IfNotPresent
+          image: busybox:1.36-glibc
+          volumeMounts:
+            - name: mysql-data
+              mountPath: /bitnami/mariadb
+          command: ["/bin/sh", "-c"]
+          args:
+            -
+              chown 1001:1001 -R /bitnami/mariadb;rm -rf /bitnami/mariadb/data
+      volumes:
+        - name: mysql-data
+          persistentVolumeClaim:
+            claimName: db
+        - name: sql
+          configMap:
+            name: mysql
+        - name: secret
+          secret:
+            secretName: mysql
+            items:
+              - key: db-user-password
+                path: user.pwd
+              - key: root-password
+                path: root.pwd
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: meilisearch
+  namespace: gb-dev-2023-02-team05
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 0
+  selector:
+    matchLabels:
+      app: meilisearch
+  template:
+    metadata:
+      labels:
+        app: meilisearch
+    spec:
+      containers:
+        - name: meilisearch
+          image: getmeili/meilisearch:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: meilisearch
+              protocol: TCP
+              containerPort: 7700
+          livenessProbe:
+            exec:
+              command:
+                - /bin/bash
+                - -ec
+                - |
+                  wget
+                  --no-verbose
+                  --spider
+                  http://localhost:7700/health
+          resources:
+            requests:
+              cpu: 250m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 320Mi
+          volumeMounts:
+            - name: meilisearch
+              mountPath: /meili_data
+      volumes:
+        - name: meilisearch
+          persistentVolumeClaim:
+            claimName: meilisearch
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mailhog
+  namespace: gb-dev-2023-02-team05
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 0
+  selector:
+    matchLabels:
+      app: mailhog
+  template:
+    metadata:
+      labels:
+        app: mailhog
+    spec:
+      containers:
+        - name: mailhog
+          image: mailhog/mailhog:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: mailhog
+              protocol: TCP
+              containerPort: 1025
+            - name: dashboard
+              protocol: TCP
+              containerPort: 8025
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 500m
+              memory: 320Mi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+  namespace: gb-dev-2023-02-team05
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 0
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+        - name: redis
+          image: redis:alpine
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: redis
+              protocol: TCP
+              containerPort: 6379
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 500m
+              memory: 320Mi
+          volumeMounts:
+            - name: redis
+              mountPath: /data
+      volumes:
+        - name: redis
+          persistentVolumeClaim:
+            claimName: redis
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app
+  namespace: gb-dev-2023-02-team05
+  labels:
+    app: app
+spec:
+  ports:
+    - port: 8080
+      targetPort: front-http
+      name: front-http
+      protocol: TCP
+    - port: 8081
+      targetPort: back-http
+      name: back-http
+      protocol: TCP
+  selector:
+    app: app
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: db
+  namespace: gb-dev-2023-02-team05
+  labels:
+    app: db
+spec:
+  ports:
+    - port: 3306
+      targetPort: mysql
+      name: mysql
+      protocol: TCP
+  selector:
+    app: db
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+  namespace: gb-dev-2023-02-team05
+  labels:
+    app: redis
+spec:
+  ports:
+    - port: 6379
+      targetPort: redis
+      name: redis
+      protocol: TCP
+  selector:
+    app: redis
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mailhog
+  namespace: gb-dev-2023-02-team05
+  labels:
+    app: mailhog
+spec:
+  ports:
+    - port: 1025
+      targetPort: mailhog
+      name: mailhog
+      protocol: TCP
+    - port: 8025
+      targetPort: dashboard
+      name: dashboard
+      protocol: TCP
+  selector:
+    app: mailhog
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: meilisearch
+  namespace: gb-dev-2023-02-team05
+  labels:
+    app: meilisearch
+spec:
+  ports:
+    - port: 7700
+      targetPort: meilisearch
+      name: meilisearch
+      protocol: TCP
+  selector:
+    app: meilisearch
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-photoalbum
+  namespace: gb-dev-2023-02-team05
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    ingress.kubernetes.io/ssl-redirect: "true"
+    cert-manager.io/cluster-issuer: "ca-ingress-issuer"
+    acme.cert-manager.io/http01-edit-in-place: "true"
+    cert-manager.io/issue-temporary-certificate: "true"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - photoalbum.k8s.tigunov.com
+      secretName: photoalbum-tls
+  rules:
+    - host: photoalbum.k8s.tigunov.com
+      http:
+        paths:
+          - pathType: Prefix
+            path: /api/
+            backend:
+              service:
+                name: app
+                port:
+                  name: back-http
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: app
+                port:
+                  name: front-http
