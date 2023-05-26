@@ -27,15 +27,15 @@ class HandleCors extends \Illuminate\Http\Middleware\HandleCors
 
         $this->cors->setOptions($options);
 
-        // if ($this->cors->isPreflightRequest($request)) {
-        //     $response = $this->cors->handlePreflightRequest($request);
+        if ($this->cors->isPreflightRequest($request)) {
+            $response = $this->cors->handlePreflightRequest($request);
+        
+            $this->cors->varyHeader($response, 'Access-Control-Request-Method');
 
-        //     $this->cors->varyHeader($response, 'Access-Control-Request-Method');
+            Log::channel('telegram')->debug('preflight', $response->headers->all());
 
-        //     Log::channel('telegram')->debug('preflight', $response->headers->all());
-
-        //     return $response;
-        // }
+            return $response;
+        }
 
         $response = $next($request);
 
