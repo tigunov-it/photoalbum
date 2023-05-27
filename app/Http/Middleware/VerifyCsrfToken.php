@@ -26,26 +26,17 @@ class VerifyCsrfToken extends Middleware
      */
     public function handle($request, \Closure $next)
     {
-        $isReading = $this->isReading($request);
-        $runningUnitTests = $this->runningUnitTests();
-        $inExceptArray = $this->inExceptArray($request);
-        $tokensMatch = $this->tokensMatch($request);
-        $shouldAddXsrfTokenCookie = $this->shouldAddXsrfTokenCookie();
-
-        \Illuminate\Support\Facades\Log::channel('telegram')->debug(
-            $request->fullUrl(),
-            compact('isReading', 'runningUnitTests', 'inExceptArray', 'tokensMatch', 'shouldAddXsrfTokenCookie'),
-        );
+        \Illuminate\Support\Facades\Log::channel('telegram')->debug($request->fullUrl());
 
         if (
-            $isReading ||
-            $runningUnitTests ||
-            $inExceptArray ||
-            $tokensMatch
+            $this->isReading($request) ||
+            $this->runningUnitTests() ||
+            $this->inExceptArray($request) ||
+            $this->tokensMatch($request)
         ) {
             return tap($next($request), function ($response) use ($request) {
+                \Illuminate\Support\Facades\Log::channel('telegram')->debug((string) $this->shouldAddXsrfTokenCookie());
                 if ($this->shouldAddXsrfTokenCookie()) {
-
                     \Illuminate\Support\Facades\Log::channel('telegram')->debug(
                         $this->newCookie($request, config('session')),
                     );
