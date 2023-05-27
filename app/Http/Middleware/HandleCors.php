@@ -27,7 +27,10 @@ class HandleCors extends \Illuminate\Http\Middleware\HandleCors
 
             $this->cors->varyHeader($response, 'Access-Control-Request-Method');
 
-            Log::debug('preflight access-control-allow-origin', $response->headers->all('access-control-allow-origin'));
+            Log::debug(
+                'preflight header',
+                ['access-control-allow-origin' => $response->headers->all('access-control-allow-origin')],
+            );
 
             return $response;
         }
@@ -40,7 +43,10 @@ class HandleCors extends \Illuminate\Http\Middleware\HandleCors
 
         $response = $this->cors->addActualRequestHeaders($response, $request);
 
-        Log::debug('access-control-allow-origin:', $response->headers->all('access-control-allow-origin'));
+        Log::debug(
+            'header',
+            ['access-control-allow-origin' => $response->headers->all('access-control-allow-origin')],
+        );
 
         return $response;
     }
