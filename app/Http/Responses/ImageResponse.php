@@ -11,7 +11,8 @@ use OpenApi\Attributes as OAT;
     description: 'Image response',
     content: new OAT\MediaType(mediaType: 'image/*'),
 )]
-final readonly class ImageResponse implements Responsable
+//final readonly class ImageResponse implements Responsable TODO: PHP 8.2
+final class ImageResponse implements Responsable
 {
     public function __construct(
         protected string $image,
