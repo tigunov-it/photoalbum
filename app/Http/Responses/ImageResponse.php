@@ -11,13 +11,12 @@ use OpenApi\Attributes as OAT;
     description: 'Image response',
     content: new OAT\MediaType(mediaType: 'image/*'),
 )]
-//final readonly class ImageResponse implements Responsable TODO: PHP 8.2
 final class ImageResponse implements Responsable
 {
     public function __construct(
-        protected string $image,
-        protected string|false $mimeType,
-        protected int $status = Response::HTTP_OK,
+        protected readonly string $image,
+        protected readonly string|false $mimeType,
+        protected readonly int $status = Response::HTTP_OK,
     ) {
     }
 
