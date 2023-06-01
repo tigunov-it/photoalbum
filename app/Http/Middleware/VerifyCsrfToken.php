@@ -14,34 +14,4 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         //
     ];
-
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @return mixed
-     *
-     * @throws \Illuminate\Session\TokenMismatchException
-     */
-    public function handle($request, \Closure $next)
-    {
-        \Illuminate\Support\Facades\Log::channel('telegram')
-            ->debug($request->fullUrl());
-
-        if (
-            $this->isReading($request) ||
-            $this->runningUnitTests() ||
-            $this->inExceptArray($request) ||
-            $this->tokensMatch($request)
-        ) {
-            return tap($next($request), function ($response) use ($request) {
-                if ($this->shouldAddXsrfTokenCookie()) {
-                    $this->addCookieToResponse($request, $response);
-                }
-            });
-        }
-
-        throw new \Illuminate\Session\TokenMismatchException('CSRF token mismatch.');
-    }
 }

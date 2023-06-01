@@ -7,7 +7,7 @@ use Illuminate\Http\UploadedFile;
 
 final class RekognitionService
 {
-    private RekognitionClient $client;
+    private readonly RekognitionClient $client;
 
     private const MAX_FILE_SIZE = 5242880;
 
@@ -21,8 +21,6 @@ final class RekognitionService
 
     public function moderate(UploadedFile $file)
     {
-        // $imageForAnalise = fopen($file, 'r');
-        // $bytes = fread($imageForAnalise, filesize($file));
         $bytes = ImageService::getReducedImage($file, self::MAX_FILE_SIZE);
 
         return $this->client->detectModerationLabels([
