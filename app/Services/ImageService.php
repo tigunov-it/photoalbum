@@ -80,10 +80,13 @@ final class ImageService
 
     public static function resizeAndUploadPostImage(string $path, ImageFile $image, string $fileName, Size $size): string
     {
+        $image->backup();
         $image = self::resizeImage($image, $size);
         $path = self::generatePostsSubDirectoryName($path, $size);
+        $path = self::uploadFile($path, $image, $fileName);
+        $image->reset();
 
-        return self::uploadFile($path, $image, $fileName);
+        return $path;
     }
 
     public static function resizeImage(ImageFile $image, Size $size): ImageFile
