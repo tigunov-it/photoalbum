@@ -80,6 +80,7 @@ final class ImageService
 
     public static function resizeAndUploadPostImage(string $path, ImageFile $image, string $fileName, Size $size): string
     {
+        ini_set('memory_limit', '-1');
         $image->backup();
         $image = self::resizeImage($image, $size);
         $path = self::generatePostsSubDirectoryName($path, $size);
